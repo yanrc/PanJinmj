@@ -1,0 +1,99 @@
+ManifestFileVersion: 0
+CRC: 116748541
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 327c149b0638450fce554166458011db
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/Sounds/girl/15.wav
+- Assets/Project/Sounds/boy/24.wav
+- Assets/Project/Sounds/girl/1.wav
+- Assets/Project/Sounds/girl/34.wav
+- Assets/Project/Sounds/boy/4.wav
+- Assets/Project/Sounds/boy/11.wav
+- Assets/Project/Sounds/boy/9.wav
+- Assets/Project/Sounds/boy/28.wav
+- Assets/Project/Sounds/girl/8.wav
+- Assets/Project/Sounds/girl/20.wav
+- Assets/Project/Sounds/girl/liuju.wav
+- Assets/Project/Sounds/girl/17.wav
+- Assets/Project/Sounds/boy/26.wav
+- Assets/Project/Sounds/girl/28.wav
+- Assets/Project/Sounds/girl/9.wav
+- Assets/Project/Sounds/boy/3.wav
+- Assets/Project/Sounds/boy/19.wav
+- Assets/Project/Sounds/girl/25.wav
+- Assets/Project/Sounds/girl/4.wav
+- Assets/Project/Sounds/girl/hu.wav
+- Assets/Project/Sounds/boy/25.wav
+- Assets/Project/Sounds/girl/30.wav
+- Assets/Project/Sounds/boy/32.wav
+- Assets/Project/Sounds/other/touzi.wav
+- Assets/Project/Sounds/girl/24.wav
+- Assets/Project/Sounds/girl/6.wav
+- Assets/Project/Sounds/boy/22.wav
+- Assets/Project/Sounds/girl/31.wav
+- Assets/Project/Sounds/boy/17.wav
+- Assets/Project/Sounds/boy/buhua.wav
+- Assets/Project/Sounds/girl/21.wav
+- Assets/Project/Sounds/boy/gang.wav
+- Assets/Project/Sounds/boy/34.wav
+- Assets/Project/Sounds/girl/23.wav
+- Assets/Project/Sounds/boy/6.wav
+- Assets/Project/Sounds/girl/12.wav
+- Assets/Project/Sounds/girl/gang.wav
+- Assets/Project/Sounds/boy/20.wav
+- Assets/Project/Sounds/boy/2.wav
+- Assets/Project/Sounds/girl/chi.wav
+- Assets/Project/Sounds/boy/18.wav
+- Assets/Project/Sounds/girl/3.wav
+- Assets/Project/Sounds/boy/8.wav
+- Assets/Project/Sounds/girl/10.wav
+- Assets/Project/Sounds/boy/liuju.wav
+- Assets/Project/Sounds/girl/11.wav
+- Assets/Project/Sounds/girl/13.wav
+- Assets/Project/Sounds/boy/10.wav
+- Assets/Project/Sounds/boy/7.wav
+- Assets/Project/Sounds/girl/22.wav
+- Assets/Project/Sounds/girl/5.wav
+- Assets/Project/Sounds/boy/15.wav
+- Assets/Project/Sounds/girl/peng.wav
+- Assets/Project/Sounds/boy/hu.wav
+- Assets/Project/Sounds/girl/33.wav
+- Assets/Project/Sounds/boy/5.wav
+- Assets/Project/Sounds/girl/7.wav
+- Assets/Project/Sounds/girl/buhua.wav
+- Assets/Project/Sounds/boy/23.wav
+- Assets/Project/Sounds/boy/13.wav
+- Assets/Project/Sounds/boy/zimo.wav
+- Assets/Project/Sounds/girl/27.wav
+- Assets/Project/Sounds/girl/14.wav
+- Assets/Project/Sounds/boy/chi.wav
+- Assets/Project/Sounds/boy/16.wav
+- Assets/Project/Sounds/girl/32.wav
+- Assets/Project/Sounds/girl/2.wav
+- Assets/Project/Sounds/boy/29.wav
+- Assets/Project/Sounds/boy/30.wav
+- Assets/Project/Sounds/girl/16.wav
+- Assets/Project/Sounds/girl/29.wav
+- Assets/Project/Sounds/girl/19.wav
+- Assets/Project/Sounds/boy/27.wav
+- Assets/Project/Sounds/boy/14.wav
+- Assets/Project/Sounds/boy/31.wav
+- Assets/Project/Sounds/boy/1.wav
+- Assets/Project/Sounds/other/out.wav
+- Assets/Project/Sounds/girl/26.wav
+- Assets/Project/Sounds/boy/33.wav
+- Assets/Project/Sounds/boy/12.wav
+- Assets/Project/Sounds/girl/zimo.wav
+- Assets/Project/Sounds/girl/18.wav
+- Assets/Project/Sounds/boy/21.wav
+- Assets/Project/Sounds/boy/peng.wav
+Dependencies: []

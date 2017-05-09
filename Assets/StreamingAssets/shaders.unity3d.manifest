@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 320086499
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 525f094e0e852f32a82c28962e390411
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7bd39743cce4d37940997ab4332a0cd7
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/Shaders/DefaultGrey.shader
+Dependencies: []

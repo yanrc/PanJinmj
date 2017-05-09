@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 877127472
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: animations.unity3d
+      Dependencies:
+        Dependency_0: texturespng.unity3d
+    Info_1:
+      Name: dynaimages.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: materials.unity3d
+      Dependencies:
+        Dependency_0: shaders.unity3d
+        Dependency_1: texturespng.unity3d
+    Info_3:
+      Name: prefabs.unity3d
+      Dependencies:
+        Dependency_0: animations.unity3d
+        Dependency_1: dynaimages.unity3d
+        Dependency_2: materials.unity3d
+        Dependency_3: texturespng.unity3d
+        Dependency_4: texturesjpg.unity3d
+    Info_4:
+      Name: shaders.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: xmls.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: texturespng.unity3d
+      Dependencies: {}
+    Info_7:
+      Name: texturesjpg.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: soundsmp3.unity3d
+      Dependencies: {}
+    Info_9:
+      Name: soundswav.unity3d
+      Dependencies: {}
