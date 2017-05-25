@@ -26,23 +26,24 @@ end
 
 function StartPanelCtrl.Awake()
 	logWarn("StartPanelCtrl.Awake--->>");
-	panelMgr:CreatePanel('StartPanel', this.OnCreate);
+	PanelManager:CreatePanel('StartPanel', this.OnCreate);
 	CtrlManager.AddCtrl("StartPanelCtrl",this)
 end
 
 --启动事件--
 function StartPanelCtrl.OnCreate(obj)
 	gameObject = obj;
+	transform=obj.transform
 	this.lua = gameObject:GetComponent('LuaBehaviour');
 	versionText=gameObject.transform:FindChild("TextVersion"):GetComponent('Text');
 	watingPanel=gameObject.transform:FindChild("Panel_wating");
 	agreeProtocol=gameObject.transform:FindChild("Toggle"):GetComponent('Toggle');
 	xieyiButton=gameObject.transform:FindChild("Toggle/Label").gameObject;
-	log(StartPanel.btnLogin)
-	log(xieyiButton)
+	--log(StartPanel.btnLogin)
+	--log(xieyiButton)
 	this.lua:AddClick(StartPanel.btnLogin, this.login);
 	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
-	logWarn("StartPanelCtrl lua--->>"..gameObject.name);
+	logWarn("lua--->>"..gameObject.name);
 	this.Start();
 end
 
@@ -59,8 +60,7 @@ end
 function StartPanelCtrl.Start()
 	CustomSocket.hasStartTimer=true;
 	soundMgr:playBGM(1);
-	SocketEventHandle.getInstance ().LoginCallBack = this.LoginCallBack;
-	SocketEventHandle.getInstance ().RoomBackResponse =this. RoomBackResponse;
+	this.Open()
 	GlobalData.Instance().isonLoginPage = true;
 	versionText.text ="版本号："..Application.version;
 	if (watingPanel ~= nil) then
@@ -100,7 +100,8 @@ function StartPanelCtrl.RoomBackResponse(response)
 	end
 	GlobalData.reEnterRoomData = json.decode (response.message);
 	log("Lua:RoomBackResponse=" .. response.message);
-	for i = 0,GlobalData.reEnterRoomData.playerList.Count do
+	log(#GlobalData.reEnterRoomData.playerList)
+	for i = 1,#GlobalData.reEnterRoomData.playerList do
 		local itemData =GlobalData.reEnterRoomData.playerList [i];
 		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
 			GlobalData.loginResponseData.account.uuid = itemData.account.uuid;
@@ -174,7 +175,7 @@ function StartPanelCtrl.doLogin()
 	coroutine.start(this.ConnectTime,10,0);
 	if UNITY_EDITOR or UNITY_STANDALONE_WIN then
 		--用于测试 不用微信登录
-		ResManager:LoadAsset('gameobject', 'Assets/Project/Prefabs/LoginPanel.prefab', LoginManager.TestLogin);
+		resMgr:LoadPrefab('prefabs', {'Assets/Project/Prefabs/LoginPanel.prefab'}, LoginManager.TestLogin);
 	else
 		GlobalData.Instance ().wechatOperate:login ();
 	end
@@ -198,11 +199,11 @@ function StartPanelCtrl.OpenXieyiPanel()
 	if(xieyiPanel) then
 	xieyiPanel:SetActive(true)
 else
-	ResManager:LoadAsset('gameobject', 'Assets/Project/Prefabs/xieyiPanel.prefab', this.InitXieyiPanel);
+	resMgr:LoadPrefab('prefabs', {'Assets/Project/Prefabs/xieyiPanel.prefab'}, this.InitXieyiPanel);
 end
 end
-function StartPanelCtrl.InitXieyiPanel(prefab)
-	xieyiPanel=newobject(prefab);
+function StartPanelCtrl.InitXieyiPanel(prefabs)
+	xieyiPanel=newObject(prefabs[0]);
 	xieyiPanel.transform.parent=StartPanel.transform.parent;
 	xieyiPanel.transform.localScale = Vector3.one;
 	xieyiPanel.transform:SetAsLastSibling();

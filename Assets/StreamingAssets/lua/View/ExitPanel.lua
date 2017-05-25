@@ -1,6 +1,5 @@
-local transform;
-local gameObject;
-
+local gameObject
+local transform
 ExitPanel = {};
 local this = ExitPanel;
 
@@ -8,6 +7,8 @@ local this = ExitPanel;
 function ExitPanel.Awake(obj)
 	gameObject = obj;
 	transform = obj.transform;
+	this.gameObject=gameObject;
+	this.transform=transform;
 	this.InitPanel();
 	logWarn("Awake lua--->>"..gameObject.name);
 end

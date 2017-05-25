@@ -48,3 +48,26 @@ function findPanel(str)
 	end
 	return obj:GetComponent("BaseLua");
 end
+
+function string.split(input, delimiter)
+    input = tostring(input)
+    delimiter = tostring(delimiter)
+    if (delimiter=='') then return false end
+    local pos,arr = 0, {}
+    -- for each divider found
+    for st,sp in function() return string.find(input, delimiter, pos, true) end do
+        table.insert(arr, string.sub(input, pos, st - 1))
+        pos = sp + 1
+    end
+    table.insert(arr, string.sub(input, pos))
+    return arr
+end
+
+function table.indexOf( t, value, iBegin )
+    for i = iBegin or 1, #t do
+        if t[i] == value then
+            return i
+        end
+    end
+    return -1
+end

@@ -1,3 +1,4 @@
+require "Common/functions"
 require "3rd/pblua/login_pb"
 require "3rd/pbc/protobuf"
 
@@ -12,7 +13,7 @@ local print_r = require "3rd/sproto/print_r"
 
 require "Logic/LuaClass"
 require "Logic/CtrlManager"
-require "Common/functions"
+
 require "Controller/StartPanelCtrl"
 
 --管理器--

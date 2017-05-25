@@ -8,11 +8,11 @@ end
 function TipsManager.setTips(tips,time)
 	this.tips=tips;
 	this.time=time;
-	ResManager:LoadAsset('gameobject', 'Assets/Project/Prefabs/TipPanel.prefab', this.OnCreateTipPanel);
+	resMgr:LoadPrefab('prefabs', {'Assets/Project/Prefabs/TipPanel.prefab'}, this.OnCreateTipPanel);
 end
 
-function TipsManager.OnCreateTipPanel(prefab)
-	local go=newobject(prefab);
+function TipsManager.OnCreateTipPanel(prefabs)
+	local go=newObject(prefabs[0]);
 	go.transform.parent =StartPanel.transform.parent;
 	go.transform.localScale = Vector3.one;
 	go.transform.localPosition =Vector2.New(0,-300);
@@ -25,11 +25,11 @@ function TipsManager.loadDialog(title,msg,yescallback,nocallback)
 	this.msg=msg;
 	this.yescallback=yescallback;
 	this.nocallback=nocallback;
-	ResManager:LoadAsset('gameobject', 'Assets/Project/Prefabs/Image_Base_Dialog.prefab', this.OnCreateDialogPanel);
+	resMgr:LoadPrefab('prefabs', {'Assets/Project/Prefabs/Image_Base_Dialog.prefab'}, this.OnCreateDialogPanel);
 end
 
-function TipsManager.OnCreateDialogPanel(prefab)
-	local go=newobject(prefab);
+function TipsManager.OnCreateDialogPanel(prefabs)
+	local go=newObject(prefabs[0]);
 	go.transform.parent =StartPanel.transform.parent;
 	go.transform.localScale = Vector3.one;
 	go.transform.localPosition = Vector3.zero;

@@ -134,7 +134,10 @@ namespace LuaFramework {
                     AssetBundleRequest request = ab.LoadAssetAsync(assetPath, list[i].assetType);
                     yield return request;
                     result.Add(request.asset);
-
+                    if(!request.asset)
+                    {
+                        Debug.LogError(assetPath + " is not exsist in " + abName);
+                    }
                     //T assetObj = ab.LoadAsset<T>(assetPath);
                     //result.Add(assetObj);
                 }

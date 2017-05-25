@@ -2,7 +2,6 @@ require "View/ExitPanel"
 ExitPanelCtrl = {};
 local this = ExitPanelCtrl;
 
-local message;
 local transform;
 local gameObject;
 

@@ -18,7 +18,7 @@ function GlobalData.reinitData()
 	this.isDrag = false;
 	this.loginResponseData = nil;
 	this.roomJoinResponseData = nil;
-	this.roomVo = nil;
+	this.roomVo = {};
 	this.hupaiResponseVo = nil;
 	this.finalGameEndVo = nil;
 	this.roomAvatarVoList = nil;

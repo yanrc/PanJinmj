@@ -50,12 +50,11 @@ public class AssemblyCSharp_GameToolScriptWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 4);
-			AssemblyCSharp.GameToolScript obj = (AssemblyCSharp.GameToolScript)ToLua.CheckObject(L, 1, typeof(AssemblyCSharp.GameToolScript));
-			System.Collections.Generic.List<UnityEngine.GameObject> arg0 = (System.Collections.Generic.List<UnityEngine.GameObject>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.GameObject>));
-			string arg1 = ToLua.CheckString(L, 3);
-			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
-			obj.setOtherCardObjPosition(arg0, arg1, arg2);
+			ToLua.CheckArgsCount(L, 3);
+			System.Collections.Generic.List<UnityEngine.GameObject> arg0 = (System.Collections.Generic.List<UnityEngine.GameObject>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<UnityEngine.GameObject>));
+			string arg1 = ToLua.CheckString(L, 2);
+			int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+			AssemblyCSharp.GameToolScript.setOtherCardObjPosition(arg0, arg1, arg2);
 			return 0;
 		}
 		catch(Exception e)

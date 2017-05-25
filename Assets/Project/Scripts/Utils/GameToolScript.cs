@@ -17,7 +17,7 @@ namespace AssemblyCSharp
         /// <param name="tempList">Temp list.</param>
         /// <param name="initDiretion">Init diretion.</param>
         /// <param name="Type">Type.</param> 1- 碰，2-杠
-        public void setOtherCardObjPosition(List<GameObject> tempList, String initDiretion, int type)
+        public static void setOtherCardObjPosition(List<GameObject> tempList, String initDiretion, int type)
         {
             if (type == 1)
             {

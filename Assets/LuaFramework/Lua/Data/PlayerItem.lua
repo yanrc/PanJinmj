@@ -17,3 +17,8 @@ end
 function PlayerItem:SetHuFlagHidde()
 	
 end
+
+function PlayerItem:SetAvatarVo(avatar)
+
+
+end

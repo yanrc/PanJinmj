@@ -62,3 +62,12 @@ function string.split(input, delimiter)
     table.insert(arr, string.sub(input, pos))
     return arr
 end
+
+function table.indexOf( t, value, iBegin )
+    for i = iBegin or 1, #t do
+        if t[i] == value then
+            return i
+        end
+    end
+    return -1
+end

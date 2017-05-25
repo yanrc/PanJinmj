@@ -8,3 +8,4 @@ Protocal = {
 
 --Project
 DisplayBroadcast='105';--游戏广播
+closeGamePanel='106';--关闭游戏场景面板

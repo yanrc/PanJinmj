@@ -47,7 +47,7 @@ namespace LuaFramework {
                 go.transform.localPosition = Vector3.zero;
                 go.AddComponent<LuaBehaviour>();
 
-                Debug.LogWarning("CreatePanel::>> " + name + " " + prefab);
+                Debug.LogWarning("CreatePanel::>> "  + prefab);
                 if (func != null) func.Call(go);
             });
 #else

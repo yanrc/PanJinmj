@@ -1,14 +1,13 @@
-local transform;
-local gameObject;
-
+local gameObject
+local transform
 StartPanel = {};
 local this = StartPanel;
-
 --启动事件--
 function StartPanel.Awake(obj)
-	gameObject = obj;
-	transform = obj.transform;
-
+	gameObject=obj;
+	transform=obj.transform
+	this.gameObject=gameObject;
+	this.transform=transform;
 	this.InitPanel();
 	logWarn("Awake lua--->>"..gameObject.name);
 end

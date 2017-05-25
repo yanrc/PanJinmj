@@ -10,8 +10,8 @@ function LoginManager.Instance()
 	return this;
 end
 
-function LoginManager.TestLogin(prefab)
-	local go=newobject(prefab);
+function LoginManager.TestLogin(prefabs)
+	local go=newObject(prefabs[0]);
 	go.transform.parent=StartPanel.transform.parent;
 	go.transform.localScale = Vector3.one;
 	go.transform:SetAsLastSibling();
