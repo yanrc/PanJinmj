@@ -7,6 +7,6 @@ function HupaiRequest.New(data)
 	hupaiRequest.headCode = APIS.HUPAI_REQUEST;
 	--hupaiRequest.messageContent='{'..data..'}'
 	hupaiRequest.messageContent=data
-	log(hupaiRequest.messageContent)
+	log("lua:hupaiRequest="..hupaiRequest.messageContent)
 	return hupaiRequest
 end

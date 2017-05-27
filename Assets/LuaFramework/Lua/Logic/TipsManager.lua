@@ -17,7 +17,7 @@ function TipsManager.OnCreateTipPanel(prefabs)
 	go.transform.localScale = Vector3.one;
 	go.transform.localPosition =Vector2.New(0,-300);
 	go:GetComponent("TipPanelScript"):setText (this.tips);
-	go:GetComponent("TipPanelScript"):startAction(this.time);
+	go:GetComponent("TipPanelScript"):startAction(this.time or 1);
 end
 
 function TipsManager.loadDialog(title,msg,yescallback,nocallback)

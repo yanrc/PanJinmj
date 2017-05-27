@@ -340,10 +340,7 @@ namespace AssemblyCSharp
             //通知调用端接收完毕
             try
             {
-                Debug.Log("m_receiveBuffer======" + m_receiveBuffer.Length);
-
                 MemoryStream ms = new MemoryStream(m_receiveBuffer);
-                Debug.Log("ReceiveCallBack：" + ms);
                 BinaryReader buffers = new BinaryReader(ms, UTF8Encoding.Default);
                 readBuffer(buffers);
             }
@@ -391,7 +388,7 @@ namespace AssemblyCSharp
                 response.status = status;
                 response.message = message;
                 response.headCode = headcode;
-                Debug.Log("response.headCode = " + response.headCode + "  response.message =   " + message);
+                Debug.Log("response.headCode = " + response.headCode.ToString("x8") + "  response.message =   " + message);
                 SocketEventHandle.getInstance().addResponse(response);
             }
             if (buffers.BaseStream.Position < buffers.BaseStream.Length)

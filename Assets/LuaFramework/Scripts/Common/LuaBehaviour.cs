@@ -30,7 +30,11 @@ namespace LuaFramework {
         /// 添加单击事件
         /// </summary>
         public void AddClick(GameObject go, LuaFunction luafunc) {
-            if (go == null || luafunc == null) return;
+            if (go == null || luafunc == null)
+            {
+                Debugger.LogError("GameObject="+go+ ",LuaFunction="+luafunc);
+                return;
+            }
             buttons.Add(go, luafunc);
             go.GetComponent<Button>().onClick.AddListener(
                 delegate() {
@@ -38,7 +42,23 @@ namespace LuaFramework {
                 }
             );
         }
-
+        /// <summary>
+        /// 添加单击事件,多一个参数
+        /// </summary>
+        public void AddClick(GameObject go, LuaFunction luafunc,object arg)
+        {
+            if (go == null || luafunc == null)
+            {
+                Debugger.LogError("GameObject=" + go + ",LuaFunction=" + luafunc);
+                return;
+            }
+            buttons.Add(go, luafunc);
+            go.GetComponent<Button>().onClick.AddListener(
+                delegate () {
+                    luafunc.Call(go,arg);
+                }
+            );
+        }
         /// <summary>
         /// 删除单击事件
         /// </summary>

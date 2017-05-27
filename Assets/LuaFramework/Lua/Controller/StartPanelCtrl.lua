@@ -27,7 +27,7 @@ end
 function StartPanelCtrl.Awake()
 	logWarn("StartPanelCtrl.Awake--->>");
 	PanelManager:CreatePanel('StartPanel', this.OnCreate);
-	CtrlManager.AddCtrl("StartPanelCtrl",this)
+	CtrlManager.StartPanelCtrl=this
 end
 
 --启动事件--
@@ -64,7 +64,7 @@ function StartPanelCtrl.Start()
 	GlobalData.Instance().isonLoginPage = true;
 	versionText.text ="版本号："..Application.version;
 	if (watingPanel ~= nil) then
-		watingPanel:FindChild("Text"):GetComponent("Text").text = "正在连接服务器...";
+		watingPanel:FindChild("Text"):GetComponent("Text").text = "正在连接服务器";
 	end
 	coroutine.start(this.ConnectTime,1,1);
 	--每隔0.1秒執行一次定時器
@@ -85,7 +85,7 @@ function StartPanelCtrl.LoginCallBack(response)
 	if (GamePanel.ActiveSelf()) then
 		GamePanelCtrl.ExitOrDissoliveRoom();
 	end
-	GlobalData.Instance().loginResponseData = json.decode (response.message);
+	GlobalData.Instance().loginResponseData =AvatarVO.New(json.decode(response.message));
 	ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
 	HomePanelCtrl.Awake()
 	this.Close()
@@ -100,7 +100,7 @@ function StartPanelCtrl.RoomBackResponse(response)
 	end
 	GlobalData.reEnterRoomData = json.decode (response.message);
 	log("Lua:RoomBackResponse=" .. response.message);
-	log(#GlobalData.reEnterRoomData.playerList)
+	log("Lua:RoomBackResponse playerList.length=" ..#GlobalData.reEnterRoomData.playerList)
 	for i = 1,#GlobalData.reEnterRoomData.playerList do
 		local itemData =GlobalData.reEnterRoomData.playerList [i];
 		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
@@ -161,7 +161,7 @@ function StartPanelCtrl.login()
 		ChatSocket.getInstance ().Connect();
 		return;
 	end
-	GlobalData.Instance().reinitData ();--初始化界面数据
+	GlobalData.Instance().reinitData ();--初始化界面数值
 	if (agreeProtocol.isOn) then
 		this.doLogin ();
 		watingPanel:FindChild("Text"):GetComponent("Text").text  = "进入游戏中";
@@ -239,5 +239,5 @@ end
 --增加事件--
 function StartPanelCtrl.AddListener()
 	SocketEventHandle.getInstance ().LoginCallBack = this.LoginCallBack;
-	SocketEventHandle.getInstance ().RoomBackResponse =this. RoomBackResponse;
+	SocketEventHandle.getInstance ().RoomBackResponse =this.RoomBackResponse;
 end

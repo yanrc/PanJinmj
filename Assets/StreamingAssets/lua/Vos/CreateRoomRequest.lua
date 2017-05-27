@@ -7,6 +7,6 @@ function CreateRoomRequest.New(data)
 	createRoomRequest.headCode = APIS.CREATEROOM_REQUEST;
 	--createRoomRequest.messageContent='{'..data..'}'
 	createRoomRequest.messageContent=data
-	log(createRoomRequest.messageContent)
+	log("lua:createRoomRequest="..createRoomRequest.messageContent)
 	return createRoomRequest
 end

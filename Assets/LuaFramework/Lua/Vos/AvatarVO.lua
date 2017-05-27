@@ -4,7 +4,7 @@ AvatarVO=
 account={};--json生成AvatarVO类时也新生成了Account类，其中包含了玩家的头像地址
 --public int cardIndex;
 isOnLine=false;
-isReady=false;
+IsReady=false;
 --庄家
 main=false;
 roomId=0;
@@ -19,8 +19,15 @@ IP="";
 local mt = {}--元表（基类）
 mt.__index = AvatarVO--index方法
 --构造函数
-function AvatarVO.New()
-	local avatarvo = {}
+function AvatarVO.New(avatarvo)
+local avatarvo =avatarvo or {}
 	setmetatable(avatarvo, mt)
 	return avatarvo
+end
+
+function AvatarVO:ResetData()
+	isOnLine = false;
+	isReady = false;
+	main = false;
+	roomId = 0;
 end

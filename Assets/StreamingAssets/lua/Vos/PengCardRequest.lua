@@ -7,6 +7,6 @@ function PengCardRequest.New(data)
 	pengCardRequest.headCode = APIS.PENGPAI_REQUEST;
 	--pengCardRequest.messageContent='{'..data..'}'
 	pengCardRequest.messageContent=data
-	log(pengCardRequest.messageContent)
+	log("lua:pengCardRequest="..pengCardRequest.messageContent)
 	return pengCardRequest
 end

@@ -14,7 +14,7 @@ end
 function ExitPanelCtrl.Awake()
 	logWarn("ExitPanelCtrl.Awake--->>");
 	PanelManager:CreatePanel('ExitPanel', this.OnCreate);
-	CtrlManager.AddCtrl("ExitPanelCtrl",this)
+	CtrlManager.ExitPanelCtrl=this
 end
 
 --启动事件--
@@ -28,12 +28,12 @@ end
 
 --单击事件--
 function ExitPanelCtrl.Exit(go)
-	log("exit click")
+	log("lua:exit click")
 end
 
 --关闭事件--
 function ExitPanelCtrl.Cancel()
-	log("cancel")
+	log("lua:cancel")
 end
 
 

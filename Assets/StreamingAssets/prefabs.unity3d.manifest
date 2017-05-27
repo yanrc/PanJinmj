@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1556899854
+CRC: 3631506561
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7fe7c5ae1ce2ca83c19de03fa11bb3bc
+    Hash: b0d0f5f29f969f0d3eedcada960b0f42
   TypeTreeHash:
     serializedVersion: 2
     Hash: d41921cb1ab0929af49901d7679ebcaf
@@ -96,37 +96,31 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 61dca9c47ce7e7440b173da3b0d68058, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7bc8a7c6fa181ee4992247917041135e, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: d483c63d8a3b2f84d95ca688c78bcd0f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 96efe73f182fc6544a46b1c22f42a109, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 73b02ef32def42b458094dcc1d57599f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 76f1c98d5317c304c83c9b55d0f43d37, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
+  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
+  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f7b9c21b9c76f114483de081bf48ca0e, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
+  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 9f506601033ff174ea5f372db912cb9b, type: 3}
 - Class: 114
@@ -146,6 +140,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 1d20b4b6b053f0d4db7bba580acf1bcc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: d483c63d8a3b2f84d95ca688c78bcd0f, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: e5dedf2b49e09014db7fddc02c74fa2d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6c777b22b8bf0524792ae301251e55ab, type: 3}
@@ -156,6 +152,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 0875524f47461044c8babd919114161f, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 7bc8a7c6fa181ee4992247917041135e, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 1207094a5e99f974d908db7f057a06bb, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6f4eda26de482974f865fc5c6fd2d7bc, type: 3}
@@ -163,6 +161,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: c750209da0c657d49bc90eb9e75f4fad, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 21cc91b2c6d08cb4fb24ceb246838ca9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 96efe73f182fc6544a46b1c22f42a109, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6ccd7c6ce8e90a84a9ed46c697d00f54, type: 3}
 - Class: 114
@@ -213,7 +213,7 @@ Assets:
 - Assets/Project/Prefabs/ThrowCard/TopAndBottomCard.prefab
 - Assets/Project/Prefabs/XieyiPanel.prefab
 - Assets/Project/Prefabs/card/PutOutCard.prefab
-- Assets/Project/Prefabs/Panel_Enter_Room.prefab
+- Assets/Project/Prefabs/EnterRoomPanel.prefab
 - Assets/Project/Prefabs/ZhuanZhuanPanel.prefab
 - Assets/Project/Prefabs/RawImage.prefab
 - Assets/Project/Prefabs/ZhanRoomItem.prefab

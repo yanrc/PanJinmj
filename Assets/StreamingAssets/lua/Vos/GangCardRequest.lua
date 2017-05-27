@@ -11,6 +11,6 @@ function GangCardRequest.New(cardPoint,gangType)
 	gangCardRequest.headCode = APIS.GANGPAI_REQUEST;
 	--gangCardRequest.messageContent='{'..data..'}'
 	gangCardRequest.messageContent=json.encode(GangRequestVO)
-	log(gangCardRequest.messageContent)
+	log("lua:gangCardRequest="..gangCardRequest.messageContent)
 	return gangCardRequest
 end

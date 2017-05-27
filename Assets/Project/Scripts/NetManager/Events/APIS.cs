@@ -15,8 +15,8 @@ namespace AssemblyCSharp
 
         //public static string chatSocketUrl = "192.168.0.111";
         //public static string socketUrl = "192.168.0.111";
-        public const int socketPort = 10122;
-        public const int chatPort = 10112;
+        public const int socketPort = 10233;
+        public const int chatPort = 10234;
 
 		public const string PIC_PATH = "http://101.200.197.7:8888/download/";
         //	public const string apkDownLoadurl="192.168.0.111/aaa/weipai.apk";

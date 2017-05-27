@@ -57,6 +57,10 @@ namespace LuaFramework {
         public void LoadPrefab(string abName, string[] assetNames, LuaFunction func) {
             LoadAsset<GameObject>(abName, assetNames, null, func);
         }
+        public void LoadSprite(string abName, string[] assetNames, LuaFunction func)
+        {
+            LoadAsset<Sprite>(abName, assetNames, null, func);
+        }
         public void LoadPrefab<T>(string abName, string assetName, Action<UObject[]> func) where T : UObject
         {
             LoadAsset<T>(abName, new string[] { assetName }, func);

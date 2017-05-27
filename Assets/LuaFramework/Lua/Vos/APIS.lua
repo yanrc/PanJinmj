@@ -5,8 +5,8 @@ UPDATE_INFO_JSON_URL = "http://101.200.197.7:8888/download/update.xml";--服务�
 chatSocketUrl = "101.200.197.7";
 socketUrl = "101.200.197.7";
 
-socketPort = 10122;
-chatPort = 10112;
+socketPort = 10233;
+chatPort = 10234;
 
 PIC_PATH = "http://101.200.197.7:8888/download/";
 --apkDownLoadurl="192.168.0.111/aaa/weipai.apk";

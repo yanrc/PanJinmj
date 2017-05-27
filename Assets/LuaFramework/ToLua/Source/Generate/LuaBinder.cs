@@ -25,8 +25,10 @@ public static class LuaBinder
 		DG_Tweening_PathModeWrap.Register(L);
 		DG_Tweening_PathTypeWrap.Register(L);
 		DG_Tweening_RotateModeWrap.Register(L);
+		DG_Tweening_EaseWrap.Register(L);
 		L.RegFunction("TweenCallback", DG_Tweening_TweenCallback);
 		L.BeginModule("Core");
+		DG_Tweening_Core_TweenerCore_UnityEngine_Vector3_UnityEngine_Vector3_DG_Tweening_Plugins_Options_VectorOptionsWrap.Register(L);
 		L.RegFunction("DOGetter_float", DG_Tweening_Core_DOGetter_float);
 		L.RegFunction("DOSetter_float", DG_Tweening_Core_DOSetter_float);
 		L.RegFunction("DOGetter_double", DG_Tweening_Core_DOGetter_double);
@@ -112,6 +114,7 @@ public static class LuaBinder
 		UnityEngine_UI_ToggleWrap.Register(L);
 		UnityEngine_UI_DropdownWrap.Register(L);
 		UnityEngine_UI_ImageWrap.Register(L);
+		UnityEngine_UI_ButtonWrap.Register(L);
 		UnityEngine_UI_MaskableGraphicWrap.Register(L);
 		UnityEngine_UI_GraphicWrap.Register(L);
 		UnityEngine_UI_SelectableWrap.Register(L);

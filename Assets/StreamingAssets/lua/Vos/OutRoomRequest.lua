@@ -7,6 +7,6 @@ function OutRoomRequest.New(data)
 	outRoomRequest.headCode = APIS.OUT_ROOM_REQUEST;
 	--outRoomRequest.messageContent='{'..data..'}'
 	outRoomRequest.messageContent=data
-	log(outRoomRequest.messageContent)
+	log("lua:outRoomRequest="..outRoomRequest.messageContent)
 	return outRoomRequest
 end

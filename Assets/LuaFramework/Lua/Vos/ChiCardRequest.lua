@@ -7,6 +7,6 @@ function ChiCardRequest.New(data)
 	chiCardRequest.headCode = APIS.CHIPAI_REQUEST;
 	--chiCardRequest.messageContent='{'..data..'}'
 	chiCardRequest.messageContent=data
-	log(chiCardRequest.messageContent)
+	log("lua:chiCardRequest="..chiCardRequest.messageContent)
 	return chiCardRequest
 end

@@ -7,6 +7,6 @@ function GaveUpRequest.New(data)
 	gaveUpRequest.headCode = APIS.GAVEUP_REQUEST;
 	--gaveUpRequest.messageContent='{'..data..'}'
 	gaveUpRequest.messageContent=data
-	log(gaveUpRequest.messageContent)
+	log("lua:gaveUpRequest="..gaveUpRequest.messageContent)
 	return gaveUpRequest
 end

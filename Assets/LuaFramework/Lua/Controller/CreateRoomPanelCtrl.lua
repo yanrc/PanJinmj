@@ -16,18 +16,20 @@ local watingPanel
 function CreateRoomPanelCtrl.Awake()
 	logWarn("CreateRoomPanelCtrl Awake--->>");
 	PanelManager:CreatePanel("CreateRoomPanel", this.OnCreate);
-	CtrlManager.AddCtrl("CreateRoomPanelCtrl", this)
+	CtrlManager.CreateRoomPanelCtrl=this
 end
 
 -- 启动事件--
 function CreateRoomPanelCtrl.OnCreate(obj)
 	gameObject = obj;
+	transform=obj.transform;
 	lua = gameObject:GetComponent('LuaBehaviour');
-	panelDevoloping =obj.transform:FindChild("Image_Create_Bg/Panel_Developing").gameObject
-	watingPanel =obj.transform:FindChild("Image_Create_Bg/wait").gameObject
-	local createButton =obj.transform:FindChild("Button_Create_Sure").gameObject
+	panelDevoloping = transform:FindChild("Image_Create_Bg/Panel_Developing").gameObject
+	watingPanel = transform:FindChild("Image_Create_Bg/wait").gameObject
+	local createButton = transform:FindChild("Button_Create_Sure").gameObject
+	local cancelButton=transform:FindChild("Image_Create_Bg/Button_Delete").gameObject
 	lua:AddClick(createButton, this.CreateRoom);
-	-- lua:AddClick( ExitPanel.btnCancel, this.Cancel);
+	lua:AddClick(cancelButton, this.Close);
 	this.Start()
 	logWarn("Start lua--->>" .. gameObject.name);
 end
@@ -70,23 +72,23 @@ end
 
 function CreateRoomPanelCtrl.CreateHuashuiRoom()
 
-end 
+end
 
 function CreateRoomPanelCtrl.CreateChangshaRoom()
 
-end 
+end
 
 function CreateRoomPanelCtrl.CreateGuangDongRoom()
 
-end 
+end
 
 function CreateRoomPanelCtrl.CreatePanjinRoom()
 
-end 
+end
 
 function CreateRoomPanelCtrl.CreateShuangLiaoRoom()
 
-end  
+end
 -- 创建九江麻将房间
 function CreateRoomPanelCtrl.CreateJiuJiangRoom()
 	soundMgr:playSoundByActionButton(1);
@@ -103,7 +105,7 @@ function CreateRoomPanelCtrl.CreateJiuJiangRoom()
 		CustomSocket.getInstance():sendMsg(CreateRoomRequest.New(sendmsgstr));
 		GlobalData.roomVo = sendVo;
 	else
-		TipsManager.Instance().setTips("你的房卡数量不足，不能创建房间");
+		TipsManager.Instance().setTips("您的房卡数量不足,不能创建房间")
 	end
 end
 
@@ -111,13 +113,13 @@ function CreateRoomPanelCtrl.CreateRoom()
 	local x = 7;
 	local switch =
 	{
-		[1] = this.CreateZhuanzhuanRoom(),
-		[2] = this.CreateHuashuiRoom(),
-		[3] = this.CreateChangshaRoom(),
-		[4] = this.CreateGuangDongRoom(),
-		[5] = this.CreatePanjinRoom(),
-		[6] = this.CreateShuangLiaoRoom(),
-		[7] = this.CreateJiuJiangRoom()
+		[1] = this.CreateZhuanzhuanRoom,
+		[2] = this.CreateHuashuiRoom,
+		[3] = this.CreateChangshaRoom,
+		[4] = this.CreateGuangDongRoom,
+		[5] = this.CreatePanjinRoom,
+		[6] = this.CreateShuangLiaoRoom,
+		[7] = this.CreateJiuJiangRoom
 	}
 	switch[x]()
 end
@@ -126,7 +128,7 @@ local function OnCreateRoomCallback(response)
 	if (watingPanel ~= nil) then
 		watingPanel:SetActive(false);
 	end
-	log(response.message);
+	log("lua:OnCreateRoomCallback=" .. response.message);
 	if (response.status == 1) then
 		local roomid = tonumber(response.message);
 		GlobalData.roomVo.roomId = roomid;
@@ -134,8 +136,13 @@ local function OnCreateRoomCallback(response)
 		GlobalData.loginResponseData.main = true;
 		GlobalData.loginResponseData.isOnLine = true;
 		GlobalData.reEnterRoomData = nil;
-		GlobalData.gamePlayPanel = GamePanelCtrl.Awake()
+		if (CtrlManager.GamePanelCtrl) then
+			CtrlManager.GamePanelCtrl.Open()
+		else
+			GamePanelCtrl.Awake()
+		end
 		this.Close();
+		HomePanelCtrl.Close()
 	else
 		TipsManager.setTips(response.message);
 	end

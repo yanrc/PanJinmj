@@ -2,21 +2,21 @@ require "View/Moban"
 MobanCtrl = {};
 local this = MobanCtrl;
 
-local message;
 local transform;
 local gameObject;
 
 --加载函数--
 function MobanCtrl.Awake()
 	logWarn("MobanCtrl Awake--->>");
-	PanelManager:CreatePanel('Moban', this.OnCreate);
-	CtrlManager.AddCtrl("MobanCtrl",this)
+	PanelManager:CreatePanel('MobanPanel', this.OnCreate);
+	CtrlManager.MobanCtrl=this
 end
 
 --启动事件--
 function MobanCtrl.OnCreate(obj)
 	gameObject = obj;
-	lua = gameObject:GetComponent('LuaBehaviour');
+	transform=obj.transform
+	this.lua = gameObject:GetComponent('LuaBehaviour');
 --	lua:AddClick( ExitPanel.btnExit, this.Exit);
 --	lua:AddClick( ExitPanel.btnCancel, this.Cancel);
 	logWarn("Start lua--->>"..gameObject.name);

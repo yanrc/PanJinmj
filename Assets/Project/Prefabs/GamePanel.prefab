@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 22248782}
   - component: {fileID: 11450030}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 22226148}
   - component: {fileID: 11428264}
   m_Layer: 5
-  m_Name: chatBg (2)
+  m_Name: chatBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 11481014}
   - component: {fileID: 9595818}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 11421496}
   - component: {fileID: 9514790}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 22278500}
   - component: {fileID: 11458330}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,7 @@ GameObject:
   - component: {fileID: 11445888}
   - component: {fileID: 9581656}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Image_Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1373,7 +1373,7 @@ GameObject:
   - component: {fileID: 22267436}
   - component: {fileID: 11499424}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 11443756}
   - component: {fileID: 9532590}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Image_Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,7 +1461,7 @@ GameObject:
   - component: {fileID: 22298550}
   - component: {fileID: 11490840}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1904,7 +1904,7 @@ GameObject:
   - component: {fileID: 22204274}
   - component: {fileID: 11418618}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2261,7 +2261,7 @@ GameObject:
   - component: {fileID: 22228594}
   - component: {fileID: 11452276}
   m_Layer: 5
-  m_Name: chatBg (1)
+  m_Name: chatBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2366,7 +2366,7 @@ GameObject:
   - component: {fileID: 22248526}
   - component: {fileID: 11433566}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2435,7 +2435,7 @@ GameObject:
   - component: {fileID: 22208084}
   - component: {fileID: 11457960}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

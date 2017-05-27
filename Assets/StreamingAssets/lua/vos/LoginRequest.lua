@@ -7,7 +7,7 @@ function LoginRequest.New(data)
 	loginrequest.headCode = APIS.LOGIN_REQUEST;
 	--loginrequest.messageContent='{'..data..'}'
 	loginrequest.messageContent=data
-	log(loginrequest.messageContent)
+	log("lua:loginrequest="..loginrequest.messageContent)
 	return loginrequest
 end
 ExitRequest={}

@@ -89,6 +89,7 @@
     <Compile Include="Lua\Common\functions.lua" />
     <Compile Include="Lua\Common\protocal.lua" />
     <Compile Include="Lua\Controller\CreateRoomPanelCtrl.lua" />
+    <Compile Include="Lua\Controller\EnterRoomPanelCtrl.lua" />
     <Compile Include="Lua\Controller\ExitPanelCtrl.lua" />
     <Compile Include="Lua\Controller\GamePanelCtrl.lua" />
     <Compile Include="Lua\Controller\HomePanelCtrl.lua" />
@@ -99,6 +100,7 @@
     <Compile Include="Lua\eventlib.lua" />
     <Compile Include="Lua\events.lua" />
     <Compile Include="Lua\Logic\BottomScript.lua" />
+    <Compile Include="Lua\Logic\BroadcastScript.lua" />
     <Compile Include="Lua\Logic\ButtonAction.lua" />
     <Compile Include="Lua\Logic\CtrlManager.lua" />
     <Compile Include="Lua\Logic\Game.lua" />
@@ -126,6 +128,7 @@
     <Compile Include="Lua\Vos\GangCardRequest.lua" />
     <Compile Include="Lua\Vos\GaveUpRequest.lua" />
     <Compile Include="Lua\Vos\HupaiRequest.lua" />
+    <Compile Include="Lua\Vos\JoinRoomRequest.lua" />
     <Compile Include="Lua\Vos\LoginChatRequest.lua" />
     <Compile Include="Lua\Vos\LoginRequest.lua" />
     <Compile Include="Lua\Vos\LoginVo.lua" />

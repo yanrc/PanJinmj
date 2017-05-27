@@ -7,6 +7,6 @@ function PutOutCardRequest.New(data)
 	putOutCardRequest.headCode = APIS.CHUPAI_REQUEST;
 	--putOutCardRequest.messageContent='{'..data..'}'
 	putOutCardRequest.messageContent=data
-	log(putOutCardRequest.messageContent)
+	log("lua:PutOutCardRequest="..putOutCardRequest.messageContent)
 	return putOutCardRequest
 end

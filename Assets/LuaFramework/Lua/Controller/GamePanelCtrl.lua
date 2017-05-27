@@ -3,7 +3,8 @@ require "Logic/ButtonAction"
 require "Data/DirectionEnum"
 require "Data/PlayerItem"
 require "Vos/GameReadyRequest"
-local json=require"cjson"
+require "Vos/OutRoomRequest"
+local json = require "cjson"
 GamePanelCtrl = { }
 local this = GamePanelCtrl;
 local gameObject;
@@ -14,30 +15,30 @@ local versionText
 local btnActionScript
 local dialog_fanhui
 local showTimeNumber = 0
--- ÅÆÊı×é£¬¶şÎ¬
--- 1 Åö ºÍ ¸Ü value == 1 Åö  value == 2 ¸Ü£¿
--- 0 ÅÆ ÏÂ±êÎªÅÆ ÄÚÈİÎª¸ÃÅÆµÄÊıÁ¿
--- ³õÊ¼»¯ºÍÖØÁ¬»áÓÃµ½·şÎñÆ÷´«µÄÖµ£¬ÇÒÖ»ÓÃµ½ÊÖÅÆ
+-- ç‰Œæ•°ç»„ï¼ŒäºŒç»´
+-- 1 ç¢° å’Œ æ  value == 1 ç¢°  value == 2 æ 
+-- 0 ç‰Œ ä¸‹æ ‡ä¸ºç‰Œ å†…å®¹ä¸ºè¯¥ç‰Œçš„æ•°é‡
+-- åˆå§‹åŒ–å’Œé‡è¿ä¼šç”¨åˆ°æœåŠ¡å™¨ä¼ çš„å€¼ï¼Œä¸”åªç”¨åˆ°æ‰‹ç‰Œ
 local mineList
--- ÊÖÅÆÁĞ±í£¬¶şÎ¬£¬´æµÄÊÇgameObject
--- 0×Ô¼º£¬1-ÓÒ±ß¡£2-ÉÏ±ß¡£3-×ó±ß
--- ×Ô¼º»á±£´æÃşµ½µÄÅÆ£¬ÆäËûÈË²»±£´æ
+-- æ‰‹ç‰Œåˆ—è¡¨ï¼ŒäºŒç»´ï¼Œå­˜çš„æ˜¯gameObject
+-- 0è‡ªå·±ï¼Œ1-å³è¾¹ã€‚2-ä¸Šè¾¹ã€‚3-å·¦è¾¹
+-- è‡ªå·±ä¼šä¿å­˜æ‘¸åˆ°çš„ç‰Œï¼Œå…¶ä»–äººä¸ä¿å­˜
 local handerCardList
--- ´òÔÚ×ÀÉÏµÄÅÆ
+-- æ‰“åœ¨æ¡Œä¸Šçš„ç‰Œ
 local tableCardList
--- ³ÔÅö¸Ülist
+-- åƒç¢°æ list
 local PengGangList_L
 local PengGangList_R
 local PengGangList_T
 local PengGangList_B
 --
 local avatarList
-local bankerId-- ×¯¼Ò
+local bankerIndex-- åº„å®¶index
 local curDirString
 local LeavedRoundNumText
 local isFirstOpen
 local ruleText
--- ÄÜ·ñÉêÇëÍË³ö·¿¼ä£¬³õÊ¼Îªfalse£¬¿ªÊ¼ÓÎÏ·ÖÃtrue
+-- èƒ½å¦ç”³è¯·é€€å‡ºæˆ¿é—´ï¼Œåˆå§‹ä¸ºfalseï¼Œå¼€å§‹æ¸¸æˆç½®true
 local canClickButtonFlag = false
 local inviteFriendButton
 local btnJieSan
@@ -53,22 +54,21 @@ local SelfAndOtherPutoutCard
 local useForGangOrPengOrChi
 local passStr
 local chiPaiPointList
-local LeavedCardsNum -- Ê£ÓàÅÆÊı
-local pickCardItem-- ×Ô¼ºÃşµÄÅÆ
-local otherPickCardItem-- ±ğÈËÃşµÄÅÆ
-local passType-- ¡°¹ı¡±²Ù×÷×Ö·û´®
-local guiObj-- ·­¿ªµÄ¹íÅÆ
-local roomRemark-- ·¿¼äÏÔÊ¾µÄ¹æÔò
-local ReadySelect = { } -- ÓÎÏ·×¼±¸Ê±µÄÑ¡Ôñ
-local btnReadyGame-- ×¼±¸°´Å¥
+local LeavedCardsNum -- å‰©ä½™ç‰Œæ•°
+local pickCardItem-- è‡ªå·±æ‘¸çš„ç‰Œ
+local otherPickCardItem-- åˆ«äººæ‘¸çš„ç‰Œ
+local passType-- â€œè¿‡â€æ“ä½œå­—ç¬¦ä¸²
+local guiObj-- ç¿»å¼€çš„é¬¼ç‰Œ
+local roomRemark-- æˆ¿é—´æ˜¾ç¤ºçš„è§„åˆ™
+local ReadySelect = { } -- æ¸¸æˆå‡†å¤‡æ—¶çš„é€‰æ‹©
+local btnReadyGame
+local timer = 0
+local noticeGameObject-- æ»šåŠ¨æ¶ˆæ¯
+local dialog_fanhui_text
 function GamePanelCtrl.Awake()
 	logWarn("GamePanelCtrl.Awake--->>");
-	if (CtrlManager.GamePanelCtrl) then
-		this.Open()
-	else
 		PanelManager:CreatePanel('GamePanel', this.OnCreate);
-		CtrlManager.AddCtrl("GamePanelCtrl", this)
-	end
+		CtrlManager.GamePanelCtrl=this
 end
 
 function GamePanelCtrl.OnCreate(go)
@@ -93,15 +93,18 @@ function GamePanelCtrl.OnCreate(go)
 	guiObj = transform:FindChild('gui').gameObject
 	roomRemark = transform:FindChild('Text'):GetComponent('Text')
 	local players = transform:FindChild('playList')
-	for i = 1, 4 do
-		local temp = PlayerItem.New()
-		temp.gameObject = players:GetChild(i - 1).gameObject
-		log(temp.gameObject)
-		playerItems[i] = temp
-	end
+	playerItems[1] = PlayerItem.New(players:FindChild('Player_B').gameObject)
+	playerItems[2] = PlayerItem.New(players:FindChild('Player_R').gameObject)
+	playerItems[3] = PlayerItem.New(players:FindChild('Player_T').gameObject)
+	playerItems[4] = PlayerItem.New(players:FindChild('Player_L').gameObject)
 	ReadySelect[1] = transform:FindChild('Panel/DuanMen'):GetComponent('Toggle')
 	ReadySelect[2] = transform:FindChild('Panel/Gang'):GetComponent('Toggle')
 	btnReadyGame = transform:FindChild('Panel/Button').gameObject
+	Number = transform:FindChild('table/Number'):GetComponent('Text')
+	noticeGameObject = transform:FindChild("Image_Notice_BG").gameObject
+	dialog_fanhui_text = transform:FindChild('jiesan/Image_Bg/tip_text'):GetComponent('Text')
+	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Sure').gameObject,this.Tuichu)
+	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Cancle').gameObject,this.Quxiao)
 	this.Start()
 end
 function GamePanelCtrl.Start()
@@ -115,17 +118,17 @@ function GamePanelCtrl.Start()
 	this.AddListener();
 	this.InitPanel();
 	this.InitArrayList();
-	-- initPerson ();--³õÊ¼»¯Ã¿¸ö³ÉÔ±1000·Ö
+	-- initPerson ();--åˆå§‹åŒ–æ¯ä¸ªæˆå‘˜1000åˆ†
 	GlobalData.isonLoginPage = false;
 	if (GlobalData.reEnterRoomData ~= nil) then
-		-- ¶ÌÏßÖØÁ¬½øÈë·¿¼ä
+		-- çŸ­çº¿é‡è¿è¿›å…¥æˆ¿é—´
 		GlobalData.loginResponseData.roomId = GlobalData.reEnterRoomData.roomId;
 		this.ReEnterRoom();
 	elseif (GlobalData.roomJoinResponseData ~= nil) then
-		-- ½øÈëËûÈË·¿¼ä
+		-- è¿›å…¥ä»–äººæˆ¿é—´
 		this.JoinToRoom(GlobalData.roomJoinResponseData.playerList);
 	else
-		-- ´´½¨·¿¼ä
+		-- åˆ›å»ºæˆ¿é—´
 		this.CreateRoomAddAvatarVO(GlobalData.loginResponseData);
 	end
 	GlobalData.reEnterRoomData = nil;
@@ -166,7 +169,7 @@ local function CardSelect(obj)
 				handerCardList[1][k] = nil
 			else
 				handerCardList[1][k].transform.localPosition = Vector3.New(handerCardList[0][k].transform.localPosition.x, -292);
-				-- ´ÓÓÒµ½×óÒÀ´Î¶ÔÆë
+				-- ä»å³åˆ°å·¦ä¾æ¬¡å¯¹é½
 				handerCardList[1][k].BottomScript.selected = false;
 			end
 		end
@@ -184,34 +187,34 @@ local function StartGame(response)
 	GlobalData.roomAvatarVoList = avatarList;
 	-- GlobalData.surplusTimes -= 1;
 	local sgvo = json.decode(response.message);
-	bankerId = sgvo.bankerId;
+	bankerIndex = sgvo.bankerId;
 	GlobalData.roomVo.guiPai = sgvo.gui;
 	this.CleanGameplayUI();
-	-- ¿ªÊ¼ÓÎÏ·ºó²»ÏÔÊ¾
+	-- å¼€å§‹æ¸¸æˆåä¸æ˜¾ç¤º
 	log("lua:GamePanelCtrl.StartGame");
 	GlobalData.surplusTimes = GlobalData.surplusTimes - 1;
-	curDirString = this.GetDirection(bankerId);
+	curDirString = this.GetDirection(bankerIndex);
 	LeavedRoundNumText.text = tostring(GlobalData.surplusTimes)
-	-- Ë¢ĞÂÊ£Óà¾ÖÊı
+	-- åˆ·æ–°å‰©ä½™å±€æ•°
 	if (not isFirstOpen) then
 		btnActionScript = ButtonAction.New();
 		this.InitPanel();
 		-- InitArrayList ();
-		avatarList[bankerId].main = true;
+		avatarList[bankerIndex].main = true;
 	end
 	GlobalData.finalGameEndVo = null;
-	GlobalData.mainUuid = avatarList[bankerId].account.uuid;
+	GlobalData.mainUuid = avatarList[bankerIndex].account.uuid;
 	this.InitArrayList();
-	curDirString = this.GetDirection(bankerId);
+	curDirString = this.GetDirection(bankerIndex);
 	playerItems[GetIndexByDir(curDirString)]:SetbankImgEnable(true);
 	SetDirGameObjectAction();
 	isFirstOpen = false;
 	GlobalData.isOverByPlayer = false;
 	mineList = sgvo.paiArray;
-	-- ·¢ÅÆ
+	-- å‘ç‰Œ
 	UpateTimeReStart();
 	DisplayTouzi(sgvo.touzi, sgvo.gui);
-	-- ÏÔÊ¾÷»×Ó
+	-- æ˜¾ç¤ºéª°å­
 	-- this.DisplayGuiPai(sgvo.gui);
 	this.SetAllPlayerReadImgVisbleToFalse();
 	InitMyCardListAndOtherCard(13, 13, 13);
@@ -226,34 +229,34 @@ local function StartGame(response)
 	local ruleStr = "";
 	if (GlobalData.roomVo ~= nil and GlobalData.roomVo.roomType == 5) then
 		if (GlobalData.roomVo.pingHu == true) then
-			ruleStr = ruleStr .. "Çîºú\n";
+			ruleStr = ruleStr .. "ç©·èƒ¡\n";
 		end
 		if (GlobalData.roomVo.baoSanJia == true) then
-			ruleStr = ruleStr .. "°üÈı¼Ò\n";
+			ruleStr = ruleStr .. "åŒ…ä¸‰å®¶\n";
 		end
 		if (GlobalData.roomVo.gui == 2) then
-			ruleStr = ruleStr .. "´ø»á¶ù\n";
+			ruleStr = ruleStr .. "å¸¦ä¼šå„¿\n";
 		end
 		if (GlobalData.roomVo.jue == true) then
-			ruleStr = ruleStr .. "¾ø\n";
+			ruleStr = ruleStr .. "ç»\n";
 		end
 		if (GlobalData.roomVo.jiaGang == true) then
-			ruleStr = ruleStr .. "¼Ó¸Ö\n";
+			ruleStr = ruleStr .. "åŠ é’¢\n";
 		end
 		if (GlobalData.roomVo.duanMen == true and sgvo.duanMen) then
-			ruleStr = ruleStr .. "Âò¶ÏÃÅ\n";
+			ruleStr = ruleStr .. "ä¹°æ–­é—¨\n";
 		end
 		if (GlobalData.roomVo.jihu == true) then
-			ruleStr = ruleStr .. "¼¦ºú\n";
+			ruleStr = ruleStr .. "é¸¡èƒ¡\n";
 		end
 		if (GlobalData.roomVo.qingYiSe == true) then
-			ruleStr = ruleStr .. "ÇåÒ»É«\n";
+			ruleStr = ruleStr .. "æ¸…ä¸€è‰²\n";
 		end
 		ruleText.text = ruleStr;
 	end
 	for i = 1, #playerItems do
 		if (sgvo.jiaGang[i]) then
-			playerItems[GetIndexByDir(this.GetDirection(i))].jiaGang.text = "¼Ó¸Ö"
+			playerItems[GetIndexByDir(this.GetDirection(i))].jiaGang.text = "åŠ é’¢"
 		else
 			playerItems[GetIndexByDir(this.GetDirection(i))].jiaGang.text = ""
 		end
@@ -283,13 +286,13 @@ local function ShowLeavedCardsNumForInit()
 	local hong = roomCreateVo.hong;
 	local RoomType = roomCreateVo.roomType;
 	if (RoomType == 1) then
-		-- ×ª×ªÂé½«
+		-- è½¬è½¬éº»å°†
 		LeavedCardsNum = 108;
 		if (hong) then
 			LeavedCardsNum = 112;
 		end
 	elseif (RoomType == 2) then
-		-- »®Ë®Âé½«
+		-- åˆ’æ°´éº»å°†
 		LeavedCardsNum = 108;
 		if (roomCreateVo.addWordCard) then
 			LeavedCardsNum = 136;
@@ -302,13 +305,13 @@ local function ShowLeavedCardsNumForInit()
 			LeavedCardsNum = 136;
 		end
 	elseif (RoomType == 5) then
-		-- ÅÌ½õÂé½«
+		-- ç›˜é”¦éº»å°†
 		LeavedCardsNum = 108;
 		if (roomCreateVo.addWordCard) then
 			LeavedCardsNum = 136;
 		end
 	elseif (RoomType == 6) then
-		-- ÎŞÎıÂé½«
+		-- æ— é”¡éº»å°†
 		LeavedCardsNum = 116;
 		if (roomCreateVo.addWordCard) then
 			LeavedCardsNum = 144;
@@ -325,12 +328,12 @@ local function CardsNumChange()
 	end
 	LeavedCastNumText.text = tostring(LeavedCardsNum);
 end
--- ±ğÈËÃşÅÆÍ¨Öª
+-- åˆ«äººæ‘¸ç‰Œé€šçŸ¥
 local function OtherPickCard(response)
 	UpateTimeReStart();
 	local json = json.decode(response.message);
-	-- ÏÂÒ»¸öÃşÅÆÈËµÄË÷Òı
-	local avatarIndex = json["avatarIndex"];
+	-- ä¸‹ä¸€ä¸ªæ‘¸ç‰Œäººçš„ç´¢å¼•
+	local avatarIndex = json["avatarIndex"]+1;
 	log("GamePanelCtrl.OtherPickCard:otherPickCard avatarIndex = " .. tostring(avatarIndex));
 	OtherPickCardAndCreate(avatarIndex);
 	SetDirGameObjectAction();
@@ -339,8 +342,8 @@ local function OtherPickCard(response)
 end
 local function OtherPickCardAndCreate(avatarIndex)
 	local myIndex = this.GetMyIndexFromList();
-	local seatIndex = avatarIndex - myIndex;
-	if (seatIndex < 0) then
+	local seatIndex =1+ avatarIndex - myIndex;
+	if (seatIndex < 1) then
 		seatIndex = 4 + seatIndex;
 	end
 	curDirString = playerItems[seatIndex].dir;
@@ -356,7 +359,7 @@ local function OtherMoPaiCreateGameObject()
 	}
 	tempVector3 = switch[dir]
 	local path = "Assets/Project/Prefabs/card/Bottom_" + dir;
-	-- ÊµÀı»¯µ±Ç°ÃşµÄÅÆ
+	-- å®ä¾‹åŒ–å½“å‰æ‘¸çš„ç‰Œ
 	otherPickCardItem = this.CreateGameObjectAndReturn(path, parentList[GetIndexByDir(dir)], tempVector3);
 	otherPickCardItem.transform.localScale = Vector3.one;
 end
@@ -365,7 +368,7 @@ local function PickCard(response)
 	UpateTimeReStart();
 	local cardvo = json.decode(response.message);
 	MoPaiCardPoint = cardvo.cardPoint;
-	log("GamePanelCtrl:PickCard:ÃşÅÆ" .. tostring(MoPaiCardPoint));
+	log("GamePanelCtrl:PickCard:æ‘¸ç‰Œ" .. tostring(MoPaiCardPoint));
 	SelfAndOtherPutoutCard = MoPaiCardPoint;
 	useForGangOrPengOrChi = cardvo.cardPoint;
 	PutCardIntoMineList(MoPaiCardPoint);
@@ -375,7 +378,7 @@ local function PickCard(response)
 	CardsNumChange();
 	GlobalData.isDrag = true;
 end
--- ºú£¬¸Ü£¬Åö£¬³Ô£¬pass°´Å¥ÏÔÊ¾.
+-- èƒ¡ï¼Œæ ï¼Œç¢°ï¼Œåƒï¼ŒpassæŒ‰é’®æ˜¾ç¤º.
 local function ActionBtnShow(response)
 	GlobalData.isDrag = false;
 	GlobalData.isChiState = false;
@@ -410,7 +413,7 @@ local function ActionBtnShow(response)
 			passStr = passStr .. "gang_"
 		end
 		if string.match(strs[i], "chi") then
-			-- ¸ñÊ½£ºchi£º³öÅÆÍæ¼Ò£º³öµÄÅÆ|ÅÆ1_ÅÆ2_ÅÆ3| ÅÆ1_ÅÆ2_ÅÆ3
+			-- æ ¼å¼ï¼šchiï¼šå‡ºç‰Œç©å®¶ï¼šå‡ºçš„ç‰Œ|ç‰Œ1_ç‰Œ2_ç‰Œ3| ç‰Œ1_ç‰Œ2_ç‰Œ3
 			-- eg:"chi:1:2|1_2_3|2_3_4"
 			GlobalData.isChiState = true;
 			local strChi = string.split(str[i], '|');
@@ -435,14 +438,14 @@ local function ActionBtnShow(response)
 	end
 end
 
--- ÊÖÅÆÅÅĞò£¬¹íÅÆÒÆµ½×îÇ°
+-- æ‰‹ç‰Œæ’åºï¼Œé¬¼ç‰Œç§»åˆ°æœ€å‰
 function GamePanelCtrl.SortMyCardList()
 	local guipaiList = { };
 	for k, v in pairs(handerCardList[1]) do
 		if (v ~= nil) then
 			if (v.BottomScript.GetPoint() == GlobalData.roomVo.guiPai) then
 				guipaiList.Add(v);
-				-- ¹íÅÆ
+				-- é¬¼ç‰Œ
 				handerCardList[1][k] = nil
 			end
 		end
@@ -452,10 +455,10 @@ function GamePanelCtrl.SortMyCardList()
 		table.insert(handerCardList[1], 0, v)
 	end
 end
--- ³õÊ¼»¯ÊÖÅÆ
+-- åˆå§‹åŒ–æ‰‹ç‰Œ
 local function InitMyCardListAndOtherCard(topCount, leftCount, rightCount)
 	for i = 1, #mineList[1].Count do
-		-- ÎÒµÄÅÆ13ÕÅ
+		-- æˆ‘çš„ç‰Œ13å¼ 
 		if (mineList[1][i] > 0) then
 			for j = 1, #mineList[1][i] do
 				local gob = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function()
@@ -470,7 +473,7 @@ local function InitMyCardListAndOtherCard(topCount, leftCount, rightCount)
 						handerCardList[1].Add(gob);
 					else
 						log("GamePanelCtrl InitMyCardListAndOtherCard:" .. tostring(i) .. "is null");
-						-- ÓÎÏ·¶ÔÏóÎª¿Õ
+						-- æ¸¸æˆå¯¹è±¡ä¸ºç©º
 					end
 				end )
 			end
@@ -480,13 +483,13 @@ local function InitMyCardListAndOtherCard(topCount, leftCount, rightCount)
 	this.InitOtherCardList(DirectionEnum.Left, leftCount);
 	this.InitOtherCardList(DirectionEnum.Right, rightCount);
 	this.InitOtherCardList(DirectionEnum.Top, topCount);
-	if (bankerId == this.GetMyIndexFromList()) then
+	if (bankerIndex == this.GetMyIndexFromList()) then
 		this.SetPosition(true);
-		-- ÉèÖÃÎ»ÖÃ
+		-- è®¾ç½®ä½ç½®
 		-- checkHuPai();
 	else
 		SetPosition(false);
-		OtherPickCardAndCreate(bankerId);
+		OtherPickCardAndCreate(bankerIndex);
 	end
 end
 function GamePanelCtrl.SetAllPlayerReadImgVisbleToFalse()
@@ -513,13 +516,13 @@ local function GetIndexByDir(dir)
 	return result;
 end
 
--- ³õÊ¼»¯ÆäËûÈËµÄÊÖÅÆ
+-- åˆå§‹åŒ–å…¶ä»–äººçš„æ‰‹ç‰Œ
 function GamePanelCtrl.InitOtherCardList(initDiretion, count)
 	for i = 1, count do
 		local temp = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function()
-			-- ÊµÀı»¯µ±Ç°ÅÆ
+			-- å®ä¾‹åŒ–å½“å‰ç‰Œ
 			if (temp ~= nil) then
-				-- ÓĞ¿ÉÄÜÃ»ÅÆÁË
+				-- æœ‰å¯èƒ½æ²¡ç‰Œäº†
 				temp.transform:SetParent(parentList[GetIndexByDir(initDiretion)]);
 				temp.transform.localScale = Vector3.one;
 				local switch = {
@@ -527,7 +530,7 @@ function GamePanelCtrl.InitOtherCardList(initDiretion, count)
 						temp.transform.localPosition = Vector3.New(-204 + 38 * i, 0);
 						handerCardList[3].Add(temp);
 						temp.transform.localScale = Vector3.one;
-						-- Ô­´óĞ¡
+						-- åŸå¤§å°
 					end,
 					[DirectionEnum.Left] = function()
 						temp.transform.localPosition = Vector3.New(0, -105 + i * 30);
@@ -545,19 +548,19 @@ function GamePanelCtrl.InitOtherCardList(initDiretion, count)
 	end
 end
 
--- ÃşÅÆ
+-- æ‘¸ç‰Œ
 local function MoPai()
 	pickCardItem = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function()
 		log("GamePanelCtrl MoPai:" .. tostring(MoPaiCardPoint));
 		if (pickCardItem ~= nil) then
-			-- ÓĞ¿ÉÄÜÃ»ÅÆÁË
+			-- æœ‰å¯èƒ½æ²¡ç‰Œäº†
 			pickCardItem.name = "pickCardItem";
 			pickCardItem.transform:SetParent(parentList[1]);
-			-- ¸¸½Úµã
+			-- çˆ¶èŠ‚ç‚¹
 			pickCardItem.transform.localScale = Vector3.New(1.1, 1.1, 1);
-			-- Ô­´óĞ¡
+			-- åŸå¤§å°
 			pickCardItem.transform.localPosition = Vector3.New(580, -292);
-			-- Î»ÖÃ
+			-- ä½ç½®
 			pickCardItem.bottomScript = BottomScript.New()
 			pickCardItem.bottomScript.onSendMessage = cardChange;
 			pickCardItem.bottomScript.reSetPoisiton = cardSelect;
@@ -576,7 +579,7 @@ function PushOutFromMineList(cardPoint)
 		mineList[1][cardPoint] = mineList[1][cardPoint] -1;
 	end
 end
--- ½ÓÊÕµ½ÆäËüÈËµÄ³öÅÆÍ¨Öª
+-- æ¥æ”¶åˆ°å…¶å®ƒäººçš„å‡ºç‰Œé€šçŸ¥
 local function OtherPutOutCard(response)
 	local json = json.decode(response.message);
 	local cardPoint = json["cardIndex"];
@@ -599,7 +602,7 @@ local function OtherPutOutCard(response)
 	-- createPutOutCardAndPlayAction(cardPoint, curAvatarIndex);
 	GlobalData.isChiState = false;
 end
--- ´´½¨´òÀ´µÄµÄÅÆ¶ÔÏó£¬²¢ÇÒ¿ªÊ¼²¥·Å¶¯»­
+-- åˆ›å»ºæ‰“æ¥çš„çš„ç‰Œå¯¹è±¡ï¼Œå¹¶ä¸”å¼€å§‹æ’­æ”¾åŠ¨ç”»
 local function CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, position)
 	soundMgr:playSound(cardPoint, avatarList[curAvatarIndex].account.sex);
 	local tempVector3 = Vector3.zero;
@@ -662,7 +665,7 @@ local function CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, position
 	end
 end
 
--- ¸ù¾İÒ»¸öÈËÔÚÊı×éÀïµÄË÷Òı£¬µÃµ½Õâ¸öÈËËùÔÚµÄ·½Î»£¬L-×ó£¬T-ÉÏ,R-ÓÒ£¬B-ÏÂ£¨×Ô¼º£©
+-- æ ¹æ®ä¸€ä¸ªäººåœ¨æ•°ç»„é‡Œçš„ç´¢å¼•ï¼Œå¾—åˆ°è¿™ä¸ªäººæ‰€åœ¨çš„æ–¹ä½ï¼ŒL-å·¦ï¼ŒT-ä¸Š,R-å³ï¼ŒB-ä¸‹ï¼ˆè‡ªå·±ï¼‰
 local function GetDirection()
 	local result = DirectionEnum.Bottom;
 	local myselfIndex = this.GetMyIndexFromList();
@@ -670,7 +673,7 @@ local function GetDirection()
 		-- log ("getDirection == B");
 		return result;
 	end
-	-- ´Ó×Ô¼º¿ªÊ¼¼ÆËã£¬ÏÂÒ»Î»µÄË÷Òı
+	-- ä»è‡ªå·±å¼€å§‹è®¡ç®—ï¼Œä¸‹ä¸€ä½çš„ç´¢å¼•
 	for i = 1, 4 do
 		myselfIndex = myselfIndex + 1;
 		if (myselfIndex >= 5) then
@@ -693,9 +696,9 @@ local function GetDirection()
 end
 
 
--- ÉèÖÃºìÉ«¼ıÍ·µÄÏÔÊ¾·½Ïò
+-- è®¾ç½®çº¢è‰²ç®­å¤´çš„æ˜¾ç¤ºæ–¹å‘
 function SetDirGameObjectAction()
-	-- ÉèÖÃ·½Ïò
+	-- è®¾ç½®æ–¹å‘
 	-- UpateTimeReStart();
 	for i = 1, #dirGameList do
 		dirGameList[i]:SetActive(false);
@@ -737,8 +740,8 @@ local function ThrowBottom(index, Dir)
 	if (Dir == DirectionEnum.Right) then
 		temp.transform.SetSiblingIndex(0);
 	end
-	-- ¶ªÅÆÉÏ?
-	-- ¶¥ÕëÏÂ?
+	-- ä¸¢ç‰Œä¸Š?
+	-- é¡¶é’ˆä¸‹?
 	SetPointGameObject(temp);
 end
 
@@ -753,18 +756,18 @@ local function PengCard(response)
 	effectType = "peng";
 	PengGangHuEffectCtrl();
 	soundMgr:playSoundByAction("peng", avatarList[cardVo.avatarId].account.sex);
-	-- Ïú»Ù×ÀÉÏ±»ÅöµÄÅÆ
+	-- é”€æ¯æ¡Œä¸Šè¢«ç¢°çš„ç‰Œ
 	if (cardOnTable ~= nil) then
 		ReSetOutOnTabelCardPosition(cardOnTable);
 		Destroy(cardOnTable);
 	end
 	if (curDirString == DirectionEnum.Bottom) then
-		-- ×Ô¼ºÅöÅÆ
+		-- è‡ªå·±ç¢°ç‰Œ
 		putCardIntoMineList(putOutCardPoint)
-		-- ¸ømineList[1]Ôö¼Ó¼ÓÒ»ÕÅÅÆ
+		-- ç»™mineList[1]å¢åŠ åŠ ä¸€å¼ ç‰Œ
 		mineList[2][putOutCardPoint] = 2;
-		-- ±£´æÅöµôµÄ2ÕÅÅÆ
-		-- ¸øhanderCardList[1]ÒÆ³ı2ÕÅÅÆ
+		-- ä¿å­˜ç¢°æ‰çš„2å¼ ç‰Œ
+		-- ç»™handerCardList[1]ç§»é™¤2å¼ ç‰Œ
 		local removeCount = 0;
 		for k, v in pairs(handerCardList[1]) do
 			if (v.bottomScript.GetPoint() == putOutCardPoint) then
@@ -778,25 +781,25 @@ local function PengCard(response)
 		this.SetPosition(true);
 		BottomPeng();
 	else
-		-- ÆäËûÈËÅöÅÆ
+		-- å…¶ä»–äººç¢°ç‰Œ
 		local tempCardList = handerCardList[getIndexByDir(curDirString)];
 		local path = "Assets/Project/Prefabs/PengGangCard/PengGangCard_" + curDirString;
 		if (tempCardList ~= nil) then
-			-- Ö±½Ó¼õÉÙÇ°Ãæ2ÕÅÅÆ
+			-- ç›´æ¥å‡å°‘å‰é¢2å¼ ç‰Œ
 			for i = 1, 2 do
 				Destroy(tempCardList[1]);
 				table.remove(tempCardList, 1)
 			end
 
-			-- ÅöÍêºó°ÑµÚÒ»ÕÅÅÆÄÃµ½×îÓÒ±ß£¬ÖØĞÂÅÅĞò
+			-- ç¢°å®ŒåæŠŠç¬¬ä¸€å¼ ç‰Œæ‹¿åˆ°æœ€å³è¾¹ï¼Œé‡æ–°æ’åº
 			otherPickCardItem = tempCardList[0];
 			GameToolScript.setOtherCardObjPosition(tempCardList, curDirString, 1);
-			-- ÆäËûÈËhanderCardList²»±£´æ×î±ßÉÏµÄÅÆ
+			-- å…¶ä»–äººhanderCardListä¸ä¿å­˜æœ€è¾¹ä¸Šçš„ç‰Œ
 			table.remove(tempCardList, 1)
 		end
 		local tempvector3 = Vector3.zero;
 		local tempList = { }
-		-- ÏÔÊ¾3ÕÅÅÆ
+		-- æ˜¾ç¤º3å¼ ç‰Œ
 		local switch = {
 			[DirectionEnum.Right] = function()
 				for i = 1, 3 do
@@ -861,17 +864,17 @@ function ChiCard(response)
 		Destroy(cardOnTable);
 	end
 	if (curDir == DirectionEnum.Bottom) then
-		-- ×Ô¼º³ÔÅÆ
+		-- è‡ªå·±åƒç‰Œ
 		mineList[1][putOutCardPoint] = mineList[1][putOutCardPoint] + 1;
 		-- mineList[3][putOutCardPoint] = 1;
-		-- µÚÒ»¸ö³ÔÅÆ
+		-- ç¬¬ä¸€ä¸ªåƒç‰Œ
 		for k, v in pairs(handerCardList[1]) do
 			if (v.bottomScript.GetPoint() == cardVo.onePoint) then
 				v = nil
 				break
 			end
 		end
-		-- µÚ¶ş¸ö³ÔÅÆ
+		-- ç¬¬äºŒä¸ªåƒç‰Œ
 		for k, v in pairs(handerCardList[1]) do
 			if (v.bottomScript.GetPoint() == cardVo.twoPoint) then
 				v = nil
@@ -881,12 +884,12 @@ function ChiCard(response)
 		this.SetPosition(true);
 		BottomChi(otherPengCard, cardVo.onePoint, cardVo.twoPoint)
 	else
-		-- ÆäËûÈË³ÔÅÆ
+		-- å…¶ä»–äººåƒç‰Œ
 		local tempCardList = handerCardList[getIndexByDir(curDir)];
 		local path = "Assets/Project/Prefabs/PengGangCard/PengGangCard_" + curDir;
 		if (tempCardList ~= nil) then
 			for i = 1, 2 do
-				Destroy(tempCardList[1]);
+				destroy(tempCardList[1]);
 				table.remove(tempCardList, 1)
 			end
 			otherPickCardItem = tempCardList[1];
@@ -999,9 +1002,9 @@ local function OtherGang(response)
 	otherGangCard = gangNotice.cardPoint;
 	otherGangType = gangNotice.type;
 	local path = "";
-	-- ¸ÜÅÆÏÂÃæµÄÈıÕÅ
+	-- æ ç‰Œä¸‹é¢çš„ä¸‰å¼ 
 	local path2 = "";
-	-- ¸ÜÅÆÉÏÃæµÄÒ»ÕÅ
+	-- æ ç‰Œä¸Šé¢çš„ä¸€å¼ 
 	local tempvector3 = Vector3.zero;
 	curDir = this.GetDirection(gangNotice.avatarId);
 	effectType = "gang";
@@ -1009,7 +1012,7 @@ local function OtherGang(response)
 	SetDirGameObjectAction();
 	soundMgr:playSoundByAction("gang", avatarList[gangNotice.avatarId].account.sex)
 	local tempCardList
-	-- È·¶¨ÅÆ±³¾°£¨Ã÷¸Ü£¬°µ¸Ü£©
+	-- ç¡®å®šç‰ŒèƒŒæ™¯ï¼ˆæ˜æ ï¼Œæš—æ ï¼‰
 	local switch =
 	{
 		[DirectionEnum.Right] = function()
@@ -1029,26 +1032,26 @@ local function OtherGang(response)
 		end
 	}
 	local tempList = { }
-	-- Ã÷¸ÜºÍ°µ¸Ü
+	-- æ˜æ å’Œæš—æ 
 	if (GetPaiInpeng(otherGangCard, curDir) == -1) then
-		-- É¾³ıÍæ¼ÒÊÖÅÆ£¬µ±Íæ¼ÒÅöÅÆÅÆ×éÀïÃæµÄÓĞÅöÅÆÊ±£¬²»ÓÃÉ¾³ıÊÖÅÆ
+		-- åˆ é™¤ç©å®¶æ‰‹ç‰Œï¼Œå½“ç©å®¶ç¢°ç‰Œç‰Œç»„é‡Œé¢çš„æœ‰ç¢°ç‰Œæ—¶ï¼Œä¸ç”¨åˆ é™¤æ‰‹ç‰Œ
 		for i = 1, 3 do
 			local temp = tempCardList[1];
 			table.remove(tempCardList, 1)
-			Destroy(temp);
+			destroy(temp);
 		end
 		this.SetPosition(false)
 		if (tempCardList ~= nil) then
 			GameToolScript.setOtherCardObjPosition(tempCardList, curDir, 2);
 		end
-		-- Ã÷¸Ü
+		-- æ˜æ 
 		if (otherGangType == 0) then
 			if (cardOnTable ~= nil) then
 				ReSetOutOnTabelCardPosition(cardOnTable);
-				Destroy(cardOnTable);
+				destroy(cardOnTable);
 			end
 			for i = 1, 4 do
-				-- ÊµÀı»¯ÆäËûÈË¸ÜÅÆ
+				-- å®ä¾‹åŒ–å…¶ä»–äººæ ç‰Œ
 				local obj = resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/PengGangCard_B.prefab" }, function()
 					obj.TopAndBottomCardScript = TopAndBottomCardScript.New()
 					obj.TopAndBottomCardScript:Init(otherGangCard, curDir, GlobalData.roomVo.guiPai == otherGangCard);
@@ -1086,9 +1089,9 @@ local function OtherGang(response)
 					table.insert(tempList, obj)
 				end )
 			end
-			-- °µ¸Ü
+			-- æš—æ 
 		elseif (otherGangType == 1) then
-			Destroy(otherPickCardItem);
+			destroy(otherPickCardItem);
 			local common = function()
 				local switch =
 				{
@@ -1139,11 +1142,11 @@ local function OtherGang(response)
 			end
 		end
 		AddListToPengGangList(curDir, tempList);
-		-- ²¹¸Ü
+		-- è¡¥æ 
 	else
 		local gangIndex = GetPaiInpeng(otherGangCard, curDir);
 		if (otherPickCardItem ~= nil) then
-			Destroy(otherPickCardItem);
+			destroy(otherPickCardItem);
 		end
 		local obj = resMgr:LoadPrefab('prefabs', { path + ".prefab" }, function()
 			obj.TopAndBottomCardScript = TopAndBottomCardScript.New()
@@ -1191,18 +1194,18 @@ function AddListToPengGangList(dir, tempList)
 end
 
 
---[[ ÅĞ¶ÏÅöÅÆµÄÅÆ×éÀïÃæÊÇ·ñ°üº¬Ä³¸öÅÆ£¬ÓÃÓÚÅĞ¶ÏÊÇ·ñÊµÀı»¯Ò»ÕÅÅÆ»¹ÊÇÈıÕÅÅÆ
-cardpoint£ºÅÆµã
-direction£º·½Ïò
-·µ»Ø-1  ´ú±íÃ»ÓĞÅÆ
-ÆäÓàÅÆÔÚlistµÄÎ»ÖÃ--]]
+--[[ åˆ¤æ–­ç¢°ç‰Œçš„ç‰Œç»„é‡Œé¢æ˜¯å¦åŒ…å«æŸä¸ªç‰Œï¼Œç”¨äºåˆ¤æ–­æ˜¯å¦å®ä¾‹åŒ–ä¸€å¼ ç‰Œè¿˜æ˜¯ä¸‰å¼ ç‰Œ
+cardpointï¼šç‰Œç‚¹
+directionï¼šæ–¹å‘
+è¿”å›-1  ä»£è¡¨æ²¡æœ‰ç‰Œ
+å…¶ä½™ç‰Œåœ¨listçš„ä½ç½®--]]
 
 function GetPaiInpeng(cardPoint, direction)
 	local jugeList = { }
 	local switch =
 	{
 		[DirectionEnum.Bottom] = function()
-			-- ×Ô¼º
+			-- è‡ªå·±
 			jugeList = PengGangCardList;
 		end,
 		[DirectionEnum.Right] = function()
@@ -1219,7 +1222,7 @@ function GetPaiInpeng(cardPoint, direction)
 	if (jugeList == nil or #jugeList == 0) then
 		return -1;
 	end
-	-- Ñ­»·±éÀú±È¶ÔµãÊı
+	-- å¾ªç¯éå†æ¯”å¯¹ç‚¹æ•°
 	for i = 1, #jugeList do
 		local index
 		local ret, errMessage = pcall(
@@ -1239,7 +1242,7 @@ function GetPaiInpeng(cardPoint, direction)
 	end
 	return -1;
 end
--- ÉèÖÃ¶¥Õë
+-- è®¾ç½®é¡¶é’ˆ
 local function SetPointGameObject(parent)
 	if (parent ~= nil) then
 		local common = function()
@@ -1259,7 +1262,7 @@ end
 
 local function OnChipSelect(obj, isSelected)
 	if (isSelect) then
-		-- Ñ¡Ôñ´ËÅÆ
+		-- é€‰æ‹©æ­¤ç‰Œ
 		if (oneChiCardPoint ~= -1 and twoChiCardPoint ~= -1) then
 			return
 		end
@@ -1271,7 +1274,7 @@ local function OnChipSelect(obj, isSelected)
 		obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -272);
 		obj.bottomScript.selected = true;
 	else
-		-- È¡ÏûÑ¡Ôñ
+		-- å–æ¶ˆé€‰æ‹©
 		if (oneChiCardPoint == obj.bottomScript.CardPoint) then
 			oneChiCardPoint = -1;
 		elseif (twoChiCardPoint == obj.bottomScript.CardPoint) then
@@ -1282,24 +1285,24 @@ local function OnChipSelect(obj, isSelected)
 	end
 end
 
--- ×Ô¼º´ò³öµÄÅÆ
+-- è‡ªå·±æ‰“å‡ºçš„ç‰Œ
 local function CardChange(obj)
 	if (GlobalData.isChiState) then
 		onChipSelect(obj, false);
 	else
 		local handCardCount = #handerCardList[1]
 		if (handCardCount % 3 == 2) then
-			-- ÕâÊ±ºò²ÅÄÜ³öÅÆ
+			-- è¿™æ—¶å€™æ‰èƒ½å‡ºç‰Œ
 			obj.bottomScript.onSendMessage = nil;
 			obj.bottomScript.reSetPoisiton = nil;
 			local putOutCardPointTemp = obj.bottomScript.CardPoint;
 			pushOutFromMineList(putOutCardPointTemp);
-			-- ½«´ò³öÅÆÒÆ³ı
+			-- å°†æ‰“å‡ºç‰Œç§»é™¤
 			table.remove(handerCardList[1], obj)
-			Destroy(obj);
+			destroy(obj);
 			this.SetPosition(false);
 			CreatePutOutCardAndPlayAction(putOutCardPointTemp, this.GetMyIndexFromList(), obj.transform.position);
-			-- ³öÅÆ¶¯»­
+			-- å‡ºç‰ŒåŠ¨ç”»
 			local cardvo = { }
 			cardvo.cardPoint = putOutCardPointTemp;
 			putOutCardPointAvarIndex = getIndexByDir(this.GetDirection(this.GetMyIndexFromList()));
@@ -1311,27 +1314,27 @@ local function CardChange(obj)
 end
 
 function InsertCardIntoList(item)
-	-- ²åÈëÅÆµÄ·½·¨
+	-- æ’å…¥ç‰Œçš„æ–¹æ³•
 	if (item ~= nil) then
 		local curCardPoint = item.bottomScript.CardPoint;
-		-- µÃµ½µ±Ç°ÅÆÖ¸Õë
+		-- å¾—åˆ°å½“å‰ç‰ŒæŒ‡é’ˆ
 		if (curCardPoint == GlobalData.roomVo.guiPai) then
 			table.insert(handerCardList[1], 1, item)
-			-- ¹íÅÆ·Åµ½×îÇ°Ãæ
+			-- é¬¼ç‰Œæ”¾åˆ°æœ€å‰é¢
 			return;
 		else
 			for i = 1, #handerCardList[1] do
-				-- ÓÎÏ·ÎïÌå¸öÊı ×ÔÔö
+				-- æ¸¸æˆç‰©ä½“ä¸ªæ•° è‡ªå¢
 				local cardPoint = handerCardList[1][i].bottomScript.CardPoint;
-				-- µÃµ½ËùÓĞÅÆÖ¸Õë
+				-- å¾—åˆ°æ‰€æœ‰ç‰ŒæŒ‡é’ˆ
 				if (cardPoint ~= GlobalData.roomVo.guiPai and cardPoint >= curCardPoint) then
-					-- ÅÆÖ¸Õë>=µ±Ç°ÅÆµÄÊ±ºò²åÈë
+					-- ç‰ŒæŒ‡é’ˆ>=å½“å‰ç‰Œçš„æ—¶å€™æ’å…¥
 					table.insert(handerCardList[1], i, item)
 					this.SortMyCardList();
 					return;
 				end
 				table.insert(handerCardList[1], item)
-				-- ÓÎÏ·¶ÔÏóÁĞ±íÌí¼Óµ±Ç°ÅÆ
+				-- æ¸¸æˆå¯¹è±¡åˆ—è¡¨æ·»åŠ å½“å‰ç‰Œ
 				this.SortMyCardList();
 			end
 		end
@@ -1340,20 +1343,20 @@ function InsertCardIntoList(item)
 end
 
 function GamePanelCtrl.SetPosition(flag)
-	-- ÉèÖÃÎ»ÖÃ
+	-- è®¾ç½®ä½ç½®
 	local count = #handerCardList[1];
 	local startX = 594 - count * 80;
 	if (flag) then
 		for i = 1, count - 1 do
 			handerCardList[1][i].transform.localPosition = Vector3.New(startX + i * 80, -292, 0);
-			-- ´Ó×óµ½ÓÒÒÀ´Î¶ÔÆë
+			-- ä»å·¦åˆ°å³ä¾æ¬¡å¯¹é½
 		end
 		handerCardList[1][count - 1].transform.localPosition = Vector3.New(580, -292, 0);
-		-- ´Ó×óµ½ÓÒÒÀ´Î¶ÔÆë
+		-- ä»å·¦åˆ°å³ä¾æ¬¡å¯¹é½
 	else
 		for i = 1, count do
 			handerCardList[1][i].transform.localPosition = Vector3.New(startX + i * 80 - 80, -292, 0);
-			-- ´Ó×óµ½ÓÒÒÀ´Î¶ÔÆë
+			-- ä»å·¦åˆ°å³ä¾æ¬¡å¯¹é½
 		end
 	end
 end
@@ -1397,13 +1400,13 @@ function MoveCompleted()
 	timeFlag = true;
 end
 
--- ÖØĞÂ¿ªÊ¼¼ÆÊ±
+-- é‡æ–°å¼€å§‹è®¡æ—¶
 function UpateTimeReStart()
 	timer = 16;
 end
 
 
--- µã»÷·ÅÆú°´Å¥
+-- ç‚¹å‡»æ”¾å¼ƒæŒ‰é’®
 function MyPassBtnClick()
 	btnActionScript.CleanBtnShow();
 	if isSelfPickCard then
@@ -1449,7 +1452,7 @@ function ShowChipai(idx)
 	end
 end
 
--- ÏÔÊ¾¿É³ÔÅÆµÄÏÔÊ¾
+-- æ˜¾ç¤ºå¯åƒç‰Œçš„æ˜¾ç¤º
 local function ShowChiList()
 	btnActionScript.CleanBtnShow();
 	for i = 1, #canChiList do
@@ -1462,7 +1465,7 @@ local function ShowChiList()
 	end
 end
 
--- ³ÔÅÆÑ¡Ôñµã»÷
+-- åƒç‰Œé€‰æ‹©ç‚¹å‡»
 local function MyChiBtnClick2(idx)
 	local cpoint = chiPaiPointList[idx];
 	GlobalData.isDrag = true;
@@ -1482,7 +1485,7 @@ local function MyChiBtnClick2(idx)
 	end
 end
 
--- ³Ô°´Å¥µã»÷
+-- åƒæŒ‰é’®ç‚¹å‡»
 local function MyChiBtnClick()
 	if (#chiPaiPointList == 1) then
 		local cpoint = chiPaiPointList[1];
@@ -1513,26 +1516,26 @@ local function GangResponse(response)
 	if (#gangBackVo.cardList == 0) then
 		mineList[1][selfGangCardPoint] = 2;
 		if (gangKind == 0) then
-			-- Ã÷¸Ü
+			-- æ˜æ 
 			if (GetPaiInpeng(selfGangCardPoint, DirectionEnum.Bottom) == -1) then
-				-- ¸ÜÅÆ²»ÔÚÅöÅÆÊı×éÒÔÄÚ£¬Ò»¶¨Îª±ğÈË´òµÃÅÆ
+				-- æ ç‰Œä¸åœ¨ç¢°ç‰Œæ•°ç»„ä»¥å†…ï¼Œä¸€å®šä¸ºåˆ«äººæ‰“å¾—ç‰Œ
 				mineList[1][putOutCardPoint] = mineList[1][putOutCardPoint] -3;
-				-- Ïú»Ù±ğÈË´òµÄÅÆ
+				-- é”€æ¯åˆ«äººæ‰“çš„ç‰Œ
 				if (putOutCard ~= nil) then
-					Destroy(putOutCard);
+					destroy(putOutCard);
 				end
 				if (cardOnTable ~= nil) then
 					ReSetOutOnTabelCardPosition(cardOnTable);
-					Destroy(cardOnTable)
+					destroy(cardOnTable)
 				end
-				-- Ïú»ÙÊÖÅÆÖĞµÄÈıÕÅÅÆ
+				-- é”€æ¯æ‰‹ç‰Œä¸­çš„ä¸‰å¼ ç‰Œ
 				local removeCount = 0;
 				for i = 1, #handerCardList[1] do
 					local temp = handerCardList[1][i];
 					local tempCardPoint = handerCardList[1][i].bottomScript.CardPoint;
 					if (selfGangCardPoint == tempCardPoint) then
 						table.remove(handerCardList[1], i)
-						Destroy(temp);
+						destroy(temp);
 						i = i - 1
 						removeCount = removeCount + 1;
 						if (removeCount == 3) then
@@ -1540,7 +1543,7 @@ local function GangResponse(response)
 						end
 					end
 				end
-				-- ´´½¨¸ÜÅÆĞòÁĞ
+				-- åˆ›å»ºæ ç‰Œåºåˆ—
 				local gangTempList = { };
 				for i = 1, 4 do
 					local obj = this.CreateGameObjectAndReturn("Assets/Project/Prefabs/PengGangCard/PengGangCard_B",
@@ -1553,22 +1556,22 @@ local function GangResponse(response)
 					end
 					table.insert(gangTempList, obj)
 				end
-				-- Ìí¼Óµ½¸ÜÅÆÊı×éÀïÃæ
+				-- æ·»åŠ åˆ°æ ç‰Œæ•°ç»„é‡Œé¢
 				table.insert(PengGangCardList, gangTempList)
-				-- ²¹¸Ü
+				-- è¡¥æ 
 			else
-				-- ÔÚÅöÅÆÊı×éÒÔÄÚ£¬ÔòÒ»¶¨ÊÇ×ÔÃşµÄÅÆ
+				-- åœ¨ç¢°ç‰Œæ•°ç»„ä»¥å†…ï¼Œåˆ™ä¸€å®šæ˜¯è‡ªæ‘¸çš„ç‰Œ
 				mineList[1][putOutCardPoint] = mineList[1][putOutCardPoint] -4;
 				for i = 1, #handerCardList[1] do
 					if (handerCardList[1][i].bottomScript.CardPoint == selfGangCardPoint) then
 						local temp = handerCardList[1][i];
 						table.remove(handerCardList[1], i)
-						Destroy(temp);
+						destroy(temp);
 						break;
 					end
 				end
 				local index = GetPaiInpeng(selfGangCardPoint, DirectionEnum.Bottom);
-				-- ½«¸ÜÅÆ·Åµ½¶ÔÓ¦Î»ÖÃ
+				-- å°†æ ç‰Œæ”¾åˆ°å¯¹åº”ä½ç½®
 				local obj = this.CreateGameObjectAndReturn("Assets/Project/Prefabs/PengGangCard/PengGangCard_B",
 				pengGangParenTransformB.transform, Vector3.New(-370 + PengGangCardList.Count * 190, 0));
 				obj.TopAndBottomCardScript = TopAndBottomCardScript.New()
@@ -1576,7 +1579,7 @@ local function GangResponse(response)
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector3.New(-310 + index * 190, 24);
 				table.insert(PengGangCardList[index], obj)
-				-- °µ¸Ü
+				-- æš—æ 
 			end
 		elseif (gangKind == 1) then
 			mineList[1][selfGangCardPoint] = mineList[1][selfGangCardPoint] -4;
@@ -1586,7 +1589,7 @@ local function GangResponse(response)
 				local tempCardPoint = handerCardList[1][i].bottomScript.CardPoint;
 				if (selfGangCardPoint == tempCardPoint) then
 					table.remove(handerCardList[1], i)
-					Destroy(temp);
+					destroy(temp);
 					i = i - 1
 					removeCount = removeCount + 1;
 					if (removeCount == 4) then
@@ -1614,7 +1617,6 @@ local function GangResponse(response)
 	end
 	this.SetPosition(false);
 	GlobalData.isChiState = false;
-
 end
 
 function GamePanelCtrl.CreateGameObjectAndReturn(path, parent, position)
@@ -1628,12 +1630,12 @@ end
 
 local function MyGangBtnClick()
 	-- useForGangOrPengOrChi = int.Parse (gangPaiList [1]);
-	-- GlobalData.isDrag = true;--ÓÉÓÚ´æÔÚÇÀ¸Üºú£¬µãÁË¸Ü°´Å¥ÒÔºó»¹²»ÄÜ´òÅÆ£¬ÊÕµ½¸ÜÏûÏ¢²ÅÄÜ´ò
+	-- GlobalData.isDrag = true;--ç”±äºå­˜åœ¨æŠ¢æ èƒ¡ï¼Œç‚¹äº†æ æŒ‰é’®ä»¥åè¿˜ä¸èƒ½æ‰“ç‰Œï¼Œæ”¶åˆ°æ æ¶ˆæ¯æ‰èƒ½æ‰“
 	if (#gangPaiList == 1) then
 		useForGangOrPengOrChi = tonumber(gangPaiList[1])
 		selfGangCardPoint = useForGangOrPengOrChi;
 	else
-		-- ¶àÕÅÅÆ
+		-- å¤šå¼ ç‰Œ
 		useForGangOrPengOrChi = tonumber(gangPaiList[1])
 		selfGangCardPoint = useForGangOrPengOrChi;
 	end
@@ -1658,13 +1660,13 @@ function GamePanelCtrl.Clean()
 		mineList = { }
 	end
 	if (putOutCard ~= nil) then
-		Destroy(putOutCard);
+		destroy(putOutCard);
 	end
 	if (pickCardItem ~= nil) then
-		Destroy(pickCardItem);
+		destroy(pickCardItem);
 	end
 	if (otherPickCardItem ~= nil) then
-		Destroy(otherPickCardItem);
+		destroy(otherPickCardItem);
 	end
 	guiObj:SetActive(false);
 end
@@ -1684,7 +1686,7 @@ function GamePanelCtrl.CleanList(tempList)
 		while #tempList > 0 do
 			local temp = tempList[1];
 			table.remove(tempList, 1)
-			Destroy(temp);
+			destroy(temp);
 		end
 	end
 end
@@ -1694,22 +1696,22 @@ local function SetRoomRemark()
 	GlobalData.totalTimes = roomvo.roundNumber;
 	GlobalData.surplusTimes = roomvo.roundNumber;
 	-- LeavedRoundNumText.text = GlobalData.surplusTimes + "";
-	local str = "·¿¼äºÅ£º\n" .. roomvo.roomId .. "\n"
-	.. "È¦Êı£º" .. roomvo.roundNumber .. "\n\n"
+	local str = "æˆ¿é—´å·ï¼š\n" .. roomvo.roomId .. "\n"
+	.. "åœˆæ•°:" .. roomvo.roundNumber .. "\n\n"
 	roomRemark.text = str;
 end
 
-local function AddAvatarVOToList(avatar)
+function GamePanelCtrl.AddAvatarVOToList(avatar)
 	if (avatarList == nil) then
 		avatarList = { };
 	end
 	table.insert(avatarList, avatar)
-	SetSeat(avatar);
+	this.SetSeat(avatar);
 end
--- ´´½¨·¿¼ä
+-- åˆ›å»ºæˆ¿é—´
 function GamePanelCtrl.CreateRoomAddAvatarVO(avatar)
 	avatar.scores = 1000;
-	AddAvatarVOToList(avatar);
+	this.AddAvatarVOToList(avatar);
 	SetRoomRemark();
 	if (GlobalData.roomVo.duanMen or GlobalData.roomVo.jiaGang) then
 		ReadySelect[1].gameObject:SetActive(GlobalData.roomVo.duanMen)
@@ -1721,11 +1723,11 @@ function GamePanelCtrl.CreateRoomAddAvatarVO(avatar)
 	end
 end
 
--- ¼ÓÈë·¿¼ä
+-- åŠ å…¥æˆ¿é—´
 function GamePanelCtrl.JoinToRoom(avatars)
 	avatarList = avatars;
 	for i = 1, #avatars do
-		SetSeat(avatars[i])
+		this.SetSeat(avatars[i])
 	end
 	SetRoomRemark();
 	if (GlobalData.roomVo.jiaGang) then
@@ -1738,15 +1740,15 @@ function GamePanelCtrl.JoinToRoom(avatars)
 	end
 end
 
--- ÉèÖÃµ±Ç°½ÇÉ«µÄ×ùÎ»
-local function SetSeat(avatar)
-	-- ÓÎÏ·½áÊøºóÓÃµÄÊı¾İ£¬ÎğÉ¾£¡£¡£¡
+-- è®¾ç½®å½“å‰è§’è‰²çš„åº§ä½
+function GamePanelCtrl.SetSeat(avatar)
+	-- æ¸¸æˆç»“æŸåç”¨çš„æ•°æ®ï¼Œå‹¿åˆ ï¼ï¼ï¼
 	if (avatar.account.uuid == GlobalData.loginResponseData.account.uuid) then
 		playerItems[1]:SetAvatarVo(avatar);
 	else
 		local myIndex = this.GetMyIndexFromList();
 		local curAvaIndex = table.indexOf(avatarList, avatar)
-		local seatIndex = curAvaIndex - myIndex;
+		local seatIndex =1+ curAvaIndex - myIndex;
 		if (seatIndex < 1) then
 			seatIndex = 4 + seatIndex;
 		end
@@ -1775,20 +1777,20 @@ function GamePanelCtrl.GetIndex(uuid)
 				end
 			end
 		end
-		return 0;
+		return 1;
 	end
 end
 
 local function OtherUserJointRoom(response)
 	local avatar = json.decode(response.message);
-	AddAvatarVOToList(avatar);
+	this.AddAvatarVOToList(avatar);
 end
 
--- ºúÅÆ°´Å¥µã»÷
+-- èƒ¡ç‰ŒæŒ‰é’®ç‚¹å‡»
 local function HupaiRequest()
 	if (SelfAndOtherPutoutCard ~= -1) then
 		local cardPoint = SelfAndOtherPutoutCard;
-		-- ĞèĞŞ¸Ä³ÉÕıÈ·µÄºúÅÆcardpoint
+		-- éœ€ä¿®æ”¹æˆæ­£ç¡®çš„èƒ¡ç‰Œcardpoint
 		local requestVo = { };
 		requestVo.cardPoint = cardPoint;
 		if (isQiangHu) then
@@ -1818,11 +1820,11 @@ local function HupaiCallBack(response)
 			if (GlobalData.hupaiResponseVo.avatarList[i].uuid == GlobalData.hupaiResponseVo.winnerId) then
 				huPaiPoint = GlobalData.hupaiResponseVo.avatarList[i].cardPoint;
 				if (GlobalData.hupaiResponseVo.winnerId ~= GlobalData.hupaiResponseVo.dianPaoId) then
-					-- µãÅÚºú
+					-- ç‚¹ç‚®èƒ¡
 					playerItems[GetIndexByDir(this.GetDirection(i))]:SetHuFlagDisplay();
 					soundMgr:playSoundByAction("hu", avatarList[i].account.sex);
 				else
-					-- ×ÔÃşºú
+					-- è‡ªæ‘¸èƒ¡
 					playerItems[GetIndexByDir(this.GetDirection(i))]:SetHuFlagDisplay();
 					soundMgr:playSoundByAction("zimo", avatarList[i].account.sex);
 				end
@@ -1833,7 +1835,7 @@ local function HupaiCallBack(response)
 		allMas = GlobalData.hupaiResponseVo.allMas;
 		if (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_ZHUANZHUAN
 			or GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_CHANGSHA) then
-			-- ×ª×ªÂé½«ÏÔÊ¾×¥ÂëĞÅÏ¢
+			-- è½¬è½¬éº»å°†æ˜¾ç¤ºæŠ“ç ä¿¡æ¯
 			if (GlobalData.roomVo.ma > 0 and allMas ~= nil and #allMas > 0) then
 				zhuamaPanel = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Panel_ZhuaMa.prefab' }, nil)
 				zhuamaPanel.ZhuMaScript = ZhuMaScript.New()
@@ -1847,7 +1849,7 @@ local function HupaiCallBack(response)
 				)
 			end
 		elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG) then
-			-- ¹ã¶«Âé½«ÏÔÊ¾×¥ÂëĞÅÏ¢
+			-- å¹¿ä¸œéº»å°†æ˜¾ç¤ºæŠ“ç ä¿¡æ¯
 			if (GlobalData.roomVo.ma > 0 and allMas ~= nil and #allMas > 0) then
 				zhuamaPanel = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Panel_ZhuaMa.prefab' }, nil)
 				zhuamaPanel.ZhuMaScript = ZhuMaScript.New()
@@ -1861,7 +1863,7 @@ local function HupaiCallBack(response)
 				)
 			end
 		elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_PANJIN) then
-			-- ÅÌ½õÂé½«¾ø
+			-- ç›˜é”¦éº»å°†ç»
 			if (GlobalData.roomVo.jue) then
 				zhuamaPanel = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/Panel_ZhuaMa.prefab' }, nil)
 				zhuamaPanel.ZhuMaScript = ZhuMaScript.New()
@@ -1912,13 +1914,13 @@ local function HupaiCoinChange(scores)
 end
 
 
--- µ¥¾Ö½áÊøÖØÖÃÊı¾İµÄµØ·½
+-- å•å±€ç»“æŸé‡ç½®æ•°æ®çš„åœ°æ–¹
 
 local function OpenGameOverPanelSignal()
-	-- µ¥¾Ö½áËã
+	-- å•å±€ç»“ç®—
 	liujuEffectGame:SetActive(false);
 	SetAllPlayerHuImgVisbleToFalse();
-	playerItems[GetIndexByDir(this.GetDirection(bankerId))]:SetbankImgEnable(false);
+	playerItems[GetIndexByDir(this.GetDirection(bankerIndex))]:SetbankImgEnable(false);
 	if (handerCardList ~= nil and #handerCardList > 0 and #handerCardList[1] > 0) then
 		for i = 1, #handerCardList[1] do
 			handerCardList[1][i].bottomScript.onSendMessage = nil
@@ -1927,7 +1929,7 @@ local function OpenGameOverPanelSignal()
 	end
 	this.InitPanel();
 	if (zhuamaPanel ~= nil) then
-		Destroy(zhuamaPanel);
+		destroy(zhuamaPanel);
 	end
 	local obj = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/Panel_Game_Over.prefab' }, function()
 		obj.GameOverScript = GameOverScript.New()
@@ -1935,8 +1937,8 @@ local function OpenGameOverPanelSignal()
 		table.insert(GlobalData.singalGameOverList, obj)
 	end )
 	allMas = "";
-	-- ³õÊ¼»¯ÂëÅÆÊı¾İÎª¿Õ
-	avatarList[bankerId].main = false;
+	-- åˆå§‹åŒ–ç ç‰Œæ•°æ®ä¸ºç©º
+	avatarList[bankerIndex].main = false;
 end
 
 function ReSetOutOnTabelCardPosition(cardOnTable)
@@ -1951,29 +1953,29 @@ function ReSetOutOnTabelCardPosition(cardOnTable)
 end
 
 
--- ÍË³ö·¿¼äÇëÇó
+-- é€€å‡ºæˆ¿é—´ç¡®è®¤é¢æ¿
 local function QuiteRoom()
-	if (bankerId == this.GetMyIndexFromList()) then
-		dialog_fanhui_text.text = "Ç×£¬È·¶¨Òª½âÉ¢·¿¼äÂğ?";
+	if (bankerIndex == this.GetMyIndexFromList()) then
+		dialog_fanhui_text.text = "äº²ï¼Œç¡®å®šè¦è§£æ•£æˆ¿é—´å—?";
 	else
-		dialog_fanhui_text.text = "Ç×£¬È·¶¨ÒªÀë¿ª·¿¼äÂğ?";
+		dialog_fanhui_text.text = "äº²ï¼Œç¡®å®šè¦ç¦»å¼€æˆ¿é—´å—?";
 	end
 	dialog_fanhui.gameObject:SetActive(true);
 end
-
-local function tuichu()
+--é€€å‡ºæˆ¿é—´æŒ‰é’®ç‚¹å‡»
+function GamePanelCtrl.Tuichu()
 	local vo = { };
 	vo.roomId = GlobalData.roomVo.roomId;
 	local sendMsg = json.encode(vo)
 	CustomSocket.getInstance():sendMsg(OutRoomRequest.New(sendMsg));
 	dialog_fanhui.gameObject:SetActive(false);
 end
-
-local function quxiao()
+--å–æ¶ˆé€€å‡ºæˆ¿é—´
+function GamePanelCtrl.Quxiao()
 	dialog_fanhui.gameObject:SetActive(false);
 end
 
-local function OutRoomCallbak()
+local function OutRoomCallbak(response)
 	local responseMsg = json.decode(response.message)
 	if (responseMsg.status_code == "0") then
 		if (responseMsg.type == "0") then
@@ -1990,13 +1992,13 @@ local function OutRoomCallbak()
 					end
 				end
 			else
-				ExitOrDissoliveRoom();
+				this.ExitOrDissoliveRoom();
 			end
 		else
-			ExitOrDissoliveRoom();
+			this.ExitOrDissoliveRoom();
 		end
 	else
-		TipsManager.Instance().setTips("ÍË³ö·¿¼äÊ§°Ü£º" .. tostring(responseMsg.error));
+		TipsManager.Instance().setTips("é€€å‡ºæˆ¿é—´å¤±è´¥ï¼š" .. tostring(responseMsg.error));
 	end
 end
 
@@ -2005,12 +2007,12 @@ local function DissoliveRoomRequest()
 	SoundMgr:playSoundByActionButton(1);
 	if (canClickButtonFlag) then
 		dissoliveRoomType = "0";
-		TipsManagerScript:LoadDialog("ÉêÇë½âÉ¢·¿¼ä", "ÄãÈ·¶¨ÒªÉêÇë½âÉ¢·¿¼ä£¿", doDissoliveRoomRequest, cancle);
+		TipsManagerScript:LoadDialog("ç”³è¯·è§£æ•£æˆ¿é—´", "ä½ ç¡®å®šè¦ç”³è¯·è§£æ•£æˆ¿é—´?", doDissoliveRoomRequest, cancle);
 	else
-		TipsManager.Instance().setTips("»¹Ã»ÓĞ¿ªÊ¼ÓÎÏ·£¬²»ÄÜÉêÇëÍË³ö·¿¼ä");
+		TipsManager.Instance().setTips("è¿˜æ²¡æœ‰å¼€å§‹æ¸¸æˆï¼Œä¸èƒ½ç”³è¯·é€€å‡ºæˆ¿é—´");
 	end
 end
--- ÓÎÏ·ÉèÖÃ
+-- æ¸¸æˆè®¾ç½®
 local function OpenGameSettingDialog()
 	SoundMgr:playSoundByActionButton(1);
 	loadPerfab("Assets/Project/Prefabs/Panel_Setting");
@@ -2018,28 +2020,28 @@ local function OpenGameSettingDialog()
 	local ss = panelCreateDialog.SettingScript
 	if (canClickButtonFlag) then
 		ss.canClickButtonFlag = canClickButtonFlag;
-		ss.jiesanBtn:GetComponentInChildren("Text").text = "ÉêÇë½âÉ¢·¿¼ä";
+		ss.jiesanBtn:GetComponentInChildren("Text").text = "ç”³è¯·è§£æ•£æˆ¿é—´";
 		ss.type = 2;
 	else
-		if (bankerId == this.GetMyIndexFromList()) then
-			-- ÎÒÊÇ·¿Ö÷£¨Ò»¿ªÊ¼×¯¼ÒÊÇ·¿Ö÷£©
+		if (bankerIndex == this.GetMyIndexFromList()) then
+			-- æˆ‘æ˜¯æˆ¿ä¸»ï¼ˆä¸€å¼€å§‹åº„å®¶æ˜¯æˆ¿ä¸»ï¼‰
 			ss.canClickButtonFlag = canClickButtonFlag;
-			ss.jiesanBtn:GetComponentInChildren("Text").text = "½âÉ¢·¿¼ä";
+			ss.jiesanBtn:GetComponentInChildren("Text").text = "è§£æ•£æˆ¿é—´";
 			ss.type = 3;
 			ss.dialog_fanhui = dialog_fanhui;
-			dialog_fanhui_text.text = "Ç×£¬È·¶¨Òª½âÉ¢·¿¼äÂğ?";
+			dialog_fanhui_text.text = "äº²ï¼Œç¡®å®šè¦è§£æ•£æˆ¿é—´å—?";
 		else
 			ss.canClickButtonFlag = canClickButtonFlag;
-			ss.jiesanBtn:GetComponentInChildren("Text").text = "Àë¿ª·¿¼ä";
+			ss.jiesanBtn:GetComponentInChildren("Text").text = "ç¦»å¼€æˆ¿é—´";
 			ss.type = 3;
 			ss.dialog_fanhui = dialog_fanhui;
-			dialog_fanhui_text.text = "Ç×£¬È·¶¨ÒªÀë¿ª·¿¼äÂğ?";
+			dialog_fanhui_text.text = "äº²ï¼Œç¡®å®šè¦ç¦»å¼€æˆ¿é—´å—?";
 		end
 	end
 
 end
 
-local panelCreateDialog;-- ½çÃæÉÏ´ò¿ªµÄdialog
+local panelCreateDialog;-- ç•Œé¢ä¸Šæ‰“å¼€çš„dialog
 local function loadPerfab(perfabName)
 	panelCreateDialog = resMgr:LoadPrefab('prefabs', { perfabName + ".prefab" }, function()
 		panelCreateDialog.transform.parent = gameObject.transform;
@@ -2049,7 +2051,7 @@ local function loadPerfab(perfabName)
 	end )
 end
 
--- ÉêÇë½âÉ¢·¿¼ä»Øµ÷
+-- ç”³è¯·è§£æ•£æˆ¿é—´å›è°ƒ
 
 local dissoDialog;
 local function DissoliveRoomResponse(response)
@@ -2064,19 +2066,19 @@ local function DissoliveRoomResponse(response)
 		dissoDialog.VoteScript.iniUI(uuid, plyerName, avatarList);
 	elseif (dissoliveRoomResponseVo.type == "3") then
 		if (zhuamaPanel ~= nil and GlobalData.isonApplayExitRoomstatus) then
-			Destroy(zhuamaPanel)
+			destroy(zhuamaPanel)
 		end
 		GlobalData.isonApplayExitRoomstatus = false;
 		if (dissoDialog ~= nil) then
 			dissoDialog.VoteScript.RemoveListener();
-			Destroy(dissoDialog);
+			destroy(dissoDialog);
 		end
 		GlobalData.isOverByPlayer = true;
 	end
 end
 
 
--- ÉêÇë»òÍ¬Òâ½âÉ¢·¿¼äÇëÇó
+-- ç”³è¯·æˆ–åŒæ„è§£æ•£æˆ¿é—´è¯·æ±‚
 local function DoDissoliveRoomRequest()
 	local dissoliveRoomRequestVo = DissoliveRoomRequestVo.New();
 	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
@@ -2089,45 +2091,45 @@ end
 local function cancle()
 end
 
-local function ExitOrDissoliveRoom()
-	GlobalData.loginResponseData.ResetData();
-	-- ¸´Î»·¿¼äÊı¾İ
+function GamePanelCtrl.ExitOrDissoliveRoom()
+	GlobalData.loginResponseData:ResetData();
+	-- å¤ä½æˆ¿é—´æ•°æ®
 	GlobalData.loginResponseData.roomId = 0;
-	-- ¸´Î»·¿¼äÊı¾İ
+	-- å¤ä½æˆ¿é—´æ•°æ®
 	GlobalData.roomJoinResponseData = nil;
-	-- ¸´Î»·¿¼äÊı¾İ
+	-- å¤ä½æˆ¿é—´æ•°æ®
 	GlobalData.roomVo.roomId = 0;
 	GlobalData.soundToggle = true;
 	this.Clean();
-	SoundMgr:playBGM(1);
-	if (GlobalData.homePanel ~= nil) then
-		GlobalData.homePanel.Open();
+	soundMgr:playBGM(1);
+	if (CtrlManager.HomePanelCtrl ~= nil) then
+		CtrlManager.HomePanelCtrl.Open();
 	else
-		HomePanel.Awake()
-		GlobalData.homePanel = HomePanelCtrl
+		HomePanelCtrl.Awake()
 	end
 
-	while #playerItems.Count > 0 do
+	while #playerItems > 0 do
 		local item = playerItems[1];
 		table.remove(playerItems, 1)
-		Destroy(item.gameObject);
+		destroy(item.gameObject);
 	end
 	this.Close()
+	HomePanelCtrl.Open()
 end
 
 local function GameReadyNotice(response)
 	local message = json.decode(response.message);
-	local avatarIndex = message["avatarIndex"];
+	local avatarIndex = message["avatarIndex"]+1;--æœåŠ¡å™¨æ˜¯ä»0å¼€å§‹
 	local myIndex = this.GetMyIndexFromList();
-	local seatIndex = avatarIndex - myIndex;
+	local seatIndex =1+ avatarIndex - myIndex;
 	if (seatIndex < 1) then
 		seatIndex = 4 + seatIndex;
 	end
-	playerItems[seatIndex].readyImg.enabled = true;
-	avatarList[avatarIndex].isReady = true;
+	playerItems[seatIndex].ReadyImg.enabled = true;
+	avatarList[avatarIndex].IsReady = true;
 end
 
--- Òş²Ø¸ú×¯
+-- éšè—è·Ÿåº„
 local function GameFollowBanderNotice(response)
 	genZhuang:SetActive(true);
 	coroutine.start(Invoke(HideGenzhuang, 2))
@@ -2141,7 +2143,7 @@ function GamePanelCtrl.ReEnterRoom()
 	if (GlobalData.reEnterRoomData ~= nil) then
 		local roomVo = GlobalData.roomVo;
 		local reEnterRoomData = GlobalData.reEnterRoomData
-		-- ÏÔÊ¾·¿¼ä»ù±¾ĞÅÏ¢
+		-- æ˜¾ç¤ºæˆ¿é—´åŸºæœ¬ä¿¡æ¯
 		roomVo.addWordCard = reEnterRoomData.addWordCard;
 		roomVo.hong = reEnterRoomData.hong;
 		roomVo.name = reEnterRoomData.name;
@@ -2168,22 +2170,22 @@ function GamePanelCtrl.ReEnterRoom()
 		roomVo.siguiyi = reEnterRoomData.siguiyi;
 		roomVo.menqing = reEnterRoomData.menqing;
 		SetRoomRemark();
-		-- ÉèÖÃ×ùÎ»
+		-- è®¾ç½®åº§ä½
 		avatarList = reEnterRoomData.playerList;
 		GlobalData.roomAvatarVoList = reEnterRoomData.playerList;
 		for i = 1, #avatarList do
-			SetSeat(avatarList[i]);
+			this.SetSeat(avatarList[i]);
 			if (avatarList[i].main) then
-				bankerId = i;
+				bankerIndex = i;
 			end
 		end
 
 		this.RecoverOtherGlobalData();
 		local selfPaiArray = reEnterRoomData.playerList[this.GetMyIndexFromList()].paiArray;
 		if (selfPaiArray == nil or #selfPaiArray == 0) then
-			-- ÓÎÏ·»¹Ã»ÓĞ¿ªÊ¼
+			-- æ¸¸æˆè¿˜æ²¡æœ‰å¼€å§‹
 			if (not avatarList[this.GetMyIndexFromList()].isReady) then
-				-- log("bankerId=" + bankerId + "     this.GetMyIndexFromList()=" +  this.GetMyIndexFromList());
+				-- log("bankerIndex=" + bankerIndex + "     this.GetMyIndexFromList()=" +  this.GetMyIndexFromList());
 				if (roomVo.duanMen or roomVo.jiaGang) then
 					ReadySelect[1].gameObject:SetActive(roomVo.duanMen);
 					ReadySelect[2].gameObject:SetActive(roomVo.jiaGang);
@@ -2194,33 +2196,33 @@ function GamePanelCtrl.ReEnterRoom()
 				end
 			end
 		else
-			-- ÅÆ¾ÖÒÑ¿ªÊ¼
+			-- ç‰Œå±€å·²å¼€å§‹
 			this.SetAllPlayerReadImgVisbleToFalse();
 			this.CleanGameplayUI();
-			-- ÏÔÊ¾´òÅÆÊı¾İ
+			-- æ˜¾ç¤ºæ‰“ç‰Œæ•°æ®
 			this.DisplayTableCards();
-			-- ÏÔÊ¾¹íÅÆ
+			-- æ˜¾ç¤ºé¬¼ç‰Œ
 			this.DisplayGuiPai();
-			-- ÏÔÊ¾ÅöÅÆ
+			-- æ˜¾ç¤ºç¢°ç‰Œ
 			this.DisplayOtherHandercard();
-			-- ÏÔÊ¾ÆäËûÍæ¼ÒµÄÊÖÅÆ
+			-- æ˜¾ç¤ºå…¶ä»–ç©å®¶çš„æ‰‹ç‰Œ
 			this.DisplayallGangCard();
-			-- ÏÔÊ¾¸ÜÅÆ
+			-- æ˜¾ç¤ºæ ç‰Œ
 			this.DisplayPengCard();
-			-- ÏÔÊ¾ÅöÅÆ
+			-- æ˜¾ç¤ºç¢°ç‰Œ
 			this.DisplayChiCard();
-			-- ÏÔÊ¾³ÔÅÆ
+			-- æ˜¾ç¤ºåƒç‰Œ
 			this.DispalySelfhanderCard();
-			-- ÏÔÊ¾×Ô¼ºµÄÊÖÅÆ
+			-- æ˜¾ç¤ºè‡ªå·±çš„æ‰‹ç‰Œ
 			CustomSocket.getInstance():sendMsg(CurrentStatusRequest.New());
 		end
 	end
 end
 
--- »Ö¸´ÆäËûÈ«¾ÖÊı¾İ
+-- æ¢å¤å…¶ä»–å…¨å±€æ•°æ®
 function GamePanelCtrl.RecoverOtherGlobalData()
 	local selfIndex = this.GetMyIndexFromList();
-	-- »Ö¸´·¿¿¨Êı¾İ£¬´ËÊ±Ö÷½çÃæ»¹Ã»ÓĞloadËùÒÔÎŞĞè²Ù×÷½çÃæÏÔÊ¾
+	-- æ¢å¤æˆ¿å¡æ•°æ®ï¼Œæ­¤æ—¶ä¸»ç•Œé¢è¿˜æ²¡æœ‰loadæ‰€ä»¥æ— éœ€æ“ä½œç•Œé¢æ˜¾ç¤º
 	GlobalData.loginResponseData.account.roomcard = GlobalData.reEnterRoomData.playerList[selfIndex].account.roomcard;
 end
 
@@ -2233,17 +2235,17 @@ function GamePanelCtrl.DispalySelfhanderCard()
 				local gob = resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function()
 					if (gob ~= nil) then
 						gob.transform:SetParent(parentList[1]);
-						-- ÉèÖÃ¸¸½Úµã
+						-- è®¾ç½®çˆ¶èŠ‚ç‚¹
 						gob.transform.localScale = Vector3.New(1.1, 1.1, 1);
 						gob.bottomScript.onSendMessage = CardChange;
-						-- ·¢ËÍÏûÏ¢fd
+						-- å‘é€æ¶ˆæ¯fd
 						gob.bottomScript.reSetPoisiton = CardSelect;
 						gob.bottomScript.CardPoint = i;
 						if (i == GlobalData.roomVo.guiPai) then
 							gob.bottomScript.SetLaizi(true);
 						end
 						table.insert(handerCardList[1], god)
-						-- Ôö¼ÓÓÎÏ·¶ÔÏó
+						-- å¢åŠ æ¸¸æˆå¯¹è±¡
 						this.SortMyCardList();
 					end
 				end )
@@ -2271,7 +2273,7 @@ function MyselfSoundActionPlay()
 end
 
 
--- ÖØÁ¬ÏÔÊ¾´òÅÆÊı¾İ
+-- é‡è¿æ˜¾ç¤ºæ‰“ç‰Œæ•°æ®
 function GamePanelCtrl.DisplayTableCards()
 	local Dir;
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
@@ -2285,10 +2287,10 @@ function GamePanelCtrl.DisplayTableCards()
 	end
 end
 
--- ÏÔÊ¾×ÀÃæ¹íÅÆ
+-- æ˜¾ç¤ºæ¡Œé¢é¬¼ç‰Œ
 local function DisplayTouzi(touzi, gui)
 	if (gui ~= -1 and GlobalData.roomVo.roomType == 4 and GlobalData.roomVo.gui == 2) then
-		-- ÏÔÊ¾÷»×Ó
+		-- æ˜¾ç¤ºéª°å­
 		local r1 = touzi / 10;
 		local r2 = touzi % 10;
 		touziObj.TouziActionScript = TouziActionScript.New()
@@ -2301,35 +2303,35 @@ local function DisplayTouzi(touzi, gui)
 	end
 end
 
--- »ñÈ¡ÏÔÊ¾Àµ×ÓÆ¤£¨¹íÅÆ2Íò ÏÔÊ¾1Íò£©
+-- è·å–æ˜¾ç¤ºèµ–å­çš®ï¼ˆé¬¼ç‰Œ2ä¸‡ æ˜¾ç¤º1ä¸‡ï¼‰
 local function GetDisplayGuiPai(gui)
 	if (gui == 0 or gui == 9 or gui == 18) then
 		return gui + 8;
 	elseif (gui == 27) then
-		-- ·ç
+		-- é£
 		return gui + 3;
 	elseif (gui == 31) then
-		-- ÖĞ·¢°×
+		-- ä¸­å‘ç™½
 		return gui + 2;
 	else
 		return gui - 1;
 	end
 end
 
--- ÏÔÊ¾×ÀÃæ¹íÅÆ
+-- æ˜¾ç¤ºæ¡Œé¢é¬¼ç‰Œ
 function GamePanelCtrl.DisplayGuiPai()
 	touziObj:SetActive(false);
 	local gui = GlobalData.roomVo.guiPai;
 	if (gui ~= -1 and(GlobalData.roomVo.hong or GlobalData.roomVo.gui > 0)) then
-		-- ÏÔÊ¾¹íÅÆ
-		-- int mGui = getDisplayGuiPai(gui);//ÅÌ½õÍæ·¨£¬ÏÔÊ¾µ±Ç°¹íÅÆµÄÇ°Ò»ÕÅ
+		-- æ˜¾ç¤ºé¬¼ç‰Œ
+		-- int mGui = getDisplayGuiPai(gui);//ç›˜é”¦ç©æ³•ï¼Œæ˜¾ç¤ºå½“å‰é¬¼ç‰Œçš„å‰ä¸€å¼ 
 		guiObj.TopAndBottomCardScript = TopAndBottomCardScript.New()
 		guiObj.TopAndBottomCardScript.Init(gui, DirectionEnum.T, true);
 		guiObj:SetActive(true);
 	end
 end
 
--- ÖØÁ¬ÏÔÊ¾ÆäËûÈËµÄÊÖÅÆ
+-- é‡è¿æ˜¾ç¤ºå…¶ä»–äººçš„æ‰‹ç‰Œ
 function GamePanelCtrl.DisplayOtherHandercard()
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
 		local dir = this.GetDirection(this.GetIndex(GlobalData.reEnterRoomData.playerList[i].account.uuid));
@@ -2340,7 +2342,7 @@ function GamePanelCtrl.DisplayOtherHandercard()
 	end
 end
 
--- ÖØÁ¬ÏÔÊ¾¸ÜÅÆ
+-- é‡è¿æ˜¾ç¤ºæ ç‰Œ
 function GamePanelCtrl.DisplayallGangCard()
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
 		local paiArrayType = GlobalData.reEnterRoomData.playerList[i].paiArray[2];
@@ -2356,7 +2358,7 @@ function GamePanelCtrl.DisplayallGangCard()
 					gangpaiObj.uuid = string.split(item, ':')[1];
 					gangpaiObj.cardPiont = tonumber(string.split(item, ':')[2]);
 					gangpaiObj.type = string.split(item, ':')[3];
-					-- Ôö¼ÓÅĞ¶ÏÊÇ·ñÎª×Ô¼ºµÄ¸ÜÅÆµÄ²Ù×÷
+					-- å¢åŠ åˆ¤æ–­æ˜¯å¦ä¸ºè‡ªå·±çš„æ ç‰Œçš„æ“ä½œ
 
 					GlobalData.reEnterRoomData.playerList[i].paiArray[1][gangpaiObj.cardPiont] = GlobalData.reEnterRoomData.playerList[i].paiArray[1][gangpaiObj.cardPiont] -4;
 					if (gangpaiObj.type == "an") then
@@ -2372,17 +2374,17 @@ function GamePanelCtrl.DisplayallGangCard()
 end
 
 
--- ÅöÅÆÖØÁ¬£¨Õâ¸öÂß¼­Ğ´µÃºÜ·´ÈËÀà£©
+-- ç¢°ç‰Œé‡è¿ï¼ˆè¿™ä¸ªé€»è¾‘å†™å¾—å¾ˆåäººç±»ï¼‰
 function GamePanelCtrl.DisplayPengCard()
 	for i = 0, #GlobalData.reEnterRoomData.playerList do
 		local paiArrayType = GlobalData.reEnterRoomData.playerList[i].paiArray[2];
-		-- µÚ¶ş¸öÊı×é´æ´¢ÁËÅöµÄÅÆ
+		-- ç¬¬äºŒä¸ªæ•°ç»„å­˜å‚¨äº†ç¢°çš„ç‰Œ
 		local dirstr = this.GetDirection(this.GetIndex(GlobalData.reEnterRoomData.playerList[i].account.uuid));
 		if (table.Contains(paiArrayType, 1)) then
-			-- 1´ú±íÅöµÄÄÇÕÅÅÆ
+			-- 1ä»£è¡¨ç¢°çš„é‚£å¼ ç‰Œ
 			for j = 1, #paiArrayType do
 				if (paiArrayType[j] == 1 and GlobalData.reEnterRoomData.playerList[i].paiArray[0][j] > 0) then
-					-- ·şÎñÆ÷Ã»È¥µôÒÑ¾­³ÔÅö¸ÜµÄÅÆ£¬ËùÒÔ´¦ÀíÒ»ÏÂ£¨Ö÷ÒªÊÇÒªÈ¥µô×Ô¼ºµÄ£©
+					-- æœåŠ¡å™¨æ²¡å»æ‰å·²ç»åƒç¢°æ çš„ç‰Œï¼Œæ‰€ä»¥å¤„ç†ä¸€ä¸‹ï¼ˆä¸»è¦æ˜¯è¦å»æ‰è‡ªå·±çš„ï¼‰
 					GlobalData.reEnterRoomData.playerList[i].paiArray[1][j] = GlobalData.reEnterRoomData.playerList[i].paiArray[1][j] -3;
 					this.DoDisplayPengGangCard(dirstr, j, 3, 2);
 				end
@@ -2392,7 +2394,7 @@ function GamePanelCtrl.DisplayPengCard()
 end
 
 
--- ³ÔÅÆµÄÖØÁ¬
+-- åƒç‰Œçš„é‡è¿
 function GamePanelCtrl.DisplayChiCard()
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
 		local dirstr = this.GetDirection(this.GetIndex(GlobalData.reEnterRoomData.playerList[i].account.uuid));
@@ -2411,9 +2413,9 @@ function GamePanelCtrl.DisplayChiCard()
 end
 
 
--- ÏÔÊ¾¸ÜÅöÅÆ
--- cloneCount ´ú±ícloneµÄ´ÎÊı  ÈôÎª3Ôò±íÊ¾Åö   ÈôÎª4Ôò±íÊ¾¸Ü
--- flag 1°µ¸Ü 0²¹¸ÜºÍÃ÷¸Ü
+-- æ˜¾ç¤ºæ ç¢°ç‰Œ
+-- cloneCount ä»£è¡¨cloneçš„æ¬¡æ•°  è‹¥ä¸º3åˆ™è¡¨ç¤ºç¢°   è‹¥ä¸º4åˆ™è¡¨ç¤ºæ 
+-- flag 1æš—æ  0è¡¥æ å’Œæ˜æ 
 function GamePanelCtrl.DoDisplayPengGangCard(dirstr, point, cloneCount, flag)
 	local gangTempList = { };
 	switch =
@@ -2520,7 +2522,7 @@ function GamePanelCtrl.DoDisplayPengGangCard(dirstr, point, cloneCount, flag)
 end
 
 
--- ³ÔÅÆÖØÁ¬
+-- åƒç‰Œé‡è¿
 
 function GamePanelCtrl.DoDisplayChiCard(dirstr, point)
 	local gangTempList = { };
@@ -2576,7 +2578,7 @@ function InviteFriend()
 	GlobalData.wechatOperate:inviteFriend();
 end
 
--- ÓÃ»§ÀëÏß»Øµ÷
+-- ç”¨æˆ·ç¦»çº¿å›è°ƒ
 function offlineNotice(response)
 	local uuid = tonumber(response.message);
 	local index = this.GetIndex(uuid);
@@ -2597,17 +2599,17 @@ function offlineNotice(response)
 		end
 	}
 	switch[dirstr]()
-	-- ÉêÇë½âÉ¢·¿¼ä¹ı³ÌÖĞ£¬ÓĞÈËµôÏß£¬Ö±½Ó²»ÄÜ½âÉ¢·¿¼ä
+	-- ç”³è¯·è§£æ•£æˆ¿é—´è¿‡ç¨‹ä¸­ï¼Œæœ‰äººæ‰çº¿ï¼Œç›´æ¥ä¸èƒ½è§£æ•£æˆ¿é—´
 	if (GlobalData.isonApplayExitRoomstatus) then
 		if (dissoDialog ~= nil) then
 			dissoDialog.VoteScript.removeListener();
-			Destroy(dissoDialog);
+			destroy(dissoDialog);
 		end
-		TipsManager.setTips("ÓÉÓÚ" .. avatarList[index].account.nickname .. "ÀëÏß£¬ÏµÍ³²»ÄÜ½âÉ¢·¿¼ä¡£");
+		TipsManager.setTips("ç”±äº" .. avatarList[index].account.nickname .. "ç¦»çº¿ï¼Œç³»ç»Ÿä¸èƒ½è§£æ•£æˆ¿é—´")
 	end
 end
 
--- ÓÃ»§ÉÏÏßÌáĞÑ
+-- ç”¨æˆ·ä¸Šçº¿æé†’
 local function OnlineNotice(response)
 	local uuid = tonumber(response.message);
 	local index = this.GetIndex(uuid);
@@ -2635,7 +2637,7 @@ local function messageBoxNotice(response)
 	local uuid = tonumber(arr[1]);
 	local myIndex = this.GetMyIndexFromList();
 	local curAvaIndex = this.GetIndex(uuid);
-	local seatIndex = curAvaIndex - myIndex;
+	local seatIndex =1+ curAvaIndex - myIndex;
 	if (seatIndex < 1) then
 		seatIndex = 4 + seatIndex;
 	end
@@ -2643,7 +2645,7 @@ local function messageBoxNotice(response)
 end
 
 
--- ·¢×¼±¸ÏûÏ¢
+-- å‘å‡†å¤‡æ¶ˆæ¯
 function GamePanelCtrl.ReadyGame()
 	local readyvo = { };
 	readyvo.duanMen = ReadySelect[1].isOn;
@@ -2669,12 +2671,12 @@ local function MicInputNotice(response)
 end
 
 
--- ×îºóÒ»´Î²Ù×÷£¨Õâ´úÂëÒ²Ğ´µÃºÜ·´ÈËÀà£©
+-- æœ€åä¸€æ¬¡æ“ä½œï¼ˆè¿™ä»£ç ä¹Ÿå†™å¾—å¾ˆåäººç±»ï¼‰
 
 local function returnGameResponse(response)
 	local returnstr = response.message;
 	log("returnGameResponse=" .. returnstr);
-	-- 1.ÏÔÊ¾Ê£ÓàÅÆµÄÕÅÊıºÍÈ¦Êı
+	-- 1.æ˜¾ç¤ºå‰©ä½™ç‰Œçš„å¼ æ•°å’Œåœˆæ•°
 	local returnJsonData = json.decode(response.message);
 	local surplusCards = returnJsonData.surplusCards;
 	LeavedCastNumText.text = tostring(surplusCards);
@@ -2683,39 +2685,39 @@ local function returnGameResponse(response)
 	LeavedRoundNumText.text = tostring(gameRound);
 	GlobalData.surplusTimes = gameRound;
 	local curAvatarIndexTemp = -1;
-	-- µ±Ç°³öÅÆÈËµÄË÷Òı
+	-- å½“å‰å‡ºç‰Œäººçš„ç´¢å¼•
 	local pickAvatarIndexTemp = -1;
-	-- µ±Ç°ÃşÅÆÈËµÄË÷Òı
+	-- å½“å‰æ‘¸ç‰Œäººçš„ç´¢å¼•
 	local putOffCardPointTemp = -1;
-	-- µ±Ç°´òµÃµãÊı
+	-- å½“å‰æ‰“å¾—ç‚¹æ•°
 	local currentCardPointTemp = -1;
-	-- µ±Ç°ÃşµÄµãÊı
-	-- ²»ÊÇ×Ô¼ºÃşÅÆ
+	-- å½“å‰æ‘¸çš„ç‚¹æ•°
+	-- ä¸æ˜¯è‡ªå·±æ‘¸ç‰Œ
 
 	curAvatarIndexTemp = returnJsonData.curAvatarIndex;
-	-- µ±Ç°´òÅÆÈËµÄË÷Òı
+	-- å½“å‰æ‰“ç‰Œäººçš„ç´¢å¼•
 	putOffCardPointTemp = returnJsonData.putOffCardPoint;
-	-- µ±Ç°´òµÃµãÊı
+	-- å½“å‰æ‰“å¾—ç‚¹æ•°
 	putOutCardPointAvarIndex = GetIndexByDir(this.GetDirection(curAvatarIndexTemp));
 	putOutCardPoint = putOffCardPointTemp;
 	SelfAndOtherPutoutCard = putOutCardPoint;
 	pickAvatarIndexTemp = returnJsonData.pickAvatarIndex;
-	-- µ±Ç°ÃşÅÆÅÆÈËµÄË÷Òı
+	-- å½“å‰æ‘¸ç‰Œç‰Œäººçš„ç´¢å¼•
 
 	if (table.Contains(returnJsonData, currentCardPoint)) then
 		currentCardPointTemp = returnJsonData.currentCardPoint;
-		-- µ±Ç°ÃşµÃµÄµãÊı  (³ÔÅö¸ÜÒÔºó£¬·şÎñÆ÷·¢µÄÕâ¸öÖµÊÇ-2)
+		-- å½“å‰æ‘¸å¾—çš„ç‚¹æ•°  (åƒç¢°æ ä»¥åï¼ŒæœåŠ¡å™¨å‘çš„è¿™ä¸ªå€¼æ˜¯-2)
 		SelfAndOtherPutoutCard = currentCardPointTemp;
 	end
 
 
 	if (pickAvatarIndexTemp == this.GetMyIndexFromList()) then
-		-- ×Ô¼ºÃşÅÆ
+		-- è‡ªå·±æ‘¸ç‰Œ
 		if (currentCardPointTemp == -2) then
 			MoPaiCardPoint = handerCardList[1][#handerCardList[1]].bottomScript.CardPoint;
 			SelfAndOtherPutoutCard = MoPaiCardPoint;
 			useForGangOrPengOrChi = curAvatarIndexTemp;
-			Destroy(handerCardList[1][#handerCardList[1]]);
+			destroy(handerCardList[1][#handerCardList[1]]);
 			table.remove(handerCardList[1])
 			this.SetPosition(false);
 			PutCardIntoMineList(MoPaiCardPoint);
@@ -2726,12 +2728,12 @@ local function returnGameResponse(response)
 		else
 			if ((#handerCardList[1]) % 3 ~= 1) then
 				MoPaiCardPoint = currentCardPointTemp;
-				log("ÃşÅÆ" .. MoPaiCardPoint);
+				log("æ‘¸ç‰Œ" .. MoPaiCardPoint);
 				SelfAndOtherPutoutCard = MoPaiCardPoint;
 				useForGangOrPengOrChi = curAvatarIndexTemp;
 				for i = 1, #handerCardList[1] do
 					if (handerCardList[1][i].bottomScript.CardPoint == currentCardPointTemp) then
-						Destroy(handerCardList[1][i]);
+						destroy(handerCardList[1][i]);
 						table.remove(handerCardList[1], i)
 						break;
 					end
@@ -2745,21 +2747,16 @@ local function returnGameResponse(response)
 			end
 		end
 	else
-		-- ±ğÈËÃşÅÆ
+		-- åˆ«äººæ‘¸ç‰Œ
 		curDir = this.GetDirection(pickAvatarIndexTemp);
 		-- otherMoPaiCreateGameObject (curDirString);
 		SetDirGameObjectAction();
 	end
-
-
-
-
-
-	-- ¹â±êÖ¸Ïò´òÅÆÈË
+	-- å…‰æ ‡æŒ‡å‘æ‰“ç‰Œäºº
 	local dirindex = GetIndexByDir(this.GetDirection(curAvatarIndexTemp));
 	-- cardOnTable = tableCardList[dirindex][tableCardList[dirindex].Count - 1];
 	if (tableCardList[dirindex] == nil or #tableCardList[dirindex] == 0) then
-		-- ¸ÕÆô¶¯
+		-- åˆšå¯åŠ¨
 	else
 		local temp = tableCardList[dirindex][#tableCardList[dirindex]];
 		cardOnTable = temp;
@@ -2771,27 +2768,30 @@ end
 
 
 
--- ½âÉ¢·¿¼ä°´Å¥
+-- è§£æ•£æˆ¿é—´æŒ‰é’®
 function GamePanelCtrl.InitbtnJieSan()
-	if (bankerId == this.GetMyIndexFromList()) then
-		-- ÎÒÊÇ·¿Ö÷£¨Ò»¿ªÊ¼×¯¼ÒÊÇ·¿Ö÷£©
-		btnJieSan:GetComponent("Image").sprite = resMgr:LoadPrefab('dynaimages', { 'Assets/Project/DynaImages/jiesan.png' }, nil)
+	if (bankerIndex == this.GetMyIndexFromList()) then
+		-- æˆ‘æ˜¯æˆ¿ä¸»ï¼ˆä¸€å¼€å§‹åº„å®¶æ˜¯æˆ¿ä¸»ï¼‰
+		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/jiesan.png' }, function(sprite)
+			btnJieSan:GetComponent("Image").sprite = sprite[0]
+		end )
 	else
-		btnJieSan:GetComponent("Image").sprite =  resMgr:LoadPrefab('dynaimages',{"Assets/Project/DynaImages/leaveRoom.png"}, nil)
+		resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/leaveRoom.png" }, function(sprite)
+			btnJieSan:GetComponent("Image").sprite = sprite[0]
+		end )
 	end
-		this.lua:AddClick(btnJieSan,QuiteRoom)
-	--btnJieSan.onClick.AddListener(QuiteRoom);
+	this.lua:AddClick(btnJieSan, QuiteRoom)
 end
 
 
 ------------------------------------------------------------
--- ¹Ø±ÕÃæ°å--
+-- å…³é—­é¢æ¿--
 function GamePanelCtrl.Close()
 	gameObject:SetActive(false)
 	this.RemoveListener()
 end
 
--- ÒÆ³ıÊÂ¼ş--
+-- ç§»é™¤äº‹ä»¶--
 function GamePanelCtrl.RemoveListener()
 	SocketEventHandle.getInstance().StartGameNotice = nil;
 	SocketEventHandle.getInstance().pickCardCallBack = nil
@@ -2815,10 +2815,10 @@ function GamePanelCtrl.RemoveListener()
 	-- CommonEvent.getInstance ().readyGame -= markselfReadyGame;
 	SocketEventHandle.getInstance().micInputNotice = nil
 	SocketEventHandle.getInstance().gameFollowBanderNotice = nil
-	Event.RemoveListener(closeGamePanel, ExitOrDissoliveRoom)
+	Event.RemoveListener(closeGamePanel, this.ExitOrDissoliveRoom)
 end
 
--- ´ò¿ªÃæ°å--
+-- æ‰“å¼€é¢æ¿--
 function GamePanelCtrl.Open()
 	if (gameObject) then
 		gameObject:SetActive(true)
@@ -2826,7 +2826,7 @@ function GamePanelCtrl.Open()
 		this.AddListener()
 	end
 end
--- Ôö¼ÓÊÂ¼ş--
+-- å¢åŠ äº‹ä»¶--
 function GamePanelCtrl.AddListener()
 	SocketEventHandle.getInstance().StartGameNotice = StartGame;
 	SocketEventHandle.getInstance().pickCardCallBack = PickCard;
@@ -2850,5 +2850,5 @@ function GamePanelCtrl.AddListener()
 	-- CommonEvent.getInstance ().readyGame = this.MarkselfReadyGame;
 	SocketEventHandle.getInstance().micInputNotice = MicInputNotice;
 	SocketEventHandle.getInstance().gameFollowBanderNotice = GameFollowBanderNotice;
-	Event.AddListener(closeGamePanel, ExitOrDissoliveRoom)
+	Event.AddListener(closeGamePanel,this.ExitOrDissoliveRoom)
 end

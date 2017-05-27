@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 11485976}
   - component: {fileID: 11449692}
   m_Layer: 5
-  m_Name: Button_delete
+  m_Name: Button_Delete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 11455308}
   - component: {fileID: 11472104}
   m_Layer: 5
-  m_Name: Button_100
+  m_Name: Button_Clear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 11496736}
   - component: {fileID: 11484642}
   m_Layer: 5
-  m_Name: Panel_Enter_Room
+  m_Name: EnterRoomPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

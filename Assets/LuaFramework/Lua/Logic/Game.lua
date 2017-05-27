@@ -15,7 +15,7 @@ require "Logic/LuaClass"
 require "Logic/CtrlManager"
 
 require "Controller/StartPanelCtrl"
-
+require "Logic/BroadcastScript"
 --管理器--
 Game = {};
 local this = Game;
@@ -50,6 +50,7 @@ function Game.OnInitOK()
 
     CtrlManager.Init();
     StartPanelCtrl:Awake()  
+	BroadcastScript.Awake()
     logWarn('LuaFramework InitOK--->>>');
 end
 

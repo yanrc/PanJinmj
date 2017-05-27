@@ -1,5 +1,6 @@
 require "View/HomePanel"
 require "Controller/CreateRoomPanelCtrl"
+local Ease = DG.Tweening.Ease
 HomePanelCtrl = { }
 local this = HomePanelCtrl;
 local gameObject;
@@ -13,12 +14,12 @@ local noticeText-- 广播
 local CreateRoomButton-- 创建房间
 local panelCreateDialog
 local CreateRoomCtrl
-showNum = 0
+showNum = 1
 startFlag = false
 function HomePanelCtrl.Awake()
 	logWarn("HomePanelCtrl.Awake--->>");
 	PanelManager:CreatePanel('HomePanel', this.OnCreate);
-	CtrlManager.AddCtrl("HomePanelCtrl", this)
+	CtrlManager.HomePanelCtrl = this
 end
 
 function HomePanelCtrl.OnCreate(go)
@@ -42,15 +43,14 @@ end
 function HomePanelCtrl.Start()
 	this.InitUI();
 	GlobalData.isonLoginPage = false;
-	this.checkEnterInRoom();
+	this.CheckEnterInRoom();
 	this.AddListener();
-	noticeText.text = "我在测试啊"
-	local time = string.len(noticeText.text) * 0.5 + 422 / 56;
-	local textTransform = gameObject.transform:FindChild("Image_Notice_BG/Image (1)/Text")
-	local tweener = textTransform:DOLocalMove(Vector3.New(- string.len(noticeText.text) * 40, textTransform.localPosition.y), time / 1.6, false);
-	log(this.MoveCompleted)
-	tweener:OnComplete(this.MoveCompleted)
-	-- tweener:SetEase(Ease.Linear);
+	-- noticeText.text = "我在测试FFFFFFFFFFFFFFFFFFFFFFFFFF"
+	-- local time = string.len(noticeText.text) * 0.5 + 422 / 56;
+	-- local textTransform = gameObject.transform:FindChild("Image_Notice_BG/Image (1)/Text")
+	-- local tweener = textTransform:DOLocalMove(Vector3.New(- string.len(noticeText.text) * 40, textTransform.localPosition.y), time / 1.6, false);
+	-- tweener:OnComplete(this.MoveCompleted)
+	--  tweener:SetEase(Ease.Linear);
 end
 
 function HomePanelCtrl.ContactInfoResponse(response)
@@ -89,8 +89,8 @@ function HomePanelCtrl.CloseRoomCardPanel()
 	roomCardPanel:SetActive(false);
 end
 
-function HomePanelCtrl.checkEnterInRoom()
-	if (GlobalData.roomVo ~= nil and GlobalData.roomVo.roomId ~= 0) then
+function HomePanelCtrl.CheckEnterInRoom()
+	if (GlobalData.roomVo ~= nil and GlobalData.roomVo.roomId ~= nil) then
 		GamePanelCtrl.Awake()
 	end
 end
@@ -112,8 +112,15 @@ end
 -- 打开创建房间的对话框
 function HomePanelCtrl.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
+log(CtrlManager.CreateRoomPanelCtrl)
+log(GlobalData.loginResponseData.roomId)
+log(CtrlManager.CreateRoomPanelCtrl)
 	if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
-		CreateRoomPanelCtrl.Awake()
+		if (CtrlManager.CreateRoomPanelCtrl) then
+			CtrlManager.CreateRoomPanelCtrl.Open()
+		else
+			CreateRoomPanelCtrl.Awake()
+		end
 	else
 		TipsManager.Instance().setTips("当前正在房间状态，无法创建房间");
 	end
@@ -143,7 +150,7 @@ function HomePanelCtrl.OpenGameSettingDialog()
 	this.loadPerfab("Assets/Project/Prefabs/Panel_Setting");
 	panelCreateDialog.SettingScript = SettingScript.New()
 	local ss = panelCreateDialog.SettingScript;
-	ss.jiesanBtn:GetComponentInChildren("Text").text = "退出游戏";
+	ss.jiesanBtn:GetComponentInChildren("Text").text = "退出游戏"
 	ss.type = 1;
 end
 
@@ -212,7 +219,7 @@ function HomePanelCtrl.CardChangeNotice(response)
 	-- 原来的钻石数量
 	local newCount = tonumber(response.message);
 	cardCountText.text = response.message;
-	GlobalDataScript.loginResponseData.account.roomcard = newCount;
+	GlobalData.loginResponseData.account.roomcard = newCount;
 	contactInfoContent.text = "钻石" .. tostring(newCount - oldCout) .. "颗";
 	roomCardPanel:SetActive(true);
 end
@@ -220,7 +227,7 @@ end
 
 
 function HomePanelCtrl.GameBroadcastNotice()
-	showNum = 0;
+	showNum = 1;
 	if (not startFlag) then
 		startFlag = true;
 		this.SetNoticeTextMessage();
@@ -228,19 +235,22 @@ function HomePanelCtrl.GameBroadcastNotice()
 end
 
 function HomePanelCtrl.SetNoticeTextMessage()
-	--[[if (GlobalData.noticeMegs ~= nil and GlobalData.noticeMegs.Count ~= 0) then
+	if (GlobalData.notices ~= nil and #GlobalData.notices > 0) then
 		noticeText.transform.localPosition = Vector3.New(500, noticeText.transform.localPosition.y);
-		noticeText.text = GlobalData.noticeMegs[showNum];
-		local time = noticeText.text.Length * 0.5 + 422 / 56;
-		local tweener = noticeText.transform.DOLocalMove(
-		Vector3.New(-noticeText.text.Length * 40, noticeText.transform.localPosition.y), time/1.6)
-		.OnComplete(this.MoveCompleted);
+		noticeText.text = GlobalData.notices[showNum];
+		local time = string.len(noticeText.text) * 0.5 + 422 / 56;
+		local tweener = noticeText.transform:DOLocalMove(Vector3.New(- string.len(noticeText.text) * 40, noticeText.transform.localPosition.y), time / 1.6, false);
+		tweener:OnComplete(this.MoveCompleted)
 		tweener:SetEase(Ease.Linear);
-	end--]]
+	end
 end
 
 function HomePanelCtrl.MoveCompleted()
-	log("MoveCompleted")
+	showNum = showNum + 1
+	if (showNum == #GlobalData.notices) then
+		showNum = 1
+	end
+	this.SetNoticeTextMessage();
 end
 
 function HomePanelCtrl.ExitApp()
@@ -276,5 +286,6 @@ end
 function HomePanelCtrl.AddListener()
 	SocketEventHandle.getInstance().cardChangeNotice = this.CardChangeNotice;
 	SocketEventHandle.getInstance().contactInfoResponse = this.ContactInfoResponse;
+	log("lua:HomePanelCtrl.AddListener")
 	Event.AddListener(DisplayBroadcast, this.GameBroadcastNotice)
 end

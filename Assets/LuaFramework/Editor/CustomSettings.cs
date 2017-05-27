@@ -75,7 +75,9 @@ public static class CustomSettings
         _GT(typeof(Camera)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         _GT(typeof(AudioSource)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(LineRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
-        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),    
+        //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)), 
+        _GT(typeof(DG.Tweening.Ease)),
+        _GT(typeof(DG.Tweening.Core.TweenerCore<Vector3,Vector3,DG.Tweening.Plugins.Options.VectorOptions>)),   
 #else
                                          
         _GT(typeof(Component)),
@@ -186,6 +188,7 @@ public static class CustomSettings
         _GT(typeof(TipPanelScript)),
         _GT(typeof(PlayerPrefs)),
         _GT(typeof(Image)),
+        _GT(typeof(Button)),
     };
 
     public static List<Type> dynamicList = new List<Type>()
