@@ -9,6 +9,7 @@ public class LuaFramework_LuaBehaviourWrap
 		L.BeginClass(typeof(LuaFramework.LuaBehaviour), typeof(View));
 		L.RegFunction("AddClick", AddClick);
 		L.RegFunction("RemoveClick", RemoveClick);
+		L.RegFunction("ResetClick", ResetClick);
 		L.RegFunction("ClearClick", ClearClick);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -59,6 +60,23 @@ public class LuaFramework_LuaBehaviourWrap
 			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject(L, 1, typeof(LuaFramework.LuaBehaviour));
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.RemoveClick(arg0);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ResetClick(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject(L, 1, typeof(LuaFramework.LuaBehaviour));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			obj.ResetClick(arg0);
 			return 0;
 		}
 		catch(Exception e)

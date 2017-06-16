@@ -1,4 +1,5 @@
-require "View/Moban"
+require "Vos/JoinRoomRequest"
+local json = require "cjson"
 EnterRoomPanelCtrl = { };
 local this = EnterRoomPanelCtrl;
 
@@ -6,6 +7,7 @@ local transform;
 local gameObject;
 local inputChars
 local btnList
+local watingPanel
 -- 加载函数--
 function EnterRoomPanelCtrl.Awake()
 	logWarn("EnterRoomPanelCtrl Awake--->>");
@@ -20,65 +22,75 @@ function EnterRoomPanelCtrl.OnCreate(obj)
 	this.lua = gameObject:GetComponent('LuaBehaviour');
 	-- lua:AddClick( ExitPanel.btnExit, this.Exit);
 	-- lua:AddClick( ExitPanel.btnCancel, this.Cancel);
-	btnList={}
-	btnList[1] = transform:findChild("GameObject/Button_0")
-	btnList[2] = transform:findChild("GameObject/Button_1")
-	btnList[3] = transform:findChild("GameObject/Button_2")
-	btnList[4] = transform:findChild("GameObject/Button_3")
-	btnList[5] = transform:findChild("GameObject/Button_4")
-	btnList[6] = transform:findChild("GameObject/Button_5")
-	btnList[7] = transform:findChild("GameObject/Button_6")
-	btnList[8] = transform:findChild("GameObject/Button_7")
-	btnList[9] = transform:findChild("GameObject/Button_8")
-	btnList[10] = transform:findChild("GameObject/Button_9")
-	local btnClear = transform:findChild("GameObject/Button_Clear")
-	local btnDelete = transform:findChild("GameObject/Button_Delete")
+	btnList = { }
+	btnList[1] = transform:FindChild("GameObject/Button_0").gameObject
+	btnList[2] = transform:FindChild("GameObject/Button_1").gameObject
+	btnList[3] = transform:FindChild("GameObject/Button_2").gameObject
+	btnList[4] = transform:FindChild("GameObject/Button_3").gameObject
+	btnList[5] = transform:FindChild("GameObject/Button_4").gameObject
+	btnList[6] = transform:FindChild("GameObject/Button_5").gameObject
+	btnList[7] = transform:FindChild("GameObject/Button_6").gameObject
+	btnList[8] = transform:FindChild("GameObject/Button_7").gameObject
+	btnList[9] = transform:FindChild("GameObject/Button_8").gameObject
+	btnList[10] = transform:FindChild("GameObject/Button_9").gameObject
+	local btnClear = transform:FindChild("GameObject/Button_Clear").gameObject
+	local btnDelete = transform:FindChild("GameObject/Button_Delete").gameObject
+local btnClose=transform:FindChild("Image_Enter_Room_Bg/Button_Close").gameObject
 	for i = 1, #btnList do
 		local gobj = btnList[i];
-		this.lua:AddClick(btnList[i], this.OnClickHandle,i-1)
+		this.lua:AddClick(btnList[i], this.OnClickHandle, i - 1)
 	end
-	this.lua:AddClick(btnClear,this.Clear)
-	this.lua:AddClick(btnDelete,this.DeleteNumber)
+	this.lua:AddClick(btnClear, this.Clear)
+	this.lua:AddClick(btnDelete, this.DeleteNumber)
+	this.lua:AddClick(btnClose, this.Close)
+	inputTexts = { }
+	inputTexts[1] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_0"):GetComponent("Text")
+	inputTexts[2] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_1"):GetComponent("Text")
+	inputTexts[3] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_2"):GetComponent("Text")
+	inputTexts[4] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_3"):GetComponent("Text")
+	inputTexts[5] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_4"):GetComponent("Text")
+	inputTexts[6] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_5"):GetComponent("Text")
+	watingPanel = transform:FindChild("wait").gameObject
 	logWarn("Start lua--->>" .. gameObject.name);
 	this.Start()
 end
 
 function EnterRoomPanelCtrl.Start()
-	SocketEventHandle.getInstance().JoinRoomCallBack = this.OnJoinRoomCallBack;
+	this.AddListener()
 	inputChars = { }
 end
 
 -- 数字按钮点击
-function EnterRoomPanelCtrl.OnClickHandle(go,Number)
-	--this.ClickNumber(go:GetComponentInChildren("Text").text);
-	this.Number(go:GetComponentInChildren("Text").text);
+function EnterRoomPanelCtrl.OnClickHandle(go, number)
+	-- this.ClickNumber(go:GetComponentInChildren("Text").text);
+	this.Number(number);
 end
 
-function EnterRoomPanelCtrl.ClickNumber(number)
-	soundMgr:playSoundByActionButton(1);
-	if (number.Equals("100")) then
-		this.Clear()
-		return
-	end
-	if (#inputChars >= 6) then
-		return;
-	end
-	table.insert(inputChars, Number)
-	local index = #inputChars
-	inputTexts[index].text = number;
-	-- 最后一位数字赋值
-	if (index == #inputTexts) then
-		this.SureRoomNumber();
-		-- 确定加入房间
-	end
-end
+-- function EnterRoomPanelCtrl.ClickNumber(number)
+-- soundMgr:playSoundByActionButton(1);
+-- if (number.Equals("100")) then
+-- 	this.Clear()
+-- 	return
+-- end
+-- if (#inputChars >= 6) then
+-- 	return;
+-- end
+-- table.insert(inputChars, number)
+-- local index = #inputChars
+-- inputTexts[index].text = number;
+-- -- 最后一位数字赋值
+-- if (index == #inputTexts) then
+-- 	this.SureRoomNumber();
+-- 	-- 确定加入房间
+-- end
+-- end
 
 function EnterRoomPanelCtrl.Number(number)
 	soundMgr:playSoundByActionButton(1);
 	if (#inputChars >= 6) then
 		return;
 	end
-	table.insert(inputChars, Number)
+	table.insert(inputChars, number)
 	local index = #inputChars
 	inputTexts[index].text = tostring(number)
 	-- 最后一位数字赋值
@@ -100,21 +112,21 @@ end
 function EnterRoomPanelCtrl.DeleteNumber()
 	soundMgr:playSoundByActionButton(1);
 	if (inputChars ~= nil and #inputChars > 0) then
-		table.remove(inputChars)
 		inputTexts[#inputChars].text = "";
+		table.remove(inputChars)
 	end
 end
 
 function EnterRoomPanelCtrl.SureRoomNumber()
 	if (#inputChars ~= 6) then
-		TipsManager.setTips("请先完整输入房间号码！");
+		TipsManager.SetTips("请先完整输入房间号码！");
 		return;
 	end
 
 	if (watingPanel ~= nil) then
 		watingPanel:SetActive(true);
 	end
-	local roomNumber = inputChars[0] .. inputChars[1] .. inputChars[2] .. inputChars[3] .. inputChars[4] .. inputChars[5];
+	local roomNumber = inputChars[1] .. inputChars[2] .. inputChars[3] .. inputChars[4] .. inputChars[5] .. inputChars[6];
 	local roomJoinVo = { };
 	roomJoinVo.roomId = tonumber(roomNumber);
 	local sendMsg = json.encode(roomJoinVo);
@@ -122,11 +134,11 @@ function EnterRoomPanelCtrl.SureRoomNumber()
 	CustomSocket.getInstance():sendMsg(JoinRoomRequest.New(sendMsg));
 	SocketEventHandle.getInstance().serviceErrorNotice = this.ServiceErrorNotice;
 end
-function EnterRoomPanelCtrl.serviceErrorNotice(response)
+function EnterRoomPanelCtrl.ServiceErrorNotice(response)
 	SocketEventHandle.getInstance().serviceErrorNotice = nil;
 	watingPanel:SetActive(false);
 	this.Clear();
-	TipsManager:setTips(response.message);
+	TipsManager.SetTips(response.message);
 end
 local connectRetruen = false;
 
@@ -139,7 +151,7 @@ function EnterRoomPanelCtrl.ConnectTime(time)
 		watingPanel:SetActive(false);
 	end
 end
-
+-- 房间不存在时不会收到这个回调，而是返回错误消息
 function EnterRoomPanelCtrl.OnJoinRoomCallBack(response)
 	watingPanel:SetActive(false);
 	if (response.status == 1) then
@@ -174,11 +186,11 @@ function EnterRoomPanelCtrl.OnJoinRoomCallBack(response)
 		GamePanelCtrl.Awake()
 		connectRetruen = true;
 		this.Close()
-		GlobalDataScript.roomVo.jiaGang = message.jiaGang;
-		GlobalDataScript.roomVo.duanMen = message.duanMen;
+		GlobalData.roomVo.jiaGang = message.jiaGang;
+		GlobalData.roomVo.duanMen = message.duanMen;
 	else
 		this.Clear();
-		TipsManager:setTips(response.message);
+		TipsManager.SetTips(response.message);
 	end
 end
 -------------------模板-------------------------
@@ -205,6 +217,6 @@ function EnterRoomPanelCtrl.Open()
 end
 -- 增加事件--
 function EnterRoomPanelCtrl.AddListener()
-
+	SocketEventHandle.getInstance().JoinRoomCallBack = this.OnJoinRoomCallBack
 end
 

@@ -23,6 +23,7 @@ public static class DelegateFactory
 		dict.Add(typeof(System.Action<int>), System_Action_int);
 		dict.Add(typeof(System.Comparison<int>), System_Comparison_int);
 		dict.Add(typeof(DG.Tweening.TweenCallback), DG_Tweening_TweenCallback);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<float>), UnityEngine_Events_UnityAction_float);
 		dict.Add(typeof(DG.Tweening.Core.DOGetter<float>), DG_Tweening_Core_DOGetter_float);
 		dict.Add(typeof(DG.Tweening.Core.DOSetter<float>), DG_Tweening_Core_DOSetter_float);
 		dict.Add(typeof(DG.Tweening.Core.DOGetter<double>), DG_Tweening_Core_DOGetter_double);
@@ -452,6 +453,53 @@ public static class DelegateFactory
 		{
 			DG_Tweening_TweenCallback_Event target = new DG_Tweening_TweenCallback_Event(func, self);
 			DG.Tweening.TweenCallback d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	class UnityEngine_Events_UnityAction_float_Event : LuaDelegate
+	{
+		public UnityEngine_Events_UnityAction_float_Event(LuaFunction func) : base(func) { }
+		public UnityEngine_Events_UnityAction_float_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call(float param0)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+
+		public void CallWithSelf(float param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public static Delegate UnityEngine_Events_UnityAction_float(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			UnityEngine.Events.UnityAction<float> fn = delegate(float param0) { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			UnityEngine_Events_UnityAction_float_Event target = new UnityEngine_Events_UnityAction_float_Event(func);
+			UnityEngine.Events.UnityAction<float> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			UnityEngine_Events_UnityAction_float_Event target = new UnityEngine_Events_UnityAction_float_Event(func, self);
+			UnityEngine.Events.UnityAction<float> d = target.CallWithSelf;
 			target.method = d.Method;
 			return d;
 		}

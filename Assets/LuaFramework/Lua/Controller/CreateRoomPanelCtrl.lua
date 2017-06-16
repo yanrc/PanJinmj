@@ -105,7 +105,7 @@ function CreateRoomPanelCtrl.CreateJiuJiangRoom()
 		CustomSocket.getInstance():sendMsg(CreateRoomRequest.New(sendmsgstr));
 		GlobalData.roomVo = sendVo;
 	else
-		TipsManager.Instance().setTips("您的房卡数量不足,不能创建房间")
+		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
 	end
 end
 
@@ -144,7 +144,7 @@ local function OnCreateRoomCallback(response)
 		this.Close();
 		HomePanelCtrl.Close()
 	else
-		TipsManager.setTips(response.message);
+		TipsManager.SetTips(response.message);
 	end
 end
 -------------------模板-------------------------

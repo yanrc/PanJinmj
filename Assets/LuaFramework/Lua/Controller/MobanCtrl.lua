@@ -4,7 +4,7 @@ local this = MobanCtrl;
 
 local transform;
 local gameObject;
-
+local lua
 --加载函数--
 function MobanCtrl.Awake()
 	logWarn("MobanCtrl Awake--->>");
@@ -16,7 +16,7 @@ end
 function MobanCtrl.OnCreate(obj)
 	gameObject = obj;
 	transform=obj.transform
-	this.lua = gameObject:GetComponent('LuaBehaviour');
+	lua = gameObject:GetComponent('LuaBehaviour');
 --	lua:AddClick( ExitPanel.btnExit, this.Exit);
 --	lua:AddClick( ExitPanel.btnCancel, this.Cancel);
 	logWarn("Start lua--->>"..gameObject.name);

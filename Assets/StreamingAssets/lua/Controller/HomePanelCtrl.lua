@@ -1,5 +1,7 @@
 require "View/HomePanel"
 require "Controller/CreateRoomPanelCtrl"
+require "Controller/EnterRoomPanelCtrl"
+require "Common/CoMgr"
 local Ease = DG.Tweening.Ease
 HomePanelCtrl = { }
 local this = HomePanelCtrl;
@@ -12,8 +14,9 @@ local contactInfoContent-- 房卡面板显示内容
 local roomCardPanel-- 房卡面板
 local noticeText-- 广播
 local CreateRoomButton-- 创建房间
+local EnterRoomButton-- 加入房间
 local panelCreateDialog
-local CreateRoomCtrl
+
 showNum = 1
 startFlag = false
 function HomePanelCtrl.Awake()
@@ -34,9 +37,10 @@ function HomePanelCtrl.OnCreate(go)
 	roomCardPanel = go.transform:FindChild("roomCardInfo").gameObject
 	noticeText = go.transform:FindChild("Image_Notice_BG/Image (1)/Text"):GetComponent("Text")
 	CreateRoomButton = go.transform:FindChild("Panel_Room/Button_Create_Room").gameObject
-	logWarn("Start lua--->>" .. gameObject.name);
-
+	EnterRoomButton = go.transform:FindChild("Panel_Room/Button_Enter_Room").gameObject
 	this.lua:AddClick(CreateRoomButton, this.OpenCreateRoomDialog);
+	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
+	logWarn("Start lua--->>" .. gameObject.name);
 	this.Start()
 end
 
@@ -66,17 +70,17 @@ function HomePanelCtrl.InitUI()
 		cardCountText.text = tostring(roomCardcount);
 		nickNameText.text = nickName;
 		IpText.text = "ID:" .. tostring(GlobalData.loginResponseData.account.uuid);
-		coroutine.start(this.LoadImg, headIcon);
+		CoMgr.LoadImg(headIconImg, headIcon);
 	end
 end
 
 function HomePanelCtrl.ShowUserInfoPanel()
 
 	soundMgr:playSoundByActionButton(1);
-	-- userInfoPanel.SetActive (true);
-	local obj = PrefabManage.loadPerfab("Assets/Project/Prefabs/userInfo");
+	-- userInfoPanel:SetActive (true);
+	local obj = this.loadPerfab("Assets/Project/Prefabs/userInfo");
 	obj.ShowUserInfoScript = ShowUserInfoScript.New()
-	obj.ShowUserInfoScript:setUIData(GlobalData.loginResponseData);
+	obj.ShowUserInfoScript:SetUIData(GlobalData.loginResponseData);
 end
 
 function HomePanelCtrl.ShowRoomCardPanel()
@@ -106,15 +110,15 @@ local Panel_message;
 
 function HomePanelCtrl.Button_Mess_Open()
 	soundMgr:playSoundByActionButton(1);
-	Panel_message = PrefabManage.loadPerfab("Assets/Project/Prefabs/Panel_message");
+	Panel_message = this.loadPerfab("Assets/Project/Prefabs/Panel_message");
 end
 
 -- 打开创建房间的对话框
 function HomePanelCtrl.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-log(CtrlManager.CreateRoomPanelCtrl)
-log(GlobalData.loginResponseData.roomId)
-log(CtrlManager.CreateRoomPanelCtrl)
+	log(CtrlManager.CreateRoomPanelCtrl)
+	log(GlobalData.loginResponseData.roomId)
+	log(CtrlManager.CreateRoomPanelCtrl)
 	if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
 		if (CtrlManager.CreateRoomPanelCtrl) then
 			CtrlManager.CreateRoomPanelCtrl.Open()
@@ -122,7 +126,7 @@ log(CtrlManager.CreateRoomPanelCtrl)
 			CreateRoomPanelCtrl.Awake()
 		end
 	else
-		TipsManager.Instance().setTips("当前正在房间状态，无法创建房间");
+		TipsManager.SetTips("当前正在房间状态，无法创建房间");
 	end
 end
 
@@ -136,10 +140,17 @@ end
 
 function HomePanelCtrl.OpenEnterRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	if (GlobalData.roomVo == nil or GlobalData.roomVo.roomId == 0) then
-		this.loadPerfab("Assets/Project/Prefabs/Panel_Enter_Room");
+	log(CtrlManager.roomVo)
+	log(GlobalData.roomVo.roomId)
+	log(CtrlManager.EnterRoomPanelCtrl)
+	if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
+		if (CtrlManager.EnterRoomPanelCtrl) then
+			CtrlManager.EnterRoomPanelCtrl.Open()
+		else
+			EnterRoomPanelCtrl.Awake()
+		end
 	else
-		TipsManager.Instance().setTips("当前正在房间状态，无法加入新的房间");
+		TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
 	end
 end
 
@@ -185,32 +196,32 @@ function HomePanelCtrl.loadPerfab(perfabName)
 	end )
 end
 
-function HomePanelCtrl.LoadImg(headIcon)
-	-- 开始下载图片
-	log("lua:HomePanelCtrl.LoadImg headIcon=" .. headIcon)
-	if (headIcon ~= nil and headIcon ~= "") then
-		if (GlobalData.wwwSpriteImage.headIcon) then
-			headIconImg.sprite = GlobalData.wwwSpriteImage.headIcon;
-			coroutine.stop()
-		end
-		local www = WWW(headIcon);
-		coroutine.www(www)
-		local ret, errMessage = pcall(
-		function()
-			-- 下载完成，保存图片到路径filePath
-			local texture2D = www.texture;
-			local bytes = texture2D:EncodeToPNG();
-			-- 将图片赋给场景上的Sprite
-			local tempSp = UnityEngine.Sprite.Create(texture2D, UnityEngine.Rect.New(0, 0, texture2D.width, texture2D.height), Vector2.zero);
-			headIconImg.sprite = tempSp;
-			GlobalData.wwwSpriteImage.headIcon = tempSp;
-		end )
-		if not ret then
-			error("error:" .. errMessage)
-			return
-		end
-	end
-end
+--function HomePanelCtrl.LoadImg(headIcon)
+--	-- 开始下载图片
+--	log("lua:HomePanelCtrl.LoadImg headIcon=" .. headIcon)
+--	if (headIcon ~= nil and headIcon ~= "") then
+--		if (GlobalData.wwwSpriteImage.headIcon) then
+--			headIconImg.sprite = GlobalData.wwwSpriteImage.headIcon;
+--			coroutine.stop()
+--		end
+--		local www = WWW(headIcon);
+--		coroutine.www(www)
+--		local ret, errMessage = pcall(
+--		function()
+--			-- 下载完成，保存图片到路径filePath
+--			local texture2D = www.texture;
+--			local bytes = texture2D:EncodeToPNG();
+--			-- 将图片赋给场景上的Sprite
+--			local tempSp = UnityEngine.Sprite.Create(texture2D, UnityEngine.Rect.New(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+--			headIconImg.sprite = tempSp;
+--			GlobalData.wwwSpriteImage.headIcon = tempSp;
+--		end )
+--		if not ret then
+--			error("error:" .. errMessage)
+--			return
+--		end
+--	end
+--end
 
 
 

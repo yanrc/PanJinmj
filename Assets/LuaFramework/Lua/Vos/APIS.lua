@@ -1,16 +1,15 @@
 APIS=
 {
 
-UPDATE_INFO_JSON_URL = "http://101.200.197.7:8888/download/update.xml";--服务器上最新的软件版本信息存储文件
-chatSocketUrl = "101.200.197.7";
-socketUrl = "101.200.197.7";
+UPDATE_INFO_JSON_URL = "http://120.77.38.7:8888/download/update.xml";--服务器上最新的软件版本信息存储文件
+chatSocketUrl = "120.77.38.7";
+socketUrl = "120.77.38.7";
 
 socketPort = 10233;
 chatPort = 10234;
 
-PIC_PATH = "http://101.200.197.7:8888/download/";
---apkDownLoadurl="192.168.0.111/aaa/weipai.apk";
-ImgUrl = "http://101.200.197.7:9096/weiPaiImage/";
+PIC_PATH = "http://120.77.38.7:8888/download/";
+ImgUrl = "http://120.77.38.7:9096/weiPaiImage/";
 head = 0x000030;
 headRESPONSE = 0x000031;
 
@@ -53,7 +52,7 @@ BACK_LOGIN_REQUEST = 0x001001;--掉线后重新登录查询当前牌桌情况请
 BACK_LOGIN_RESPONSE = 0x001002;--掉线后重新登录查询当前牌桌情况返回
 
 OUT_ROOM_REQUEST = 0x000013;--退出房间请求
-OUT_ROOM_RESPONSE = 0x000014;--退出房间返回数7
+OUT_ROOM_RESPONSE = 0x000014;--退出房间返回数
 
 DISSOLIVE_ROOM_REQUEST = 0X000113;--申请解散房间
 DISSOLIVE_ROOM_RESPONSE = 0X000114;--解散房间回调

@@ -15,8 +15,8 @@ ExitRequest={}
 function ExitRequest.New()
 	local exitrequest = ClientRequest.New();
 	exitrequest.headCode = APIS.QUITE_LOGIN;
-	if (GlobalData.Instance().loginResponseData ~= nil) then
-		exitrequest.messageContent =tostring(GlobalData.Instance().loginResponseData.account.uuid);
+	if (GlobalData.loginResponseData ~= nil) then
+		exitrequest.messageContent =tostring(GlobalData.loginResponseData.account.uuid);
 		return exitrequest
 	end
 end

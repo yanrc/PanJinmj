@@ -61,7 +61,7 @@ function StartPanelCtrl.Start()
 	CustomSocket.hasStartTimer=true;
 	soundMgr:playBGM(1);
 	this.Open()
-	GlobalData.Instance().isonLoginPage = true;
+	GlobalData.isonLoginPage = true;
 	versionText.text ="版本号："..Application.version;
 	if (watingPanel ~= nil) then
 		watingPanel:FindChild("Text"):GetComponent("Text").text = "正在连接服务器";
@@ -85,7 +85,7 @@ function StartPanelCtrl.LoginCallBack(response)
 	if (GamePanel.ActiveSelf()) then
 		GamePanelCtrl.ExitOrDissoliveRoom();
 	end
-	GlobalData.Instance().loginResponseData =AvatarVO.New(json.decode(response.message));
+	GlobalData.loginResponseData =AvatarVO.New(json.decode(response.message));
 	ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
 	HomePanelCtrl.Awake()
 	this.Close()
@@ -122,7 +122,7 @@ function StartPanelCtrl.ConnectTime(time,state)
 			CustomSocket.hasStartTimer = false;
 			CustomSocket.getInstance():Connect();
 			ChatSocket.getInstance():Connect();
-			GlobalData.Instance().isonLoginPage = true;
+			GlobalData.isonLoginPage = true;
 		else
 			if (watingPanel ~= nil)then
 				watingPanel.gameObject:SetActive(false);
@@ -140,11 +140,11 @@ function StartPanelCtrl.isConnected(time,rate)
 			watingPanel.gameObject:SetActive(false);
 			--如果已经授权自动登录
 			if UNITY_ANDROID then
-				if (GlobalData.Instance().wechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
+				if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
 					this.login();
 				end
 			elseif UNITY_IPHONE then
-				if (GlobalData.Instance().wechatOperate.shareSdk:IsAuthorized(PlatformType.WechatPlatform)) then
+				if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WechatPlatform)) then
 					this.login();
 				end
 			end
@@ -161,14 +161,14 @@ function StartPanelCtrl.login()
 		ChatSocket.getInstance ().Connect();
 		return;
 	end
-	GlobalData.Instance().reinitData ();--初始化界面数值
+	GlobalData.ReinitData ();--初始化界面数值
 	if (agreeProtocol.isOn) then
 		this.doLogin ();
 		watingPanel:FindChild("Text"):GetComponent("Text").text  = "进入游戏中";
 		watingPanel.gameObject:SetActive(true);
 	else
 		log("lua:请先同意用户使用协议");
-		TipsManager.Instance().setTips("请先同意用户使用协议",1);
+		TipsManager.SetTips("请先同意用户使用协议",1);
 	end
 end
 function StartPanelCtrl.doLogin()
@@ -177,7 +177,7 @@ function StartPanelCtrl.doLogin()
 		--用于测试 不用微信登录
 		resMgr:LoadPrefab('prefabs', {'Assets/Project/Prefabs/LoginPanel.prefab'}, LoginManager.TestLogin);
 	else
-		GlobalData.Instance ().wechatOperate:login ();
+		GlobalData.wechatOperate:login ();
 	end
 end
 -- Update is called once per frame

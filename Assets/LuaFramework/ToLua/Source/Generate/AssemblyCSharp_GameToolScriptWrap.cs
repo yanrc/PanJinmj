@@ -15,7 +15,7 @@ public class AssemblyCSharp_GameToolScriptWrap
 		L.RegFunction("IntToToggleList", IntToToggleList);
 		L.RegFunction("CopyFolder", CopyFolder);
 		L.RegFunction("CopyFilesInAndroid", CopyFilesInAndroid);
-		L.RegFunction("getIpAddress", getIpAddress);
+		L.RegFunction("GetIpAddress", GetIpAddress);
 		L.RegFunction("New", _CreateAssemblyCSharp_GameToolScript);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.EndClass();
@@ -182,13 +182,13 @@ public class AssemblyCSharp_GameToolScriptWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int getIpAddress(IntPtr L)
+	static int GetIpAddress(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
-			string o = AssemblyCSharp.GameToolScript.getIpAddress(arg0);
+			string o = AssemblyCSharp.GameToolScript.GetIpAddress(arg0);
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}

@@ -72,7 +72,20 @@ namespace LuaFramework {
                 buttons.Remove(go);
             }
         }
-
+        /// <summary>
+        /// 重置单击事件
+        /// </summary>
+        /// <param name="go"></param>
+        public void ResetClick(GameObject go)
+        {
+            if (go == null) return;
+            LuaFunction luafunc = null;
+            if (buttons.TryGetValue(go, out luafunc))
+            {
+                buttons.Remove(go);
+                go.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
+        }
         /// <summary>
         /// 清除单击事件
         /// </summary>

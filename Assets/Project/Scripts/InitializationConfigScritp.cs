@@ -32,13 +32,6 @@ public class InitializationConfigScritp : MonoBehaviour {
 		heartbeatThread(); 
 	}
 
-   void	Awake(){
-		if (PlayerPrefs.HasKey ("MusicVolume")) {
-            LuaHelper.GetSoundManager().MusicVolume = PlayerPrefs.GetFloat ("MusicVolume");
-            LuaHelper.GetSoundManager().EffectVolume = PlayerPrefs.GetFloat ("EffectVolume");
-		}
-    }
-
     /// <summary>  
     /// 获取时间戳  
     /// </summary>  

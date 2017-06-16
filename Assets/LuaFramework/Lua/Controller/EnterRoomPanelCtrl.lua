@@ -1,5 +1,5 @@
 require "Vos/JoinRoomRequest"
-local json=require"cjson"
+local json = require "cjson"
 EnterRoomPanelCtrl = { };
 local this = EnterRoomPanelCtrl;
 
@@ -35,20 +35,22 @@ function EnterRoomPanelCtrl.OnCreate(obj)
 	btnList[10] = transform:FindChild("GameObject/Button_9").gameObject
 	local btnClear = transform:FindChild("GameObject/Button_Clear").gameObject
 	local btnDelete = transform:FindChild("GameObject/Button_Delete").gameObject
+local btnClose=transform:FindChild("Image_Enter_Room_Bg/Button_Close").gameObject
 	for i = 1, #btnList do
 		local gobj = btnList[i];
 		this.lua:AddClick(btnList[i], this.OnClickHandle, i - 1)
 	end
 	this.lua:AddClick(btnClear, this.Clear)
 	this.lua:AddClick(btnDelete, this.DeleteNumber)
-	inputTexts={}
+	this.lua:AddClick(btnClose, this.Close)
+	inputTexts = { }
 	inputTexts[1] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_0"):GetComponent("Text")
 	inputTexts[2] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_1"):GetComponent("Text")
 	inputTexts[3] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_2"):GetComponent("Text")
 	inputTexts[4] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_3"):GetComponent("Text")
 	inputTexts[5] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_4"):GetComponent("Text")
 	inputTexts[6] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_5"):GetComponent("Text")
-	watingPanel=transform:FindChild("wait").gameObject
+	watingPanel = transform:FindChild("wait").gameObject
 	logWarn("Start lua--->>" .. gameObject.name);
 	this.Start()
 end
@@ -64,31 +66,31 @@ function EnterRoomPanelCtrl.OnClickHandle(go, number)
 	this.Number(number);
 end
 
---function EnterRoomPanelCtrl.ClickNumber(number)
---	soundMgr:playSoundByActionButton(1);
---	if (number.Equals("100")) then
---		this.Clear()
---		return
---	end
---	if (#inputChars >= 6) then
---		return;
---	end
---	table.insert(inputChars, number)
---	local index = #inputChars
---	inputTexts[index].text = number;
---	-- 最后一位数字赋值
---	if (index == #inputTexts) then
---		this.SureRoomNumber();
---		-- 确定加入房间
---	end
---end
+-- function EnterRoomPanelCtrl.ClickNumber(number)
+-- soundMgr:playSoundByActionButton(1);
+-- if (number.Equals("100")) then
+-- 	this.Clear()
+-- 	return
+-- end
+-- if (#inputChars >= 6) then
+-- 	return;
+-- end
+-- table.insert(inputChars, number)
+-- local index = #inputChars
+-- inputTexts[index].text = number;
+-- -- 最后一位数字赋值
+-- if (index == #inputTexts) then
+-- 	this.SureRoomNumber();
+-- 	-- 确定加入房间
+-- end
+-- end
 
 function EnterRoomPanelCtrl.Number(number)
 	soundMgr:playSoundByActionButton(1);
 	if (#inputChars >= 6) then
 		return;
 	end
-	table.insert(inputChars,number)
+	table.insert(inputChars, number)
 	local index = #inputChars
 	inputTexts[index].text = tostring(number)
 	-- 最后一位数字赋值
@@ -117,7 +119,7 @@ end
 
 function EnterRoomPanelCtrl.SureRoomNumber()
 	if (#inputChars ~= 6) then
-		TipsManager.setTips("请先完整输入房间号码！");
+		TipsManager.SetTips("请先完整输入房间号码！");
 		return;
 	end
 
@@ -132,11 +134,11 @@ function EnterRoomPanelCtrl.SureRoomNumber()
 	CustomSocket.getInstance():sendMsg(JoinRoomRequest.New(sendMsg));
 	SocketEventHandle.getInstance().serviceErrorNotice = this.ServiceErrorNotice;
 end
-function EnterRoomPanelCtrl.serviceErrorNotice(response)
+function EnterRoomPanelCtrl.ServiceErrorNotice(response)
 	SocketEventHandle.getInstance().serviceErrorNotice = nil;
 	watingPanel:SetActive(false);
 	this.Clear();
-	TipsManager:setTips(response.message);
+	TipsManager.SetTips(response.message);
 end
 local connectRetruen = false;
 
@@ -149,7 +151,7 @@ function EnterRoomPanelCtrl.ConnectTime(time)
 		watingPanel:SetActive(false);
 	end
 end
---房间不存在时不会收到这个回调，而是返回错误消息
+-- 房间不存在时不会收到这个回调，而是返回错误消息
 function EnterRoomPanelCtrl.OnJoinRoomCallBack(response)
 	watingPanel:SetActive(false);
 	if (response.status == 1) then
@@ -188,7 +190,7 @@ function EnterRoomPanelCtrl.OnJoinRoomCallBack(response)
 		GlobalData.roomVo.duanMen = message.duanMen;
 	else
 		this.Clear();
-		TipsManager:setTips(response.message);
+		TipsManager.SetTips(response.message);
 	end
 end
 -------------------模板-------------------------
@@ -215,6 +217,6 @@ function EnterRoomPanelCtrl.Open()
 end
 -- 增加事件--
 function EnterRoomPanelCtrl.AddListener()
-SocketEventHandle.getInstance().JoinRoomCallBack=this.OnJoinRoomCallBack
+	SocketEventHandle.getInstance().JoinRoomCallBack = this.OnJoinRoomCallBack
 end
 

@@ -294,7 +294,7 @@ namespace AssemblyCSharp
         /// <summary>
         /// 这个方法和lua里的方法一起使用
         /// </summary>
-        public static string getIpAddress(string url)
+        public static string GetIpAddress(string url)
         {
             string tempip = "";
             try

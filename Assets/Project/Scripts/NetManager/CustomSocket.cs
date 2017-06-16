@@ -203,8 +203,7 @@ namespace AssemblyCSharp
                 stream = tcpclient.GetStream();
                 asyncread(tcpclient);
                 isConnected = true;
-                Debug.Log("服务器已经连接!");
-                Debug.Log("---------------ConnectCallback----------------ConnectCallback--");
+                Debug.Log("游戏服务器已经连接!");
             }
             else
             {

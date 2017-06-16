@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3631506561
+CRC: 3268369178
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b0d0f5f29f969f0d3eedcada960b0f42
+    Hash: 68c41545c65c0e9aeff544d8545a45e4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d41921cb1ab0929af49901d7679ebcaf
+    Hash: 60613a705ea01cf3a8bce0bfeb28f0aa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -100,21 +100,21 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 76f1c98d5317c304c83c9b55d0f43d37, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
+  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f7b9c21b9c76f114483de081bf48ca0e, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
+  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
+  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
 - Class: 114
@@ -135,8 +135,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 30d3803917d611548ae8ac81d28fa885, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 8b380fa41f7581b42b24700d94d2beb2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 1ffd16973ad89f04498ab0d5d7899a56, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1d20b4b6b053f0d4db7bba580acf1bcc, type: 3}
 - Class: 114
@@ -202,7 +200,7 @@ Assets:
 - Assets/Project/Prefabs/playBack/HandCard_R.prefab
 - Assets/Project/Prefabs/userInfo.prefab
 - Assets/Project/Prefabs/HuaShuiPanel.prefab
-- Assets/Project/Prefabs/Image_Base_Dialog.prefab
+- Assets/Project/Prefabs/DialogPanel.prefab
 - Assets/Project/Prefabs/HomePanel.prefab
 - Assets/Project/Prefabs/ShuangLiaoPanel.prefab
 - Assets/Project/Prefabs/StartPanel.prefab
@@ -238,7 +236,7 @@ Assets:
 - Assets/Project/Prefabs/Panel_Gift.prefab
 - Assets/Project/Prefabs/jiesan.prefab
 - Assets/Project/Prefabs/HuEffect_B.prefab
-- Assets/Project/Prefabs/Panel_Setting.prefab
+- Assets/Project/Prefabs/SettingPanel.prefab
 - Assets/Project/Prefabs/Panel_Lottery.prefab
 - Assets/Project/Prefabs/PanJinPanel.prefab
 - Assets/Project/Prefabs/Panel_wating.prefab

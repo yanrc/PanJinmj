@@ -12,14 +12,26 @@ namespace LuaFramework
         private static AudioSource MessageSounPlay;//消息音乐
         private Hashtable sounds = new Hashtable();
         Hashtable OnGetAudioClipList = new Hashtable();//正在加载中的音频
-        public float MusicVolume = 1f;//音乐音量
-        public float EffectVolume = 1f;//音效音量
+        //音乐音量
+        public float MusicVolume
+        {
+            get { return audio.volume; }
+            set { audio.volume = value; }
+        }
+        //音效音量
+        public float EffectVolume { get; set; }
         void Start()
         {
             audio = GameObject.Find("SoundsContainer/MyAudio").GetComponent<AudioSource>();
             cardSounPlay = GameObject.Find("SoundsContainer/cardSoundPlay").GetComponent<AudioSource>();
             ActionSounPlay = GameObject.Find("SoundsContainer/ActionSound").GetComponent<AudioSource>();
             MessageSounPlay = GameObject.Find("SoundsContainer/MessageSound").GetComponent<AudioSource>();
+            Debug.Log("MusicVolume=" + PlayerPrefs.GetFloat("MusicVolume"));
+            if (PlayerPrefs.HasKey("MusicVolume"))
+            {
+                MusicVolume = PlayerPrefs.GetFloat("MusicVolume");
+                EffectVolume = PlayerPrefs.GetFloat("EffectVolume");
+            }
         }
         #region 框架自己的方法，我们不用
         /// <summary>
@@ -229,8 +241,8 @@ namespace LuaFramework
                 if (!OnGetAudioClipList.Contains(path))
                 {
                     OnGetAudioClipList[path] = path;
-                    
-                    GetAudioClip(path, "sounds"+path.Substring(path.LastIndexOf('.')+1), audiosource, isloop, Volume);
+
+                    GetAudioClip(path, "sounds" + path.Substring(path.LastIndexOf('.') + 1), audiosource, isloop, Volume);
                 }
             }
             else

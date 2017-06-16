@@ -3,18 +3,26 @@ GlobalData = {};
 local this = GlobalData;
 local isonLoginPage=false;
 local wechatOperate=nil;
---构建函数--
-function GlobalData.Instance()
-	return this;
-end
 --init
 this.wechatOperate=GameObject.Find("Utils/ShareSDK"):GetComponent('WechatOperateScript');
-
-this.wwwSpriteImage={}
+this.messageBoxContents={
+"快点啦，时间很宝贵的！",
+"又断线了，网络怎么这么差！",
+"不要走决战到天亮。",
+"你的牌打的太好了！",
+"你是美眉还是哥哥？",
+"和你合作真是太愉快了！",
+"大家好很高兴见到大家！",
+"各位真不好意思,我要离开一会",
+"有什么好吵的,专心玩游戏吧！",
+"我到底跟你有什么仇什么怨！",
+"哎呀！打错了怎么办"
+}
+--this.wwwSpriteImage={}
 
 
 --重新初始化数据
-function GlobalData.reinitData()
+function GlobalData.ReinitData()
 	this.isDrag = false;
 	this.loginResponseData = nil;
 	this.roomJoinResponseData = nil;
@@ -33,8 +41,8 @@ function GlobalData.reinitData()
 	this.loginVo = nil;
 	this.isChiState = false;
 end
-function GlobalData.getIpAddress()
-	local all = GameToolScript.getIpAddress("http://1212.ip138.com/ic.asp");
+function GlobalData.GetIpAddress()
+	local all = GameToolScript.GetIpAddress("http://1212.ip138.com/ic.asp");
 	--log(all)
 	--local startIndex =string.find(all,"[") + 1;
 	--ocal endIndex = string.find(all,"]");
@@ -45,3 +53,4 @@ function GlobalData.getIpAddress()
 	--log(tempip)
 	return tempip;
 end
+

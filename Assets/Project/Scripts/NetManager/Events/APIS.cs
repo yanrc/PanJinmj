@@ -7,20 +7,15 @@ namespace AssemblyCSharp
         public APIS()
         {
         }
-		public const string UPDATE_INFO_JSON_URL = "http://101.200.197.7:8888/download/update.xml";//服务器上最新的软件版本信息存储文件
-        public static string chatSocketUrl = "101.200.197.7";
-        public static string socketUrl = "101.200.197.7";
-        //      public static string chatSocketUrl = "123.56.106.194";
-        //public static string socketUrl = "123.56.106.194";
-
-        //public static string chatSocketUrl = "192.168.0.111";
-        //public static string socketUrl = "192.168.0.111";
+		public const string UPDATE_INFO_JSON_URL = "http://120.77.38.7:8888/download/update.xml";//服务器上最新的软件版本信息存储文件
+        public static string chatSocketUrl = "120.77.38.7";
+        public static string socketUrl = "120.77.38.7";
         public const int socketPort = 10233;
         public const int chatPort = 10234;
 
-		public const string PIC_PATH = "http://101.200.197.7:8888/download/";
+		public const string PIC_PATH = "http://120.77.38.7:8888/download/";
         //	public const string apkDownLoadurl="192.168.0.111/aaa/weipai.apk";
-		public const string ImgUrl = "http://101.200.197.7:9096/weiPaiImage/";
+		public const string ImgUrl = "http://120.77.38.7:9096/weiPaiImage/";
         public const int head = 0x000030;
         public const int headRESPONSE = 0x000031;
 
@@ -39,6 +34,8 @@ namespace AssemblyCSharp
 
         public const int STARTGAME_RESPONSE_NOTICE = 0x00012;//开始游戏
         public const int PICKCARD_RESPONSE = 0x100004;//自己摸牌 
+        public const int BUHUA_REQUEST = 0x100020;//补花请求
+        public const int BUHUA_RESPONSE = 0x100021;//补花通知
         public const int OTHER_PICKCARD_RESPONSE_NOTICE = 0x100014;//别人摸牌通知
 
         public const int RETURN_INFO_RESPONSE = 0x100000;//胡、碰、杠等通知
