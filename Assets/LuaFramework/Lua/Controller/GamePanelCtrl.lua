@@ -27,7 +27,7 @@ local showTimeNumber = 0
 local mineList
 -- 手牌列表，二维，自己存的是table,其他人存的是gameObject
 -- 0自己，1-右边。2-上边。3-左边
-this.handerCardList={}
+this.handerCardList = { }
 -- 打在桌上的牌,gameObject
 local tableCardList
 -- 吃碰杠list
@@ -49,14 +49,13 @@ local ExitRoomButton
 local live1
 local live2
 local centerImage
-local liujuEffectGame
 local ruleText
 local LeavedCastNumText
 local SelfAndOtherPutoutCard
 local useForGangOrPengOrChi
 local passStr = ""
 local chiPaiPointList
-local LeavedCardsNum=0 -- 剩余牌数
+local LeavedCardsNum = 0 -- 剩余牌数
 local pickCardItem-- 自己摸的牌
 local otherPickCardItem-- 别人摸的牌,gameobject
 local passType-- “过”操作字符串
@@ -77,6 +76,13 @@ local Dir = { "B", "R", "T", "L" }
 local CurLocalIndex;-- 当前操作位
 local btnSetting-- 设置按钮
 local outparentList = { }-- 出牌的父对象
+-- 吃碰杠胡特效
+local chiEffectGame
+local pengEffectGame
+local gangEffectGame
+local huEffectGame
+local liujuEffectGame
+
 function GamePanelCtrl.Awake()
 	logWarn("GamePanelCtrl.Awake--->>");
 	PanelManager:CreatePanel('GamePanel', this.OnCreate);
@@ -99,7 +105,13 @@ function GamePanelCtrl.OnCreate(go)
 	live1 = transform:FindChild('Leaved'):GetComponent('Image');
 	live2 = transform:FindChild('Leaved1'):GetComponent('Image');
 	centerImage = transform:FindChild('table'):GetComponent('Image');
+
+	chiEffectGame = transform:FindChild('ChiEffect_B').gameObject
+	pengEffectGame = transform:FindChild('PengEffect_B').gameObject
+	gangEffectGame = transform:FindChild('GangEffect_B').gameObject
+	huEffectGame = transform:FindChild('HuEffect_B').gameObject
 	liujuEffectGame = transform:FindChild('Liuju_B').gameObject
+
 	ruleText = transform:FindChild('Rule'):GetComponent('Text');
 	LeavedCastNumText = transform:FindChild('Leaved/Text'):GetComponent('Text');
 	guiObj = transform:FindChild('gui').gameObject
@@ -195,7 +207,7 @@ end
 function GamePanelCtrl.CardSelect(objCtrl)
 	for k, v in pairs(this.handerCardList[1]) do
 		if v == nil then
-			this.handerCardList[1][k] = nil
+			table.remove(this.handerCardList[1], k)
 		else
 			this.handerCardList[1][k].gameObject.transform.localPosition = Vector3.New(this.handerCardList[1][k].transform.localPosition.x, -292);
 			-- 从右到左依次对齐
@@ -470,7 +482,7 @@ function GamePanelCtrl.SortMyCardList()
 			if (v.CardPoint == GlobalData.roomVo.guiPai) then
 				tabel.insert(guipaiList, v)
 				-- 鬼牌
-				this.handerCardList[1][k] = nil
+				table.remove(this.handerCardList[1], k)
 			end
 		end
 	end
@@ -649,7 +661,7 @@ function GamePanelCtrl.CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, 
 		end
 	}
 	switch[LocalIndex]()
-	this.CreateGameObjectAndReturn(path,outparentList[LocalIndex], tempVector3, function(obj)
+	this.CreateGameObjectAndReturn(path, outparentList[LocalIndex], tempVector3, function(obj)
 		obj.name = "putOutCard";
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(cardPoint, LocalIndex, GlobalData.roomVo.guiPai == cardPoint);
@@ -754,6 +766,7 @@ function GamePanelCtrl.PengCard(response)
 		for k, v in pairs(this.handerCardList[1]) do
 			if (v.CardPoint == putOutCardPoint) then
 				v = nil
+				table.remove(this.handerCardList[1], k)
 				removeCount = removeCount + 1
 				if (removeCount == 2) then
 					break
@@ -855,6 +868,7 @@ function GamePanelCtrl.ChiCard(response)
 		for k, v in pairs(this.handerCardList[1]) do
 			if (v.CardPoint == cardVo.onePoint) then
 				v = nil
+				table.remove(this.handerCardList[1], k)
 				break
 			end
 		end
@@ -862,6 +876,7 @@ function GamePanelCtrl.ChiCard(response)
 		for k, v in pairs(this.handerCardList[1]) do
 			if (v.CardPoint == cardVo.twoPoint) then
 				v = nil
+				table.remove(this.handerCardList[1], k)
 				break
 			end
 		end
@@ -1362,11 +1377,16 @@ function GamePanelCtrl.CardChange(objCtrl)
 		objCtrl.ReSetPoisiton = nil;
 		local CardPoint = objCtrl.CardPoint;
 		this.PushOutFromMineList(CardPoint);
-		-- 将打出牌移除
-		table.remove(this.handerCardList[1], table.indexOf(this.handerCardList[1], objCtrl))
 		this.CreatePutOutCardAndPlayAction(CardPoint, this.GetMyIndexFromList(), objCtrl.transform.position);
-		destroy(objCtrl.gameObject);
-		objCtrl = nil
+		-- 将打出牌移除
+		for k, v in this.handerCardList[1] do
+			if v.CardPoint == CardPoint then
+				table.remove(this.handerCardList[1], k)
+				destroy(v.gameObject);
+				v = nil
+				break
+			end
+		end
 		this.SetPosition(false);
 		-- 出牌动画
 		local cardvo = { }
@@ -1693,7 +1713,7 @@ function GamePanelCtrl.GangResponse(response)
 end
 
 function GamePanelCtrl.CreateGameObjectAndReturn(path, parent, position, f)
-log("CreateGameObjectAndReturn:"..path)
+	log("CreateGameObjectAndReturn:" .. path)
 	resMgr:LoadPrefab('prefabs', { path .. ".prefab" }, function(prefabs)
 		local obj = newObject(prefabs[0])
 		obj.transform:SetParent(parent);
@@ -2743,11 +2763,13 @@ function GamePanelCtrl.ReturnGameResponse(response)
 	-- 当前摸牌牌人的索引
 	local LocalIndex = LastAvarIndex;
 	if (pickAvatarIndex == this.GetMyIndexFromList()) then
+		local count = #this.handerCardList[1]
 		-- 自己摸牌
-		if (returnJsonData.currentCardPoint == -2 or #this.handerCardList[1] % 3 == 2) then
-			local cardPoint = this.handerCardList[1][#this.handerCardList[1]].CardPoint;
+		if (returnJsonData.currentCardPoint == -2 or count % 3 == 2) then
+			local cardPoint = this.handerCardList[1][count].CardPoint;
 			SelfAndOtherPutoutCard = cardPoint;
-			destroy(this.handerCardList[1][#this.handerCardList[1]].gameObject);
+			destroy(this.handerCardList[1][count].gameObject);
+			this.handerCardList[1][count] = nil
 			table.remove(this.handerCardList[1])
 			-- 默认移除最后一位
 			this.SetPosition(false);
@@ -2756,12 +2778,13 @@ function GamePanelCtrl.ReturnGameResponse(response)
 			this.SetDirGameObjectAction(1);
 			GlobalData.isDrag = true;
 		else
-			if ((#this.handerCardList[1]) % 3 ~= 2) then
+			if (count % 3 ~= 2) then
 				local cardPoint = returnJsonData.currentCardPoint;
 				SelfAndOtherPutoutCard = cardPoint;
-				for i = 1, #this.handerCardList[1] do
+				for i = 1, count do
 					if (this.handerCardList[1][i].CardPoint == cardPoint) then
 						destroy(this.handerCardList[1][i].gameObject);
+						this.handerCardList[1][i] = nil
 						table.remove(this.handerCardList[1], i)
 						break;
 					end
@@ -2874,4 +2897,8 @@ function GamePanelCtrl.AddListener()
 	SocketEventHandle.getInstance().micInputNotice = this.MicInputNotice;
 	SocketEventHandle.getInstance().gameFollowBanderNotice = this.GameFollowBanderNotice;
 	Event.AddListener(closeGamePanel, this.ExitOrDissoliveRoom)
+end
+--测试方法，用来打印table
+function GamePanelCtrl.Test()
+return avatarList
 end
