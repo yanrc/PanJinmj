@@ -1,4 +1,4 @@
-require"Controller/DialogPanelCtrl"
+
 --管理器--
 TipsManager = {};
 local this = TipsManager;
@@ -18,5 +18,5 @@ function TipsManager.OnCreateTipPanel(prefabs)
 end
 
 function TipsManager.loadDialog(title,msg,yescallback,nocallback)
-	DialogPanelCtrl.Open(title,msg,yescallback,nocallback);
+	DialogPanelCtrl:Open(title,msg,yescallback,nocallback);
 end

@@ -32,7 +32,7 @@ namespace LuaFramework {
         public void AddClick(GameObject go, LuaFunction luafunc) {
             if (go == null || luafunc == null)
             {
-                Debugger.LogError("GameObject="+go+ ",LuaFunction="+luafunc);
+                Debugger.LogError("GameObject="+go+ ",LuaFunction="+luafunc.name);
                 return;
             }
             buttons.Add(go, luafunc);

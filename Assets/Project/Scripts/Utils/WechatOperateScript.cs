@@ -13,7 +13,6 @@ using LuaInterface;
 public class WechatOperateScript : MonoBehaviour {
 	public ShareSDK shareSdk;
 	private string picPath;
-	//
 	void Start () {
 		if (shareSdk != null) {
 			shareSdk.showUserHandler = getUserInforCallback;
@@ -21,12 +20,6 @@ public class WechatOperateScript : MonoBehaviour {
 		}
 
 	}
-	
-
-	void Update () {
-	
-	}
-
     /**
 	 * 获取微信个人信息成功回调,登录
 	 *
@@ -41,9 +34,6 @@ public class WechatOperateScript : MonoBehaviour {
 	 */
     public void login(){
 	    shareSdk.GetUserInfo(PlatformType.WeChat);
-	
-  //   testLogin();
-
 	}
 
 

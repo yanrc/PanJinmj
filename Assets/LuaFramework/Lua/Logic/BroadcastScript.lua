@@ -1,4 +1,4 @@
-require "View/Moban"
+
 BroadcastScript = { };
 local this = BroadcastScript;
 
@@ -14,10 +14,6 @@ function BroadcastScript.GameBroadcastNotice(response)
 	local noticeList = string.split(noticeString, '*')
 	if (noticeList ~= nil) then
 	GlobalData.notices = noticeList
---		GlobalData.notices = { }
---		for i = 1, #noticeList do
---			GlobalData.notices[i] = noticeList[i];
---		end
 		Event.Brocast(DisplayBroadcast)
 	end
 end
@@ -26,12 +22,12 @@ end
 
 -- 移除事件--
 function BroadcastScript.RemoveListener()
-SocketEventHandle.getInstance ().gameBroadcastNotice=nil
+Event.RemoveListener(tostring(APIS.GAME_BROADCAST),this.GameBroadcastNotice)
 end
 
 -- 增加事件--
 function BroadcastScript.AddListener()
-SocketEventHandle.getInstance ().gameBroadcastNotice=this.GameBroadcastNotice
+Event.AddListener(tostring(APIS.GAME_BROADCAST),this.GameBroadcastNotice)
 end
 
 

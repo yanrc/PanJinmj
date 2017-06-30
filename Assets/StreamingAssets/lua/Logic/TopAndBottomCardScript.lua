@@ -24,10 +24,10 @@ function TopAndBottomCardScript:Init(cardPoint, LocalIndex, islaizi)
 	self.guiIcon.gameObject:SetActive(islaizi);
 	local switch =
 	{
-		[0] = "Assets/Project/DynaImages/Cards/Big/b",
-		[1] = "Assets/Project/DynaImages/Cards/Left&Right/lr",
-		[2] = "Assets/Project/DynaImages/Cards/Small/s",
-		[3] = "Assets/Project/DynaImages/Cards/Left&Right/lr"
+		[1] = "Assets/Project/DynaImages/Cards/Big/b",
+		[2] = "Assets/Project/DynaImages/Cards/Left&Right/lr",
+		[3] = "Assets/Project/DynaImages/Cards/Small/s",
+		[4] = "Assets/Project/DynaImages/Cards/Left&Right/lr"
 	}
 	local path = switch[LocalIndex]
 	resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)

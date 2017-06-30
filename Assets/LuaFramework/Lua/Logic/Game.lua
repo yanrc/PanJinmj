@@ -14,9 +14,7 @@ local print_r = require "3rd/sproto/print_r"
 require "Logic/LuaClass"
 require "Logic/CtrlManager"
 
-require "Controller/StartPanelCtrl"
-require "Logic/BroadcastScript"
-require "Logic/Test"
+require"Common/requireAll"
 -- 管理器--
 Game = { };
 local this = Game;
@@ -34,10 +32,10 @@ end
 
 -- 初始化完成，发送链接服务器信息--
 function Game.OnInitOK()
-	AppConst.SocketPort = 2012;
-	AppConst.SocketAddress = "127.0.0.1";
-	networkMgr:SendConnect();
-
+	AppConst.SocketPort = APIS.socketPort;
+	AppConst.SocketAddress = APIS.socketUrl;
+	--加载面板
+	UIManager.InitPanels();
 	-- 注册LuaView--
 	-- this.InitViewPanels();
 
@@ -48,9 +46,7 @@ function Game.OnInitOK()
     this.test_lpeg_func();
     this.test_sproto_func();
     coroutine.start(this.test_coroutine);--]]
-
 	CtrlManager.Init();
-	StartPanelCtrl:Awake()
 	BroadcastScript.Awake()
 	Test.Awake()
 	logWarn('LuaFramework InitOK--->>>');
@@ -71,24 +67,24 @@ end
 function Game.test_sproto_func()
 	logWarn("test_sproto_func-------->>");
 	local sp = sproto.parse [[
-	    .Person {
-	        name 0 : string
-	        id 1 : integer
-	        email 2 : string
+		    .Person {
+		        name 0 : string
+		        id 1 : integer
+		        email 2 : string
 
-	        .PhoneNumber {
-	            number 0 : string
-	            type 1 : integer
-	        }
+		        .PhoneNumber {
+		            number 0 : string
+		            type 1 : integer
+		        }
 
-	        phone 3 : *PhoneNumber
-	    }
+		        phone 3 : *PhoneNumber
+		    }
 
-	    .AddressBook {
-	        person 0 : *Person(id)
-	        others 1 : *Person
-	    }
-	    ]]
+		    .AddressBook {
+		        person 0 : *Person(id)
+		        others 1 : *Person
+		    }
+		    ]]
 
 	local ab = {
 		person =

@@ -1,12 +1,4 @@
 
-CtrlNames = {
-	
-}
-
-PanelNames = {
-	
-}
-
 --协议类型--
 ProtocalType = {
 	BINARY = 0,
@@ -37,13 +29,10 @@ KeyCode=UnityEngine.KeyCode
 List_int=System.Collections.Generic.List_int
 PlayerPrefs=UnityEngine.PlayerPrefs
 
-CustomSocket=AssemblyCSharp.CustomSocket
 ChatRequest=AssemblyCSharp.ChatRequest
 ChatSocket=AssemblyCSharp.ChatSocket
 ClientRequest=AssemblyCSharp.ClientRequest
 ClientResponse=AssemblyCSharp.ClientResponse
-CustomSocket=AssemblyCSharp.CustomSocket
-SocketEventHandle=AssemblyCSharp.SocketEventHandle
 HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
 PlatformType=cn.sharesdk.unity3d.PlatformType
@@ -62,3 +51,21 @@ UNITY_ANDROID=AppConst.UNITY_ANDROID;
 UNITY_IPHONE=AppConst.UNITY_IPHONE;
 UNITY_STANDALONE_WIN=AppConst.UNITY_STANDALONE_WIN;
 UNITY_EDITOR=AppConst.UNITY_EDITOR;
+
+
+--定义字符串
+define={}
+define.PanelsInited="PanelsInited"
+
+define.FixUI="FixUI"
+define.PopUI="PopUI"
+define.CreateRoomPanel="CreateRoomPanel"
+define.DialogPanel="DialogPanel"
+define.EnterRoomPanel="EnterRoomPanel"
+define.ExitPanel="ExitPanel"
+define.GamePanel="GamePanel"
+define.HomePanel="HomePanel"
+define.SettingPanel="SettingPanel"
+define.StartPanel="StartPanel"
+define.VotePanel="VotePanel"
+define.WaitingPanel="WaitingPanel"

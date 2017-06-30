@@ -166,20 +166,6 @@ public static class LuaBinder
 		LuaFramework_NetworkManagerWrap.Register(L);
 		LuaFramework_ResourceManagerWrap.Register(L);
 		L.EndModule();
-		L.BeginModule("AssemblyCSharp");
-		AssemblyCSharp_ChatRequestWrap.Register(L);
-		AssemblyCSharp_ChatSocketWrap.Register(L);
-		AssemblyCSharp_ClientRequestWrap.Register(L);
-		AssemblyCSharp_ClientResponseWrap.Register(L);
-		AssemblyCSharp_CustomSocketWrap.Register(L);
-		AssemblyCSharp_SocketEventHandleWrap.Register(L);
-		AssemblyCSharp_HeadRequestWrap.Register(L);
-		AssemblyCSharp_GameToolScriptWrap.Register(L);
-		L.BeginModule("SocketEventHandle");
-		L.RegFunction("ServerCallBackEvent", AssemblyCSharp_SocketEventHandle_ServerCallBackEvent);
-		L.RegFunction("ServerDisconnectCallBackEvent", AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent);
-		L.EndModule();
-		L.EndModule();
 		L.BeginModule("cn");
 		L.BeginModule("sharesdk");
 		L.BeginModule("unity3d");
@@ -190,6 +176,9 @@ public static class LuaBinder
 		L.EndModule();
 		L.EndModule();
 		L.EndModule();
+		L.EndModule();
+		L.BeginModule("AssemblyCSharp");
+		AssemblyCSharp_GameToolScriptWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);
@@ -1211,60 +1200,6 @@ public static class LuaBinder
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
 				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AssemblyCSharp_SocketEventHandle_ServerCallBackEvent(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(AssemblyCSharp.SocketEventHandle.ServerCallBackEvent), func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(AssemblyCSharp.SocketEventHandle.ServerCallBackEvent), func, self);
-				ToLua.Push(L, arg1);
-			}
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-			LuaFunction func = ToLua.CheckLuaFunction(L, 1);
-
-			if (count == 1)
-			{
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent), func);
-				ToLua.Push(L, arg1);
-			}
-			else
-			{
-				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent), func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

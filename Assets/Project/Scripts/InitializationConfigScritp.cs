@@ -9,14 +9,16 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Net.Sockets;
 using LuaFramework;
+using YRC;
 
 public class InitializationConfigScritp : MonoBehaviour {
 	
 	int num = 0;
 	bool hasPaused   = false;
-	void Start () {
-       
-        MicroPhoneInput.getInstance ();
+    public bool debugMode;
+    void Start () {
+        Debuger.debugMode = debugMode;
+         MicroPhoneInput.getInstance ();
 		//GlobalDataScript.getInstance ();
 		////CustomSocket.getInstance().Connect();
 		////ChatSocket.getInstance ();
@@ -50,12 +52,12 @@ public class InitializationConfigScritp : MonoBehaviour {
 
 
 	private static void sendHeartbeat(){
-		CustomSocket.getInstance ().sendHeadData ();
+		//CustomSocket.getInstance ().sendHeadData ();
 		Thread.Sleep (20000);
 		sendHeartbeat ();
 	}
 
 	public  void doSendHeartbeat( object source, System.Timers.ElapsedEventArgs e){
-		CustomSocket.getInstance ().sendHeadData ();
+		//CustomSocket.getInstance ().sendHeadData ();
 	}
 }

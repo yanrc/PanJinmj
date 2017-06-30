@@ -1,7 +1,4 @@
-local json = require "cjson"
-require "vos/AvatarVO"
-require "vos/Account"
-require "vos/LoginRequest"
+
 --管理器--
 LoginManager = {};
 local this = LoginManager;
@@ -18,7 +15,7 @@ function LoginManager.TestLogin(prefabs)
 	go:GetComponent("RectTransform").offsetMax =Vector2.zero;
 	go:GetComponent("RectTransform").offsetMin = Vector2.zero;
 	local button=go.transform:FindChild("Button"):GetComponent("Button").gameObject;
-	StartPanelCtrl.lua:AddClick(button,this.TestLoginClick)
+	StartPanel.lua:AddClick(button,this.TestLoginClick)
 	this.dropdown=go.transform:FindChild("Dropdown"):GetComponent("Dropdown");
 	this.go=go;
 end
@@ -62,7 +59,7 @@ function LoginManager.TestLoginClick()
 	GlobalData.loginResponseData.account.unionid = loginvo.city;
 	GlobalData.loginResponseData.account.sex = loginvo.sex;
 	GlobalData.loginResponseData.IP = loginvo.IP;
-	CustomSocket.getInstance():sendMsg(LoginRequest.New(data));
+	networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST,data));
 	destroy(this.go);
 end
 

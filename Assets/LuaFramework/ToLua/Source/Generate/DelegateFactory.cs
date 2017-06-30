@@ -60,8 +60,6 @@ public static class DelegateFactory
 		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), UnityEngine_RectTransform_ReapplyDrivenProperties);
 		dict.Add(typeof(System.Action<NotiData>), System_Action_NotiData);
 		dict.Add(typeof(System.Action<UnityEngine.Object[]>), System_Action_UnityEngine_Objects);
-		dict.Add(typeof(AssemblyCSharp.SocketEventHandle.ServerCallBackEvent), AssemblyCSharp_SocketEventHandle_ServerCallBackEvent);
-		dict.Add(typeof(AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent), AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent);
 		dict.Add(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), cn_sharesdk_unity3d_ShareSDK_EventHandler);
 	}
 
@@ -2228,96 +2226,6 @@ public static class DelegateFactory
 		{
 			System_Action_UnityEngine_Objects_Event target = new System_Action_UnityEngine_Objects_Event(func, self);
 			System.Action<UnityEngine.Object[]> d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	class AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event : LuaDelegate
-	{
-		public AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event(LuaFunction func) : base(func) { }
-		public AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call(AssemblyCSharp.ClientResponse param0)
-		{
-			func.BeginPCall();
-			func.PushObject(param0);
-			func.PCall();
-			func.EndPCall();
-		}
-
-		public void CallWithSelf(AssemblyCSharp.ClientResponse param0)
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.PushObject(param0);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public static Delegate AssemblyCSharp_SocketEventHandle_ServerCallBackEvent(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			AssemblyCSharp.SocketEventHandle.ServerCallBackEvent fn = delegate(AssemblyCSharp.ClientResponse param0) { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event target = new AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event(func);
-			AssemblyCSharp.SocketEventHandle.ServerCallBackEvent d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event target = new AssemblyCSharp_SocketEventHandle_ServerCallBackEvent_Event(func, self);
-			AssemblyCSharp.SocketEventHandle.ServerCallBackEvent d = target.CallWithSelf;
-			target.method = d.Method;
-			return d;
-		}
-	}
-
-	class AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event : LuaDelegate
-	{
-		public AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event(LuaFunction func) : base(func) { }
-		public AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event(LuaFunction func, LuaTable self) : base(func, self) { }
-
-		public void Call()
-		{
-			func.Call();
-		}
-
-		public void CallWithSelf()
-		{
-			func.BeginPCall();
-			func.Push(self);
-			func.PCall();
-			func.EndPCall();
-		}
-	}
-
-	public static Delegate AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent(LuaFunction func, LuaTable self, bool flag)
-	{
-		if (func == null)
-		{
-			AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent fn = delegate() { };
-			return fn;
-		}
-
-		if(!flag)
-		{
-			AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event target = new AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event(func);
-			AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent d = target.Call;
-			target.method = d.Method;
-			return d;
-		}
-		else
-		{
-			AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event target = new AssemblyCSharp_SocketEventHandle_ServerDisconnectCallBackEvent_Event(func, self);
-			AssemblyCSharp.SocketEventHandle.ServerDisconnectCallBackEvent d = target.CallWithSelf;
 			target.method = d.Method;
 			return d;
 		}

@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Collections;
 using System.Collections.Generic;
 using LuaFramework;
-
+using YRC;
 public enum DisType {
     Exception,
     Disconnect,
@@ -63,9 +63,16 @@ public class SocketClient {
     /// 连接上服务器
     /// </summary>
     void OnConnect(IAsyncResult asr) {
-        outStream = client.GetStream();
-        client.GetStream().BeginRead(byteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
-        NetworkManager.AddEvent(Protocal.Connect, new ByteBuffer());
+        try
+        {
+            outStream = client.GetStream();
+            client.GetStream().BeginRead(byteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
+            NetworkManager.AddEvent(Protocal.Connect, new ByteBuffer());
+        }catch(Exception e)
+        {
+            //断网时会提示Not connected
+            Debug.LogWarning(e.Message);
+        }
     }
 
     /// <summary>
@@ -76,7 +83,8 @@ public class SocketClient {
         using (ms = new MemoryStream()) {
             ms.Position = 0;
             BinaryWriter writer = new BinaryWriter(ms);
-            ushort msglen = (ushort)message.Length;
+            int msglen =IPAddress.HostToNetworkOrder(message.Length);
+            writer.Write((byte)1);
             writer.Write(msglen);
             writer.Write(message);
             writer.Flush();
@@ -109,7 +117,7 @@ public class SocketClient {
                 client.GetStream().BeginRead(byteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
             }
         } catch (Exception ex) {
-            //PrintBytes();
+            PrintBytes();
             OnDisconnected(DisType.Exception, ex.Message);
         }
     }
@@ -123,9 +131,9 @@ public class SocketClient {
         Protocal.Exception : Protocal.Disconnect;
 
         ByteBuffer buffer = new ByteBuffer();
-        buffer.WriteShort((ushort)protocal);
+        buffer.WriteShort((short)protocal);
         NetworkManager.AddEvent(protocal, buffer);
-        Debug.LogError("Connection was closed by the server:>" + msg + " Distype:>" + dis);
+        Debug.LogError("Connection was closed by the server:>" + msg + ":Distype:>" + dis);
     }
 
     /// <summary>
@@ -150,26 +158,35 @@ public class SocketClient {
             Debug.LogError("OnWrite--->>>" + ex.Message);
         }
     }
-
     /// <summary>
     /// 接收到消息
     /// </summary>
-    void OnReceive(byte[] bytes, int length) {
+    void OnReceive(byte[] bytes, int length)
+    {
         memStream.Seek(0, SeekOrigin.End);
         memStream.Write(bytes, 0, length);
         //Reset to beginning
         memStream.Seek(0, SeekOrigin.Begin);
-        while (RemainingBytes() > 2) {
-            ushort messageLen = reader.ReadUInt16();
-            if (RemainingBytes() >= messageLen) {
+        while (RemainingBytes() > 5)
+        {
+            byte flag = reader.ReadByte();
+            int messageLen = reader.ReadInt32();
+            messageLen = IPAddress.NetworkToHostOrder(messageLen);
+            if (RemainingBytes() >= messageLen)
+            {
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter writer = new BinaryWriter(ms);
                 writer.Write(reader.ReadBytes(messageLen));
                 ms.Seek(0, SeekOrigin.Begin);
-                OnReceivedMessage(ms);
-            } else {
+                if (flag == 1)
+                {
+                    OnReceivedMessage(ms);
+                }
+            }
+            else
+            {
                 //Back up the position two bytes
-                memStream.Position = memStream.Position - 2;
+                memStream.Position = memStream.Position - 5;
                 break;
             }
         }
@@ -178,7 +195,6 @@ public class SocketClient {
         memStream.SetLength(0);     //Clear
         memStream.Write(leftover, 0, leftover.Length);
     }
-
     /// <summary>
     /// 剩余的字节
     /// </summary>
@@ -190,13 +206,24 @@ public class SocketClient {
     /// 接收到消息
     /// </summary>
     /// <param name="ms"></param>
-    void OnReceivedMessage(MemoryStream ms) {
+    /// <summary>
+    /// 接收到消息
+    /// </summary>
+    /// <param name="ms"></param>
+    void OnReceivedMessage(MemoryStream ms)
+    {
         BinaryReader r = new BinaryReader(ms);
         byte[] message = r.ReadBytes((int)(ms.Length - ms.Position));
-        //int msglen = message.Length;
-
+        if (Debuger.debugMode)
+        {
+            ByteBuffer LOGbuffer = new ByteBuffer(message);
+            int Headcode= LOGbuffer.ReadInt();
+            int State = LOGbuffer.ReadInt();
+            string Message= LOGbuffer.ReadString();
+            Debuger.Log(string.Format("OnReceivedMessage:headcode={0},state={1},msg={2}", Headcode,State,Message));
+        }
         ByteBuffer buffer = new ByteBuffer(message);
-        int mainId = buffer.ReadShort();
+        int mainId = buffer.ReadInt();
         NetworkManager.AddEvent(mainId, buffer);
     }
 

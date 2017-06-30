@@ -41,14 +41,20 @@ namespace LuaFramework {
         }
 
         public void WriteInt(int v) {
+            v=System.Net.IPAddress.HostToNetworkOrder(v);
             writer.Write((int)v);
         }
-
-        public void WriteShort(ushort v) {
+        public void WriteShort(short v)
+        {
+            v = System.Net.IPAddress.HostToNetworkOrder(v);
+            writer.Write(v);
+        }
+        public void WriteUshort(ushort v) {
             writer.Write((ushort)v);
         }
 
         public void WriteLong(long v) {
+            v = System.Net.IPAddress.HostToNetworkOrder(v);
             writer.Write((long)v);
         }
 
@@ -66,7 +72,7 @@ namespace LuaFramework {
 
         public void WriteString(string v) {
             byte[] bytes = Encoding.UTF8.GetBytes(v);
-            writer.Write((ushort)bytes.Length);
+            WriteShort((short)bytes.Length);
             writer.Write(bytes);
         }
 
@@ -84,15 +90,24 @@ namespace LuaFramework {
         }
 
         public int ReadInt() {
-            return (int)reader.ReadInt32();
+            int v = reader.ReadInt32();
+            v = System.Net.IPAddress.NetworkToHostOrder(v);
+            return v;
         }
-
-        public ushort ReadShort() {
+        public short ReadShort()
+        {
+            short v= reader.ReadInt16();
+            v= System.Net.IPAddress.NetworkToHostOrder(v);
+            return v;
+        }
+        public ushort ReadUshort() {
             return (ushort)reader.ReadInt16();
         }
 
         public long ReadLong() {
-            return (long)reader.ReadInt64();
+            long v = reader.ReadInt64();
+            v = System.Net.IPAddress.NetworkToHostOrder(v);
+            return v;
         }
 
         public float ReadFloat() {
@@ -108,7 +123,7 @@ namespace LuaFramework {
         }
 
         public string ReadString() {
-            ushort len = ReadShort();
+            short len = ReadShort();
             byte[] buffer = new byte[len];
             buffer = reader.ReadBytes(len);
             return Encoding.UTF8.GetString(buffer);
@@ -126,7 +141,8 @@ namespace LuaFramework {
 
         public byte[] ToBytes() {
             writer.Flush();
-            return stream.ToArray();
+            byte[]bytes= stream.ToArray();
+            return bytes;
         }
 
         public void Flush() {

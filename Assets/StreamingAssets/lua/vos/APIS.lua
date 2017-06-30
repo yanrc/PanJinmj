@@ -1,15 +1,14 @@
 APIS=
 {
-
-UPDATE_INFO_JSON_URL = "http://120.77.38.7:8888/download/update.xml";--服务器上最新的软件版本信息存储文件
+socketUrl = "101.200.197.7";
 chatSocketUrl = "120.77.38.7";
-socketUrl = "120.77.38.7";
-
-socketPort = 10233;
+socketPort = 11111;
 chatPort = 10234;
 
-PIC_PATH = "http://120.77.38.7:8888/download/";
-ImgUrl = "http://120.77.38.7:9096/weiPaiImage/";
+UPDATE_INFO_JSON_URL =string.format("http://{0}:8888/download/update.xml",socketUrl) ;--服务器上最新的软件版本信息存储文件
+PIC_PATH =string.format("http://{0}:8888/download/",socketUrl);
+ImgUrl =string.format("http://{0}:9096/weiPaiImage/",socketUrl);
+
 head = 0x000030;
 headRESPONSE = 0x000031;
 
@@ -100,4 +99,6 @@ GAME_BACK_PLAY_RESPONSE = 0x003002;--回放返回数据
 TIP_MESSAGE = 0x160016;
 
 OTHER_TELE_LOGIN = 0x211211;--其他设备登录
+
+PanelsInited="PanelsInited"
 }

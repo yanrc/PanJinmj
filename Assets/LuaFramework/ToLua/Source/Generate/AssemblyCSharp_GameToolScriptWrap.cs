@@ -8,7 +8,6 @@ public class AssemblyCSharp_GameToolScriptWrap
 	{
 		L.BeginClass(typeof(AssemblyCSharp.GameToolScript), typeof(System.Object));
 		L.RegFunction("setOtherCardObjPosition", setOtherCardObjPosition);
-		L.RegFunction("cleaListener", cleaListener);
 		L.RegFunction("boolArrToInt", boolArrToInt);
 		L.RegFunction("IntToboolArr", IntToboolArr);
 		L.RegFunction("ToggleListToInt", ToggleListToInt);
@@ -55,21 +54,6 @@ public class AssemblyCSharp_GameToolScriptWrap
 			string arg1 = ToLua.CheckString(L, 2);
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
 			AssemblyCSharp.GameToolScript.setOtherCardObjPosition(arg0, arg1, arg2);
-			return 0;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int cleaListener(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 0);
-			AssemblyCSharp.GameToolScript.cleaListener();
 			return 0;
 		}
 		catch(Exception e)

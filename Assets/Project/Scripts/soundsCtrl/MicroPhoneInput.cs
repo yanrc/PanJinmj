@@ -6,8 +6,8 @@ using System.Text;
 using UnityEngine;  
 using System.Collections;
 using AssemblyCSharp;
-using LuaInterface;
 using LuaFramework;
+using YRC;
   
 [RequireComponent (typeof(AudioSource))]  
 
@@ -30,7 +30,7 @@ public class MicroPhoneInput : MonoBehaviour {
 	List<int> userList;
 	// Use this for initialization   
 	void Start () {  
-		SocketEventHandle.getInstance ().micInputNotice += micInputNotice;
+		//SocketEventHandle.getInstance ().micInputNotice += micInputNotice;
 		playAudio = GameObject.Find ("GamePlayAudio").GetComponent<AudioSource> ();
 		if (playAudio.clip == null) {
 			playAudio.clip = AudioClip.Create("playRecordClip", 160000, 1, 8000, false, false);  
@@ -89,7 +89,7 @@ public class MicroPhoneInput : MonoBehaviour {
 
 	public  void StopRecord()  
 	{  
-		Debugger.Log("StopRecord");  
+		Debuger.Log("StopRecord");  
 		if (micArray.Length == 0)  
 		{  
 			Debug.Log("No Record Device!");  
@@ -101,7 +101,7 @@ public class MicroPhoneInput : MonoBehaviour {
 		}  
 		Microphone.End (null);  
 		GetComponent<AudioSource>().Stop();  
-		ChatSocket.getInstance ().sendMsg (new MicInputRequest(userList,GetClipData()));
+		//ChatSocket.getInstance ().sendMsg (new MicInputRequest(userList,GetClipData()));
 		PlayRecord ();
 	}  
 
@@ -109,12 +109,12 @@ public class MicroPhoneInput : MonoBehaviour {
 	{  
 		if (GetComponent<AudioSource>().clip == null)  
 		{  
-			Debugger.Log("GetClipData audio.clip is null");  
+			Debuger.Log("GetClipData audio.clip is null");  
 			return null;   
 		}  
 
 		float[] samples = new float[GetComponent<AudioSource>().clip.samples];
-        Debugger.Log ("samples.Length = "+samples.Length);
+        Debuger.Log ("samples.Length = "+samples.Length);
 		GetComponent<AudioSource>().clip.GetData(samples, 0);  
 
 
@@ -147,7 +147,7 @@ public class MicroPhoneInput : MonoBehaviour {
 			Debug.Log("get intarr clipdata is null");  
 			return;  
 		}
-        Debugger.Log ("PlayClipData");
+        Debuger.Log ("PlayClipData");
 		//从Int16[]到float[]   
 		float[] samples = new float[intArr.Length];  
 		int rescaleFactor = 32767;  
@@ -233,16 +233,16 @@ public class MicroPhoneInput : MonoBehaviour {
 		}  
 		if (time >= RECORD_TIME)  
 		{
-            Debugger.Log("RECORD_TIME is out! stop record!");  
+            Debuger.Log("RECORD_TIME is out! stop record!");  
 			StopRecord();  
 		}  
 		yield return 0;  
 	}
 
-	public void micInputNotice(ClientResponse response){
-        Debugger.Log ("micInputNotice");
+	public void micInputNotice(ByteBuffer response){
+        Debuger.Log ("micInputNotice");
 		if (LuaHelper.GetSoundManager().EffectVolume>0){
-			byte[] data = response.bytes;
+			byte[] data = response.ReadBytes();
 			int i = 0;
 			List<short> result = new List<short>();
 			while(data.Length - i >= 2)
@@ -256,7 +256,7 @@ public class MicroPhoneInput : MonoBehaviour {
 	}
 	//save to localhost
 	public bool Save(string filename) {
-        Debugger.Log("Application.persistentDataPath = "+Application.persistentDataPath);  
+        Debuger.Log("Application.persistentDataPath = "+Application.persistentDataPath);  
 
 		AudioClip clip = GetComponent<AudioSource> ().clip;
 

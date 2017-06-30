@@ -1,16 +1,10 @@
-require"vos/APIS"
-local json = require "cjson"
-GangCardRequest={}
---构造函数
-function GangCardRequest.New(cardPoint,gangType)
-			local GangRequestVO={}
-		GangRequestVO.cardPoint=cardPoint
-		 GangRequestVO.gangType = gangType;
-	local gangCardRequest = ClientRequest.New();
-	--setmetatable(gangCardRequest, mt)
-	gangCardRequest.headCode = APIS.GANGPAI_REQUEST;
-	--gangCardRequest.messageContent='{'..data..'}'
-	gangCardRequest.messageContent=json.encode(GangRequestVO)
-	log("lua:gangCardRequest="..gangCardRequest.messageContent)
+
+GangCardRequest = { }
+-- 构造函数
+function GangCardRequest.New(cardPoint, gangType)
+	local GangRequestVO = { }
+	GangRequestVO.cardPoint = cardPoint
+	GangRequestVO.gangType = gangType;
+	local gangCardRequest = ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO));
 	return gangCardRequest
 end

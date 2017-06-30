@@ -1,4 +1,4 @@
-require"vos/APIS"
+
 LoginChatRequest={}
 --¹¹Ôìº¯Êý
 function LoginChatRequest.New(userId)

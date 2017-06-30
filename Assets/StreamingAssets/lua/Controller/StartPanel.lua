@@ -1,0 +1,168 @@
+
+
+StartPanel = UIBase("StartPanel")
+local this = StartPanel
+local transform;
+local gameObject;
+local versionText;-- 版本号
+local panelCreate;-- 要加载的面板的引用
+local agreeProtocol;-- toggle
+local xieyiPanel;-- 协议面板
+local xieyiButton;-- 打开协议面板的按钮
+local btnLogin-- 登录按钮
+-- 启动事件--
+function StartPanel.OnCreate(obj)
+	gameObject = obj;
+	transform = obj.transform
+	this:Init(obj)
+	versionText = gameObject.transform:FindChild("TextVersion"):GetComponent('Text');
+	agreeProtocol = gameObject.transform:FindChild("Toggle"):GetComponent('Toggle');
+	xieyiButton = gameObject.transform:FindChild("Toggle/Label").gameObject;
+	btnLogin = transform:FindChild("Button").gameObject;
+	this.lua:AddClick(btnLogin, this.Login);
+	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
+	Event.Brocast(APIS.PanelsInited,this);
+end
+
+function StartPanel.OnOpen()
+	soundMgr:playBGM(1);
+	GlobalData.isonLoginPage = true;
+	versionText.text = "版本号：" .. Application.version;
+	WaitingPanel:Open("正在连接服务器")
+	-- 1秒后开始连接
+	coroutine.start(this.ConnectTime, 1);
+end
+
+function StartPanel.LoginCallBack(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
+	log("LUA:StartPanel.LoginCallBack=" .. message);
+	WaitingPanel:Close()
+	soundMgr:playBGM(1);
+	if (status == 1) then
+		if (HomePanel.ActiveSelf()) then
+			HomePanelCtrl.Close()
+		end
+	end
+	if (GamePanel.ActiveSelf()) then
+		GamePanel.ExitOrDissoliveRoom();
+	end
+	GlobalData.loginResponseData = AvatarVO.New(json.decode(message));
+	-- ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
+	HomePanelCtrl.Awake()
+	this:Close()
+end
+function StartPanel.RoomBackResponse(response)
+	WaitingPanel:Close()
+	if (HomePanel.ActiveSelf()) then
+		HomePanelCtrl.Close()
+	end
+	if (GamePanel.ActiveSelf()) then
+		GamePanel.ExitOrDissoliveRoom();
+	end
+	GlobalData.reEnterRoomData = json.decode(response.message);
+	log("Lua:RoomBackResponse=" .. response.message);
+	log("Lua:RoomBackResponse playerList.length=" .. #GlobalData.reEnterRoomData.playerList)
+	for i = 1, #GlobalData.reEnterRoomData.playerList do
+		local itemData = GlobalData.reEnterRoomData.playerList[i];
+		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
+			GlobalData.loginResponseData.account.uuid = itemData.account.uuid;
+			-- ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
+			break;
+		end
+	end
+	GamePanel.Awake()
+	this:Close()
+end
+
+function StartPanel.ConnectTime(time)
+	coroutine.wait(1)
+	networkMgr:SendConnect();
+	GlobalData.isonLoginPage = true;
+end
+
+function StartPanel.OnConnect()
+	WaitingPanel:Close()
+	-- 如果已经授权自动登录
+	if UNITY_ANDROID then
+		if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
+			this.Login();
+		end
+	elseif UNITY_IPHONE then
+		if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WechatPlatform)) then
+			this.Login();
+		end
+	end
+end
+
+function StartPanel.Login()
+	GlobalData.ReinitData();
+	-- 初始化界面数值
+	if (agreeProtocol.isOn) then
+		this.doLogin();
+		WaitingPanel:Open("进入游戏中")
+	else
+		log("lua:请先同意用户使用协议");
+		TipsManager.SetTips("请先同意用户使用协议", 1);
+	end
+end
+function StartPanel.doLogin()
+	if UNITY_EDITOR or UNITY_STANDALONE_WIN then
+		-- 用于测试 不用微信登录
+		resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/LoginPanel.prefab' }, LoginManager.TestLogin);
+	else
+		GlobalData.wechatOperate:login();
+	end
+end
+-- Update is called once per frame
+function StartPanel.Update()
+	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
+	if (Input.GetKey(KeyCode.Escape)) then
+		-- 在登录界面panelCreateDialog肯定是null
+		local ctrl = CtrlManager.GetCtrl("ExitPanelCtrl");
+		if ctrl then
+			ExitPanelCtrl.Open();
+		else
+			ExitPanelCtrl.Awake();
+		end
+	end
+end
+
+function StartPanel.OpenXieyiPanel()
+	soundMgr:playSoundByActionButton(1);
+	if (xieyiPanel) then
+		xieyiPanel:SetActive(true)
+	else
+		resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/xieyiPanel.prefab' }, this.InitXieyiPanel);
+	end
+end
+function StartPanel.InitXieyiPanel(prefabs)
+	xieyiPanel = newObject(prefabs[0]);
+	xieyiPanel.transform.parent = StartPanel.transform.parent;
+	xieyiPanel.transform.localScale = Vector3.one;
+	xieyiPanel.transform:SetAsLastSibling();
+	xieyiPanel:GetComponent("RectTransform").offsetMax = Vector2.zero;
+	xieyiPanel:GetComponent("RectTransform").offsetMin = Vector2.zero;
+end
+function StartPanel.CloseXieyiPanel()
+	soundMgr:playSoundByActionButton(1);
+	if (xieyiPanel) then
+		xieyiPanel:SetActive(false);
+	end
+end
+
+-- 移除事件--
+function StartPanel.RemoveListener()
+	UpdateBeat:Remove(this.Update);
+	Event.RemoveListener(Protocal.Connect, this.OnConnect);
+	Event.RemoveListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
+	Event.RemoveListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)
+end
+
+-- 增加事件--
+function StartPanel.AddListener()
+	UpdateBeat:Add(this.Update);
+	Event.AddListener(Protocal.Connect, this.OnConnect);
+	Event.AddListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
+	Event.AddListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)
+end

@@ -170,13 +170,6 @@ public static class CustomSettings
         _GT(typeof(ResourceManager)),
         
         //our project    
-        _GT(typeof(AssemblyCSharp.ChatRequest)),
-        _GT(typeof(AssemblyCSharp.ChatSocket)),
-        _GT(typeof(AssemblyCSharp.ClientRequest)),
-        _GT(typeof(AssemblyCSharp.ClientResponse)),
-        _GT(typeof(AssemblyCSharp.CustomSocket)),
-        _GT(typeof(AssemblyCSharp.SocketEventHandle)),
-        _GT(typeof(AssemblyCSharp.HeadRequest)),
         _GT(typeof(cn.sharesdk.unity3d.PlatformType)),
         _GT(typeof(AssemblyCSharp.GameToolScript)),
         _GT(typeof(List<int>)),

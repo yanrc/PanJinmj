@@ -1,12 +1,4 @@
 
-CtrlNames = {
-	
-}
-
-PanelNames = {
-	
-}
-
 --协议类型--
 ProtocalType = {
 	BINARY = 0,
@@ -37,13 +29,10 @@ KeyCode=UnityEngine.KeyCode
 List_int=System.Collections.Generic.List_int
 PlayerPrefs=UnityEngine.PlayerPrefs
 
-CustomSocket=AssemblyCSharp.CustomSocket
 ChatRequest=AssemblyCSharp.ChatRequest
 ChatSocket=AssemblyCSharp.ChatSocket
 ClientRequest=AssemblyCSharp.ClientRequest
 ClientResponse=AssemblyCSharp.ClientResponse
-CustomSocket=AssemblyCSharp.CustomSocket
-SocketEventHandle=AssemblyCSharp.SocketEventHandle
 HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
 PlatformType=cn.sharesdk.unity3d.PlatformType

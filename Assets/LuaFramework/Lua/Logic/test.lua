@@ -1,4 +1,4 @@
-local json = require "cjson"
+--测试类，主要用来打印table
 Test = { }
 local this = Test
 
@@ -9,7 +9,7 @@ end
 function Test.Update()
 	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
 	if (Input.GetKeyDown(KeyCode.T)) then
-		local table = GamePanelCtrl.Test()
+		local table = GamePanel.Test()
 		log(this.DumpTab(table))
 	end
 end

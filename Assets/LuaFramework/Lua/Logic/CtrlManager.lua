@@ -1,5 +1,3 @@
-require "Common/define"
-
 
 CtrlManager = {};
 local this = CtrlManager;
