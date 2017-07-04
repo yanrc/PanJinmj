@@ -36,10 +36,12 @@ function StartPanel.LoginCallBack(buffer)
 	OpenPanel(HomePanel)
 	ClosePanel(this)
 end
-function StartPanel.RoomBackResponse(response)
+function StartPanel.RoomBackResponse(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
-	GlobalData.reEnterRoomData = json.decode(response.message);
-	log("Lua:RoomBackResponse=" .. response.message);
+	GlobalData.reEnterRoomData = json.decode(message);
+	log("Lua:RoomBackResponse=" .. message);
 	log("Lua:RoomBackResponse playerList.length=" .. #GlobalData.reEnterRoomData.playerList)
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
 		local itemData = GlobalData.reEnterRoomData.playerList[i];

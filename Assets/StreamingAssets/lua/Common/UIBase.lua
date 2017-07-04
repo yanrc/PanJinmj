@@ -1,6 +1,7 @@
 local _UIBase =
 {
 	name = "",
+	_type = "",
 	gameObject = nil,
 	transform = nil,
 	lua = nil,
@@ -20,7 +21,6 @@ function _UIBase:Init(obj)
 end
 
 function _UIBase:Open(...)
-	log("open panel:" .. self.name)
 	if (self.gameObject) then
 		self.gameObject:SetActive(true)
 		self.transform:SetAsLastSibling();
@@ -37,8 +37,8 @@ _UIBase.__index = function(t, k)
 	return rawget(_UIBase, k)
 end
 setmetatable(_UIBase, _UIBase)
-function UIBase(name)
-	local base = { name = name }
+function UIBase(name, _type)
+	local base = { name = name, _type = _type }
 	setmetatable(base, _UIBase)
 	return base
 end

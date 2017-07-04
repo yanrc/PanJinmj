@@ -1,37 +1,43 @@
 
-ExitPanel = UIBase("ExitPanel");
+ExitPanel = UIBase(define.ExitPanel,define.PopUI);
 local this = ExitPanel;
-
 local transform;
 local gameObject;
 
---启动事件--
+local btnExit
+local btnCancel
+
+-- 启动事件--
 function ExitPanel.OnCreate(obj)
 	gameObject = obj;
+	transform = obj.transform;
 	this:Init(obj)
-	this.lua:AddClick( ExitPanel.btnExit, this.Exit);
-	this.lua:AddClick( ExitPanel.btnCancel, this.Cancel);
+	btnExit = transform:FindChild('Image_Bg/Button_Sure').gameObject
+	btnCancel = transform:FindChild('Image_Bg/Button_Cancle').gameObject
+	this.lua:AddClick(btnExit, this.Exit)
+	this.lua:AddClick(btnCancel, this.CloseClick)
 end
 
---单击事件--
-function ExitPanel.Exit(go)
+
+function ExitPanel.Exit()
 	log("lua:exit click")
-end
-
---关闭事件--
-function ExitPanel.Cancel()
-	log("lua:cancel")
 end
 
 
 -------------------模板-------------------------
-
---移除事件--
-function ExitPanel.RemoveListener()
-	
+function ExitPanel.CloseClick()
+ClosePanel(this)
 end
 
---增加事件--
+function ExitPanel.OnOpen()
+	
+end
+-- 移除事件--
+function ExitPanel.RemoveListener()
+
+end
+
+-- 增加事件--
 function ExitPanel.AddListener()
 
 end

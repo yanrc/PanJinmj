@@ -1,6 +1,6 @@
 
 local Ease = DG.Tweening.Ease
-GamePanel = UIBase("GamePanel")
+GamePanel = UIBase(define.GamePanel,define.FixUI)
 local this = GamePanel;
 local gameObject;
 local transform
@@ -134,35 +134,7 @@ function GamePanel.OnCreate(go)
 	this.lua:AddClick(btnSetting, this.OpenGameSettingDialog)
 	touziObj = transform:FindChild('Panel_touzi').gameObject
 end
-function GamePanel.OnOpen()
-	this.RandShowTime();
-	timeFlag = true;
-	soundMgr:playBGM(2);
-	-- norHu = new NormalHuScript();
-	-- naiziHu = new NaiziHuScript();
-	-- gameTool = new GameToolScript();
-	versionText.text = "V" .. Application.version;
-	this.AddListener();
-	this.InitPanel();
-	this.InitArrayList();
-	-- initPerson ();--初始化每个成员1000分
-	GlobalData.isonLoginPage = false;
-	if (GlobalData.reEnterRoomData ~= nil) then
-		-- 短线重连进入房间
-		GlobalData.loginResponseData.roomId = GlobalData.reEnterRoomData.roomId;
-		this.ReEnterRoom();
-	elseif (GlobalData.roomJoinResponseData ~= nil) then
-		-- 进入他人房间
-		this.JoinToRoom(GlobalData.roomJoinResponseData.playerList);
-	else
-		-- 创建房间
-		this.CreateRoomAddAvatarVO(GlobalData.loginResponseData);
-	end
-	GlobalData.reEnterRoomData = nil;
-	TipsManager.SetTips("", 0);
-	dialog_fanhui.gameObject:SetActive(false);
-	this.InitbtnJieSan();
-end
+
 
 function GamePanel.RandShowTime()
 	showTimeNumber = math.random(5000, 10000)
@@ -2153,11 +2125,7 @@ function GamePanel.ExitOrDissoliveRoom()
 	GlobalData.soundToggle = true;
 	this.Clean();
 	soundMgr:playBGM(1);
-	if (CtrlManager.HomePanelCtrl ~= nil) then
-		CtrlManager.HomePanelCtrl.Open();
-	else
-		HomePanelCtrl.Awake()
-	end
+	OpenPanel(HomePanel)
 
 	while #playerItems > 0 do
 		local item = playerItems[1];
@@ -2673,8 +2641,7 @@ function GamePanel.OfflineNotice(response)
 	switch[LocalIndex]()
 	-- 申请解散房间过程中，有人掉线，直接不能解散房间
 	if (GlobalData.isonApplayExitRoomstatus) then
-			VotePanel:Close()
-		end
+		VotePanel:Close()
 		TipsManager.SetTips("由于" .. avatarList[index].account.nickname .. "离线，系统不能解散房间")
 	end
 end
@@ -2810,9 +2777,40 @@ function GamePanel.InitbtnJieSan()
 	this.lua:AddClick(btnJieSan, this.QuiteRoom)
 end
 
-
+-- 测试方法，用来打印table
+function GamePanel.Test()
+	return avatarList
+end
 ------------------------------------------------------------
-
+function GamePanel.OnOpen()
+	this.RandShowTime();
+	timeFlag = true;
+	soundMgr:playBGM(2);
+	-- norHu = new NormalHuScript();
+	-- naiziHu = new NaiziHuScript();
+	-- gameTool = new GameToolScript();
+	versionText.text = "V" .. Application.version;
+	this.AddListener();
+	this.InitPanel();
+	this.InitArrayList();
+	-- initPerson ();--初始化每个成员1000分
+	GlobalData.isonLoginPage = false;
+	if (GlobalData.reEnterRoomData ~= nil) then
+		-- 短线重连进入房间
+		GlobalData.loginResponseData.roomId = GlobalData.reEnterRoomData.roomId;
+		this.ReEnterRoom();
+	elseif (GlobalData.roomJoinResponseData ~= nil) then
+		-- 进入他人房间
+		this.JoinToRoom(GlobalData.roomJoinResponseData.playerList);
+	else
+		-- 创建房间
+		this.CreateRoomAddAvatarVO(GlobalData.loginResponseData);
+	end
+	GlobalData.reEnterRoomData = nil;
+	TipsManager.SetTips("", 0);
+	dialog_fanhui.gameObject:SetActive(false);
+	this.InitbtnJieSan();
+end
 -- 移除事件--
 function GamePanel.RemoveListener()
 	UpdateBeat:RemoveListener(this.Update);
@@ -2864,8 +2862,4 @@ function GamePanel.AddListener()
 	Event.AddListener(tostring(APIS.MicInput_Response), this.MicInputNotice)
 	Event.AddListener(tostring(APIS.Game_FollowBander_Notice), this.GameFollowBanderNotice)
 	Event.AddListener(closeGamePanel, this.ExitOrDissoliveRoom)
-end
--- 测试方法，用来打印table
-function GamePanel.Test()
-	return avatarList
 end

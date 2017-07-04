@@ -1,4 +1,4 @@
-VotePanel = UIBase("VotePanel")
+VotePanel = UIBase(define.VotePanel,define.PopUI)
 local this = VotePanel;
 
 local transform;
@@ -15,7 +15,9 @@ function VotePanel.OnCreate(obj)
 end
 
 -------------------模板-------------------------
-
+function VotePanel.OnOpen()
+	
+end
 -- 移除事件--
 function VotePanel.RemoveListener()
 

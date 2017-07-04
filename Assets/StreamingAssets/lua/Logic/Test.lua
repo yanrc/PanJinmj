@@ -1,4 +1,4 @@
-
+--测试类，主要用来打印table
 Test = { }
 local this = Test
 

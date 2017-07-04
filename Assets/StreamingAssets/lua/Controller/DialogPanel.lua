@@ -1,4 +1,5 @@
-DialogPanel = { };
+--通用弹出框
+DialogPanel = UIBase(define.DialogPanel,define.PopUI)
 local this = DialogPanel;
 
 local transform;
@@ -19,16 +20,20 @@ function DialogPanel.OnCreate(obj)
 	btnCancel = transform:FindChild('Button_Cancle').gameObject
 end
 
+
+
+-------------------模板-------------------------
+function DialogPanel.CloseClick()
+ClosePanel(this)
+end
 function DialogPanel.OnOpen(title, msg, yescallback, nocallback)
 	this.lua:ResetClick(btnConfirm)
 	this.lua:ResetClick(btnCancel)
 	texttitle.text = title
 	textmsg.text = msg
 	this.lua:AddClick(btnConfirm, yescallback)
-	this.lua:AddClick(btnCancel, nocallback or this:Close())
+	this.lua:AddClick(btnCancel, nocallback or this.CloseClick)
 end
-
--------------------模板-------------------------
 -- 移除事件--
 function DialogPanel.RemoveListener()
 

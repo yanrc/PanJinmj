@@ -13,11 +13,13 @@ function CreateRoomPanel.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
 	this:Init(obj)
-	panelDevoloping = transform:FindChild("Image_Create_Bg/Panel_Developing").gameObject
-	local createButton = transform:FindChild("Button_Create_Sure").gameObject
-	local cancelButton = transform:FindChild("Image_Create_Bg/Button_Delete").gameObject
+	panelDevoloping = transform:FindChild("root/content/Panel_Developing").gameObject
+	local createButton = transform:FindChild("root/content/Button_Create_Sure").gameObject
+	local cancelButton = transform:FindChild("root/Image_Create_Bg/Button_Delete").gameObject
 	this.lua:AddClick(createButton, this.CreateRoom);
 	this.lua:AddClick(cancelButton, this.CloseClick);
+	RuleSelectObj = transform:FindChild("root/content/Panel_Game_Setting").gameObject
+	RuleSelect.Init(RuleSelectObj)
 end
 
 -- 打开九江设置面板
@@ -64,7 +66,7 @@ function CreateRoomPanel.CreateGuangDongRoom()
 end
 
 function CreateRoomPanel.CreatePanjinRoom()
-
+	RuleSelect.Open(PanjinRule)
 end
 
 function CreateRoomPanel.CreateShuangLiaoRoom()
@@ -105,11 +107,13 @@ function CreateRoomPanel.CreateRoom()
 	switch[x]()
 end
 
-function CreateRoomPanel.OnCreateRoomCallback(response)
+function CreateRoomPanel.OnCreateRoomCallback(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
-	log("lua:OnCreateRoomCallback=" .. response.message);
+	log("lua:OnCreateRoomCallback=" .. message);
 	if (response.status == 1) then
-		local roomid = tonumber(response.message);
+		local roomid = tonumber(message);
 		GlobalData.roomVo.roomId = roomid;
 		GlobalData.loginResponseData.roomId = roomid;
 		GlobalData.loginResponseData.main = true;
@@ -119,7 +123,7 @@ function CreateRoomPanel.OnCreateRoomCallback(response)
 		ClosePanel(this)
 		ClosePanel(HomePanel)
 	else
-		TipsManager.SetTips(response.message);
+		TipsManager.SetTips(message);
 	end
 end
 -------------------模板-------------------------

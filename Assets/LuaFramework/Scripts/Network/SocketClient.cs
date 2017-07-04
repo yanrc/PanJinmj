@@ -172,6 +172,7 @@ public class SocketClient {
             byte flag = reader.ReadByte();
             int messageLen = reader.ReadInt32();
             messageLen = IPAddress.NetworkToHostOrder(messageLen);
+            messageLen = messageLen - 5;
             if (RemainingBytes() >= messageLen)
             {
                 MemoryStream ms = new MemoryStream();
@@ -220,7 +221,7 @@ public class SocketClient {
             int Headcode= LOGbuffer.ReadInt();
             int State = LOGbuffer.ReadInt();
             string Message= LOGbuffer.ReadString();
-            Debuger.Log(string.Format("OnReceivedMessage:headcode={0},state={1},msg={2}", Headcode,State,Message));
+            Debuger.Log(string.Format("OnReceivedMessage:headcode={0},state={1},msg={2}", Headcode.ToString("x8"),State,Message));
         }
         ByteBuffer buffer = new ByteBuffer(message);
         int mainId = buffer.ReadInt();

@@ -100,5 +100,4 @@ TIP_MESSAGE = 0x160016;
 
 OTHER_TELE_LOGIN = 0x211211;--其他设备登录
 
-PanelsInited="PanelsInited"
 }

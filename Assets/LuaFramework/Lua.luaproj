@@ -35,7 +35,7 @@
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
     <Folder Include="Lua\Logic\" />
-    <Folder Include="Lua\View\" />
+    <Folder Include="Lua\Rules\" />
     <Folder Include="Lua\Vos\" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +103,7 @@
     <Compile Include="Lua\Controller\VotePanel.lua" />
     <Compile Include="Lua\Controller\WaitingPanel.lua" />
     <Compile Include="Lua\Data\PlayerItem.lua" />
+    <Compile Include="Lua\Data\RuleSelect.lua" />
     <Compile Include="Lua\eventlib.lua" />
     <Compile Include="Lua\events.lua" />
     <Compile Include="Lua\Logic\BottomScript.lua" />
@@ -122,7 +123,8 @@
     <Compile Include="Lua\Logic\TopAndBottomCardScript.lua" />
     <Compile Include="Lua\Logic\UIManager.lua" />
     <Compile Include="Lua\Main.lua" />
-    <Compile Include="Lua\View\JiuJiangPanel.lua" />
+    <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
+    <Compile Include="Lua\Rules\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />
     <Compile Include="Lua\Vos\APIS.lua" />
     <Compile Include="Lua\Vos\AvatarVO.lua" />

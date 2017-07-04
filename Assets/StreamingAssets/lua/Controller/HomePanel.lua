@@ -1,6 +1,6 @@
 
 local Ease = DG.Tweening.Ease
-HomePanel = UIBase("HomePanel")
+HomePanel = UIBase(define.HomePanel,define.FixUI)
 local this = HomePanel;
 local gameObject;
 local nickNameText;-- 昵称
@@ -16,11 +16,6 @@ local panelCreateDialog
 
 showNum = 1
 startFlag = false
-function HomePanel.Awake()
-	logWarn("HomePanelCtrl.Awake--->>");
-	PanelManager:CreatePanel('HomePanel', this.OnCreate);
-	CtrlManager.HomePanelCtrl = this
-end
 
 function HomePanel.OnCreate(go)
 	gameObject = go;
@@ -39,11 +34,7 @@ function HomePanel.OnCreate(go)
 	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
 end
 
-function HomePanel.OnOpen()
-	this.InitUI();
-	GlobalData.isonLoginPage = false;
-	this.CheckEnterInRoom();
-end
+
 
 function HomePanel.ContactInfoResponse(response)
 	contactInfoContent.text = response.message;
@@ -81,7 +72,7 @@ end
 
 function HomePanel.CheckEnterInRoom()
 	if (GlobalData.roomVo ~= nil and GlobalData.roomVo.roomId ~= nil) then
-		GamePanel.Awake()
+		OpenPanel(GamePanel)
 	end
 end
 
@@ -103,11 +94,7 @@ end
 function HomePanel.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
 	if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
-		if (CtrlManager.CreateRoomPanelCtrl) then
-			CtrlManager.CreateRoomPanelCtrl.Open()
-		else
-			CreateRoomPanelCtrl.Awake()
-		end
+		OpenPanel(CreateRoomPanel)
 	else
 		TipsManager.SetTips("当前正在房间状态，无法创建房间");
 	end
@@ -124,11 +111,7 @@ end
 function HomePanel.OpenEnterRoomDialog()
 	soundMgr:playSoundByActionButton(1);
 	if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
-		if (CtrlManager.EnterRoomPanelCtrl) then
-			CtrlManager.EnterRoomPanelCtrl.Open()
-		else
-			EnterRoomPanelCtrl.Awake()
-		end
+		OpenPanel(EnterRoomPanel)
 	else
 		TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
 	end
@@ -223,7 +206,11 @@ function HomePanel.ExitApp()
 	end
 end
 -------------------模板-------------------------
-
+function HomePanel.OnOpen()
+	this.InitUI();
+	GlobalData.isonLoginPage = false;
+	this.CheckEnterInRoom();
+end
 -- 移除事件--
 function HomePanel.RemoveListener()
 	Event.RemoveListener(APIS.CARD_CHANGE, this.CardChangeNotice)

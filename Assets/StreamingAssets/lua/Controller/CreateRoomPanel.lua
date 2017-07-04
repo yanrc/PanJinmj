@@ -1,5 +1,5 @@
 
-CreateRoomPanel = UIBase("CreateRoomPanel")
+CreateRoomPanel = UIBase(define.CreateRoomPanel, define.PopUI)
 local this = CreateRoomPanel;
 local transform;
 local gameObject;
@@ -13,16 +13,13 @@ function CreateRoomPanel.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
 	this:Init(obj)
-	panelDevoloping = transform:FindChild("Image_Create_Bg/Panel_Developing").gameObject
-	local createButton = transform:FindChild("Button_Create_Sure").gameObject
-	local cancelButton = transform:FindChild("Image_Create_Bg/Button_Delete").gameObject
+	panelDevoloping = transform:FindChild("root/content/Panel_Developing").gameObject
+	local createButton = transform:FindChild("root/content/Button_Create_Sure").gameObject
+	local cancelButton = transform:FindChild("root/Image_Create_Bg/Button_Delete").gameObject
 	this.lua:AddClick(createButton, this.CreateRoom);
-	this.lua:AddClick(cancelButton, this.Close);
-end
-
-function CreateRoomPanel.Start()
-	this.AddListener()
-	this.OpenJiuJiangSettingPanel();
+	this.lua:AddClick(cancelButton, this.CloseClick);
+	RuleSelectObj = transform:FindChild("root/content/Panel_Game_Setting").gameObject
+	RuleSelect.Init(RuleSelectObj)
 end
 
 -- 打开九江设置面板
@@ -37,7 +34,7 @@ end
 -- 点击隐藏watingPanel
 function CreateRoomPanel.Cancle()
 	soundMgr:playSoundByActionButton(1);
-	WaitingPanel:Close()
+	ClosePanel(WaitingPanel)
 end
 
 -- 点击下载(过时)
@@ -69,7 +66,7 @@ function CreateRoomPanel.CreateGuangDongRoom()
 end
 
 function CreateRoomPanel.CreatePanjinRoom()
-
+	RuleSelect.Open(PanjinRule)
 end
 
 function CreateRoomPanel.CreateShuangLiaoRoom()
@@ -87,7 +84,7 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 	sendVo.hongzhonglaizi = jiujiang.GetHongzhongLaizi();
 	local sendMsg = json.encode(sendVo);
 	if (GlobalData.loginResponseData.account.roomcard > 0) then
-		WaitingPanel:Open("正在创建房间")
+		OpenPanel(WaitingPanel, "正在创建房间")
 		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
 		GlobalData.roomVo = sendVo;
 	else
@@ -111,7 +108,7 @@ function CreateRoomPanel.CreateRoom()
 end
 
 function CreateRoomPanel.OnCreateRoomCallback(response)
-	WaitingPanel:Close()
+	ClosePanel(WaitingPanel)
 	log("lua:OnCreateRoomCallback=" .. response.message);
 	if (response.status == 1) then
 		local roomid = tonumber(response.message);
@@ -120,21 +117,20 @@ function CreateRoomPanel.OnCreateRoomCallback(response)
 		GlobalData.loginResponseData.main = true;
 		GlobalData.loginResponseData.isOnLine = true;
 		GlobalData.reEnterRoomData = nil;
-		if (CtrlManager.GamePanel) then
-			CtrlManager.GamePanel.Open()
-		else
-			GamePanel.Awake()
-		end
-		this.Close();
-		HomePanelCtrl.Close()
+		OpenPanel(GamePanel)
+		ClosePanel(this)
+		ClosePanel(HomePanel)
 	else
 		TipsManager.SetTips(response.message);
 	end
 end
 -------------------模板-------------------------
-
-
-
+function CreateRoomPanel.CloseClick()
+	ClosePanel(this)
+end
+function CreateRoomPanel.OnOpen()
+	this.OpenJiuJiangSettingPanel();
+end
 -- 移除事件--
 function CreateRoomPanel.RemoveListener()
 	Event.RemoveListener(tostring(APIS.CREATEROOM_RESPONSE), this.OnCreateRoomCallback)

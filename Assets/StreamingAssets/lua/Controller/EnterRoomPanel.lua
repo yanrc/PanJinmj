@@ -1,5 +1,5 @@
 
-EnterRoomPanel =UIBase("EnterRoomPanel")
+EnterRoomPanel = UIBase(define.EnterRoomPanel, define.PopUI)
 local this = EnterRoomPanel;
 
 local transform;
@@ -33,7 +33,7 @@ function EnterRoomPanel.OnCreate(obj)
 	end
 	this.lua:AddClick(btnClear, this.Clear)
 	this.lua:AddClick(btnDelete, this.DeleteNumber)
-	this.lua:AddClick(btnClose, this.Close)
+	this.lua:AddClick(btnClose, this.CloseClick)
 	inputTexts = { }
 	inputTexts[1] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_0"):GetComponent("Text")
 	inputTexts[2] = transform:FindChild("Image_Enter_Room_Bg/Text_Nmber_1"):GetComponent("Text")
@@ -44,9 +44,7 @@ function EnterRoomPanel.OnCreate(obj)
 	logWarn("Start lua--->>" .. gameObject.name);
 end
 
-function EnterRoomPanel.OnOpen()
-	inputChars = { }
-end
+
 
 -- 数字按钮点击
 function EnterRoomPanel.OnClickHandle(go, number)
@@ -90,21 +88,17 @@ function EnterRoomPanel.SureRoomNumber()
 		TipsManager.SetTips("请先完整输入房间号码！");
 		return;
 	end
-
-	WaitingPanel:Open("正在进入房间")
+	OpenPanel(WaitingPanel, "正在进入房间")
 	local roomNumber = inputChars[1] .. inputChars[2] .. inputChars[3] .. inputChars[4] .. inputChars[5] .. inputChars[6];
 	local roomJoinVo = { };
 	roomJoinVo.roomId = tonumber(roomNumber);
 	local sendMsg = json.encode(roomJoinVo);
 	coroutine.start(this.ConnectTime, 4)
 	networkMgr:SendMessage(ClientRequest.New(APIS.JOIN_ROOM_REQUEST, sendMsg));
-	Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
+
 end
 function EnterRoomPanel.ServiceErrorNotice(response)
-	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
-	WaitingPanel:Close()
 	this.Clear();
-	TipsManager.SetTips(response.message);
 end
 local connectRetruen = false;
 
@@ -114,12 +108,12 @@ function EnterRoomPanel.ConnectTime(time)
 	if (not connectRetruen) then
 		-- 超过5秒还没连接成功显示失败
 		connectRetruen = true;
-		WaitingPanel:Close()
+		ClosePanel(WaitingPanel)
 	end
 end
 -- 房间不存在时不会收到这个回调，而是返回错误消息
 function EnterRoomPanel.OnJoinRoomCallBack(response)
-	WaitingPanel:Close()
+	ClosePanel(WaitingPanel)
 	if (response.status == 1) then
 		local message = json.decode(response.message)
 		GlobalData.roomJoinResponseData = message
@@ -149,9 +143,9 @@ function EnterRoomPanel.OnJoinRoomCallBack(response)
 		GlobalData.surplusTimes = message.roundNumber;
 		GlobalData.loginResponseData.roomId = message.roomId;
 		GlobalData.reEnterRoomData = nil;
-		GamePanel:Open()
+		OpenPanel(GamePanel)
 		connectRetruen = true;
-		this:Close()
+		ClosePanel(this)
 		GlobalData.roomVo.jiaGang = message.jiaGang;
 		GlobalData.roomVo.duanMen = message.duanMen;
 	else
@@ -160,16 +154,22 @@ function EnterRoomPanel.OnJoinRoomCallBack(response)
 	end
 end
 -------------------模板-------------------------
+function EnterRoomPanel.CloseClick()
+	ClosePanel(this)
+end
 
-
-
+function EnterRoomPanel.OnOpen()
+	inputChars = { }
+end
 -- 移除事件--
 function EnterRoomPanel.RemoveListener()
 	Event.RemoveListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
+	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 end
 
 -- 增加事件--
 function EnterRoomPanel.AddListener()
+	Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 	Event.AddListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
 end
 

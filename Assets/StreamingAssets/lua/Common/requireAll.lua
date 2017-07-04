@@ -2,7 +2,7 @@
 require "Common/define"
 require "Common/CoMgr"
 
-require "View/JiuJiangPanel"
+require "Rules/JiuJiangPanel"
 
 require "Logic.GlobalData"
 require "Logic/TipsManager"
@@ -20,8 +20,12 @@ require "vos/Account"
 require "vos/ClientRequest"
 
 require "Data/PlayerItem"
+require "Data/RuleSelect"
 
-require "Controller/UIBase"
+require "Rules/JiuJiangPanel"
+require "Rules/PanjinRule"
+
+require "Common/UIBase"
 for i = 1, #CtrlNames do
 	require("Controller/" .. CtrlNames[i])
 end

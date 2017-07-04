@@ -1,5 +1,5 @@
 
-EnterRoomPanel =UIBase(define.EnterRoomPanel,define.PopUI)
+EnterRoomPanel = UIBase(define.EnterRoomPanel, define.PopUI)
 local this = EnterRoomPanel;
 
 local transform;
@@ -88,20 +88,17 @@ function EnterRoomPanel.SureRoomNumber()
 		TipsManager.SetTips("请先完整输入房间号码！");
 		return;
 	end
-	OpenPanel(WaitingPanel,"正在进入房间")
+	OpenPanel(WaitingPanel, "正在进入房间")
 	local roomNumber = inputChars[1] .. inputChars[2] .. inputChars[3] .. inputChars[4] .. inputChars[5] .. inputChars[6];
 	local roomJoinVo = { };
 	roomJoinVo.roomId = tonumber(roomNumber);
 	local sendMsg = json.encode(roomJoinVo);
 	coroutine.start(this.ConnectTime, 4)
 	networkMgr:SendMessage(ClientRequest.New(APIS.JOIN_ROOM_REQUEST, sendMsg));
-	Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
+
 end
-function EnterRoomPanel.ServiceErrorNotice(response)
-	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
-	ClosePanel(WaitingPanel)
+function EnterRoomPanel.ServiceErrorNotice(buffer)
 	this.Clear();
-	TipsManager.SetTips(response.message);
 end
 local connectRetruen = false;
 
@@ -115,50 +112,52 @@ function EnterRoomPanel.ConnectTime(time)
 	end
 end
 -- 房间不存在时不会收到这个回调，而是返回错误消息
-function EnterRoomPanel.OnJoinRoomCallBack(response)
+function EnterRoomPanel.OnJoinRoomCallBack(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
-	if (response.status == 1) then
-		local message = json.decode(response.message)
-		GlobalData.roomJoinResponseData = message
-		log("Lua:OnJoinRoomCallBack=" .. response.message)
-		GlobalData.roomVo.addWordCard = message.addWordCard;
-		GlobalData.roomVo.hong = message.hong;
-		GlobalData.roomVo.ma = message.ma;
-		GlobalData.roomVo.name = message.name;
-		GlobalData.roomVo.roomId = message.roomId;
-		GlobalData.roomVo.roomType = message.roomType;
-		GlobalData.roomVo.roundNumber = message.roundNumber;
-		GlobalData.roomVo.sevenDouble = message.sevenDouble;
-		GlobalData.roomVo.xiaYu = message.xiaYu;
-		GlobalData.roomVo.ziMo = message.ziMo;
-		GlobalData.roomVo.gangHu = message.gangHu;
-		GlobalData.roomVo.guiPai = message.guiPai;
-		GlobalData.roomVo.pingHu = message.pingHu;
-		GlobalData.roomVo.jue = message.jue;
-		GlobalData.roomVo.baoSanJia = message.baoSanJia;
-		GlobalData.roomVo.jiaGang = message.jiaGang;
-		GlobalData.roomVo.gui = message.gui;
-		GlobalData.roomVo.duanMen = message.duanMen;
-		GlobalData.roomVo.jihu = message.jihu;
-		GlobalData.roomVo.qingYiSe = message.qingYiSe;
-		GlobalData.roomVo.menqing = message.menqing;
-		GlobalData.roomVo.siguiyi = message.siguiyi;
-		GlobalData.surplusTimes = message.roundNumber;
-		GlobalData.loginResponseData.roomId = message.roomId;
+	if (status == 1) then
+		local data = json.decode(message)
+		GlobalData.roomJoinResponseData = data
+		log("Lua:OnJoinRoomCallBack=" .. message)
+		GlobalData.roomVo.addWordCard = data.addWordCard;
+		GlobalData.roomVo.hong = data.hong;
+		GlobalData.roomVo.ma = data.ma;
+		GlobalData.roomVo.name = data.name;
+		GlobalData.roomVo.roomId = data.roomId;
+		GlobalData.roomVo.roomType = data.roomType;
+		GlobalData.roomVo.roundNumber = data.roundNumber;
+		GlobalData.roomVo.sevenDouble = data.sevenDouble;
+		GlobalData.roomVo.xiaYu = data.xiaYu;
+		GlobalData.roomVo.ziMo = data.ziMo;
+		GlobalData.roomVo.gangHu = data.gangHu;
+		GlobalData.roomVo.guiPai = data.guiPai;
+		GlobalData.roomVo.pingHu = data.pingHu;
+		GlobalData.roomVo.jue = data.jue;
+		GlobalData.roomVo.baoSanJia = data.baoSanJia;
+		GlobalData.roomVo.jiaGang = data.jiaGang;
+		GlobalData.roomVo.gui = data.gui;
+		GlobalData.roomVo.duanMen = data.duanMen;
+		GlobalData.roomVo.jihu = data.jihu;
+		GlobalData.roomVo.qingYiSe = data.qingYiSe;
+		GlobalData.roomVo.menqing = data.menqing;
+		GlobalData.roomVo.siguiyi = data.siguiyi;
+		GlobalData.surplusTimes = data.roundNumber;
+		GlobalData.loginResponseData.roomId = data.roomId;
 		GlobalData.reEnterRoomData = nil;
 		OpenPanel(GamePanel)
 		connectRetruen = true;
 		ClosePanel(this)
-		GlobalData.roomVo.jiaGang = message.jiaGang;
-		GlobalData.roomVo.duanMen = message.duanMen;
+		GlobalData.roomVo.jiaGang = data.jiaGang;
+		GlobalData.roomVo.duanMen = data.duanMen;
 	else
 		this.Clear();
-		TipsManager.SetTips(response.message);
+		TipsManager.SetTips(message);
 	end
 end
 -------------------模板-------------------------
 function EnterRoomPanel.CloseClick()
-ClosePanel(this)
+	ClosePanel(this)
 end
 
 function EnterRoomPanel.OnOpen()
@@ -167,10 +166,12 @@ end
 -- 移除事件--
 function EnterRoomPanel.RemoveListener()
 	Event.RemoveListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
+	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 end
 
 -- 增加事件--
 function EnterRoomPanel.AddListener()
+	Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 	Event.AddListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
 end
 

@@ -28,6 +28,7 @@ end
 
 --Socket消息--
 function Network.OnSocket(key, data)
+	log(string.format("key=%#x,data=%s",key,data))
     Event.Brocast(tostring(key), data);
 end
 

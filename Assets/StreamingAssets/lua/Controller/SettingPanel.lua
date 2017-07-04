@@ -1,5 +1,5 @@
 
-SettingPanel = UIBase("SettingPanel")
+SettingPanel = UIBase(define.SettingPanel,define.PopUI)
 local this = SettingPanel
 
 local transform;
@@ -32,7 +32,7 @@ function SettingPanel.OnCreate(obj)
 	btnMaxYinXiao = transform:FindChild('Slider_yinxiao/Image (2)').gameObject
 	sliderYinYue = transform:FindChild('Slider_yinyue'):GetComponent('Slider')
 	sliderYinXiao = transform:FindChild('Slider_yinxiao'):GetComponent('Slider')
-	this.lua:AddClick(btnClose, this:Close());
+	this.lua:AddClick(btnClose, this.CloseClick);
 	this.lua:AddClick(btnMinYinYue, this.setJingyin);
 	this.lua:AddClick(btnMaxYinYue, this.setMax);
 	this.lua:AddClick(btnMinYinXiao, this.setJingyin2);
@@ -41,49 +41,6 @@ function SettingPanel.OnCreate(obj)
 	sliderYinXiao.onValueChanged:AddListener(this.silder2Change)
 end
 
--------------------模板-------------------------
-
-
--- 移除事件--
-function SettingPanel.RemoveListener()
-
-end
-
-
--- 增加事件--
-function SettingPanel.AddListener()
-
-end
-
-function SettingPanel.OnOpen()
-	sliderYinYue.value = soundMgr.MusicVolume
-	sliderYinXiao.value = soundMgr.EffectVolume
-	this.lua:ResetClick(jiesanBtn)
-	local _type = 1;
-	if (GamePanel.isGameStarted) then
-		jiesanBtnStr.text = "申请解散房间";
-		_type = 2;
-	else
-		if (1 == GamePanel.GetMyIndexFromList()) then
-			-- 我是房主（一开始庄家是房主）
-			jiesanBtnStr.text = "解散房间";
-			_type = 3;
-		else
-			jiesanBtnStr.text = "离开房间";
-			_type = 4;
-		end
-	end
-	log("_type" .. _type)
-	if (_type == 1) then
-		this.lua:AddClick(jiesanBtn, this.toExit)
-	elseif (_type == 2) then
-		this.lua:AddClick(jiesanBtn, this.toJieSan)
-	elseif (_type == 3) then
-		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要解散房间吗?") end)
-	elseif (_type == 4) then
-		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要离开房间吗?") end)
-	end
-end
 function SettingPanel.toJieSan()
 	TipsManager.loadDialog("申请解散房间", "你确定要申请解散房间？", this.doDissoliveRoomRequest, nil);
 	this:Close()
@@ -146,3 +103,48 @@ function SettingPanel.setMax2()
 	soundMgr.EffectVolume = 1
 	soundMgr:playSoundByActionButton(1);
 end
+-------------------模板-------------------------
+function SettingPanel.CloseClick()
+	ClosePanel(this)
+end
+function SettingPanel.OnOpen()
+	sliderYinYue.value = soundMgr.MusicVolume
+	sliderYinXiao.value = soundMgr.EffectVolume
+	this.lua:ResetClick(jiesanBtn)
+	local _type = 1;
+	if (GamePanel.isGameStarted) then
+		jiesanBtnStr.text = "申请解散房间";
+		_type = 2;
+	else
+		if (1 == GamePanel.GetMyIndexFromList()) then
+			-- 我是房主（一开始庄家是房主）
+			jiesanBtnStr.text = "解散房间";
+			_type = 3;
+		else
+			jiesanBtnStr.text = "离开房间";
+			_type = 4;
+		end
+	end
+	log("_type" .. _type)
+	if (_type == 1) then
+		this.lua:AddClick(jiesanBtn, this.toExit)
+	elseif (_type == 2) then
+		this.lua:AddClick(jiesanBtn, this.toJieSan)
+	elseif (_type == 3) then
+		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要解散房间吗?") end)
+	elseif (_type == 4) then
+		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要离开房间吗?") end)
+	end
+end
+-- 移除事件--
+function SettingPanel.RemoveListener()
+
+end
+
+
+-- 增加事件--
+function SettingPanel.AddListener()
+
+end
+
+

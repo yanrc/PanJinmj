@@ -1,6 +1,6 @@
 
 
-StartPanel = UIBase("StartPanel")
+StartPanel = UIBase(define.StartPanel,define.FixUI)
 local this = StartPanel
 local transform;
 local gameObject;
@@ -21,45 +21,23 @@ function StartPanel.OnCreate(obj)
 	btnLogin = transform:FindChild("Button").gameObject;
 	this.lua:AddClick(btnLogin, this.Login);
 	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
-	Event.Brocast(APIS.PanelsInited,this);
+	Event.Brocast(define.PanelsInited,this);
 end
 
-function StartPanel.OnOpen()
-	soundMgr:playBGM(1);
-	GlobalData.isonLoginPage = true;
-	versionText.text = "版本号：" .. Application.version;
-	WaitingPanel:Open("正在连接服务器")
-	-- 1秒后开始连接
-	coroutine.start(this.ConnectTime, 1);
-end
+
 
 function StartPanel.LoginCallBack(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	log("LUA:StartPanel.LoginCallBack=" .. message);
-	WaitingPanel:Close()
+	ClosePanel(WaitingPanel)
 	soundMgr:playBGM(1);
-	if (status == 1) then
-		if (HomePanel.ActiveSelf()) then
-			HomePanelCtrl.Close()
-		end
-	end
-	if (GamePanel.ActiveSelf()) then
-		GamePanel.ExitOrDissoliveRoom();
-	end
 	GlobalData.loginResponseData = AvatarVO.New(json.decode(message));
-	-- ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
-	HomePanelCtrl.Awake()
-	this:Close()
+	OpenPanel(HomePanel)
+	ClosePanel(this)
 end
 function StartPanel.RoomBackResponse(response)
-	WaitingPanel:Close()
-	if (HomePanel.ActiveSelf()) then
-		HomePanelCtrl.Close()
-	end
-	if (GamePanel.ActiveSelf()) then
-		GamePanel.ExitOrDissoliveRoom();
-	end
+	ClosePanel(WaitingPanel)
 	GlobalData.reEnterRoomData = json.decode(response.message);
 	log("Lua:RoomBackResponse=" .. response.message);
 	log("Lua:RoomBackResponse playerList.length=" .. #GlobalData.reEnterRoomData.playerList)
@@ -71,8 +49,8 @@ function StartPanel.RoomBackResponse(response)
 			break;
 		end
 	end
-	GamePanel.Awake()
-	this:Close()
+	OpenPanel(GamePanel)
+	ClosePanel(this)
 end
 
 function StartPanel.ConnectTime(time)
@@ -82,7 +60,7 @@ function StartPanel.ConnectTime(time)
 end
 
 function StartPanel.OnConnect()
-	WaitingPanel:Close()
+	ClosePanel(WaitingPanel)
 	-- 如果已经授权自动登录
 	if UNITY_ANDROID then
 		if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
@@ -100,7 +78,7 @@ function StartPanel.Login()
 	-- 初始化界面数值
 	if (agreeProtocol.isOn) then
 		this.doLogin();
-		WaitingPanel:Open("进入游戏中")
+		OpenPanel(WaitingPanel,"进入游戏中")
 	else
 		log("lua:请先同意用户使用协议");
 		TipsManager.SetTips("请先同意用户使用协议", 1);
@@ -119,12 +97,7 @@ function StartPanel.Update()
 	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
 	if (Input.GetKey(KeyCode.Escape)) then
 		-- 在登录界面panelCreateDialog肯定是null
-		local ctrl = CtrlManager.GetCtrl("ExitPanelCtrl");
-		if ctrl then
-			ExitPanelCtrl.Open();
-		else
-			ExitPanelCtrl.Awake();
-		end
+		OpenPanel(ExitPanel)
 	end
 end
 
@@ -151,6 +124,15 @@ function StartPanel.CloseXieyiPanel()
 	end
 end
 
+-------------------模板-------------------------
+function StartPanel.OnOpen()
+	soundMgr:playBGM(1);
+	GlobalData.isonLoginPage = true;
+	versionText.text = "版本号：" .. Application.version;
+	OpenPanel(WaitingPanel,"正在连接服务器")
+	-- 1秒后开始连接
+	coroutine.start(this.ConnectTime, 1);
+end
 -- 移除事件--
 function StartPanel.RemoveListener()
 	UpdateBeat:Remove(this.Update);
