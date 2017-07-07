@@ -106,6 +106,7 @@ public class SocketClient {
         try {
             lock (client.GetStream()) {         //读取字节流到缓冲区
                 bytesRead = client.GetStream().EndRead(asr);
+                Debug.LogWarning(string.Format("收到buffer长度为{0}", bytesRead));
             }
             if (bytesRead < 1) {                //包尺寸有问题，断线处理
                 OnDisconnected(DisType.Disconnect, "bytesRead < 1");
@@ -172,6 +173,7 @@ public class SocketClient {
             byte flag = reader.ReadByte();
             int messageLen = reader.ReadInt32();
             messageLen = IPAddress.NetworkToHostOrder(messageLen);
+            Debug.LogWarning(string.Format("消息长度为{0}", messageLen));
             messageLen = messageLen - 5;
             if (RemainingBytes() >= messageLen)
             {

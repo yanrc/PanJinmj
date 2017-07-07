@@ -22,6 +22,10 @@ function BroadcastScript.ServiceErrorNotice(response)
 	ClosePanel(WaitingPanel)
 	TipsManager.SetTips(response.message);
 end
+
+function BroadcastScript.HeadResponse(response)
+
+end
 -------------------模板-------------------------
 
 
@@ -33,6 +37,7 @@ end
 
 -- 增加事件--
 function BroadcastScript.AddListener()
+Event.AddListener(tostring(APIS.headRESPONSE),this.HeadResponse)
 Event.AddListener(tostring(APIS.GAME_BROADCAST),this.GameBroadcastNotice)
 Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 end

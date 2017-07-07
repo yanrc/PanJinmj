@@ -6,6 +6,10 @@ local gangBtn;
 local pengBtn;
 local chiBtn;
 local passBtn;
+
+local ChiSelect1
+local ChiSelect2
+local ChiSelect3
 -- ¹¹Ôìº¯Êý
 function ButtonAction.New(transform)
 	local ButtonAction = { }
@@ -15,6 +19,17 @@ function ButtonAction.New(transform)
 	pengBtn = transform:FindChild("btnList/PengButton").gameObject
 	chiBtn = transform:FindChild("btnList/ChiButton").gameObject
 	passBtn = transform:FindChild("btnList/PassButton").gameObject
+	ChiSelect1 = transform:FindChild("ChiList/list_1/Button").gameObject
+	ChiSelect2 = transform:FindChild("ChiList/list_2/Button").gameObject
+	ChiSelect3 = transform:FindChild("ChiList/list_3/Button").gameObject
+	GamePanel.lua:AddClick(huBtn, GamePanel.HupaiRequest)
+	GamePanel.lua:AddClick(gangBtn, GamePanel.MyGangBtnClick)
+	GamePanel.lua:AddClick(pengBtn, GamePanel.MyPengBtnClick)
+	GamePanel.lua:AddClick(chiBtn, GamePanel.MyChiBtnClick)
+	GamePanel.lua:AddClick(passBtn, GamePanel.MyPassBtnClick)
+	GamePanel.lua:AddClick(ChiSelect1, GamePanel.MyChiBtnClick2,0)
+	GamePanel.lua:AddClick(ChiSelect2, GamePanel.MyChiBtnClick2,1)
+	GamePanel.lua:AddClick(ChiSelect3, GamePanel.MyChiBtnClick2,2)
 	return ButtonAction
 end
 

@@ -24,6 +24,9 @@ function destroy(obj)
 end
 
 function newObject(prefab)
+	if (prefab == nil) then
+		logError("prefab is nil")
+	end
 	return GameObject.Instantiate(prefab);
 end
 

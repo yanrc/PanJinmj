@@ -56,7 +56,7 @@ function Test.DumpTab(tab, ind)
 		elseif (type(v) == "userdata") then
 			s = "userdata : " .. tostring(v);
 		else
-			s = "nuknow : " .. tostring(v);
+			s = "unknow : " .. tostring(v);
 		end;
 		-- //end if
 		-- //Contact

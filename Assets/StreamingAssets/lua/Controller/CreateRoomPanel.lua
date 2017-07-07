@@ -107,11 +107,13 @@ function CreateRoomPanel.CreateRoom()
 	switch[x]()
 end
 
-function CreateRoomPanel.OnCreateRoomCallback(response)
+function CreateRoomPanel.OnCreateRoomCallback(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
-	log("lua:OnCreateRoomCallback=" .. response.message);
+	log("lua:OnCreateRoomCallback=" .. message);
 	if (response.status == 1) then
-		local roomid = tonumber(response.message);
+		local roomid = tonumber(message);
 		GlobalData.roomVo.roomId = roomid;
 		GlobalData.loginResponseData.roomId = roomid;
 		GlobalData.loginResponseData.main = true;
@@ -121,7 +123,7 @@ function CreateRoomPanel.OnCreateRoomCallback(response)
 		ClosePanel(this)
 		ClosePanel(HomePanel)
 	else
-		TipsManager.SetTips(response.message);
+		TipsManager.SetTips(message);
 	end
 end
 -------------------模板-------------------------

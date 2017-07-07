@@ -130,7 +130,6 @@
     <Compile Include="Lua\Vos\AvatarVO.lua" />
     <Compile Include="Lua\Vos\ClientRequest.lua" />
     <Compile Include="Lua\Vos\DateVo.lua" />
-    <Compile Include="Lua\Vos\GangCardRequest.lua" />
     <Compile Include="Lua\Vos\LoginChatRequest.lua" />
     <Compile Include="Lua\Vos\LoginVo.lua" />
     <Compile Include="Lua\YRCUtils.lua" />

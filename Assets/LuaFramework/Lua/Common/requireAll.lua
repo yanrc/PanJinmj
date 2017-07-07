@@ -19,6 +19,7 @@ require "vos/AvatarVO"
 require "vos/Account"
 require "vos/ClientRequest"
 
+
 require "Data/PlayerItem"
 require "Data/RuleSelect"
 

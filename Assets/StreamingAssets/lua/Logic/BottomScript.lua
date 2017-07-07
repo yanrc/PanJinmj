@@ -76,6 +76,6 @@ function BottomScript:Init(cardPoint, islaizi)
 	self.islaizi = islaizi;
 	local path = "Assets/Project/DynaImages/Cards/Big/b"
 	resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)
-		self.cardImg.sprite = sprite[0]
+		self.cardImg.sprite =newObject(sprite[0])
 	end )
 end
