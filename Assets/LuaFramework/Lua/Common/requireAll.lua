@@ -13,6 +13,7 @@ require "Logic/UIManager"
 require "Logic/ButtonAction"
 require "Logic/TopAndBottomCardScript"
 require "Logic/BottomScript"
+require "Logic/GameOverScript"
 
 require "Vos/APIS"
 require "vos/AvatarVO"
