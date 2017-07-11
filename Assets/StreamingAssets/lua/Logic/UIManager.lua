@@ -9,7 +9,9 @@ CtrlNames = {
 	define.WaitingPanel,
 	define.VotePanel,
 	define.StartPanel,
+	define.GameOverPanel,
 }
+
 
 UIManager = { }
 local this = UIManager;
@@ -26,6 +28,24 @@ function UIManager.OnInited(panel)
 	if (panel == StartPanel) then
 		OpenPanel(panel)
 	end
+end
+
+function UIManager.InitPrefabs()
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/Pointer.prefab" }, function(prefabs) this.Pointer = newObject(prefabs[0]) end)
+	resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function(prefabs) this.Bottom_B = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_R.prefab' }, function(prefabs) this.Bottom_R = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_T.prefab' }, function(prefabs) this.Bottom_T = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_L.prefab' }, function(prefabs) this.Bottom_L = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ThrowCard/TopAndBottomCard.prefab" }, function(prefabs) this.TopAndBottomCard = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ThrowCard/ThrowCard_R.prefab" }, function(prefabs) this.ThrowCard_R = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ThrowCard/ThrowCard_L.prefab" }, function(prefabs) this.ThrowCard_L = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/PengGangCard_B.prefab" }, function(prefabs) this.PengGangCard_B = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/PengGangCard_R.prefab" }, function(prefabs) this.PengGangCard_R = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/PengGangCard_T.prefab" }, function(prefabs) this.PengGangCard_T = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/PengGangCard_L.prefab" }, function(prefabs) this.PengGangCard_L = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/gangBack.prefab" }, function(prefabs) this.GangBack = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_L&R.prefab" }, function(prefabs) this.GangBack_LR = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab" }, function(prefabs) this.GangBack_T = prefabs[0] end)
 end
 
 function OpenPanel(panel,...)
@@ -46,4 +66,5 @@ function ClosePanel(panel)
 	end
 	panel:Close()
 end
+
 

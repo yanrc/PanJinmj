@@ -27,9 +27,9 @@ function ButtonAction.New(transform)
 	GamePanel.lua:AddClick(pengBtn, GamePanel.MyPengBtnClick)
 	GamePanel.lua:AddClick(chiBtn, GamePanel.MyChiBtnClick)
 	GamePanel.lua:AddClick(passBtn, GamePanel.MyPassBtnClick)
-	GamePanel.lua:AddClick(ChiSelect1, GamePanel.MyChiBtnClick2,0)
-	GamePanel.lua:AddClick(ChiSelect2, GamePanel.MyChiBtnClick2,1)
-	GamePanel.lua:AddClick(ChiSelect3, GamePanel.MyChiBtnClick2,2)
+	GamePanel.lua:AddClick(ChiSelect1, GamePanel.MyChiBtnClick2,1)
+	GamePanel.lua:AddClick(ChiSelect2, GamePanel.MyChiBtnClick2,2)
+	GamePanel.lua:AddClick(ChiSelect3, GamePanel.MyChiBtnClick2,3)
 	return ButtonAction
 end
 

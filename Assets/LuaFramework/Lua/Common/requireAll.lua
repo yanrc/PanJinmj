@@ -13,7 +13,7 @@ require "Logic/UIManager"
 require "Logic/ButtonAction"
 require "Logic/TopAndBottomCardScript"
 require "Logic/BottomScript"
-require "Logic/GameOverScript"
+
 
 require "Vos/APIS"
 require "vos/AvatarVO"
@@ -23,6 +23,7 @@ require "vos/ClientRequest"
 
 require "Data/PlayerItem"
 require "Data/RuleSelect"
+require "Data/SignalOverItem"
 
 require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"

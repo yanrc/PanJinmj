@@ -28,7 +28,7 @@ Input=UnityEngine.Input
 KeyCode=UnityEngine.KeyCode
 List_int=System.Collections.Generic.List_int
 PlayerPrefs=UnityEngine.PlayerPrefs
-
+DateTime=System.DateTime
 ChatRequest=AssemblyCSharp.ChatRequest
 ChatSocket=AssemblyCSharp.ChatSocket
 ClientRequest=AssemblyCSharp.ClientRequest
@@ -69,3 +69,4 @@ define.SettingPanel="SettingPanel"
 define.StartPanel="StartPanel"
 define.VotePanel="VotePanel"
 define.WaitingPanel="WaitingPanel"
+define.GameOverPanel="GameOverPanel"

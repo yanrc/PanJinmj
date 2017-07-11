@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 22242248}
   - component: {fileID: 11401818}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Text2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 22216846}
   - component: {fileID: 11449180}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Text1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 22401440}
   - component: {fileID: 11473704}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Scores
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

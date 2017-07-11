@@ -9,7 +9,7 @@ PlayerItem = {
 	offlineImage,-- 离线标志
 	chatMessage,-- 短语内容
 	chatPaoPao,-- 短语背景
-	huFlag,-- 胡牌图标
+	HuFlag,-- 胡牌图标
 	uuid,-- 玩家uuid
 	showTime,-- 短语显示时间
 	showChatTime,-- 语音显示时间
@@ -31,7 +31,7 @@ function PlayerItem.New(go)
 	playerItem.offlineImage = go.transform:FindChild('Image_offline'):GetComponent('Image')
 	playerItem.chatMessage = go.transform:FindChild('chatBg/Text'):GetComponent('Text')
 	playerItem.chatPaoPao = go.transform:FindChild('chatBg').gameObject
-	playerItem.huFlag = go.transform:FindChild('Image_hu').gameObject
+	playerItem.HuFlag = go.transform:FindChild('Image_hu').gameObject
 	playerItem.jiaGang = go.transform:FindChild('Text_jiagang'):GetComponent('Text')
 	playerItem.showTime =0
 	playerItem.showChatTime = 0

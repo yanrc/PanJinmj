@@ -186,7 +186,8 @@ public static class CustomSettings
         _GT(typeof(Mahjong)),
         _GT(typeof(Slider)),
         _GT(typeof(Slider.SliderEvent)),
-        _GT(typeof(UnityEngine.EventSystems.PointerEventData))
+        _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
+             _GT(typeof(DateTime)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

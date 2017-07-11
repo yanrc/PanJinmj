@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22486170}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: zimoCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22427062}
   m_Layer: 5
-  m_Name: GameObject (4)
+  m_Name: minggangCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 22467176}
   - component: {fileID: 11410728}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Counts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22430426}
   m_Layer: 5
-  m_Name: GameObject (2)
+  m_Name: dianpaoCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22480264}
   m_Layer: 5
-  m_Name: GameObject (3)
+  m_Name: angangCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,7 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22400854}
   m_Layer: 5
-  m_Name: GameObject (1)
+  m_Name: jiepaoCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

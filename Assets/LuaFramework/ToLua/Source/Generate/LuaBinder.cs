@@ -181,6 +181,7 @@ public static class LuaBinder
 		AssemblyCSharp_GameToolScriptWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("System");
+		System_DateTimeWrap.Register(L);
 		L.RegFunction("Action", System_Action);
 		L.RegFunction("Predicate_int", System_Predicate_int);
 		L.RegFunction("Action_int", System_Action_int);

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1460874883
+CRC: 2170258913
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 39727435270890f8958b2f9a8c09afbc
+    Hash: a45dc5d83d080d2c0831b2676d422312
   TypeTreeHash:
     serializedVersion: 2
     Hash: fbc7628c77723310a1d7d6ffd689cbd7
@@ -96,6 +96,10 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 61dca9c47ce7e7440b173da3b0d68058, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 0a0adf16af4cc0749b04ba188d4fc306, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 94ee6b4e9dea1f445b57d156f5c33227, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 73b02ef32def42b458094dcc1d57599f, type: 3}
@@ -127,8 +131,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 475949581aeb23d4e9ba9bf0ea973298, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f62e78f15d27ebe409a90be72fa3157b, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 94ee6b4e9dea1f445b57d156f5c33227, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30d3803917d611548ae8ac81d28fa885, type: 3}
 - Class: 114
@@ -163,8 +165,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 71e60f9fefb27b0458552cb7237ac9b3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d5fe7916c30d62043b74ad00c1ad6b6f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0a0adf16af4cc0749b04ba188d4fc306, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -244,7 +244,7 @@ Assets:
 - Assets/Project/Prefabs/playBack/HandCard_B.prefab
 - Assets/Project/Prefabs/Panel_Final.prefab
 - Assets/Project/Prefabs/card/Bottom_B.prefab
-- Assets/Project/Prefabs/Panel_Game_Over.prefab
+- Assets/Project/Prefabs/GameOverPanel.prefab
 - Assets/Project/Prefabs/PengGangCard/PengGangCard_L.prefab
 Dependencies:
 - F:/WorkSpace/panjinmj/panjinTolua/Assets/StreamingAssets/animations.unity3d

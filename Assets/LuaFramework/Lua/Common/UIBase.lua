@@ -24,7 +24,7 @@ function _UIBase:Open(...)
 	if (self.gameObject) then
 		self.gameObject:SetActive(true)
 		self.transform:SetAsLastSibling();
-		self.AddListener()
+		self.AddListener() 
 		self.OnOpen(...)
 	end
 end
@@ -32,6 +32,13 @@ end
 function _UIBase:Close()
 	self.gameObject:SetActive(false)
 	self.RemoveListener()
+end
+
+function _UIBase.AddListener()
+
+end
+function _UIBase.RemoveListener()
+
 end
 _UIBase.__index = function(t, k)
 	return rawget(_UIBase, k)
