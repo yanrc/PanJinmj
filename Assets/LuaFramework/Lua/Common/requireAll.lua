@@ -24,6 +24,7 @@ require "vos/ClientRequest"
 require "Data/PlayerItem"
 require "Data/RuleSelect"
 require "Data/SignalOverItem"
+require "Data/FinalOverItem"
 
 require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"

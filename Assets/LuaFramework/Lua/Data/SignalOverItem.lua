@@ -193,7 +193,8 @@ function SignalOverItem:ArrangePai(itemData)
 			end
 		end
 	end
-	if (itemData.cardPoint > -1) then
+	startPosition = startPosition + 8
+	if (itemData.cardPoint > -1 and itemData.uuid == GlobalData.hupaiResponseVo.winnerId) then
 		local cardPoint = itemData.cardPoint
 		local obj = newObject(UIManager.TopAndBottomCard)
 		obj.transform:SetParent(self.paiArrayPanel)

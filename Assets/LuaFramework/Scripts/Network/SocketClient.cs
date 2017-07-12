@@ -118,7 +118,7 @@ public class SocketClient {
                 client.GetStream().BeginRead(byteBuffer, 0, MAX_READ, new AsyncCallback(OnRead), null);
             }
         } catch (Exception ex) {
-            PrintBytes();
+            //PrintBytes();
             OnDisconnected(DisType.Exception, ex.Message);
         }
     }

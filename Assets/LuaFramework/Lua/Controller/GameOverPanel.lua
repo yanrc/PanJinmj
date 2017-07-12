@@ -110,7 +110,7 @@ function GameOverPanel:SetSignalContent()
 end
 
 function GameOverPanel:SetFinalContent()
-    if (GlobalData.finalGameEndVo.totalInfo ~= nil) then
+    if (GlobalData.finalGameEndVo~=nil and GlobalData.finalGameEndVo.totalInfo ~= nil) then
         local itemdatas = GlobalData.finalGameEndVo.totalInfo;
         local topScore = itemdatas[1].scores;
         local topPaoshou = itemdatas[1].dianpao;
@@ -156,7 +156,7 @@ function GameOverPanel.ReStratGame()
     local Readyvo = { }
     Readyvo.duanMen = ReadySelect[1].isOn;
     Readyvo.jiaGang = ReadySelect[2].isOn;
-    networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.decode(Readyvo)));
+    networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.encode(Readyvo)));
     soundMgr:playSoundByActionButton(1);
     ClosePanel(this)
 end
@@ -167,7 +167,7 @@ function GameOverPanel.ShowSingle(isNextBanker)
     btnShare:SetActive(false);
     btnReturn:SetActive(false);
     -- 本轮结束，显示查看战绩按钮
-    if (GlobalData.surplusTimes == 0 or GlobalData.isOverByPlayer) then
+    if (GlobalData.surplusTimes <= 0 or GlobalData.isOverByPlayer) then
         btnShowFinal:SetActive(true);
         btnContinue:SetActive(false);
     else
@@ -198,6 +198,7 @@ end
 -------------------模板-------------------------
 function GameOverPanel.CloseClick()
     ClosePanel(this)
+ClosePanel(GamePanel)
     OpenPanel(HomePanel)
 end
 
