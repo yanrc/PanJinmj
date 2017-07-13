@@ -187,7 +187,8 @@ public static class CustomSettings
         _GT(typeof(Slider)),
         _GT(typeof(Slider.SliderEvent)),
         _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
-             _GT(typeof(DateTime)),
+        _GT(typeof(DateTime)),
+        _GT(typeof(ToggleGroup)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

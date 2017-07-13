@@ -1,7 +1,8 @@
 
 -- 输出日志--
 function log(str)
-	Util.Log(tostring(str));
+	--Util.Log(tostring(str));
+	print(debug.traceback(tostring(str)))
 end
 
 -- 错误日志--
@@ -23,9 +24,12 @@ function destroy(obj)
 	GameObject.Destroy(obj);
 end
 
-function newObject(prefab)
+function newObject(prefab, parent)
 	if (prefab == nil) then
-		logError("prefab is nil")
+		logWarn("prefab is nil")
+	end
+	if (parent ~= nil) then
+		return GameToolScript.Instantiate(prefab, parent)
 	end
 	return GameObject.Instantiate(prefab);
 end

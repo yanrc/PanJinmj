@@ -5,13 +5,9 @@ using AssemblyCSharp;
 using System;
 using UnityEngine.UI;
 public class Test : MonoBehaviour {
-    Slider slider;
-    void mtest()
+    public GameObject prefab;
+    private void Start()
     {
-        slider.onValueChanged.AddListener(Changed);
-    }
-    private void Changed(float value)
-    {
-        
+       GameObject clone=GameObject.Instantiate(prefab,prefab.transform.parent);
     }
 }

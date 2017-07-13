@@ -3,6 +3,10 @@ local this=CoMgr
 local dicImage={}--已经下载好了的图片字典
 local dicForDownLoad = { }--等待下载的图片字典
 function CoMgr.LoadImg(img, url)
+	if(img==nil or url==nil) then
+		logWarn("img==nil or url==nil")
+	return
+	end
 	if (dicImage[url]~=nil) then
 		img.sprite = dicImage[url];
 		return;

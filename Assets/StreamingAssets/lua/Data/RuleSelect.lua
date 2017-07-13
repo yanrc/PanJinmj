@@ -23,14 +23,13 @@ function RuleSelect.Init(obj)
 end
 function RuleSelect.Open(ruletable)
 	local rulestr = ruletable.name
-	log(rulestr);
 	local trans = transform:FindChild(rulestr);
 	if (trans ~= nil) then
 		trans.gameObject:SetActive(true);
 		groupList = dic[rulestr];
 	else
-		trans = GameObject.Instantiate(root, transform).transform;
-		trans.gameObject.SetActive(true);
+		trans = newObject(root, transform).transform;
+		trans.gameObject:SetActive(true);
 		trans.name = rulestr;
 		groupList = { };
 		dic[rulestr] = groupList
@@ -46,53 +45,60 @@ function RuleSelect.CreateItem(ruletable, parent)
 		-- 新建一个组
 		local panel = parent:FindChild(k);
 		if (panel == nil) then
-			panel = GameObject.Instantiate(Panel, parent).transform;
+			panel = newObject(Panel, parent).transform;
 			panel.gameObject:SetActive(true);
 			panel.name = k;
-			root = panel.FindChild("roots/root");
+			root = panel:FindChild("roots/root");
 		else
-			root = panel.FindChild("roots/root2");
+			-- 有时候同一标签下有两组
+			root = panel:FindChild("roots/root2");
 			root.gameObject:SetActive(true);
 		end
 		local textObj = panel:FindChild("textObj");
 		textObj:GetComponent("Text").text = k;
 		-- 是否可以复选
 		if (v._type == "0") then
-			group = root.GetComponent("ToggleGroup")
+			group = root:GetComponent("ToggleGroup")
 			if (group == nil) then
-				group = root.gameObject:AddComponent("ToggleGroup")
+				group = root.gameObject:AddComponent(typeof(ToggleGroup))
 			end
 		else
 			group = nil;
 		end
 		local temp = { }
 		table.insert(groupList, temp)
-		for key, value in pairs(v) do
-			-- 实例化toggle
-			local obj = GameObject.Instantiate(Toggle, root);
-			obj:SetActive(true);
-			local main = obj.transform:FindChild("Label"):GetComponent("Text")
-			local des = obj.transform:FindChild("lbDes"):GetComponent("Text")
-			-- 消耗房卡数
-			local label = obj.transform:FindChild("cost/Text"):GetComponent("Text")
-			local image = obj.transform:FindChild("cost/Image"):GetComponent("Image")
-			if (key:match("x%d*")) then
-				label.text = key;
-				image.enabled = true;
-				obj.name = value;
-				main.text = value;
-			else
-				label.text = "";
-				image.enabled = false;
-				obj.name = key
-				main.text = key
-				-- 描述
-				des.text = value;
+		for key, value in ipairs(v) do
+			if (key ~= "_type") then
+				-- 实例化toggle
+				local obj = newObject(Toggle, root);
+				obj:SetActive(true);
+				local main = obj.transform:FindChild("Label"):GetComponent("Text")
+				local des = obj.transform:FindChild("lbDes"):GetComponent("Text")
+				-- 消耗房卡数
+				local label = obj.transform:FindChild("cost/Text"):GetComponent("Text")
+				local image = obj.transform:FindChild("cost/Image"):GetComponent("Image")
+				local strs=string.split(value,'|')
+				if (value:match("x%d*")) then
+					--键是名字，值是消耗房卡数
+					label.text = strs[2];
+					image.enabled = true;
+					obj.name = strs[1];
+					main.text = strs[1];
+					des.text = ""
+				else
+					--键是名字，值是描述
+					label.text = "";
+					image.enabled = false;
+					obj.name = strs[1]
+					main.text = strs[1]
+					-- 描述
+					des.text = strs[2];
+				end
+				-- 单选
+				local toggle = obj:GetComponent("Toggle");
+				toggle.group = group;
+				table.insert(temp, toggle)
 			end
-			-- 单选
-			local toggle = obj:GetComponent("Toggle");
-			toggle.group = group;
-			table.insert(temp, toggle)
 		end
 	end
 end               
@@ -101,39 +107,39 @@ end
 -- 显示默认选择
 function RuleSelect.GetDefaultSelect(rulestr)
 	local rule = PlayerPrefs.GetInt(rulestr);
-	log("rule=" + rule);
+	print("rule=" .. rule);
 	if (rule > 0) then
-		for i = groupList.Count, 1, -1 do
-			for j = groupList[i].Count, 1, -1 do
+		for i = #groupList, 1, -1 do
+			for j = #groupList[i], 1, -1 do
 				if ((bit.band(rule, 1)) == 1) then
 					groupList[i][j].isOn = true;
 				else
 					groupList[i][j].isOn = false;
 				end
-				rule = bit.shr(rule, 1);
+				rule = bit.rshift(rule, 1);
 			end
 		end
 	else
-		for i = 1, groupList.Count do
+		print(Test.DumpTab(groupList))
+		for i = 1, #groupList do
 			groupList[i][1].isOn = true;
 		end
 	end
 end
 
--- 选择转成数字
+-- 选择转成数字(和toggle顺序一致)
 function RuleSelect.Select2Int(rulestr)
 	local rule = 0;
-	for i = 1, groupList.Count do
-		for j = 1, groupList[i].Count do
+	for i = 1, #groupList do
+		for j = 1, #groupList[i] do
 			if (groupList[i][j].isOn) then
-				rule = bit.shl(rule, 1) + 1;
+				rule = bit.lshift(rule, 1) + 1;
 			else
-
-				rule = bit.shl(rule, 1);
+				rule = bit.lshift(rule, 1);
 			end
 		end
 	end
-	log("setrule=" + rule);
+	print("setrule=" .. rule);
 	-- 保存默认选择
 	PlayerPrefs.SetInt(rulestr, rule);
 	return rule;

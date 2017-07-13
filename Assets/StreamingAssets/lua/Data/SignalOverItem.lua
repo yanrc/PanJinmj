@@ -49,7 +49,6 @@ function SignalOverItem.New(obj)
 	this.gangPaiList = { }
 	this.pengPaiList = { }
 	this.chiPaiList = { }
-	this.hupaiObj = nil
 	setmetatable(this, mt)
 	return this
 end
@@ -78,11 +77,11 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 			local items = string.split(gangs[i], ':')
 			local temp = { }
 			temp.uuid = items[1]
-			temp.cardPiont = tonumber(items[2])
+			temp.cardPoint = tonumber(items[2])
 			temp.type = items[3]
 			-- 增加判断是否为自己的杠牌的操作
-			paiArray[temp.cardPiont] = paiArray[temp.cardPiont] -4;
-			table.insert(gangPaiList, temp)
+			paiArray[temp.cardPoint+1] = paiArray[temp.cardPoint+1] -4;
+			table.insert(self.gangPaiList, temp)
 			if (temp.type == "an") then
 				mdesCribe = mdesCribe .. "暗杠  ";
 			else
@@ -96,8 +95,8 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 		local pengs = string.split(pengpaiStr, ',')
 		for i = 1, #pengs do
 			local cardPoint = tonumber(pengs[i])
-			paiArray[cardPoint] = paiArray[cardPoint] -3;
-			table.insert(pengPaiList, cardPoint)
+			paiArray[cardPoint+1] = paiArray[cardPoint+1] -3;
+			table.insert(self.pengPaiList, cardPoint)
 		end
 	end
 	-- 吃
@@ -109,16 +108,16 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 			local cardPoint1 = tonumber(items[1])
 			local cardPoint2 = tonumber(items[2])
 			local cardPoint3 = tonumber(items[3])
-			paiArray[cardPoint1] = paiArray[cardPoint1] -1;
-			paiArray[cardPoint2] = paiArray[cardPoint2] -1;
-			paiArray[cardPoint3] = paiArray[cardPoint3] -1;
+			paiArray[cardPoint1+1] = paiArray[cardPoint1+1] -1;
+			paiArray[cardPoint2+1] = paiArray[cardPoint2+1] -1;
+			paiArray[cardPoint3+1] = paiArray[cardPoint3+1] -1;
 			local temp = { }
-			temp.cardPionts = { cardPoint1, cardPoint2, cardPoint3 };
-			table.insert(chiPaiList, temp)
+			temp.cardPoints = { cardPoint1, cardPoint2, cardPoint3 };
+			table.insert(self.chiPaiList, temp)
 		end
 	end
 	if (itemData.uuid == GlobalData.hupaiResponseVo.winnerId) then
-		paiArray[itemData.cardPoint] = paiArray[itemData.cardPoint] -1;
+		paiArray[itemData.cardPoint+1] = paiArray[itemData.cardPoint+1] -1;
 	end
 	if (itemData.huType ~= nil) then
 		mdesCribe = mdesCribe .. itemData.huType
@@ -131,79 +130,79 @@ end
 -- 显示牌
 function SignalOverItem:ArrangePai(itemData)
 	local startPosition = 30
-	local subPaiConut = 0;
 	-- 显示杠牌
-	if (gangPaiList ~= nil) then
-		for i = 1, #gangPaiList do
-			local cardPiont = gangPaiList[i].cardPiont;
+	if (#self.gangPaiList>0) then
+		for i = 1, #self.gangPaiList do
+			local cardPoint = self.gangPaiList[i].cardPoint;
 			for j = 1, 4 do
 				local obj = newObject(UIManager.TopAndBottomCard)
-				obj.transform.parent = paiArrayPanel
+				obj.transform.parent = self.paiArrayPanel
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPiont, 3, GlobalData.roomVo.guiPai == cardPiont)
+				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
 			end
 		end
 		startPosition = startPosition + 8
 	end
-	if (pengPaiList ~= nil) then
-		for i = 1, #pengPaiList do
-			local cardPoint = pengPaiList[i];
+	if (#self.pengPaiList >0) then
+		for i = 1, #self.pengPaiList do
+			local cardPoint = self.pengPaiList[i];
 			for j = 1, 3 do
 				local obj = newObject(UIManager.TopAndBottomCard)
-				obj.transform.parent = paiArrayPanel
+				obj.transform.parent = self.paiArrayPanel
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPiont, 3, GlobalData.roomVo.guiPai == cardPiont)
+				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
 
 			end
 		end
 		startPosition = startPosition + 8
 	end
-	if (chiPaiList ~= nil) then
-		for i = 1, #chiPaiLis do
+	if (#self.chiPaiList >0) then
+		for i = 1, #self.chiPaiList do
 			for j = 1, 3 do
-				local cardPiont = chiPaiList[i].cardPionts[j];
+				local cardPoint = self.chiPaiList[i].cardPoints[j];
 				local obj = newObject(UIManager.TopAndBottomCard)
-				obj.transform.parent = paiArrayPanel
+				obj.transform.parent = self.paiArrayPanel
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPiont, 3, GlobalData.roomVo.guiPai == cardPiont)
+				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
 			end
 		end
 		startPosition = startPosition + 8
 	end
+	local paiArray = itemData.paiArray;
 	for i = 1, #paiArray do
 		if (paiArray[i] > 0) then
-			local cardPiont = i - 1
-			local count = #paiArray[i]
+			local cardPoint = i - 1
+			local count = paiArray[i]
 			for j = 1, count do
-				local cardPiont = chiPaiList[i].cardPionts[j];
 				local obj = newObject(UIManager.TopAndBottomCard)
-				obj.transform.parent = paiArrayPanel
+				obj.transform:SetParent(self.paiArrayPanel)
 				obj.transform.localScale = Vector3.one;
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPiont, 3, GlobalData.roomVo.guiPai == cardPiont)
+				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
 			end
 		end
 	end
-	if (itemData.cardPoint > -1) then
-		local cardPiont = itemData.cardPoint
+	startPosition = startPosition + 8
+	if (itemData.cardPoint > -1 and itemData.uuid == GlobalData.hupaiResponseVo.winnerId) then
+		local cardPoint = itemData.cardPoint
 		local obj = newObject(UIManager.TopAndBottomCard)
-		obj.transform.parent = paiArrayPanel
+		obj.transform:SetParent(self.paiArrayPanel)
 		obj.transform.localScale = Vector3.one;
 		obj.transform.localPosition = Vector2.New(startPosition, 0);
 		startPosition = startPosition + 36
 		local objCtrl = TopAndBottomCardScript.New(obj)
-		objCtrl:Init(cardPiont, 3, GlobalData.roomVo.guiPai == cardPiont)
+		objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
 	end
 	startPosition = startPosition + 52
 end

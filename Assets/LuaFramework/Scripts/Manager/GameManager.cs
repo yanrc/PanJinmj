@@ -16,6 +16,8 @@ namespace LuaFramework {
         /// 初始化游戏管理器
         /// </summary>
         void Awake() {
+            YRC.Debuger.debugMode = true;
+            YRC.Debuger.Log("GameManager Awake");
             Init();
         }
 
@@ -34,6 +36,7 @@ namespace LuaFramework {
         /// 释放资源
         /// </summary>
         public void CheckExtractResource() {
+            YRC.Debuger.Log("CheckExtractResource");
             bool isExists = Directory.Exists(Util.DataPath) &&
               Directory.Exists(Util.DataPath + "lua/") && File.Exists(Util.DataPath + "files.txt");
             if (isExists || AppConst.DebugMode) {
@@ -111,6 +114,7 @@ namespace LuaFramework {
         /// 启动更新下载，这里只是个思路演示，此处可启动线程下载更新
         /// </summary>
         IEnumerator OnUpdateResource() {
+            YRC.Debuger.Log("OnUpdateResource");
             if (!AppConst.UpdateMode) {
                 OnResourceInited();
                 yield break;
@@ -219,6 +223,7 @@ namespace LuaFramework {
         /// 资源初始化结束
         /// </summary>
         public void OnResourceInited() {
+            YRC.Debuger.Log("OnResourceInited");
 #if ASYNC_MODE
             ResManager.Initialize(AppConst.AssetDir, delegate() {
                 Debug.Log("Initialize OK!!!");
@@ -231,6 +236,7 @@ namespace LuaFramework {
         }
 
         void OnInitialize() {
+            YRC.Debuger.Log("OnInitialize");
             LuaManager.InitStart();
             LuaManager.DoFile("Logic/Game");         //加载游戏
             LuaManager.DoFile("Logic/Network");      //加载网络

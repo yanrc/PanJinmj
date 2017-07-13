@@ -161,7 +161,7 @@ function EnterRoomPanel.CloseClick()
 end
 
 function EnterRoomPanel.OnOpen()
-	inputChars = { }
+	this.Clear()
 end
 -- 移除事件--
 function EnterRoomPanel.RemoveListener()

@@ -27,6 +27,7 @@ end
 function UIManager.OnInited(panel)
 	if (panel == StartPanel) then
 		OpenPanel(panel)
+		this.InitPrefabs()
 	end
 end
 
@@ -48,7 +49,7 @@ function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab" }, function(prefabs) this.GangBack_T = prefabs[0] end)
 end
 
-function OpenPanel(panel,...)
+function OpenPanel(panel, ...)
 	if (panel._type == define.FixUI) then
 		log("Lua:OpenFix==>" .. panel.name)
 	else

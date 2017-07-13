@@ -31,7 +31,7 @@ public class InitializationConfigScritp : MonoBehaviour {
 
 		//ServiceErrorListener seriveError = new ServiceErrorListener();
 		//Screen.sleepTimeout = SleepTimeout.NeverSleep;
-		heartbeatThread(); 
+		//heartbeatThread(); 
 	}
 
     /// <summary>  
@@ -44,20 +44,20 @@ public class InitializationConfigScritp : MonoBehaviour {
     //    return Convert.ToInt64(ts.TotalSeconds);
     //}
 
-	private void heartbeatThread(){
-		Thread thread = new Thread (sendHeartbeat);
-		thread.IsBackground = true;
-		thread.Start();
-	}
+	//private void heartbeatThread(){
+	//	Thread thread = new Thread (sendHeartbeat);
+	//	thread.IsBackground = true;
+	//	thread.Start();
+	//}
 
 
-	private static void sendHeartbeat(){
-		//CustomSocket.getInstance ().sendHeadData ();
-		Thread.Sleep (20000);
-		sendHeartbeat ();
-	}
+	//private static void sendHeartbeat(){
+	//	//CustomSocket.getInstance ().sendHeadData ();
+	//	Thread.Sleep (20000);
+	//	sendHeartbeat ();
+	//}
 
-	public  void doSendHeartbeat( object source, System.Timers.ElapsedEventArgs e){
-		//CustomSocket.getInstance ().sendHeadData ();
-	}
+	//public  void doSendHeartbeat( object source, System.Timers.ElapsedEventArgs e){
+	//	//CustomSocket.getInstance ().sendHeadData ();
+	//}
 }

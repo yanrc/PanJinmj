@@ -28,7 +28,7 @@ Input=UnityEngine.Input
 KeyCode=UnityEngine.KeyCode
 List_int=System.Collections.Generic.List_int
 PlayerPrefs=UnityEngine.PlayerPrefs
-
+DateTime=System.DateTime
 ChatRequest=AssemblyCSharp.ChatRequest
 ChatSocket=AssemblyCSharp.ChatSocket
 ClientRequest=AssemblyCSharp.ClientRequest
@@ -36,6 +36,8 @@ ClientResponse=AssemblyCSharp.ClientResponse
 HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
 PlatformType=cn.sharesdk.unity3d.PlatformType
+ToggleGroup=UnityEngine.UI.ToggleGroup
+
 GameConfig={}
 GameConfig.GAME_TYPE_ZHUANZHUAN = 1;
 GameConfig.GAME_TYPE_HUASHUI = 2;

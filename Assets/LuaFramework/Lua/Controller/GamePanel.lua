@@ -152,6 +152,7 @@ function GamePanel.OnCreate(go)
 	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Cancle').gameObject, this.Quxiao)
 	this.lua:AddClick(btnSetting, this.OpenGameSettingDialog)
 	this.lua:AddClick(btnJieSan, this.QuiteRoom)
+	this.lua:AddClick(btnReadyGame, this.ReadyGame)
 	touziObj = transform:FindChild('Panel_touzi').gameObject
 	canChiList[1] = transform:FindChild('ChiList/list_1').gameObject
 	canChiList[2] = transform:FindChild('ChiList/list_2').gameObject
@@ -1485,6 +1486,7 @@ function GamePanel.CleanList(tempList)
 end
 
 function GamePanel.SetRoomRemark()
+	log(Test.DumpTab(GlobalData.roomVo))
 	local roomvo = GlobalData.roomVo;
 	GlobalData.totalTimes = roomvo.roundNumber;
 	GlobalData.surplusTimes = roomvo.roundNumber;
@@ -1495,15 +1497,15 @@ function GamePanel.SetRoomRemark()
 end
 
 function GamePanel.AddAvatarVOToList(avatar)
-	if (avatarList == nil) then
-		avatarList = { };
-	end
+--	if (avatarList == nil) then
+--		avatarList = { };
+--	end
 	table.insert(avatarList, avatar)
 	this.SetSeat(avatar);
 end
 -- 创建房间
 function GamePanel.CreateRoomAddAvatarVO(avatar)
-	avatar.scores = 1000;
+	--avatar.scores = 1000;
 	this.AddAvatarVOToList(avatar);
 	this.SetRoomRemark();
 	if (GlobalData.roomVo.duanMen or GlobalData.roomVo.jiaGang) then
@@ -1901,13 +1903,12 @@ function GamePanel.ExitOrDissoliveRoom()
 	soundMgr:playBGM(1);
 	OpenPanel(HomePanel)
 
-	while #playerItems > 0 do
-		local item = playerItems[1];
-		table.remove(playerItems, 1)
-		destroy(item.gameObject);
-	end
-	this.Close()
-	HomePanelCtrl.Open()
+--	while #playerItems > 0 do
+--		local item = playerItems[1];
+--		table.remove(playerItems, 1)
+--		destroy(item.gameObject);
+--	end
+	ClosePanel(this)
 end
 
 function GamePanel.GameReadyNotice(buffer)
@@ -2469,7 +2470,7 @@ end
 
 -- 解散房间按钮
 function GamePanel.InitbtnJieSan()
-	if (bankerIndex == this.GetMyIndexFromList()) then
+	if (1 == this.GetMyIndexFromList()) then
 		-- 我是房主（一开始庄家是房主）
 		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/jiesan.png' }, function(sprite)
 			btnJieSan:GetComponent("Image").sprite = sprite[0]
@@ -2501,6 +2502,7 @@ function GamePanel.OnOpen()
 	ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
 	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
 	BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
+	avatarList={}
 	this.RandShowTime();
 	timeFlag = true;
 	soundMgr:playBGM(2);

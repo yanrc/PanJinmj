@@ -7,6 +7,7 @@ public class AssemblyCSharp_GameToolScriptWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(AssemblyCSharp.GameToolScript), typeof(System.Object));
+		L.RegFunction("Instantiate", Instantiate);
 		L.RegFunction("GetIpAddress", GetIpAddress);
 		L.RegFunction("New", _CreateAssemblyCSharp_GameToolScript);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -30,6 +31,24 @@ public class AssemblyCSharp_GameToolScriptWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: AssemblyCSharp.GameToolScript.New");
 			}
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Instantiate(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.GameObject));
+			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Transform));
+			UnityEngine.GameObject o = AssemblyCSharp.GameToolScript.Instantiate(arg0, arg1);
+			ToLua.Push(L, o);
+			return 1;
 		}
 		catch(Exception e)
 		{

@@ -13,7 +13,8 @@ PlayerItem = {
 	uuid,-- 玩家uuid
 	showTime,-- 短语显示时间
 	showChatTime,-- 语音显示时间
-	jiaGang-- 加钢、飘分等
+	jiaGang,-- 加钢、飘分等
+	DefaultIcon,
 }
 local mt = { }-- 元表（基类）
 mt.__index = PlayerItem-- index方法
@@ -33,10 +34,11 @@ function PlayerItem.New(go)
 	playerItem.chatPaoPao = go.transform:FindChild('chatBg').gameObject
 	playerItem.HuFlag = go.transform:FindChild('Image_hu').gameObject
 	playerItem.jiaGang = go.transform:FindChild('Text_jiagang'):GetComponent('Text')
-	playerItem.showTime =0
+	playerItem.showTime = 0
 	playerItem.showChatTime = 0
-	playerItem.uuid=-1
-	UpdateBeat:Add(playerItem.Update,playerItem);
+	playerItem.uuid = -1
+	resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite) playerItem.DefaultIcon = sprite[0] end)
+	UpdateBeat:Add(playerItem.Update, playerItem);
 	return playerItem
 end
 
@@ -62,18 +64,10 @@ function PlayerItem:SetAvatarVo(avatar)
 		self.nameText.text = avatar.account.nickname;
 		self.scoreText.text = tostring(avatar.scores)
 		self.offlineImage.enabled =(not avatar.isOnLine);
-		self.uuid=avatar.account.uuid
+		self.uuid = avatar.account.uuid
 		CoMgr.LoadImg(headerIcon, avatar.account.headicon);
 	else
-		self.nameText.text = "";
-		self.readyImg.enabled = false;
-		self.enabled = false;
-		self.scoreText.text = "";
-		self.readyImg.enabled = false;
-		self.uuid=-1;
-		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite)
-			self.headerIcon.sprite = sprite[0]
-		end )
+		self:Clean()
 	end
 end
 
@@ -95,10 +89,12 @@ function PlayerItem:GetUuid()
 end
 
 function PlayerItem:Clean()
-	destroy(self.headerIcon.gameObject);
-	destroy(self.bankerImg.gameObject);
-	destroy(self.nameText.gameObject);
-	destroy(self.readyImg.gameObject);
+	self.headerIcon.sprite = self.DefaultIcon
+	self.bankerImg.enabled = false
+	self.readyImg.enabled = false
+	self.scoreText.text = "";
+	self.nameText = ""
+	self.uuid = -1;
 end
 
 function PlayerItem:SetPlayerOffline(value)

@@ -93,11 +93,11 @@ end
 -- 打开创建房间的对话框
 function HomePanel.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
+	--if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
 		OpenPanel(CreateRoomPanel)
-	else
-		TipsManager.SetTips("当前正在房间状态，无法创建房间");
-	end
+	--else
+		--TipsManager.SetTips("当前正在房间状态，无法创建房间");
+	--end
 end
 
 function HomePanel.Button_fankui()
@@ -110,11 +110,11 @@ end
 
 function HomePanel.OpenEnterRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
+	--if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
 		OpenPanel(EnterRoomPanel)
-	else
-		TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
-	end
+	--else
+		--TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
+	--end
 end
 
 -- 打开设置对话框
@@ -209,12 +209,12 @@ end
 function HomePanel.OnOpen()
 	this.InitUI();
 	GlobalData.isonLoginPage = false;
-	this.CheckEnterInRoom();
+	--this.CheckEnterInRoom();
 end
 -- 移除事件--
 function HomePanel.RemoveListener()
-	Event.RemoveListener(APIS.CARD_CHANGE, this.CardChangeNotice)
-	Event.RemoveListener(APIS.CONTACT_INFO_RESPONSE, this.ContactInfoResponse)
+	Event.RemoveListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
+	Event.RemoveListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
 	Event.RemoveListener(DisplayBroadcast, this.GameBroadcastNotice)
 end
 

@@ -7,6 +7,6 @@ function ClientRequest.New(headcode,data)
 	if (#data > 0) then
 		buffer:WriteString(data)
 	end
-	log(string.format("lua ClientRequest:headcode=%#x,data=%s",headcode,data))
+	print(string.format("lua ClientRequest:headcode=%#x,data=%s",headcode,data))
 	return buffer
 end

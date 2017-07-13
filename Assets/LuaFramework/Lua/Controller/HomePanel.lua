@@ -213,8 +213,8 @@ function HomePanel.OnOpen()
 end
 -- 移除事件--
 function HomePanel.RemoveListener()
-	Event.RemoveListener(APIS.CARD_CHANGE, this.CardChangeNotice)
-	Event.RemoveListener(APIS.CONTACT_INFO_RESPONSE, this.ContactInfoResponse)
+	Event.RemoveListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
+	Event.RemoveListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
 	Event.RemoveListener(DisplayBroadcast, this.GameBroadcastNotice)
 end
 

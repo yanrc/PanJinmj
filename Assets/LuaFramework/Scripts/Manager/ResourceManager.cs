@@ -36,6 +36,7 @@ namespace LuaFramework {
 
         // Load AssetBundleManifest.
         public void Initialize(string manifestName, Action initOK) {
+            YRC.Debuger.Log("Initialize");
             m_BaseDownloadingURL = Util.GetRelativePath();
             LoadAsset<AssetBundleManifest>(manifestName, new string[] { "AssetBundleManifest" }, delegate(UObject[] objs) {
                 if (objs.Length > 0) {
@@ -92,6 +93,7 @@ namespace LuaFramework {
         /// 载入素材
         /// </summary>
         void LoadAsset<T>(string abName, string[] assetNames, Action<UObject[]> action = null, LuaFunction func = null) where T : UObject {
+            YRC.Debuger.Log("LoadAsset");
             abName = GetRealAssetPath(abName);
 
             LoadAssetRequest request = new LoadAssetRequest();

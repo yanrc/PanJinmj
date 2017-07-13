@@ -31,6 +31,14 @@ function CreateRoomPanel.OpenJiuJiangSettingPanel()
 	PanelManager:CreatePanel('JiuJiangPanel', nil);
 end
 
+-- 打开九江设置面板
+function CreateRoomPanel.OpenPanJinSettingPanel()
+	soundMgr:playSoundByActionButton(1);
+	panelDevoloping:SetActive(false);
+	RuleSelect.Open(PanjinRule)
+end
+
+
 -- 点击隐藏watingPanel
 function CreateRoomPanel.Cancle()
 	soundMgr:playSoundByActionButton(1);
@@ -66,7 +74,54 @@ function CreateRoomPanel.CreateGuangDongRoom()
 end
 
 function CreateRoomPanel.CreatePanjinRoom()
-	RuleSelect.Open(PanjinRule)
+	soundMgr:playSoundByActionButton(1);
+	local rule = RuleSelect.Select2Int("盘锦麻将")
+	local sendVo = {
+		roundNumber = 1,
+		pingHu = false,
+		magnification = false,
+		baoSanJia = false,
+		jiaGang = false,
+		gui = 0,
+		duanMen = false,
+		jihu = false,
+	};
+	-- 盘锦麻将为了兼容老版本，不直接发rule
+	for i = 1, 10 do
+		if ((bit.band(rule, 1)) == 1) then
+			if (i == 1) then
+				sendVo.jihu = true
+			elseif (i == 2) then
+				sendVo.duanmen = true
+			elseif (i == 3) then
+				sendVo.gui = 2
+			elseif (i == 4) then
+				sendVo.jiaGang = true
+			elseif (i == 5) then
+				sendVo.baoSanJia = true
+			elseif (i == 6) then
+				sendVo.magnification = true
+			elseif (i == 7) then
+				sendVo.pingHu = true
+			elseif (i == 8) then
+				sendVo.roundNumber = 4
+			elseif (i == 9) then
+				sendVo.roundNumber = 2
+			elseif (i == 10) then
+				sendVo.roundNumber = 1
+			end
+		end
+		rule = bit.rshift(rule, 1);
+	end
+	sendVo.roomType = GameConfig.GAME_TYPE_PANJIN;
+	local sendMsg = json.encode(sendVo);
+	if (GlobalData.loginResponseData.account.roomcard > 0) then
+		OpenPanel(WaitingPanel, "正在创建房间")
+		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
+		GlobalData.roomVo = sendVo;
+	else
+		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
+	end
 end
 
 function CreateRoomPanel.CreateShuangLiaoRoom()
@@ -93,7 +148,7 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 end
 
 function CreateRoomPanel.CreateRoom()
-	local x = 7;
+	local x = 5;
 	local switch =
 	{
 		[1] = this.CreateZhuanzhuanRoom,
@@ -112,12 +167,13 @@ function CreateRoomPanel.OnCreateRoomCallback(buffer)
 	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
 	log("lua:OnCreateRoomCallback=" .. message);
-	if (response.status == 1) then
+	if (status == 1) then
 		local roomid = tonumber(message);
 		GlobalData.roomVo.roomId = roomid;
 		GlobalData.loginResponseData.roomId = roomid;
 		GlobalData.loginResponseData.main = true;
 		GlobalData.loginResponseData.isOnLine = true;
+		GlobalData.loginResponseData.scores = 0;
 		GlobalData.reEnterRoomData = nil;
 		OpenPanel(GamePanel)
 		ClosePanel(this)
@@ -131,7 +187,7 @@ function CreateRoomPanel.CloseClick()
 	ClosePanel(this)
 end
 function CreateRoomPanel.OnOpen()
-	this.OpenJiuJiangSettingPanel();
+	this.OpenPanJinSettingPanel();
 end
 -- 移除事件--
 function CreateRoomPanel.RemoveListener()
