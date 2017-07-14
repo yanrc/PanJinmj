@@ -923,7 +923,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1576319772}
   - component: {fileID: 1576319773}
-  - component: {fileID: 1576319774}
   m_Layer: 0
   m_Name: ShareSDK
   m_TagString: Untagged
@@ -974,18 +973,6 @@ MonoBehaviour:
       SortId: 7
       AppId: wx9228df7ba5a4906c
       AppSecret: f388bfd9b7e8c1e328d4f11b3e14f900
---- !u!114 &1576319774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1576319771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f87865f2e261f948895ab1828131457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shareSdk: {fileID: 1576319773}
 --- !u!1001 &1749646360
 Prefab:
   m_ObjectHideFlags: 0

@@ -87,6 +87,7 @@
     <Compile Include="Lua\3rd\sproto\testrpc.lua" />
     <Compile Include="Lua\Common\CoMgr.lua" />
     <Compile Include="Lua\Common\define.lua" />
+    <Compile Include="Lua\Common\Enums.lua" />
     <Compile Include="Lua\Common\functions.lua" />
     <Compile Include="Lua\Common\protocal.lua" />
     <Compile Include="Lua\Common\requireAll.lua" />
@@ -124,6 +125,7 @@
     <Compile Include="Lua\Logic\TipsManager.lua" />
     <Compile Include="Lua\Logic\TopAndBottomCardScript.lua" />
     <Compile Include="Lua\Logic\UIManager.lua" />
+    <Compile Include="Lua\Logic\WechatOperate.lua" />
     <Compile Include="Lua\Main.lua" />
     <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
     <Compile Include="Lua\Rules\PanjinRule.lua" />

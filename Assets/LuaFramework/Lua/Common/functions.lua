@@ -1,7 +1,7 @@
 
 -- 输出日志--
 function log(str)
-	--Util.Log(tostring(str));
+	-- Util.Log(tostring(str));
 	print(debug.traceback(tostring(str)))
 end
 
@@ -79,13 +79,18 @@ function table.indexOf(t, value, iBegin)
 	return -1
 end
 
-function loadPrefab(perfabName, parent, callback)
-	resMgr:LoadPrefab('prefabs', { perfabName .. ".prefab" }, function(prefabs)
-		local obj = newObject(prefabs[0]);
-		obj.transform.parent = parent
-		obj.transform.localScale = Vector3.one
-		obj:GetComponent("RectTransform").offsetMax = Vector2.zero
-		obj:GetComponent("RectTransform").offsetMin = Vector2.zero
-		callback(obj)
-	end )
+function string.bytes2string(bytes)
+	local str = ''
+	if (type(bytes) == "table") then
+		for i = 1, #bytes do
+			str = str .. string.char(bytes[i])
+		end
+	elseif (type(bytes) == "userdata") then
+		for i = 0, bytes.Length - 1 do
+			str = str .. string.char(bytes[i])
+		end
+	else
+		log(string.format("bytes type is %s", type(bytes)))
+	end
+	return str
 end

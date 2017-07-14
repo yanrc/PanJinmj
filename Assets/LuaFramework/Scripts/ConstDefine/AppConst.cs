@@ -5,7 +5,12 @@ using System.Collections.Generic;
 
 namespace LuaFramework {
     public class AppConst {
-        public const bool DebugMode = true;                       //调试模式-用于内部测试
+        public const bool DebugMode =
+#if UNITY_EDITOR
+         true;                       //调试模式-用于内部测试
+#else
+         false;
+#endif
         /// <summary>
         /// 如果想删掉框架自带的例子，那这个例子模式必须要
         /// 关闭，否则会出现一些错误。
@@ -41,24 +46,24 @@ namespace LuaFramework {
             }
         }
 #if UNITY_ANDROID
-        public const bool UNITY_ANDROID = true;
+        public static bool UNITY_ANDROID = true;
 #else
-        public const bool UNITY_ANDROID = false;
+        public static bool UNITY_ANDROID = false;
 #endif
 #if UNITY_IPHONE
-        public const bool UNITY_IPHONE = true;
+        public static bool UNITY_IPHONE = true;
 #else
-        public const bool UNITY_IPHONE = false;
+        public static bool UNITY_IPHONE = false;
 #endif
 #if UNITY_STANDALONE_WIN
-        public const bool UNITY_STANDALONE_WIN = true;
+        public static bool UNITY_STANDALONE_WIN = true;
 #else
-        public const bool UNITY_STANDALONE_WIN = false;
+        public static bool UNITY_STANDALONE_WIN = false;
 #endif
 #if UNITY_EDITOR
-        public const bool UNITY_EDITOR = true;
+        public static bool UNITY_EDITOR = true;
 #else
-        public const bool UNITY_EDITOR = false;
+        public static bool UNITY_EDITOR = false;
 #endif
     }
 }

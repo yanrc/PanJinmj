@@ -1,6 +1,7 @@
 
 require "Common/define"
 require "Common/CoMgr"
+require "Common/Enums"
 
 require "Rules/JiuJiangPanel"
 
@@ -13,6 +14,7 @@ require "Logic/UIManager"
 require "Logic/ButtonAction"
 require "Logic/TopAndBottomCardScript"
 require "Logic/BottomScript"
+require "Logic/WechatOperate"
 
 
 require "Vos/APIS"

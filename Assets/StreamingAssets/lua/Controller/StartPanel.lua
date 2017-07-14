@@ -65,11 +65,11 @@ function StartPanel.OnConnect()
 	ClosePanel(WaitingPanel)
 	-- 如果已经授权自动登录
 	if UNITY_ANDROID then
-		if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
+		if (WechatOperate.shareSdk:IsAuthorized(PlatformType.WeChat)) then
 			this.Login();
 		end
 	elseif UNITY_IPHONE then
-		if (GlobalData.wechatOperate.shareSdk:IsAuthorized(PlatformType.WechatPlatform)) then
+		if (WechatOperate.shareSdk:IsAuthorized(PlatformType.WechatPlatform)) then
 			this.Login();
 		end
 	end
@@ -87,11 +87,12 @@ function StartPanel.Login()
 	end
 end
 function StartPanel.doLogin()
+	log("UNITY_EDITOR="..tostring(UNITY_EDITOR)..",UNITY_STANDALONE_WIN="..tostring(UNITY_STANDALONE_WIN))
 	if UNITY_EDITOR or UNITY_STANDALONE_WIN then
 		-- 用于测试 不用微信登录
 		resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/LoginPanel.prefab' }, LoginManager.TestLogin);
 	else
-		GlobalData.wechatOperate:login();
+		WechatOperate.Login();
 	end
 end
 -- Update is called once per frame
@@ -125,6 +126,7 @@ function StartPanel.CloseXieyiPanel()
 		xieyiPanel:SetActive(false);
 	end
 end
+
 
 -------------------模板-------------------------
 function StartPanel.OnOpen()

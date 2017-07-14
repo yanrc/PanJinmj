@@ -1720,7 +1720,7 @@ function GamePanel.HupaiCoinChange(scores)
 		for i = 1, #scoreList - 1 do
 			local itemstr = scoreList[i];
 			local uuid = tonumber(string.split(itemstr, ':')[1]);
-			local score = tonumber(string.split(itemstr, ':')[2]) + 1000;
+			local score = tonumber(string.split(itemstr, ':')[2]);
 			local LocalIndex = this.GetLocalIndex(this.GetIndex(uuid) -1)
 			playerItems[LocalIndex].scoreText.text = tostring(score);
 			avatarList[this.GetIndex(uuid)].scores = score;
@@ -2328,7 +2328,7 @@ function GamePanel.DoDisplayChiCard(LocalIndex, chipai)
 end
 
 function GamePanel.InviteFriend()
-	GlobalData.wechatOperate:inviteFriend();
+	WechatOperate.InviteFriend();
 end
 
 -- 用户离线回调

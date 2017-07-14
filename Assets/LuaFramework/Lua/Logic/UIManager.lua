@@ -47,6 +47,7 @@ function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/gangBack.prefab" }, function(prefabs) this.GangBack = prefabs[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_L&R.prefab" }, function(prefabs) this.GangBack_LR = prefabs[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab" }, function(prefabs) this.GangBack_T = prefabs[0] end)
+	resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite) this.DefaultIcon = sprite[0] end)
 end
 
 function OpenPanel(panel, ...)

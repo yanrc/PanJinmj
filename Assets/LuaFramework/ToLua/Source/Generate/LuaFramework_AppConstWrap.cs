@@ -25,10 +25,10 @@ public class LuaFramework_AppConstWrap
 		L.RegVar("UserId", get_UserId, set_UserId);
 		L.RegVar("SocketPort", get_SocketPort, set_SocketPort);
 		L.RegVar("SocketAddress", get_SocketAddress, set_SocketAddress);
-		L.RegConstant("UNITY_ANDROID", 1);
-		L.RegConstant("UNITY_IPHONE", 0);
-		L.RegConstant("UNITY_STANDALONE_WIN", 1);
-		L.RegConstant("UNITY_EDITOR", 1);
+		L.RegVar("UNITY_ANDROID", get_UNITY_ANDROID, set_UNITY_ANDROID);
+		L.RegVar("UNITY_IPHONE", get_UNITY_IPHONE, set_UNITY_IPHONE);
+		L.RegVar("UNITY_STANDALONE_WIN", get_UNITY_STANDALONE_WIN, set_UNITY_STANDALONE_WIN);
+		L.RegVar("UNITY_EDITOR", get_UNITY_EDITOR, set_UNITY_EDITOR);
 		L.RegVar("FrameworkRoot", get_FrameworkRoot, null);
 		L.EndClass();
 	}
@@ -184,6 +184,62 @@ public class LuaFramework_AppConstWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UNITY_ANDROID(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_ANDROID);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UNITY_IPHONE(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_IPHONE);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UNITY_STANDALONE_WIN(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_STANDALONE_WIN);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_UNITY_EDITOR(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_EDITOR);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_FrameworkRoot(IntPtr L)
 	{
 		try
@@ -234,6 +290,66 @@ public class LuaFramework_AppConstWrap
 		{
 			string arg0 = ToLua.CheckString(L, 2);
 			LuaFramework.AppConst.SocketAddress = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_UNITY_ANDROID(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.UNITY_ANDROID = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_UNITY_IPHONE(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.UNITY_IPHONE = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_UNITY_STANDALONE_WIN(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.UNITY_STANDALONE_WIN = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_UNITY_EDITOR(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.UNITY_EDITOR = arg0;
 			return 0;
 		}
 		catch(Exception e)

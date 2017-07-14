@@ -56,7 +56,7 @@ function LoginManager.TestLoginClick()
 	GlobalData.loginResponseData.account.openid = loginvo.openId;
 	GlobalData.loginResponseData.account.nickname = loginvo.nickName;
 	GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
-	GlobalData.loginResponseData.account.unionid = loginvo.city;
+	GlobalData.loginResponseData.account.unionid = loginvo.unionid;
 	GlobalData.loginResponseData.account.sex = loginvo.sex;
 	GlobalData.loginResponseData.IP = loginvo.IP;
 	networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST,data));

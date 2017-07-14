@@ -42,6 +42,7 @@ public static class CustomSettings
         _DT(typeof(System.Comparison<int>)),
         _DT(typeof(DG.Tweening.TweenCallback)),
         _DT(typeof(UnityEngine.Events.UnityAction<float>)),
+        _DT(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler)),
     };
 
     //在这里添加你要导出注册到lua的类型列表
@@ -170,14 +171,16 @@ public static class CustomSettings
         _GT(typeof(ResourceManager)),
         
         //our project    
+        _GT(typeof(RuntimePlatform)),
         _GT(typeof(cn.sharesdk.unity3d.PlatformType)),
+        _GT(typeof(cn.sharesdk.unity3d.ShareContent)),
+        _GT(typeof(cn.sharesdk.unity3d.ShareSDK)),
         _GT(typeof(AssemblyCSharp.GameToolScript)),
         _GT(typeof(List<int>)),
         _GT(typeof(Sprite)),
         _GT(typeof(Rect)),
         _GT(typeof(Toggle)),
-        _GT(typeof(WechatOperateScript)),
-        _GT(typeof(cn.sharesdk.unity3d.ShareSDK)),
+
         _GT(typeof(Dropdown)),
         _GT(typeof(TipPanelScript)),
         _GT(typeof(PlayerPrefs)),
@@ -189,6 +192,7 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
         _GT(typeof(DateTime)),
         _GT(typeof(ToggleGroup)),
+
     };
 
     public static List<Type> dynamicList = new List<Type>()

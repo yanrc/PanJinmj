@@ -14,7 +14,6 @@ PlayerItem = {
 	showTime,-- 短语显示时间
 	showChatTime,-- 语音显示时间
 	jiaGang,-- 加钢、飘分等
-	DefaultIcon,
 }
 local mt = { }-- 元表（基类）
 mt.__index = PlayerItem-- index方法
@@ -37,7 +36,6 @@ function PlayerItem.New(go)
 	playerItem.showTime = 0
 	playerItem.showChatTime = 0
 	playerItem.uuid = -1
-	resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite) playerItem.DefaultIcon = sprite[0] end)
 	UpdateBeat:Add(playerItem.Update, playerItem);
 	return playerItem
 end
@@ -89,7 +87,7 @@ function PlayerItem:GetUuid()
 end
 
 function PlayerItem:Clean()
-	self.headerIcon.sprite = self.DefaultIcon
+	self.headerIcon.sprite = UIManager.DefaultIcon
 	self.bankerImg.enabled = false
 	self.readyImg.enabled = false
 	self.scoreText.text = "";
@@ -111,8 +109,8 @@ end
 
 function PlayerItem:DisplayAvatorIp()
 	if (self.avatarvo ~= nil) then
-		loadPrefab("Assets/Project/Prefabs/userInfo", gameObject.transform, function(obj)
-			local ShowUserInfoScript = ShowUserInfoScript.New(obj)
+		resMgr:LoadPrefab("Assets/Project/Prefabs/userInfo", gameObject.transform, function(prefabs)
+			local ShowUserInfoScript = ShowUserInfoScript.New(prefabs[0])
 			ShowUserInfoScript:SetUIData(self.avatarvo)
 		end )
 		soundMgr:playSoundByActionButton(1);

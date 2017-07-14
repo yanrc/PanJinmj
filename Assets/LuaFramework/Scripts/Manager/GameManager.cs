@@ -39,6 +39,7 @@ namespace LuaFramework {
             YRC.Debuger.Log("CheckExtractResource");
             bool isExists = Directory.Exists(Util.DataPath) &&
               Directory.Exists(Util.DataPath + "lua/") && File.Exists(Util.DataPath + "files.txt");
+            YRC.Debuger.Log("isExists="+ isExists);
             if (isExists || AppConst.DebugMode) {
                 StartCoroutine(OnUpdateResource());
                 return;   //文件已经解压过了，自己可添加检查文件列表逻辑

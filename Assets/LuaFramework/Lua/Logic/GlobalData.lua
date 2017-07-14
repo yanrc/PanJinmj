@@ -2,9 +2,7 @@
 GlobalData = {};
 local this = GlobalData;
 local isonLoginPage=false;
-local wechatOperate=nil;
---init
-this.wechatOperate=GameObject.Find("Utils/ShareSDK"):GetComponent('WechatOperateScript');
+
 this.messageBoxContents={
 "快点啦，时间很宝贵的！",
 "又断线了，网络怎么这么差！",

@@ -93,7 +93,7 @@ namespace LuaFramework {
         /// 载入素材
         /// </summary>
         void LoadAsset<T>(string abName, string[] assetNames, Action<UObject[]> action = null, LuaFunction func = null) where T : UObject {
-            YRC.Debuger.Log("LoadAsset");
+            YRC.Debuger.Log("LoadAsset:"+ assetNames[0]);
             abName = GetRealAssetPath(abName);
 
             LoadAssetRequest request = new LoadAssetRequest();

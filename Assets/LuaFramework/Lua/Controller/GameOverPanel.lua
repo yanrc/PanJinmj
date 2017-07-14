@@ -192,7 +192,7 @@ function GameOverPanel.ShowFinal()
 end
 
 function GameOverPanel.ShareFinal()
-    GlobalData.wechatOperate:shareAchievementToWeChat(PlatformType.WeChat);
+    WechatOperate.ShareAchievementToWeChat(PlatformType.WeChat);
     soundMgr:playSoundByActionButton(1);
 end
 -------------------模板-------------------------

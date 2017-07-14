@@ -61,7 +61,7 @@ function SignalOverItem:SetUI(itemData, Banker)
 	self.huFlagImg.enabled =(itemData.uuid == GlobalData.hupaiResponseVo.winnerId);
 	self.Banker.enabled =(itemData.uuid == Banker);
 	self.JiaGang.text = "";
-	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == GlobalDataScript.mainUuid)
+	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == GlobalData.mainUuid)
 	self:AnalysisPaiInfo(itemData);
 end
 
