@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f29ea3b6-d2f4-4985-abc6-19989f97cf15}</ProjectGuid>
+    <!--$guid1$-->
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Lua\" />
+    <Folder Include="Lua\cjson\" />
+    <Folder Include="Lua\lpeg\" />
+    <Folder Include="Lua\misc\" />
+    <Folder Include="Lua\protobuf\" />
+    <Folder Include="Lua\socket\" />
+    <Folder Include="Lua\System\" />
+    <Folder Include="Lua\System\Reflection\" />
+    <Folder Include="Lua\UnityEngine\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Lua\cjson\util.lua" />
+    <Compile Include="Lua\event.lua" />
+    <Compile Include="Lua\list.lua" />
+    <Compile Include="Lua\lpeg\re.lua" />
+    <Compile Include="Lua\ltn12.lua" />
+    <Compile Include="Lua\mime.lua" />
+    <Compile Include="Lua\misc\functions.lua" />
+    <Compile Include="Lua\misc\misc.lua" />
+    <Compile Include="Lua\misc\strict.lua" />
+    <Compile Include="Lua\misc\utf8.lua" />
+    <Compile Include="Lua\protobuf\containers.lua" />
+    <Compile Include="Lua\protobuf\decoder.lua" />
+    <Compile Include="Lua\protobuf\descriptor.lua" />
+    <Compile Include="Lua\protobuf\encoder.lua" />
+    <Compile Include="Lua\protobuf\listener.lua" />
+    <Compile Include="Lua\protobuf\protobuf.lua" />
+    <Compile Include="Lua\protobuf\text_format.lua" />
+    <Compile Include="Lua\protobuf\type_checkers.lua" />
+    <Compile Include="Lua\protobuf\wire_format.lua" />
+    <Compile Include="Lua\slot.lua" />
+    <Compile Include="Lua\socket.lua" />
+    <Compile Include="Lua\socket\ftp.lua" />
+    <Compile Include="Lua\socket\headers.lua" />
+    <Compile Include="Lua\socket\http.lua" />
+    <Compile Include="Lua\socket\mbox.lua" />
+    <Compile Include="Lua\socket\smtp.lua" />
+    <Compile Include="Lua\socket\tp.lua" />
+    <Compile Include="Lua\socket\url.lua" />
+    <Compile Include="Lua\System\coroutine.lua" />
+    <Compile Include="Lua\System\Reflection\BindingFlags.lua" />
+    <Compile Include="Lua\System\Timer.lua" />
+    <Compile Include="Lua\System\ValueType.lua" />
+    <Compile Include="Lua\tolua.lua" />
+    <Compile Include="Lua\typeof.lua" />
+    <Compile Include="Lua\UnityEngine\Bounds.lua" />
+    <Compile Include="Lua\UnityEngine\Color.lua" />
+    <Compile Include="Lua\UnityEngine\LayerMask.lua" />
+    <Compile Include="Lua\UnityEngine\Mathf.lua" />
+    <Compile Include="Lua\UnityEngine\Plane.lua" />
+    <Compile Include="Lua\UnityEngine\Quaternion.lua" />
+    <Compile Include="Lua\UnityEngine\Ray.lua" />
+    <Compile Include="Lua\UnityEngine\RaycastHit.lua" />
+    <Compile Include="Lua\UnityEngine\Time.lua" />
+    <Compile Include="Lua\UnityEngine\Touch.lua" />
+    <Compile Include="Lua\UnityEngine\Vector2.lua" />
+    <Compile Include="Lua\UnityEngine\Vector3.lua" />
+    <Compile Include="Lua\UnityEngine\Vector4.lua" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

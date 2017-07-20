@@ -1,5 +1,5 @@
 
-SettingPanel = UIBase(define.SettingPanel,define.PopUI)
+SettingPanel = UIBase(define.SettingPanel, define.PopUI)
 local this = SettingPanel
 
 local transform;
@@ -42,16 +42,17 @@ function SettingPanel.OnCreate(obj)
 end
 
 function SettingPanel.toJieSan()
-	TipsManager.loadDialog("申请解散房间", "你确定要申请解散房间？", this.doDissoliveRoomRequest, nil);
-	this:Close()
+	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？", this.doDissoliveRoomRequest);
+	ClosePanel(this)
 end
 
 function SettingPanel.toExit()
-	ExitAppScript.OpenPanel(transform);
+	OpenPanel(ExitPanel);
+	ClosePanel(this)
 end
 function SettingPanel.toLeaveRoom(des)
-	TipsManager.loadDialog("提示", des, this.LeaveRoom, nil);
-	this:Close();
+	OpenPanel(ExitPanel, "提示", des, this.LeaveRoom);
+	ClosePanel(this)
 end
 
 
@@ -60,7 +61,6 @@ function SettingPanel.LeaveRoom()
 	vo.roomId = GlobalData.roomVo.roomId;
 	local sendMsg = json.encode(vo);
 	networkMgr:SendMessage(ClientRequest.New(APIS.OUT_ROOM_REQUEST, sendMsg));
-	gameObject:SetActive(false);
 end
 function SettingPanel.doDissoliveRoomRequest()
 	local dissoliveRoomRequestVo = { };
@@ -107,32 +107,34 @@ end
 function SettingPanel.CloseClick()
 	ClosePanel(this)
 end
-function SettingPanel.OnOpen()
+function SettingPanel.OnOpen(_type)
 	sliderYinYue.value = soundMgr.MusicVolume
 	sliderYinXiao.value = soundMgr.EffectVolume
 	this.lua:ResetClick(jiesanBtn)
-	local _type = 1;
-	if (GamePanel.isGameStarted) then
-		jiesanBtnStr.text = "申请解散房间";
-		_type = 2;
-	else
-		if (1 == GamePanel.GetMyIndexFromList()) then
-			-- 我是房主（一开始庄家是房主）
-			jiesanBtnStr.text = "解散房间";
-			_type = 3;
-		else
-			jiesanBtnStr.text = "离开房间";
-			_type = 4;
-		end
-	end
-	log("_type" .. _type)
+	-- if (GamePanel.isGameStarted) then
+	-- 	jiesanBtnStr.text = "申请解散房间";
+	-- 	_type = 2;
+	-- else
+	-- 	if (1 == GamePanel.GetMyIndexFromList()) then
+	-- 		-- 我是房主（一开始庄家是房主）
+	-- 		jiesanBtnStr.text = "解散房间";
+	-- 		_type = 3;
+	-- 	else
+	-- 		jiesanBtnStr.text = "离开房间";
+	-- 		_type = 4;
+	-- 	end
+	-- end
 	if (_type == 1) then
+		jiesanBtnStr.text = "退出游戏"
 		this.lua:AddClick(jiesanBtn, this.toExit)
 	elseif (_type == 2) then
+		jiesanBtnStr.text = "申请解散房间";
 		this.lua:AddClick(jiesanBtn, this.toJieSan)
 	elseif (_type == 3) then
+		jiesanBtnStr.text = "解散房间";
 		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要解散房间吗?") end)
 	elseif (_type == 4) then
+		jiesanBtnStr.text = "离开房间";
 		this.lua:AddClick(jiesanBtn, function() this.toLeaveRoom("亲，确定要离开房间吗?") end)
 	end
 end

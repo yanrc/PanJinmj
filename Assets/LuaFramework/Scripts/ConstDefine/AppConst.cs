@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace LuaFramework {
-    public class AppConst {
+namespace LuaFramework
+{
+    public class AppConst
+    {
         public const bool DebugMode =
 #if UNITY_EDITOR
          true;                       //调试模式-用于内部测试
@@ -22,8 +24,8 @@ namespace LuaFramework {
         /// 否则就需要自己将StreamingAssets里面的所有内容
         /// 复制到自己的Webserver上面，并修改下面的WebUrl。
         /// </summary>
-        public const bool UpdateMode = false;                       //更新模式-默认关闭 
-        public const bool LuaByteMode = false;                       //Lua字节码模式-默认关闭 
+        public const bool UpdateMode = false;                        //更新模式-默认关闭 
+        public const bool LuaByteMode = false;                      //Lua字节码模式-默认关闭 
         public const bool LuaBundleMode = false;                    //Lua代码AssetBundle模式
 
         public const int TimerInterval = 1;
@@ -34,14 +36,23 @@ namespace LuaFramework {
         public const string AppPrefix = AppName + "_";              //应用程序前缀
         public const string ExtName = ".unity3d";                   //素材扩展名
         public const string AssetDir = "StreamingAssets";           //素材目录 
-        public const string WebUrl = "http://localhost:6688/";      //测试更新地址
+        public const string WebUrl =                                //测试更新地址
+#if UNITY_STANDALONE_WIN
+        "http://101.200.197.7:8090/panjinHotfix/Windows/";
+#elif  UNITY_ANDROID
+        "http://101.200.197.7:8090/panjinHotfix/Android/";
+#elif UNITY_IPHONE
+        "http://101.200.197.7:8090/panjinHotfix/iOS/";
+#endif            
 
         public static string UserId = string.Empty;                 //用户ID
         public static int SocketPort = 0;                           //Socket服务器端口
         public static string SocketAddress = string.Empty;          //Socket服务器地址
 
-        public static string FrameworkRoot {
-            get {
+        public static string FrameworkRoot
+        {
+            get
+            {
                 return Application.dataPath + "/" + AppName;
             }
         }

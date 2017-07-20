@@ -2,6 +2,8 @@ CoMgr={}
 local this=CoMgr
 local dicImage={}--已经下载好了的图片字典
 local dicForDownLoad = { }--等待下载的图片字典
+local Sprite=UnityEngine.Sprite
+local Rect=UnityEngine.Rect
 function CoMgr.LoadImg(img, url)
 	if(img==nil or url==nil) then
 		logWarn("img==nil or url==nil")
@@ -29,15 +31,15 @@ function CoMgr.DownLoad(url, callback)
 	end
 	if (dicForDownLoad[url]==nil) then
 		dicForDownLoad[url]=callback
-		coroutine.start(this.download(url, callback))
+		coroutine.start(this.download,url,callback)
 	else
-		listForDownLoad[url] =listForDownLoad[url]+ callback;
+		dicForDownLoad[url] =dicForDownLoad[url]+ callback;
 	end
 end
 
 function CoMgr.download(url, callback)
 	local www = WWW(url);
 	coroutine.www(www)
-	listForDownLoad[url]=nil;
+	dicForDownLoad[url]=nil;
 	callback(www);
 end

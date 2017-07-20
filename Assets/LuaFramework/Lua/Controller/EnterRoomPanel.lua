@@ -47,7 +47,7 @@ end
 
 
 -- 数字按钮点击
-function EnterRoomPanel.OnClickHandle(go, number)
+function EnterRoomPanel.OnClickHandle(number,go)
 	this.Number(number);
 end
 

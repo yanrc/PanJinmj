@@ -14,6 +14,7 @@ PlayerItem = {
 	showTime,-- 短语显示时间
 	showChatTime,-- 语音显示时间
 	jiaGang,-- 加钢、飘分等
+	avatarvo,
 }
 local mt = { }-- 元表（基类）
 mt.__index = PlayerItem-- index方法
@@ -36,6 +37,7 @@ function PlayerItem.New(go)
 	playerItem.showTime = 0
 	playerItem.showChatTime = 0
 	playerItem.uuid = -1
+	playerItem.avatarvo = nil
 	UpdateBeat:Add(playerItem.Update, playerItem);
 	return playerItem
 end
@@ -63,7 +65,8 @@ function PlayerItem:SetAvatarVo(avatar)
 		self.scoreText.text = tostring(avatar.scores)
 		self.offlineImage.enabled =(not avatar.isOnLine);
 		self.uuid = avatar.account.uuid
-		CoMgr.LoadImg(headerIcon, avatar.account.headicon);
+		self.avatarvo = avatar
+		CoMgr.LoadImg(self.headerIcon, avatar.account.headicon);
 	else
 		self:Clean()
 	end
@@ -107,12 +110,9 @@ function PlayerItem:ShowChatMessage(index)
 end
 
 
-function PlayerItem:DisplayAvatorIp()
+function PlayerItem.DisplayAvatorIp(self)
 	if (self.avatarvo ~= nil) then
-		resMgr:LoadPrefab("Assets/Project/Prefabs/userInfo", gameObject.transform, function(prefabs)
-			local ShowUserInfoScript = ShowUserInfoScript.New(prefabs[0])
-			ShowUserInfoScript:SetUIData(self.avatarvo)
-		end )
+		OpenPanel(UserInfoPanel, self.avatarvo)
 		soundMgr:playSoundByActionButton(1);
 	end
 end

@@ -1,25 +1,30 @@
 WechatOperate = { }
 local this = WechatOperate
 local shareSdk = GameObject.Find("Utils/ShareSDK"):GetComponent('ShareSDK');
-log(shareSdk)
 this.shareSdk=shareSdk
-shareSdk.showUserHandler = this.GetUserInforCallback;
-shareSdk.shareHandler = this.OnShareCallBack;
-log(shareSdk.showUserHandler)
-log(shareSdk.shareHandler)
+
+
+function WechatOperate.AddListener()
+	shareSdk.showUserHandler = this.GetUserInforCallback;
+	shareSdk.shareHandler = this.OnShareCallBack;
+end
+
+function WechatOperate.RemoveListener()
+	shareSdk.showUserHandler = nil;
+	shareSdk.shareHandler = nil;
+end
 -- 获取微信个人信息成功回调,登录
 function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 	if (data ~= nil) then
-		log(json.encode(data));
 		local loginvo = LoginVo.New();
 		xpcall( function()
-			loginvo.openId = tostring(data["openid"]);
-			loginvo.nickName = tostring(data["nickname"]);
-			loginvo.headIcon = tostring(data["headimgurl"]);
-			loginvo.unionid = tostring(data["unionid"]);
-			loginvo.province = tostring(data["province"]);
-			loginvo.city = tostring(data["city"]);
-			loginvo.sex = tonumber(data["sex"]);
+			loginvo.openId = data:get_Item("openid");
+			loginvo.nickName = data:get_Item("nickname");
+			loginvo.headIcon = data:get_Item("headimgurl");
+			loginvo.unionid = data:get_Item("unionid");
+			loginvo.province = data:get_Item("province");
+			loginvo.city = data:get_Item("city");
+			loginvo.sex = data:get_Item("sex");
 			loginvo.IP = GlobalData.GetIpAddress();
 			local data = json.encode(loginvo);
 			GlobalData.loginVo = loginvo;
@@ -36,7 +41,7 @@ function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 			log("GlobalData.loginResponseData.account.unionid=" .. GlobalData.loginResponseData.account.unionid)
 		end
 		, function(e)
-			log("微信接口有变动！" .. e.Message);
+			log(e);
 			TipsManager.SetTips("请先打开你的微信客户端");
 		end )
 	else

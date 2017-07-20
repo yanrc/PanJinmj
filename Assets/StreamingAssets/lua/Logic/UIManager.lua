@@ -10,6 +10,9 @@ CtrlNames = {
 	define.VotePanel,
 	define.StartPanel,
 	define.GameOverPanel,
+	define.UserInfoPanel,
+	define.MessagePanel,
+	define.RulePanel,
 }
 
 
@@ -28,7 +31,9 @@ function UIManager.OnInited(panel)
 	if (panel == StartPanel) then
 		OpenPanel(panel)
 		this.InitPrefabs()
+		LoadingProgress.ClearProgressBar();
 	end
+	UpdateBeat:Add(this.Update);
 end
 
 function UIManager.InitPrefabs()
@@ -69,4 +74,9 @@ function ClosePanel(panel)
 	panel:Close()
 end
 
+function UIManager.Update()
+	if (Input.GetKey(KeyCode.Escape)) then
+		OpenPanel(ExitPanel)
+	end
+end
 

@@ -46,7 +46,7 @@ function StartPanel.RoomBackResponse(buffer)
 	for i = 1, #GlobalData.reEnterRoomData.playerList do
 		local itemData = GlobalData.reEnterRoomData.playerList[i];
 		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
-			GlobalData.loginResponseData.account.uuid = itemData.account.uuid;
+			GlobalData.loginResponseData=AvatarVO.New(itemData)
 			-- ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
 			break;
 		end
@@ -96,13 +96,13 @@ function StartPanel.doLogin()
 	end
 end
 -- Update is called once per frame
-function StartPanel.Update()
-	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
-	if (Input.GetKey(KeyCode.Escape)) then
-		-- 在登录界面panelCreateDialog肯定是null
-		OpenPanel(ExitPanel)
-	end
-end
+--function StartPanel.Update()
+--	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
+--	if (Input.GetKey(KeyCode.Escape)) then
+--		-- 在登录界面panelCreateDialog肯定是null
+--		OpenPanel(ExitPanel)
+--	end
+--end
 
 function StartPanel.OpenXieyiPanel()
 	soundMgr:playSoundByActionButton(1);
@@ -139,7 +139,7 @@ function StartPanel.OnOpen()
 end
 -- 移除事件--
 function StartPanel.RemoveListener()
-	UpdateBeat:Remove(this.Update);
+	--UpdateBeat:Remove(this.Update);
 	Event.RemoveListener(Protocal.Connect, this.OnConnect);
 	Event.RemoveListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
 	Event.RemoveListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)
@@ -147,7 +147,7 @@ end
 
 -- 增加事件--
 function StartPanel.AddListener()
-	UpdateBeat:Add(this.Update);
+	--UpdateBeat:Add(this.Update);
 	Event.AddListener(Protocal.Connect, this.OnConnect);
 	Event.AddListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
 	Event.AddListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)

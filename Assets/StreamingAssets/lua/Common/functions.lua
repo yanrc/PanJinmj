@@ -56,6 +56,10 @@ function findPanel(str)
 	return obj:GetComponent("BaseLua");
 end
 
+function IsNil(uobj)
+	return uobj == nil or uobj:Equals(nil)
+end
+
 function string.split(input, delimiter)
 	input = tostring(input)
 	delimiter = tostring(delimiter)

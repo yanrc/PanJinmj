@@ -1,43 +1,53 @@
-
-ExitPanel = UIBase(define.ExitPanel,define.PopUI);
+﻿
+ExitPanel = UIBase(define.ExitPanel, define.PopUI);
 local this = ExitPanel;
 local transform;
 local gameObject;
 
 local btnExit
 local btnCancel
+local title
+local content
 
--- �����¼�--
+-- 启动事件--
 function ExitPanel.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
 	this:Init(obj)
 	btnExit = transform:FindChild('Image_Bg/Button_Sure').gameObject
 	btnCancel = transform:FindChild('Image_Bg/Button_Cancle').gameObject
-	this.lua:AddClick(btnExit, this.Exit)
+	title=transform:FindChild('Image_Bg/Title'):GetComponent('Text')
+	content=transform:FindChild('Image_Bg/Content'):GetComponent('Text')
 	this.lua:AddClick(btnCancel, this.CloseClick)
 end
 
 
 function ExitPanel.Exit()
-	log("lua:exit click")
+	if UNITY_ANDROID then
+		Application.Quit()
+	elseif UNITY_IPHONE then
+		TipsManager.SetTips("苹果手机请按Home键盘进行退出！")
+	end
 end
 
 
--------------------ģ��-------------------------
+-------------------模板-------------------------
 function ExitPanel.CloseClick()
-ClosePanel(this)
+	ClosePanel(this)
 end
 
-function ExitPanel.OnOpen()
-	
+function ExitPanel.OnOpen(titleStr, des, f)
+	this.lua:ResetClick(btnExit)
+	this.lua:AddClick(btnExit, f or this.Exit)
+	title.text = titleStr or "提示"
+	content.text = des or "亲，确定要退出游戏吗?"
 end
--- �Ƴ��¼�--
+-- 移除事件--
 function ExitPanel.RemoveListener()
 
 end
 
--- �����¼�--
+-- 增加事件--
 function ExitPanel.AddListener()
 
 end

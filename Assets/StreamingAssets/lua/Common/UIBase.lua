@@ -22,16 +22,22 @@ end
 
 function _UIBase:Open(...)
 	if (self.gameObject) then
-		self.gameObject:SetActive(true)
-		self.transform:SetAsLastSibling();
-		self.AddListener() 
-		self.OnOpen(...)
+		if (not self.gameObject.activeSelf) then
+			self.gameObject:SetActive(true)
+			self.transform:SetAsLastSibling();
+			self.AddListener()
+			self.OnOpen(...)
+		end
 	end
 end
 
 function _UIBase:Close()
-	self.gameObject:SetActive(false)
-	self.RemoveListener()
+	if (self.gameObject) then
+		if (self.gameObject.activeSelf) then
+			self.gameObject:SetActive(false)
+			self.RemoveListener()
+		end
+	end
 end
 
 function _UIBase.AddListener()

@@ -1,19 +1,22 @@
 
 local Ease = DG.Tweening.Ease
-HomePanel = UIBase(define.HomePanel,define.FixUI)
+HomePanel = UIBase(define.HomePanel, define.FixUI)
 local this = HomePanel;
 local gameObject;
 local nickNameText;-- 昵称
 local cardCountText;-- 房卡剩余数量
 local IpText;-- ID
 local headIconImg-- 头像
+local headIconbg-- 头像框
 local contactInfoContent-- 房卡面板显示内容
 local roomCardPanel-- 房卡面板
 local noticeText-- 广播
 local CreateRoomButton-- 创建房间
 local EnterRoomButton-- 加入房间
 local panelCreateDialog
-
+local btnMessage-- 消息按钮
+local btnRule-- 玩法按钮
+local btnSet-- 设置按钮
 showNum = 1
 startFlag = false
 
@@ -25,13 +28,21 @@ function HomePanel.OnCreate(go)
 	cardCountText = go.transform:FindChild("Panel_Left/Image_Card_Number_Bg/Text"):GetComponent("Text")
 	IpText = go.transform:FindChild("Panel_Left/Text_Nick_IP"):GetComponent("Text")
 	headIconImg = go.transform:FindChild("Panel_Left/Image_icon"):GetComponent("Image")
+	headIconbg = go.transform:FindChild("Panel_Left/Image_icon_bg").gameObject
 	contactInfoContent = go.transform:FindChild("roomCardInfo/Text_Info_Content"):GetComponent("Text")
 	roomCardPanel = go.transform:FindChild("roomCardInfo").gameObject
 	noticeText = go.transform:FindChild("Image_Notice_BG/Image (1)/Text"):GetComponent("Text")
 	CreateRoomButton = go.transform:FindChild("Panel_Room/Button_Create_Room").gameObject
 	EnterRoomButton = go.transform:FindChild("Panel_Room/Button_Enter_Room").gameObject
+	btnMessage = go.transform:FindChild("Panel_Right/btnMessage").gameObject
+	btnRule = go.transform:FindChild("Panel_Right/btnRule").gameObject
+	btnSet = go.transform:FindChild("Panel_Right/btnSet").gameObject
 	this.lua:AddClick(CreateRoomButton, this.OpenCreateRoomDialog);
 	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
+	this.lua:AddClick(headIconbg, this.ShowUserInfoPanel);
+	this.lua:AddClick(btnMessage, this.Button_Mess_Open);
+	this.lua:AddClick(btnRule, this.OpenGameRuleDialog);
+	this.lua:AddClick(btnSet, this.OpenGameSettingDialog);
 end
 
 
@@ -55,14 +66,12 @@ end
 
 function HomePanel.ShowUserInfoPanel()
 	soundMgr:playSoundByActionButton(1);
-	local obj = this.loadPerfab("Assets/Project/Prefabs/userInfo");
-	obj.ShowUserInfoScript = ShowUserInfoScript.New()
-	obj.ShowUserInfoScript:SetUIData(GlobalData.loginResponseData);
+	OpenPanel(UserInfoPanel, GlobalData.loginResponseData)
 end
 
 function HomePanel.ShowRoomCardPanel()
 	soundMgr:playSoundByActionButton(1);
-	networkMgr:SendMessage(ClientRequest.New(APIS.CONTACT_INFO_REQUEST,""));
+	networkMgr:SendMessage(ClientRequest.New(APIS.CONTACT_INFO_REQUEST, ""));
 end
 
 function HomePanel.CloseRoomCardPanel()
@@ -87,17 +96,17 @@ local Panel_message;
 
 function HomePanel.Button_Mess_Open()
 	soundMgr:playSoundByActionButton(1);
-	Panel_message = this.loadPerfab("Assets/Project/Prefabs/Panel_message");
+	OpenPanel(MessagePanel)
 end
 
 -- 打开创建房间的对话框
 function HomePanel.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	--if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
-		OpenPanel(CreateRoomPanel)
-	--else
-		--TipsManager.SetTips("当前正在房间状态，无法创建房间");
-	--end
+	-- if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
+	OpenPanel(CreateRoomPanel)
+	-- else
+	-- TipsManager.SetTips("当前正在房间状态，无法创建房间");
+	-- end
 end
 
 function HomePanel.Button_fankui()
@@ -110,22 +119,18 @@ end
 
 function HomePanel.OpenEnterRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	--if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
-		OpenPanel(EnterRoomPanel)
-	--else
-		--TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
-	--end
+	-- if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
+	OpenPanel(EnterRoomPanel)
+	-- else
+	-- TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
+	-- end
 end
 
 -- 打开设置对话框
 
 function HomePanel.OpenGameSettingDialog()
 	soundMgr:playSoundByActionButton(1);
-	this.loadPerfab("Assets/Project/Prefabs/Panel_Setting");
-	panelCreateDialog.SettingScript = SettingScript.New()
-	local ss = panelCreateDialog.SettingScript;
-	ss.jiesanBtn:GetComponentInChildren("Text").text = "退出游戏"
-	ss.type = 1;
+	OpenPanel(SettingPanel,1)
 end
 
 
@@ -134,7 +139,7 @@ end
 
 function HomePanel.OpenGameRuleDialog()
 	soundMgr:playSoundByActionButton(1);
-	this.loadPerfab("Assets/Project/Prefabs/Panel_Game_Rule_Dialog");
+	OpenPanel(RulePanel)
 end
 
 -- 打开抽奖对话框
@@ -209,7 +214,7 @@ end
 function HomePanel.OnOpen()
 	this.InitUI();
 	GlobalData.isonLoginPage = false;
-	--this.CheckEnterInRoom();
+	-- this.CheckEnterInRoom();
 end
 -- 移除事件--
 function HomePanel.RemoveListener()

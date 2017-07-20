@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#define USING_DOTWEENING
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using LuaInterface;
@@ -180,7 +181,7 @@ public static class CustomSettings
         _GT(typeof(Sprite)),
         _GT(typeof(Rect)),
         _GT(typeof(Toggle)),
-
+        _GT(typeof(System.Collections.Hashtable)),
         _GT(typeof(Dropdown)),
         _GT(typeof(TipPanelScript)),
         _GT(typeof(PlayerPrefs)),
@@ -192,7 +193,7 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
         _GT(typeof(DateTime)),
         _GT(typeof(ToggleGroup)),
-
+        _GT(typeof(LoadingProgress)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

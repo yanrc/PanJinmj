@@ -270,7 +270,7 @@ namespace LuaFramework
                 audiosource.Play();
                 OnGetAudioClipList.Remove(assetName);
                 if (func != null) func.Call(audioclip);
-                Debug.LogWarning("CreateAudioClip::>> " + name + " " + prefab);
+                Debug.LogWarning("CreateAudioClip::>> " + assetName + " " + prefab);
             });
         }
     }

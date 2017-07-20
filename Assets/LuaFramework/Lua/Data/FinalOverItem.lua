@@ -13,6 +13,11 @@ FinalOverItem = {
 	angangCount,
 	minggangCount,
 	finalScore,
+	IsMain = false,
+	Nickname = "",
+	IsWiner = false,
+	IsPaoshou = false,
+	Icon = "",
 }
 local mt = { }-- 元表（基类）
 mt.__index = FinalOverItem-- index方法
@@ -49,16 +54,16 @@ function FinalOverItem.New(obj)
 end
 
 function FinalOverItem:SetUI(itemData)
-	self.fangzhu.enabled = itemData.IsMain
-	self.nickName.text = itemData.Nickname;
+	self.fangzhu.enabled = self.IsMain
+	self.nickName.text = self.Nickname;
 	self.ID.text = "ID:" .. itemData.uuid;
-	self.winner.enabled =(itemData.IsWiner and itemData.scores > 0)
-	self.paoshou.enabled =(itemData.IsPaoshou and itemData.dianpao > 0)
+	self.winner.enabled =(self.IsWiner and itemData.scores > 0)
+	self.paoshou.enabled =(self.IsPaoshou and itemData.dianpao > 0)
 	self.zimoCount.text = itemData.zimo;
 	self.jiepaoCount.text = itemData.jiepao;
 	self.dianpaoCount.text = itemData.dianpao;
 	self.angangCount.text = itemData.angang;
 	self.minggangCount.text = itemData.minggang;
 	self.finalScore.text = itemData.scores;
-	CoMgr.LoadImg(icon, itemData.Icon);
+	CoMgr.LoadImg(icon, self.Icon);
 end

@@ -99,14 +99,18 @@
     <Compile Include="Lua\Controller\GameOverPanel.lua" />
     <Compile Include="Lua\Controller\GamePanel.lua" />
     <Compile Include="Lua\Controller\HomePanel.lua" />
+    <Compile Include="Lua\Controller\MessagePanel.lua" />
     <Compile Include="Lua\Controller\Moban.lua" />
+    <Compile Include="Lua\Controller\RulePanel.lua" />
     <Compile Include="Lua\Controller\SettingPanel.lua" />
+    <Compile Include="Lua\Controller\ShopPanel.lua" />
     <Compile Include="Lua\Controller\StartPanel.lua" />
     <Compile Include="Lua\Controller\VotePanel.lua" />
     <Compile Include="Lua\Controller\WaitingPanel.lua" />
     <Compile Include="Lua\Data\FinalOverItem.lua" />
     <Compile Include="Lua\Data\PlayerItem.lua" />
     <Compile Include="Lua\Data\RuleSelect.lua" />
+    <Compile Include="Lua\Data\ShopItem.lua" />
     <Compile Include="Lua\Data\SignalOverItem.lua" />
     <Compile Include="Lua\eventlib.lua" />
     <Compile Include="Lua\events.lua" />
@@ -119,7 +123,7 @@
     <Compile Include="Lua\Logic\LoginManager.lua" />
     <Compile Include="Lua\Logic\LuaClass.lua" />
     <Compile Include="Lua\Logic\Network.lua" />
-    <Compile Include="Lua\Logic\ShowUserInfoScript.lua" />
+    <Compile Include="Lua\Controller\UserInfoPanel.lua" />
     <Compile Include="Lua\Logic\SocketEventHandle.lua" />
     <Compile Include="Lua\Logic\Test.lua" />
     <Compile Include="Lua\Logic\TipsManager.lua" />

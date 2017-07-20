@@ -55,7 +55,7 @@ namespace LuaFramework {
             buttons.Add(go, luafunc);
             go.GetComponent<Button>().onClick.AddListener(
                 delegate () {
-                    luafunc.Call(go,arg);
+                    luafunc.Call(arg,go);
                 }
             );
         }

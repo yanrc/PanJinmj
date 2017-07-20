@@ -114,9 +114,11 @@ namespace LuaFramework {
         /// <summary>
         /// 启动更新下载，这里只是个思路演示，此处可启动线程下载更新
         /// </summary>
-        IEnumerator OnUpdateResource() {
+        IEnumerator OnUpdateResource()
+        {
             YRC.Debuger.Log("OnUpdateResource");
-            if (!AppConst.UpdateMode) {
+            if (!AppConst.UpdateMode)
+            {
                 OnResourceInited();
                 yield break;
             }
@@ -127,36 +129,45 @@ namespace LuaFramework {
             string listUrl = url + "files.txt?v=" + random;
             Debug.LogWarning("LoadUpdate---->>>" + listUrl);
 
-            WWW www = new WWW(listUrl); yield return www;
-            if (www.error != null) {
+            WWW www = new WWW(listUrl);
+            yield return www;
+            if (www.error != null)
+            {
                 OnUpdateFailed(string.Empty);
                 yield break;
             }
-            if (!Directory.Exists(dataPath)) {
+            if (!Directory.Exists(dataPath))
+            {
                 Directory.CreateDirectory(dataPath);
             }
             File.WriteAllBytes(dataPath + "files.txt", www.bytes);
             string filesText = www.text;
             string[] files = filesText.Split('\n');
-
-            for (int i = 0; i < files.Length; i++) {
+            LoadingProgress.all = files.Length;
+            LoadingProgress.current = 1;
+            for (int i = 0; i < files.Length; i++)
+            {
                 if (string.IsNullOrEmpty(files[i])) continue;
                 string[] keyValue = files[i].Split('|');
                 string f = keyValue[0];
                 string localfile = (dataPath + f).Trim();
                 string path = Path.GetDirectoryName(localfile);
-                if (!Directory.Exists(path)) {
+                if (!Directory.Exists(path))
+                {
                     Directory.CreateDirectory(path);
                 }
                 string fileUrl = url + f + "?v=" + random;
                 bool canUpdate = !File.Exists(localfile);
-                if (!canUpdate) {
+                if (!canUpdate)
+                {
                     string remoteMd5 = keyValue[1].Trim();
                     string localMd5 = Util.md5file(localfile);
                     canUpdate = !remoteMd5.Equals(localMd5);
                     if (canUpdate) File.Delete(localfile);
+                    if (!canUpdate) LoadingProgress.current++;
                 }
-                if (canUpdate) {   //本地缺少文件
+                if (canUpdate)
+                {   //本地缺少文件
                     Debug.Log(fileUrl);
                     message = "downloading>>" + fileUrl;
                     facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
@@ -174,7 +185,6 @@ namespace LuaFramework {
                 }
             }
             yield return new WaitForEndOfFrame();
-
             message = "更新完成!!";
             facade.SendMessageCommand(NotiConst.UPDATE_MESSAGE, message);
 

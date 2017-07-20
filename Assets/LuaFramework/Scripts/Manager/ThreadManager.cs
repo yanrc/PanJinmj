@@ -108,14 +108,15 @@ namespace LuaFramework {
 
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e) {
             //UnityEngine.Debug.Log(e.ProgressPercentage);
-            /*
-            UnityEngine.Debug.Log(string.Format("{0} MB's / {1} MB's",
-                (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
-                (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00")));
-            */
-            //float value = (float)e.ProgressPercentage / 100f;
 
-            string value = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
+            //UnityEngine.Debug.Log(string.Format("{0} MB's / {1} MB's",
+            //    (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
+            //    (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00")));
+
+            float value = (float)e.ProgressPercentage / 100f;
+        
+
+            //string value = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
             NotiData data = new NotiData(NotiConst.UPDATE_PROGRESS, value);
             if (m_SyncEvent != null) m_SyncEvent(data);
 
