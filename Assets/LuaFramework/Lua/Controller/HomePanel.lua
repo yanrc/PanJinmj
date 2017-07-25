@@ -17,6 +17,7 @@ local panelCreateDialog
 local btnMessage-- 消息按钮
 local btnRule-- 玩法按钮
 local btnSet-- 设置按钮
+local btnBuy--购买按钮
 showNum = 1
 startFlag = false
 
@@ -37,12 +38,14 @@ function HomePanel.OnCreate(go)
 	btnMessage = go.transform:FindChild("Panel_Right/btnMessage").gameObject
 	btnRule = go.transform:FindChild("Panel_Right/btnRule").gameObject
 	btnSet = go.transform:FindChild("Panel_Right/btnSet").gameObject
+	btnBuy = go.transform:FindChild("Panel_Left/Image_Card_Number_Bg/jiahao").gameObject
 	this.lua:AddClick(CreateRoomButton, this.OpenCreateRoomDialog);
 	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
 	this.lua:AddClick(headIconbg, this.ShowUserInfoPanel);
 	this.lua:AddClick(btnMessage, this.Button_Mess_Open);
 	this.lua:AddClick(btnRule, this.OpenGameRuleDialog);
 	this.lua:AddClick(btnSet, this.OpenGameSettingDialog);
+this.lua:AddClick(btnBuy, this.OpenShop);
 end
 
 
@@ -133,7 +136,11 @@ function HomePanel.OpenGameSettingDialog()
 	OpenPanel(SettingPanel,1)
 end
 
-
+-- 打开商店
+function HomePanel.OpenShop()
+	soundMgr:playSoundByActionButton(1);
+	OpenPanel(ShopPanel)
+end
 
 -- 打开游戏规则对话框
 

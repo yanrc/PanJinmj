@@ -16,6 +16,6 @@ function RulePanel.CloseClick()
 	ClosePanel(this)
 end
 
-function RulePanel.OnOpen(userInfo)
+function RulePanel.OnOpen()
 
 end

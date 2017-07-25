@@ -13,6 +13,7 @@ CtrlNames = {
 	define.UserInfoPanel,
 	define.MessagePanel,
 	define.RulePanel,
+	define.ShopPanel,
 }
 
 

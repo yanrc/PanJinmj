@@ -1,7 +1,7 @@
 WechatOperate = { }
 local this = WechatOperate
 local shareSdk = GameObject.Find("Utils/ShareSDK"):GetComponent('ShareSDK');
-this.shareSdk=shareSdk
+this.shareSdk = shareSdk
 
 
 function WechatOperate.AddListener()
@@ -16,6 +16,7 @@ end
 -- 获取微信个人信息成功回调,登录
 function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 	if (data ~= nil) then
+		log(data)
 		local loginvo = LoginVo.New();
 		xpcall( function()
 			loginvo.openId = data:get_Item("openid");
@@ -25,20 +26,21 @@ function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 			loginvo.province = data:get_Item("province");
 			loginvo.city = data:get_Item("city");
 			loginvo.sex = data:get_Item("sex");
-			loginvo.IP = GlobalData.GetIpAddress();
-			local data = json.encode(loginvo);
-			GlobalData.loginVo = loginvo;
-			GlobalData.loginResponseData = AvatarVO.New();
-			GlobalData.loginResponseData.account = Account.New();
-			GlobalData.loginResponseData.account.city = loginvo.city;
-			GlobalData.loginResponseData.account.openid = loginvo.openId;
-			GlobalData.loginResponseData.account.nickname = loginvo.nickName;
-			GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
-			GlobalData.loginResponseData.account.unionid = loginvo.unionid;
-			GlobalData.loginResponseData.account.sex = loginvo.sex;
-			GlobalData.loginResponseData.IP = loginvo.IP;
-			networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST, data));
-			log("GlobalData.loginResponseData.account.unionid=" .. GlobalData.loginResponseData.account.unionid)
+			coroutine.start(GlobalData.GetIpAddress, function(IPstr)
+				loginvo.IP = IPstr;
+				local data = json.encode(loginvo);
+				GlobalData.loginVo = loginvo;
+				GlobalData.loginResponseData = AvatarVO.New();
+				GlobalData.loginResponseData.account = Account.New();
+				GlobalData.loginResponseData.account.city = loginvo.city;
+				GlobalData.loginResponseData.account.openid = loginvo.openId;
+				GlobalData.loginResponseData.account.nickname = loginvo.nickName;
+				GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
+				GlobalData.loginResponseData.account.unionid = loginvo.unionid;
+				GlobalData.loginResponseData.account.sex = loginvo.sex;
+				GlobalData.loginResponseData.IP = loginvo.IP;
+				networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST, data));
+			end )
 		end
 		, function(e)
 			log(e);

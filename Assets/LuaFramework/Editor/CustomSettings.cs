@@ -194,6 +194,8 @@ public static class CustomSettings
         _GT(typeof(DateTime)),
         _GT(typeof(ToggleGroup)),
         _GT(typeof(LoadingProgress)),
+        _GT(typeof(AndroidJavaClass)),
+        _GT(typeof(AndroidJavaObject)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

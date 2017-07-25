@@ -53,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224122974946693762}
   - component: {fileID: 222783544480913698}
-  - component: {fileID: 114876064320451604}
   m_Layer: 5
   m_Name: ShopPanel
   m_TagString: Untagged
@@ -229,19 +228,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u5145\u503C"
---- !u!114 &114876064320451604
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1231470332247084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd0af3dc1b496c4f94586a02c5b0c9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnClose: {fileID: 114635803899155236}
-  ItemsRoot: {fileID: 224730896592023418}
 --- !u!114 &114914021130273010
 MonoBehaviour:
   m_ObjectHideFlags: 1

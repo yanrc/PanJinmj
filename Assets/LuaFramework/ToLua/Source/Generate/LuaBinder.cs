@@ -106,6 +106,8 @@ public static class LuaBinder
 		UnityEngine_SpriteWrap.Register(L);
 		UnityEngine_RectWrap.Register(L);
 		UnityEngine_PlayerPrefsWrap.Register(L);
+		UnityEngine_AndroidJavaClassWrap.Register(L);
+		UnityEngine_AndroidJavaObjectWrap.Register(L);
 		L.BeginModule("Experimental");
 		L.BeginModule("Director");
 		UnityEngine_Experimental_Director_DirectorPlayerWrap.Register(L);

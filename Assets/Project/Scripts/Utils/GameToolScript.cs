@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
-using AssemblyCSharp;
-using UnityEngine.UI;
 using System.IO;
-using System.Collections;
 using System.Net;
 using System.Text;
+using System.Security.Cryptography;
+using System.Collections;
+
 namespace AssemblyCSharp
 {
     public class GameToolScript
@@ -15,26 +14,33 @@ namespace AssemblyCSharp
         {
             return GameObject.Instantiate(obj, parent);
         }
-        /// <summary>
-        /// 这个方法和lua里的方法一起使用
-        /// </summary>
-        public static string GetIpAddress(string url)
+
+        public static AndroidJavaObject AndroidJavaObjectGetStatic(AndroidJavaObject obj,string fieldName)
         {
-            string tempip = "";
-            try
-            {
-                WebRequest wr = WebRequest.Create(url);
-                Stream s = wr.GetResponse().GetResponseStream();
-                StreamReader sr = new StreamReader(s, Encoding.Default);
-                string all = sr.ReadToEnd(); //读取网站的数据
-                tempip = all;
-                sr.Close();
-                s.Close();
-            }
-            catch
-            {
-            }
-            return tempip;
+            return obj.GetStatic<AndroidJavaObject>(fieldName);
+        }
+        public static AndroidJavaObject AndroidJavaObjectCallStatic(AndroidJavaObject obj, string fieldName, params object[] args)
+        {
+            return obj.CallStatic<AndroidJavaObject>(fieldName, args);
+        }
+        public static bool AndroidJavaObjectCallBool(AndroidJavaObject obj, string fieldName, params object[] args)
+        {
+            return obj.Call<bool>(fieldName, args);
+        }
+        public static AndroidJavaObject NewAndroidJavaObject(string className)
+        {
+            return new AndroidJavaObject(className);
+        }
+        public static void SetAndroidString(AndroidJavaObject obj, string fieldName, string val)
+        {
+            obj.Set(fieldName, val);
+        }
+        public static string GetMD5(string str)
+        {
+            byte[] result = Encoding.Default.GetBytes(str);    //tbPass为输入密码的文本框
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] output = md5.ComputeHash(result);
+            return (BitConverter.ToString(output).Replace("-", "")).ToLower();  //tbMd5pass为输出加密文本的文本框
         }
     }
 }

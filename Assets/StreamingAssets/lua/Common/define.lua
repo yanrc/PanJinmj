@@ -26,17 +26,24 @@ GameObject = UnityEngine.GameObject;
 Application=UnityEngine.Application
 Input=UnityEngine.Input
 KeyCode=UnityEngine.KeyCode
-List_int=System.Collections.Generic.List_int
 PlayerPrefs=UnityEngine.PlayerPrefs
+ToggleGroup=UnityEngine.UI.ToggleGroup
+AndroidJavaClass=UnityEngine.AndroidJavaClass
+RuntimePlatform=UnityEngine.RuntimePlatform
+AndroidJavaObject=UnityEngine.AndroidJavaObject
+
+List_int=System.Collections.Generic.List_int
 DateTime=System.DateTime
+
 ChatRequest=AssemblyCSharp.ChatRequest
 ChatSocket=AssemblyCSharp.ChatSocket
 ClientRequest=AssemblyCSharp.ClientRequest
 ClientResponse=AssemblyCSharp.ClientResponse
 HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
+
 PlatformType=cn.sharesdk.unity3d.PlatformType
-ToggleGroup=UnityEngine.UI.ToggleGroup
+
 
 
 GameConfig={}
@@ -76,3 +83,4 @@ define.GameOverPanel="GameOverPanel"
 define.UserInfoPanel="UserInfoPanel"
 define.MessagePanel="MessagePanel"
 define.RulePanel="RulePanel"
+define.ShopPanel="ShopPanel"

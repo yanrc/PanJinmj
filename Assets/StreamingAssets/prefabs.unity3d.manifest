@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2149668632
+CRC: 3956802848
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 65592ceea7c0f0acbec43e8acb22a8ed
+    Hash: 09d95d1152c90e2bf6ec164bdd14f08f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e6c247dfc52576587da63b677c14cf30
+    Hash: 312e4a1127c43c11072ef2e32c86b560
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -104,21 +104,21 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 76f1c98d5317c304c83c9b55d0f43d37, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
+  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
+  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: f7b9c21b9c76f114483de081bf48ca0e, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
+  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
 - Class: 114
@@ -143,6 +143,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: e5dedf2b49e09014db7fddc02c74fa2d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6c777b22b8bf0524792ae301251e55ab, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ece12d1c0ce3ad0448def8b1260e82e0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 12087461b8b3d8d40b7ca7da9b58941c, type: 3}
 - Class: 114
@@ -203,6 +205,8 @@ Assets:
 - Assets/Project/Prefabs/ExitPanel.prefab
 - Assets/Project/Prefabs/Panel_touzi.prefab
 - Assets/Project/Prefabs/ThrowCard/TopAndBottomCard.prefab
+- Assets/Project/Prefabs/ShopPanel.prefab
+- Assets/Project/Prefabs/ShopItem.prefab
 - Assets/Project/Prefabs/XieyiPanel.prefab
 - Assets/Project/Prefabs/card/PutOutCard.prefab
 - Assets/Project/Prefabs/EnterRoomPanel.prefab

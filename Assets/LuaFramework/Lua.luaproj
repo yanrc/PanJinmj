@@ -35,6 +35,7 @@
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
     <Folder Include="Lua\Logic\" />
+    <Folder Include="Lua\NewModule\" />
     <Folder Include="Lua\Rules\" />
     <Folder Include="Lua\Vos\" />
   </ItemGroup>
@@ -131,6 +132,7 @@
     <Compile Include="Lua\Logic\UIManager.lua" />
     <Compile Include="Lua\Logic\WechatOperate.lua" />
     <Compile Include="Lua\Main.lua" />
+    <Compile Include="Lua\NewModule\Payment.lua" />
     <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
     <Compile Include="Lua\Rules\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />

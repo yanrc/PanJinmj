@@ -39,16 +39,12 @@ function GlobalData.ReinitData()
 	this.loginVo = nil;
 	this.isChiState = false;
 end
-function GlobalData.GetIpAddress()
-	local all = GameToolScript.GetIpAddress("http://1212.ip138.com/ic.asp");
-	--log(all)
-	--local startIndex =string.find(all,"[") + 1;
-	--ocal endIndex = string.find(all,"]");
-	--local count = endIndex - startIndex;
-	--log(count)
-	--tempip =string.sub(all,startIndex,count);
+function GlobalData.GetIpAddress(callback)
+    local www = WWW("http://1212.ip138.com/ic.asp");
+    coroutine.www(www)
+    local all = www.text;
+	log(all)
 	tempip =string.match(all,"%d+.%d+.%d+.%d+");
-	--log(tempip)
-	return tempip;
+	callback(tempip)
 end
 

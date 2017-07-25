@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1716872979
+CRC: 659178157
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2db6d73d47c32968642a257f3f194bb5
+    Hash: 6f3b89e64b0b315cec2f2d548ef92532
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -122,6 +122,7 @@ Assets:
 - Assets/Project/Textures/Unused/paihangbang_08.png
 - Assets/Project/Textures/Other/setIcon.png
 - Assets/Project/Textures/Unused/ui_game1.png
+- Assets/Project/Textures/Bg/itembgframe.png
 - Assets/Project/Textures/Buttons/get_gift_sh.png
 - Assets/Project/Textures/Unused/frame_05.png
 - Assets/Project/Textures/Setting/setting_dice.png
@@ -173,7 +174,6 @@ Assets:
 - Assets/Project/Textures/Other/changsha_title.png
 - Assets/Project/Textures/Unused/mahjong_face.png
 - Assets/Project/Textures/Frame/icon_frame.png
-- Assets/Project/Textures/Other/room_card.png
 - Assets/Project/Textures/Icon/Icon.png
 - Assets/Project/Textures/Unused/game_over_bg.png
 - Assets/Project/Textures/Effect/game_op_hu1.png
@@ -260,7 +260,9 @@ Assets:
 - Assets/Project/Textures/Unused/home_bg.png
 - Assets/Project/Textures/Other/shengqing_03.png
 - Assets/Project/Textures/JionGame/shanchu.png
+- Assets/Project/Textures/Bg/bgframe.png
 - Assets/Project/Textures/Unused/PhoneSliderOn.png
+- Assets/Project/Textures/Bg/shopitem.png
 - Assets/Project/Textures/Other/kexuan.png
 - Assets/Project/Textures/Other/wave_1.png
 - Assets/Project/Textures/Unused/zhuanzhuanmajiang_03.png

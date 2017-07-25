@@ -202,7 +202,6 @@ namespace cn.sharesdk.unity3d
 			}
 			case 8: 
 			{ // 8 == Platform.ACTION_USER_INFOR
-                        YRC.Debuger.Log(showUserHandler);
 				if (showUserHandler != null) 
 				{
 					showUserHandler(reqID, ResponseState.Success, platform, res);

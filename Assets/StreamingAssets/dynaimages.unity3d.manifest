@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2669196541
+CRC: 253063523
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 57268de7c4eb52b7c64920bd13180125
+    Hash: 3e9fec9b62a20b3d40fabcad81fced28
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -79,6 +79,7 @@ Assets:
 - Assets/Project/DynaImages/Cards/Big/b13.png
 - Assets/Project/DynaImages/Touzi/touzi_13.png
 - Assets/Project/DynaImages/Cards/Big/b3.png
+- Assets/Project/DynaImages/room_card.png
 - Assets/Project/DynaImages/Cards/Small/s29.png
 - Assets/Project/DynaImages/Cards/Small/s3.png
 - Assets/Project/DynaImages/Cards/Left&Right/lr33.png

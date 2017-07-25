@@ -27,9 +27,12 @@ require "Data/PlayerItem"
 require "Data/RuleSelect"
 require "Data/SignalOverItem"
 require "Data/FinalOverItem"
+require "Data/ShopItem"
 
 require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"
+
+require "NewModule/Payment"
 
 require "Common/UIBase"
 for i = 1, #CtrlNames do
