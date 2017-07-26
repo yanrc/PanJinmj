@@ -35,7 +35,7 @@ require "Rules/PanjinRule"
 require "NewModule/Payment"
 
 require "Common/UIBase"
-for i = 1, #CtrlNames do
-	require("Controller/" .. CtrlNames[i])
+for k,v in pairs(define.Panels) do
+	require("Controller/" .. v)
 end
 json = require "cjson"

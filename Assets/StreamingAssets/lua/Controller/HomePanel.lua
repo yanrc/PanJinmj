@@ -1,6 +1,6 @@
 
 local Ease = DG.Tweening.Ease
-HomePanel = UIBase(define.HomePanel, define.FixUI)
+HomePanel = UIBase(define.Panels.HomePanel, define.FixUI)
 local this = HomePanel;
 local gameObject;
 local nickNameText;-- 昵称
@@ -17,7 +17,10 @@ local panelCreateDialog
 local btnMessage-- 消息按钮
 local btnRule-- 玩法按钮
 local btnSet-- 设置按钮
-local btnBuy--购买按钮
+local btnBuy-- 购买按钮
+local btnShop-- 商城按钮
+local btnShare-- 分享按钮
+local btnRecord-- 战绩按钮
 showNum = 1
 startFlag = false
 
@@ -39,19 +42,26 @@ function HomePanel.OnCreate(go)
 	btnRule = go.transform:FindChild("Panel_Right/btnRule").gameObject
 	btnSet = go.transform:FindChild("Panel_Right/btnSet").gameObject
 	btnBuy = go.transform:FindChild("Panel_Left/Image_Card_Number_Bg/jiahao").gameObject
+	btnShop = transform:FindChild("Bottom/shop").gameObject
+	btnShare = transform:FindChild("Bottom/share").gameObject
+	btnRecord = transform:FindChild("Bottom/Record").gameObject
 	this.lua:AddClick(CreateRoomButton, this.OpenCreateRoomDialog);
 	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
 	this.lua:AddClick(headIconbg, this.ShowUserInfoPanel);
 	this.lua:AddClick(btnMessage, this.Button_Mess_Open);
 	this.lua:AddClick(btnRule, this.OpenGameRuleDialog);
 	this.lua:AddClick(btnSet, this.OpenGameSettingDialog);
-this.lua:AddClick(btnBuy, this.OpenShop);
+	this.lua:AddClick(btnBuy, this.OpenShop);
+	this.lua:AddClick(btnShop, this.OpenShop);
+	this.lua:AddClick(btnShare, this.Share);
 end
 
 
 
-function HomePanel.ContactInfoResponse(response)
-	contactInfoContent.text = response.message;
+function HomePanel.ContactInfoResponse(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
+	contactInfoContent.text = message;
 	roomCardPanel:SetActive(true);
 end
 
@@ -133,7 +143,7 @@ end
 
 function HomePanel.OpenGameSettingDialog()
 	soundMgr:playSoundByActionButton(1);
-	OpenPanel(SettingPanel,1)
+	OpenPanel(SettingPanel, 1)
 end
 
 -- 打开商店
@@ -172,16 +182,25 @@ function HomePanel.loadPerfab(perfabName)
 end
 
 
-function HomePanel.CardChangeNotice(response)
+function HomePanel.CardChangeNotice(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
 	local oldCount = tonumber(cardCountText.text);
-	-- 原来的钻石数量
-	local newCount = tonumber(response.message);
-	cardCountText.text = response.message;
+	local newCount = tonumber(message);
+	cardCountText.text = message;
 	GlobalData.loginResponseData.account.roomcard = newCount;
-	contactInfoContent.text = "钻石" .. tostring(newCount - oldCout) .. "颗";
+	if newCount > oldCount then
+		contactInfoContent.text = "恭喜您获得" ..(newCount - oldCout) .. "张房卡"
+	else
+		contactInfoContent.text = "房卡" ..(newCount - oldCout);
+	end
 	roomCardPanel:SetActive(true);
 end
 
+function HomePanel.Share()
+	soundMgr:playSoundByActionButton(1);
+	OpenPanel(SharePanel)
+end
 
 
 function HomePanel.GameBroadcastNotice()
@@ -211,12 +230,12 @@ function HomePanel.MoveCompleted()
 	this.SetNoticeTextMessage();
 end
 
-function HomePanel.ExitApp()
-	soundMgr:playSoundByActionButton(1);
-	if (panelExitDialog == nil) then
-		this.loadPerfab("Assets/Project/Prefabs/Panel_Exit");
-	end
-end
+-- function HomePanel.ExitApp()
+-- soundMgr:playSoundByActionButton(1);
+-- if (panelExitDialog == nil) then
+-- 	this.loadPerfab("Assets/Project/Prefabs/Panel_Exit");
+-- end
+-- end
 -------------------模板-------------------------
 function HomePanel.OnOpen()
 	this.InitUI();

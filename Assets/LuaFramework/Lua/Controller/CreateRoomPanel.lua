@@ -1,5 +1,5 @@
 
-CreateRoomPanel = UIBase(define.CreateRoomPanel, define.PopUI)
+CreateRoomPanel = UIBase(define.Panels.CreateRoomPanel, define.PopUI)
 local this = CreateRoomPanel;
 local transform;
 local gameObject;

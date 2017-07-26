@@ -1,4 +1,4 @@
-RulePanel = UIBase(define.RulePanel, define.PopUI)
+RulePanel = UIBase(define.Panels.RulePanel, define.PopUI)
 local this = RulePanel
 local gameObject
 local btnClose

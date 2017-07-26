@@ -1,6 +1,6 @@
 
 
-StartPanel = UIBase(define.StartPanel,define.FixUI)
+StartPanel = UIBase(define.Panels.StartPanel,define.FixUI)
 local this = StartPanel
 local transform;
 local gameObject;
@@ -21,7 +21,7 @@ function StartPanel.OnCreate(obj)
 	btnLogin = transform:FindChild("Button").gameObject;
 	this.lua:AddClick(btnLogin, this.Login);
 	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
-	Event.Brocast(define.PanelsInited,this);
+	
 end
 
 

@@ -104,6 +104,7 @@
     <Compile Include="Lua\Controller\Moban.lua" />
     <Compile Include="Lua\Controller\RulePanel.lua" />
     <Compile Include="Lua\Controller\SettingPanel.lua" />
+    <Compile Include="Lua\Controller\SharePanel.lua" />
     <Compile Include="Lua\Controller\ShopPanel.lua" />
     <Compile Include="Lua\Controller\StartPanel.lua" />
     <Compile Include="Lua\Controller\VotePanel.lua" />

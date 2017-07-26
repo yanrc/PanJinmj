@@ -1,5 +1,5 @@
 
-WaitingPanel = UIBase(define.WaitingPanel,define.PopUI);
+WaitingPanel = UIBase(define.Panels.WaitingPanel,define.PopUI);
 local this = WaitingPanel
 local gameObject
 local transform

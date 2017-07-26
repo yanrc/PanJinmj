@@ -1,4 +1,4 @@
-ShopPanel = UIBase(define.ShopPanel, define.PopUI)
+ShopPanel = UIBase(define.Panels.ShopPanel, define.PopUI)
 local this = ShopPanel
 local gameObject
 local btnClose

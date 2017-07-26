@@ -1,5 +1,5 @@
 
-SettingPanel = UIBase(define.SettingPanel, define.PopUI)
+SettingPanel = UIBase(define.Panels.SettingPanel, define.PopUI)
 local this = SettingPanel
 
 local transform;
@@ -111,19 +111,6 @@ function SettingPanel.OnOpen(_type)
 	sliderYinYue.value = soundMgr.MusicVolume
 	sliderYinXiao.value = soundMgr.EffectVolume
 	this.lua:ResetClick(jiesanBtn)
-	-- if (GamePanel.isGameStarted) then
-	-- 	jiesanBtnStr.text = "申请解散房间";
-	-- 	_type = 2;
-	-- else
-	-- 	if (1 == GamePanel.GetMyIndexFromList()) then
-	-- 		-- 我是房主（一开始庄家是房主）
-	-- 		jiesanBtnStr.text = "解散房间";
-	-- 		_type = 3;
-	-- 	else
-	-- 		jiesanBtnStr.text = "离开房间";
-	-- 		_type = 4;
-	-- 	end
-	-- end
 	if (_type == 1) then
 		jiesanBtnStr.text = "退出游戏"
 		this.lua:AddClick(jiesanBtn, this.toExit)

@@ -1,5 +1,5 @@
 
-SettingPanel = UIBase(define.SettingPanel, define.PopUI)
+SettingPanel = UIBase(define.Panels.SettingPanel, define.PopUI)
 local this = SettingPanel
 
 local transform;
@@ -42,7 +42,7 @@ function SettingPanel.OnCreate(obj)
 end
 
 function SettingPanel.toJieSan()
-	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？", this.doDissoliveRoomRequest);
+	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？",function() this.DoDissoliveRoomRequest(0) end);
 	ClosePanel(this)
 end
 
@@ -62,10 +62,10 @@ function SettingPanel.LeaveRoom()
 	local sendMsg = json.encode(vo);
 	networkMgr:SendMessage(ClientRequest.New(APIS.OUT_ROOM_REQUEST, sendMsg));
 end
-function SettingPanel.doDissoliveRoomRequest()
+function SettingPanel.DoDissoliveRoomRequest(_type)
 	local dissoliveRoomRequestVo = { };
 	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
-	dissoliveRoomRequestVo.type = "0";
+	dissoliveRoomRequestVo.type = _type;
 	local sendMsg = json.encode(dissoliveRoomRequestVo);
 	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
 	GlobalData.isonApplayExitRoomstatus = true;
@@ -111,19 +111,6 @@ function SettingPanel.OnOpen(_type)
 	sliderYinYue.value = soundMgr.MusicVolume
 	sliderYinXiao.value = soundMgr.EffectVolume
 	this.lua:ResetClick(jiesanBtn)
-	-- if (GamePanel.isGameStarted) then
-	-- 	jiesanBtnStr.text = "申请解散房间";
-	-- 	_type = 2;
-	-- else
-	-- 	if (1 == GamePanel.GetMyIndexFromList()) then
-	-- 		-- 我是房主（一开始庄家是房主）
-	-- 		jiesanBtnStr.text = "解散房间";
-	-- 		_type = 3;
-	-- 	else
-	-- 		jiesanBtnStr.text = "离开房间";
-	-- 		_type = 4;
-	-- 	end
-	-- end
 	if (_type == 1) then
 		jiesanBtnStr.text = "退出游戏"
 		this.lua:AddClick(jiesanBtn, this.toExit)

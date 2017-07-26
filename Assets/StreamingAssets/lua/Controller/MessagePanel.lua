@@ -1,4 +1,4 @@
-MessagePanel = UIBase(define.MessagePanel, define.PopUI)
+MessagePanel = UIBase(define.Panels.MessagePanel, define.PopUI)
 local this = MessagePanel
 local gameObject
 local btnClose

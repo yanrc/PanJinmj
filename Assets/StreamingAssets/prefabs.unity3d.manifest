@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3956802848
+CRC: 2704640694
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 09d95d1152c90e2bf6ec164bdd14f08f
+    Hash: 0fd5a36d23fce667b5ac97ad164f3547
   TypeTreeHash:
     serializedVersion: 2
     Hash: 312e4a1127c43c11072ef2e32c86b560
@@ -106,17 +106,17 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
+  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
+  Script: {fileID: 11500000, guid: f7b9c21b9c76f114483de081bf48ca0e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f7b9c21b9c76f114483de081bf48ca0e, type: 3}
+  Script: {fileID: 11500000, guid: f586e0eea525d2d47a5e3bdef298d277, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
@@ -200,6 +200,7 @@ Assets:
 - Assets/Project/Prefabs/HomePanel.prefab
 - Assets/Project/Prefabs/ShuangLiaoPanel.prefab
 - Assets/Project/Prefabs/StartPanel.prefab
+- Assets/Project/Prefabs/SharePanel.prefab
 - Assets/Project/Prefabs/card/Bottom_L.prefab
 - Assets/Project/Prefabs/Image_yu.prefab
 - Assets/Project/Prefabs/ExitPanel.prefab

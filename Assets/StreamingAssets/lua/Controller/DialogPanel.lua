@@ -1,5 +1,5 @@
 --通用弹出框
-DialogPanel = UIBase(define.DialogPanel,define.PopUI)
+DialogPanel = UIBase(define.Panels.DialogPanel,define.PopUI)
 local this = DialogPanel;
 
 local transform;

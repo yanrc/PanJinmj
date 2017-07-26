@@ -24,7 +24,12 @@ namespace LuaFramework
         /// 否则就需要自己将StreamingAssets里面的所有内容
         /// 复制到自己的Webserver上面，并修改下面的WebUrl。
         /// </summary>
-        public const bool UpdateMode = true;                        //更新模式-默认关闭 
+        public const bool UpdateMode =
+#if UNITY_EDITOR
+         false;                                                     //更新模式-默认关闭 
+#else
+         true;
+#endif                       
         public const bool LuaByteMode = false;                      //Lua字节码模式-默认关闭 
         public const bool LuaBundleMode = false;                    //Lua代码AssetBundle模式
 
@@ -39,11 +44,11 @@ namespace LuaFramework
         public const string WebUrl =                                //测试更新地址
 #if UNITY_STANDALONE_WIN
         "http://101.200.197.7:8090/panjinHotfix/Windows/";
-#elif  UNITY_ANDROID
+#elif UNITY_ANDROID
         "http://101.200.197.7:8090/panjinHotfix/Android/";
 #elif UNITY_IPHONE
         "http://101.200.197.7:8090/panjinHotfix/iOS/";
-#endif            
+#endif
 
         public static string UserId = string.Empty;                 //用户ID
         public static int SocketPort = 0;                           //Socket服务器端口

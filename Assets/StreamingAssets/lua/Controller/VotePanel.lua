@@ -1,4 +1,4 @@
-VotePanel = UIBase(define.VotePanel,define.PopUI)
+VotePanel = UIBase(define.Panels.VotePanel,define.PopUI)
 local this = VotePanel;
 
 local transform;

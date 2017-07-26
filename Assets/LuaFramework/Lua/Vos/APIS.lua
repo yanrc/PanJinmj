@@ -6,8 +6,8 @@ chatSocketUrl = "120.77.38.7";
 socketPort = 11111;
 chatPort = 10234;
 
-UPDATE_INFO_JSON_URL =string.format("http://{0}:8888/download/update.xml",socketUrl) ;--服务器上最新的软件版本信息存储文件
-PIC_PATH =string.format("http://{0}:8888/download/",socketUrl);
+UPDATE_INFO_JSON_URL =string.format("http://%s:8888/download/update.xml",socketUrl) ;--服务器上最新的软件版本信息存储文件
+PIC_PATH =string.format("http://%s:8888/download/",socketUrl);
 shareUrl="";
 shareImageUrl = "http://101.200.197.7:8090/panjin/share/logo.png";
 
@@ -105,7 +105,7 @@ OTHER_TELE_LOGIN = 0x211211;--其他设备登录
 }
 
 if UNITY_ANDROID then
-       APIS.shareUrl =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=android&response_type=code&scope=snsapi_userinfo&state={0}&connect_redirect=1#wechat_redirect";
+       APIS.shareUrl =  "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=android&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
 elseif UNITY_IPHONE then
-       APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=ios&response_type=code&scope=snsapi_userinfo&state={0}&connect_redirect=1#wechat_redirect";
+       APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=ios&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
 end

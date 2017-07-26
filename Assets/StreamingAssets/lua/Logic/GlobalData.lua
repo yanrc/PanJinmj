@@ -41,10 +41,11 @@ function GlobalData.ReinitData()
 end
 function GlobalData.GetIpAddress(callback)
     local www = WWW("http://1212.ip138.com/ic.asp");
-    coroutine.www(www)
+	local timeout={time=5,dotimeout=function() callback("IP获取失败") end}
+    coroutine.www(www,timeout)
     local all = www.text;
 	log(all)
-	tempip =string.match(all,"%d+.%d+.%d+.%d+");
+	local tempip =string.match(all,"%d+.%d+.%d+.%d+");
 	callback(tempip)
 end
 

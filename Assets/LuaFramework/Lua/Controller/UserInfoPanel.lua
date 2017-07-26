@@ -1,4 +1,4 @@
-UserInfoPanel = UIBase(define.UserInfoPanel, define.PopUI)
+UserInfoPanel = UIBase(define.Panels.UserInfoPanel, define.PopUI)
 local this = UserInfoPanel
 local gameObject
 local headIcon

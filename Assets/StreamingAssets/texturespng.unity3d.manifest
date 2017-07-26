@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 659178157
+CRC: 3783371802
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6f3b89e64b0b315cec2f2d548ef92532
+    Hash: 6a6ca005885bb06edeea10a422342693
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -14,6 +14,7 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/Project/Textures/Buttons/shop.png
 - Assets/Project/Textures/Other/dibu.png
 - Assets/Project/Textures/Buttons/exit.png
 - Assets/Project/Textures/Effect/game_op_hu2.png
@@ -26,6 +27,7 @@ Assets:
 - Assets/Project/Textures/JionGame/chongshu.png
 - Assets/Project/Textures/Unused/7_.png
 - Assets/Project/Textures/Unused/shuiyin1.png
+- Assets/Project/Textures/Bg/Ads.png
 - Assets/Project/Textures/Buttons/gift.png
 - Assets/Project/Textures/Unused/ui_game.png
 - Assets/Project/Textures/Unused/putOutCard_bgimg.png
@@ -34,6 +36,7 @@ Assets:
 - Assets/Project/Textures/Other/notice_icon.png
 - Assets/Project/Textures/Buttons/exit_cancle.png
 - Assets/Project/Textures/Effect/hu_B.png
+- Assets/Project/Textures/wechatShare/06.png
 - Assets/Project/Textures/Effect/laiziFlg.png
 - Assets/Project/Textures/Unused/paidimian_05.png
 - Assets/Project/Textures/Unused/app_icon.png
@@ -69,6 +72,7 @@ Assets:
 - Assets/Project/Textures/Icon/Icon-180.png
 - Assets/Project/Textures/JionGame/8.png
 - Assets/Project/Textures/Unused/chakanzhanji2_03.png
+- Assets/Project/Textures/Buttons/share.png
 - Assets/Project/Textures/Unused/fangjianhao1.png
 - Assets/Project/Textures/Other/classfy_title_bg_hl.png
 - Assets/Project/Textures/Unused/mahong_face2.png
@@ -88,6 +92,7 @@ Assets:
 - Assets/Project/Textures/Unused/8_.png
 - Assets/Project/Textures/Unused/zhunbei_03.png
 - Assets/Project/Textures/New_cardsBg/dipai_06.png
+- Assets/Project/Textures/wechatShare/04.png
 - Assets/Project/Textures/Unused/card_number_bg2.png
 - Assets/Project/Textures/Buttons/chakanzhanji_03.png
 - Assets/Project/Textures/Unused/game_op_ting2.png
@@ -100,6 +105,7 @@ Assets:
 - Assets/Project/Textures/Buttons/huifang.png
 - Assets/Project/Textures/Bg/card_number_bg.png
 - Assets/Project/Textures/Unused/fenxiang.png
+- Assets/Project/Textures/wechatShare/10.png
 - Assets/Project/Textures/Unused/login_youke.png
 - Assets/Project/Textures/Unused/anniu_14.png
 - Assets/Project/Textures/Unused/anniu.png
@@ -153,6 +159,7 @@ Assets:
 - Assets/Project/Textures/Unused/ui_game3.png
 - Assets/Project/Textures/Other/Lottery (1).png
 - Assets/Project/Textures/Unused/sex1.png
+- Assets/Project/Textures/wechatShare/03.png
 - Assets/Project/Textures/Unused/yinliang_04.png
 - Assets/Project/Textures/Unused/userbg.png
 - Assets/Project/Textures/Buttons/micPhone.png
@@ -167,7 +174,9 @@ Assets:
 - Assets/Project/Textures/Unused/create_room.png
 - Assets/Project/Textures/Unused/huashui.png
 - Assets/Project/Textures/Bg/chuangjian_n.png
+- Assets/Project/Textures/wechatShare/02.png
 - Assets/Project/Textures/Unused/logo.png
+- Assets/Project/Textures/wechatShare/08.png
 - Assets/Project/Textures/Unused/liuju_03.png
 - Assets/Project/Textures/Other/chuangjian.png
 - Assets/Project/Textures/Bg/create_room_dialog_bg.png
@@ -212,6 +221,7 @@ Assets:
 - Assets/Project/Textures/Bg/loading2.png
 - Assets/Project/Textures/Other/zhunbei_03(1).png
 - Assets/Project/Textures/Other/wave_3.png
+- Assets/Project/Textures/wechatShare/09.png
 - Assets/Project/Textures/Other/Red.png
 - Assets/Project/Textures/Unused/game_op_ting1.png
 - Assets/Project/Textures/JionGame/4.png
@@ -230,6 +240,7 @@ Assets:
 - Assets/Project/Textures/Unused/frame_04.png
 - Assets/Project/Textures/Buttons/button_create.png
 - Assets/Project/Textures/Unused/ui_game4.png
+- Assets/Project/Textures/wechatShare/07.png
 - Assets/Project/Textures/Unused/tuichuyouxi.png
 - Assets/Project/Textures/Other/Lottery (3).png
 - Assets/Project/Textures/Unused/6_.png
@@ -256,6 +267,7 @@ Assets:
 - Assets/Project/Textures/Other/fangkashuliang.png
 - Assets/Project/Textures/Effect/gang_E.png
 - Assets/Project/Textures/Buttons/rank.png
+- Assets/Project/Textures/wechatShare/01.png
 - Assets/Project/Textures/Bg/rank_dialog_bg.png
 - Assets/Project/Textures/Unused/home_bg.png
 - Assets/Project/Textures/Other/shengqing_03.png
@@ -303,6 +315,7 @@ Assets:
 - Assets/Project/Textures/Unused/button_paodekuai.png
 - Assets/Project/Textures/Unused/paiyou.png
 - Assets/Project/Textures/Unused/Icon-120.png
+- Assets/Project/Textures/wechatShare/05.png
 - Assets/Project/Textures/Unused/frame_02.png
 - Assets/Project/Textures/JionGame/fangjianhao.png
 - Assets/Project/Textures/Other/notice_bg.png

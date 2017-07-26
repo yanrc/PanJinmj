@@ -1,4 +1,4 @@
-GameOverPanel = UIBase(define.GameOverPanel, define.PopUI)
+GameOverPanel = UIBase(define.Panels.GameOverPanel, define.PopUI)
 local this = GameOverPanel
 local transform
 local gameObject

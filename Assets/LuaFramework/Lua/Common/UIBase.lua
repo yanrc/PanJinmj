@@ -17,6 +17,7 @@ function _UIBase:Init(obj)
 	self.transform = obj.transform
 	self.lua = obj:GetComponent('LuaBehaviour');
 	obj:SetActive(false)
+	Event.Brocast(define.PanelsInited, self);
 	logWarn("Start lua--->>" .. obj.name);
 end
 

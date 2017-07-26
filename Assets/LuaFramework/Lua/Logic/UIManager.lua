@@ -1,40 +1,25 @@
-CtrlNames = {
-	define.CreateRoomPanel,
-	define.DialogPanel,
-	define.EnterRoomPanel,
-	define.ExitPanel,
-	define.GamePanel,
-	define.HomePanel,
-	define.SettingPanel,
-	define.WaitingPanel,
-	define.VotePanel,
-	define.StartPanel,
-	define.GameOverPanel,
-	define.UserInfoPanel,
-	define.MessagePanel,
-	define.RulePanel,
-	define.ShopPanel,
-}
 
 
 UIManager = { }
 local this = UIManager;
-
+this.PanelNum = 0
 function UIManager.InitPanels()
 	log("Lua:UIManager.InitPanels")
 	Event.AddListener(define.PanelsInited, this.OnInited)
-	for i = 1, #CtrlNames do
-		_G[CtrlNames[i]]:Awake()
+	for k, v in pairs(define.Panels) do
+		this.PanelNum=this.PanelNum+1
+		_G[v]:Awake()
 	end
 end
-
+--面板都加载好了，再加载预制体
 function UIManager.OnInited(panel)
-	if (panel == StartPanel) then
-		OpenPanel(panel)
+	this.PanelNum = this.PanelNum - 1
+	if (this.PanelNum == 0) then
+		OpenPanel(StartPanel)
 		this.InitPrefabs()
 		LoadingProgress.ClearProgressBar();
+		UpdateBeat:Add(this.Update);
 	end
-	UpdateBeat:Add(this.Update);
 end
 
 function UIManager.InitPrefabs()

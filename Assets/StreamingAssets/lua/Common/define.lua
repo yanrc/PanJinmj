@@ -43,7 +43,7 @@ HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
 
 PlatformType=cn.sharesdk.unity3d.PlatformType
-
+ShareContent=cn.sharesdk.unity3d.ShareContent
 
 
 GameConfig={}
@@ -69,18 +69,21 @@ define.PanelsInited="PanelsInited"
 
 define.FixUI="FixUI"
 define.PopUI="PopUI"
-define.CreateRoomPanel="CreateRoomPanel"
-define.DialogPanel="DialogPanel"
-define.EnterRoomPanel="EnterRoomPanel"
-define.ExitPanel="ExitPanel"
-define.GamePanel="GamePanel"
-define.HomePanel="HomePanel"
-define.SettingPanel="SettingPanel"
-define.StartPanel="StartPanel"
-define.VotePanel="VotePanel"
-define.WaitingPanel="WaitingPanel"
-define.GameOverPanel="GameOverPanel"
-define.UserInfoPanel="UserInfoPanel"
-define.MessagePanel="MessagePanel"
-define.RulePanel="RulePanel"
-define.ShopPanel="ShopPanel"
+
+define.Panels={}
+define.Panels.CreateRoomPanel="CreateRoomPanel"
+define.Panels.DialogPanel="DialogPanel"
+define.Panels.EnterRoomPanel="EnterRoomPanel"
+define.Panels.ExitPanel="ExitPanel"
+define.Panels.GamePanel="GamePanel"
+define.Panels.HomePanel="HomePanel"
+define.Panels.SettingPanel="SettingPanel"
+define.Panels.StartPanel="StartPanel"
+define.Panels.VotePanel="VotePanel"
+define.Panels.WaitingPanel="WaitingPanel"
+define.Panels.GameOverPanel="GameOverPanel"
+define.Panels.UserInfoPanel="UserInfoPanel"
+define.Panels.MessagePanel="MessagePanel"
+define.Panels.RulePanel="RulePanel"
+define.Panels.ShopPanel="ShopPanel"
+define.Panels.SharePanel="SharePanel"

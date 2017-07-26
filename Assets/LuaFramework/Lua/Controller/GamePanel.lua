@@ -1,6 +1,6 @@
 
 local Ease = DG.Tweening.Ease
-GamePanel = UIBase(define.GamePanel, define.FixUI)
+GamePanel = UIBase(define.Panels.GamePanel, define.FixUI)
 local this = GamePanel;
 local gameObject;
 local transform
@@ -34,7 +34,7 @@ local isFirstOpen
 local ruleText
 -- 能否申请退出房间，初始为false，开始游戏置true
 this.isGameStarted = false
-local inviteFriendButton
+local btnInviteFriend
 local btnJieSan
 local ExitRoomButton
 local live1
@@ -93,6 +93,8 @@ local chiList_1 = { }
 local chiList_2 = { }
 local chiList_3 = { }
 local LastAvarIndex = 1
+local isQiangHu = false
+local showNoticeNumber = 0
 function GamePanel.OnCreate(go)
 	gameObject = go;
 	transform = go.transform
@@ -103,7 +105,7 @@ function GamePanel.OnCreate(go)
 	dialog_fanhui = transform:FindChild('jiesan')
 	LeavedRoundNumText = transform:FindChild('Leaved1/Text'):GetComponent('Text');
 	ruleText = transform:FindChild('Rule'):GetComponent('Text');
-	inviteFriendButton = transform:FindChild('Button_invite_friend'):GetComponent('Button');
+	btnInviteFriend = transform:FindChild('Button_invite_friend').gameObject;
 	btnJieSan = transform:FindChild('Button_jiesan').gameObject;
 	ExitRoomButton = transform:FindChild('Button_other'):GetComponent('Button');
 	live1 = transform:FindChild('Leaved'):GetComponent('Image');
@@ -130,7 +132,7 @@ function GamePanel.OnCreate(go)
 	playerItems[3] = PlayerItem.New(players:FindChild('Player_T').gameObject)
 	playerItems[4] = PlayerItem.New(players:FindChild('Player_L').gameObject)
 	for i = 1, #playerItems do
-		this.lua:AddClick(playerItems[i].gameObject, PlayerItem.DisplayAvatorIp,playerItems[i])
+		this.lua:AddClick(playerItems[i].gameObject, PlayerItem.DisplayAvatorIp, playerItems[i])
 	end
 	ReadySelect[1] = transform:FindChild('Panel/DuanMen'):GetComponent('Toggle')
 	ReadySelect[2] = transform:FindChild('Panel/Gang'):GetComponent('Toggle')
@@ -153,9 +155,10 @@ function GamePanel.OnCreate(go)
 	btnSetting = transform:FindChild('soundClose').gameObject
 	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Sure').gameObject, this.Tuichu)
 	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Cancle').gameObject, this.Quxiao)
-	this.lua:AddClick(btnSetting, this.OpenGameSettingDialog)
+	this.lua:AddClick(btnSetting, this.OpenSettingPanel)
 	this.lua:AddClick(btnJieSan, this.QuiteRoom)
 	this.lua:AddClick(btnReadyGame, this.ReadyGame)
+	this.lua:AddClick(btnInviteFriend, this.InviteFriend)
 	touziObj = transform:FindChild('Panel_touzi').gameObject
 	canChiList[1] = transform:FindChild('ChiList/list_1').gameObject
 	canChiList[2] = transform:FindChild('ChiList/list_2').gameObject
@@ -313,7 +316,7 @@ function GamePanel.CleanGameplayUI()
 	log("GamePanel.CleanGameplayUI")
 	this.isGameStarted = true;
 	-- weipaiImg.transform.gameObject:SetActive(false);
-	inviteFriendButton.transform.gameObject:SetActive(false);
+	btnInviteFriend:SetActive(false);
 	btnJieSan:SetActive(false);
 	ExitRoomButton.transform.gameObject:SetActive(false);
 	live1.transform.gameObject:SetActive(true);
@@ -681,7 +684,7 @@ function GamePanel.SetDirGameObjectAction(LocalIndex)
 end
 
 function GamePanel.ThrowBottom(CardPoint, LocalIndex, pos, isActive)
-	obj = newObject(ThrowPrefabs[LocalIndex])
+	local obj = newObject(ThrowPrefabs[LocalIndex])
 	obj.transform:SetParent(outparentList[LocalIndex])
 	obj.transform.localPosition = pos
 	local objCtrl = TopAndBottomCardScript.New(obj)
@@ -749,7 +752,7 @@ function GamePanel.PengCard(buffer)
 	table.remove(tableCardList[LastAvarIndex])
 	-- 消除手牌
 	if (LocalIndex == 1) then
-		removeCount = 0
+		local removeCount = 0
 		for i = #this.handerCardList[1], 1, -1 do
 			local objCtrl = this.handerCardList[1][i];
 			if (objCtrl.CardPoint == cardVo.cardPoint) then
@@ -1224,28 +1227,28 @@ end
 
 
 function GamePanel.OnChipSelect(objCtrl, isSelected)
-	if (isSelect) then
-		-- 选择此牌
-		if (oneChiCardPoint ~= -1 and twoChiCardPoint ~= -1) then
-			return
-		end
-		if (oneChiCardPoint == -1) then
-			oneChiCardPoint = objCtrl.CardPoint;
-		else
-			twoChiCardPoint = objCtrl.CardPoint;
-		end
-		obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -272);
-		objCtrl.selected = true;
-	else
-		-- 取消选择
-		if (oneChiCardPoint == objCtrl.CardPoint) then
-			oneChiCardPoint = -1;
-		elseif (twoChiCardPoint == objCtrl.CardPoint) then
-			twoChiCardPoint = -1;
-		end
-		obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -292);
-		objCtrl.selected = false;
-	end
+	-- if (isSelect) then
+	-- 	-- 选择此牌
+	-- 	if (oneChiCardPoint ~= -1 and twoChiCardPoint ~= -1) then
+	-- 		return
+	-- 	end
+	-- 	if (oneChiCardPoint == -1) then
+	-- 		oneChiCardPoint = objCtrl.CardPoint;
+	-- 	else
+	-- 		twoChiCardPoint = objCtrl.CardPoint;
+	-- 	end
+	-- 	obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -272);
+	-- 	objCtrl.selected = true;
+	-- else
+	-- 	-- 取消选择
+	-- 	if (oneChiCardPoint == objCtrl.CardPoint) then
+	-- 		oneChiCardPoint = -1;
+	-- 	elseif (twoChiCardPoint == objCtrl.CardPoint) then
+	-- 		twoChiCardPoint = -1;
+	-- 	end
+	-- 	obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -292);
+	-- 	objCtrl.selected = false;
+	-- end
 end
 
 
@@ -1383,7 +1386,7 @@ function GamePanel.ShowChiList()
 end
 
 -- 吃牌选择点击
-function GamePanel.MyChiBtnClick2(idx,go)
+function GamePanel.MyChiBtnClick2(idx, go)
 	local cpoint = chiPaiPointList[idx];
 	local cardvo = { }
 	cardvo.cardPoint = cpoint.putCardPoint;
@@ -1429,11 +1432,11 @@ function GamePanel.MyGangBtnClick()
 	-- GlobalData.isDrag = true;--由于存在抢杠胡，点了杠按钮以后还不能打牌，收到杠消息才能打
 	if (#gangPaiList == 1) then
 		useForGangOrPengOrChi = tonumber(gangPaiList[1])
-		selfGangCardPoint = useForGangOrPengOrChi;
+		-- selfGangCardPoint = useForGangOrPengOrChi;
 	else
 		-- 多张牌
 		useForGangOrPengOrChi = tonumber(gangPaiList[1])
-		selfGangCardPoint = useForGangOrPengOrChi;
+		-- selfGangCardPoint = useForGangOrPengOrChi;
 	end
 	local GangRequestVO = { }
 	GangRequestVO.cardPoint = useForGangOrPengOrChi
@@ -1777,6 +1780,7 @@ end
 
 -- 退出房间确认面板
 function GamePanel.QuiteRoom()
+	soundMgr:playSoundByActionButton(1);
 	if (bankerIndex == this.GetMyIndexFromList()) then
 		dialog_fanhui_text.text = "亲，确定要解散房间吗?";
 	else
@@ -1786,6 +1790,7 @@ function GamePanel.QuiteRoom()
 end
 -- 退出房间按钮点击
 function GamePanel.Tuichu()
+	soundMgr:playSoundByActionButton(1);
 	local vo = { };
 	vo.roomId = GlobalData.roomVo.roomId;
 	local sendMsg = json.encode(vo)
@@ -1794,6 +1799,7 @@ function GamePanel.Tuichu()
 end
 -- 取消退出房间
 function GamePanel.Quxiao()
+	soundMgr:playSoundByActionButton(1);
 	dialog_fanhui.gameObject:SetActive(false);
 end
 
@@ -1826,20 +1832,26 @@ function GamePanel.OutRoomCallbak(buffer)
 	end
 end
 
-local dissoliveRoomType = "0";
-function GamePanel.DissoliveRoomRequest()
-	soundMgr:playSoundByActionButton(1);
-	if (this.isGameStarted) then
-		dissoliveRoomType = "0";
-		TipsManager.LoadDialog("申请解散房间", "你确定要申请解散房间?", this.DoDissoliveRoomRequest, cancle);
-	else
-		TipsManager.SetTips("还没有开始游戏，不能申请退出房间");
-	end
-end
+--local dissoliveRoomType = "0";
+--function GamePanel.DissoliveRoomRequest()
+--	soundMgr:playSoundByActionButton(1);
+--	if (this.isGameStarted) then
+--		dissoliveRoomType = "0";
+--		OpenPanel(ExitPanel,"申请解散房间", "你确定要申请解散房间?", this.DoDissoliveRoomRequest);
+--	else
+--		TipsManager.SetTips("还没有开始游戏，不能申请退出房间");
+--	end
+--end
 -- 游戏设置
-function GamePanel.OpenGameSettingDialog()
+function GamePanel.OpenSettingPanel()
 	soundMgr:playSoundByActionButton(1);
-	SettingPanelCtrl.Open();
+	local _type = 4
+	if (this.isGameStarted) then
+		_type = 2;
+	elseif (1 == GamePanel.GetMyIndexFromList()) then
+		_type = 3;
+	end
+	OpenPanel(SettingPanel, _type)
 end
 
 local panelCreateDialog;-- 界面上打开的dialog
@@ -1854,8 +1866,6 @@ function GamePanel.LoadPrefab(perfabName)
 end
 
 -- 申请解散房间回调
-
-local dissoDialog;
 function GamePanel.DissoliveRoomResponse(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
@@ -1864,35 +1874,27 @@ function GamePanel.DissoliveRoomResponse(buffer)
 	local uuid = dissoliveRoomResponseVo.uuid;
 	if (dissoliveRoomResponseVo.type == "0") then
 		GlobalData.isonApplayExitRoomstatus = true;
-		dissoliveRoomType = "1";
-		resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/Panel_Apply_Exit.prefab" }, function(prefabs)
-			dissoDialog = newObject(prefabs[0])
-			local VoteScript = VoteScript.New(dissoDialog)
-			VoteScript:InitUI(uuid, plyerName, avatarList);
-		end )
+		OpenPanel(VotePanel,uuid,plyerName,avatarList)
 	elseif (dissoliveRoomResponseVo.type == "3") then
 		if (zhuamaPanel ~= nil and GlobalData.isonApplayExitRoomstatus) then
 			destroy(zhuamaPanel)
 		end
 		GlobalData.isonApplayExitRoomstatus = false;
-		if (dissoDialog ~= nil) then
-			dissoDialog.VoteScript.RemoveListener();
-			destroy(dissoDialog);
-		end
+		ClosePanel(VotePanel)
 		GlobalData.isOverByPlayer = true;
 	end
 end
 
 
 -- 申请或同意解散房间请求
-function GamePanel.DoDissoliveRoomRequest()
-	local dissoliveRoomRequestVo = DissoliveRoomRequestVo.New();
-	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
-	dissoliveRoomRequestVo.type = dissoliveRoomType;
-	local sendMsg = josn.encode(dissoliveRoomRequestVo);
-	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
-	GlobalData.isonApplayExitRoomstatus = true;
-end
+--function GamePanel.DoDissoliveRoomRequest()
+--	local dissoliveRoomRequestVo = DissoliveRoomRequestVo.New();
+--	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
+--	dissoliveRoomRequestVo.type = 0;
+--	local sendMsg = josn.encode(dissoliveRoomRequestVo);
+--	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
+--	GlobalData.isonApplayExitRoomstatus = true;
+--end
 
 function GamePanel.Cancle()
 end
@@ -2340,7 +2342,8 @@ function GamePanel.DoDisplayChiCard(LocalIndex, chipai)
 end
 
 function GamePanel.InviteFriend()
-	WechatOperate.InviteFriend();
+	soundMgr:playSoundByActionButton(1);
+	OpenPanel(SharePanel)
 end
 
 -- 用户离线回调
@@ -2368,7 +2371,7 @@ function GamePanel.OfflineNotice(buffer)
 	switch[LocalIndex]()
 	-- 申请解散房间过程中，有人掉线，直接不能解散房间
 	if (GlobalData.isonApplayExitRoomstatus) then
-		VotePanel:Close()
+		ClosePanel(VotePanel)
 		TipsManager.SetTips("由于" .. avatarList[index].account.nickname .. "离线，系统不能解散房间")
 	end
 end
@@ -2396,6 +2399,7 @@ end
 
 -- 发准备消息
 function GamePanel.ReadyGame()
+	soundMgr:playSoundByActionButton(1);
 	local readyvo = { };
 	readyvo.duanMen = ReadySelect[1].isOn;
 	readyvo.jiaGang = ReadySelect[2].isOn;

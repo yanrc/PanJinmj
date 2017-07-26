@@ -59,7 +59,7 @@ end
 -- 分享战绩成功回调
 function WechatOperate.OnShareCallBack(reqID, state, _type, result)
 	if state == ResponseState.Success then
-		-- TipsManager.SetTips("分享成功");
+		TipsManager.SetTips("分享成功");
 	elseif (state == ResponseState.Fail) then
 		log("shar fail :" + result["error_msg"]);
 	end
@@ -113,12 +113,14 @@ function WechatOperate.ShareAchievement(platformType, picPath)
 	shareSdk:ShareContent(platformType, customizeShareParams);
 end
 
-function WechatOperate.InviteFriend()
-	if (GlobalData.roomVo ~= nil) then
+function WechatOperate.InviteFriend(platformType)
+	local str = "";
+	local title
+	log(GlobalData.roomVo)
+	if (GlobalData.roomVo.roomId ~= nil and GlobalData.roomVo.roomId > 0) then
 		local roomvo = GlobalData.roomVo;
 		GlobalData.totalTimes = roomvo.roundNumber;
 		GlobalData.surplusTimes = roomvo.roundNumber;
-		local str = "";
 		if (roomvo.hong) then
 			str = str .. "红中麻将,";
 		else
@@ -142,33 +144,29 @@ function WechatOperate.InviteFriend()
 			else
 				str = str .. "无风牌,";
 			end
-			if (roomvo.xiaYu > 0) then
+			if (roomvo.xiaYu and roomvo.xiaYu > 0) then
 				str = str .. "下鱼" .. roomvo.xiaYu .. "条,";
 			end
-			if (roomvo.ma > 0) then
+			if (roomvo.ma and roomvo.ma > 0) then
 				str = str .. "抓" .. roomvo.ma .. "个码,";
 			end
-			if (roomvo.magnification > 0) then
+			if (roomvo.magnification and roomvo.magnification > 0) then
 				str = str .. "128番封顶";
 			end
 			str = str .. "有胆，你就来！";
-			local title = "豆豆盘锦麻将    " .. "房间号：" .. roomvo.roomId;
-			local url = string.format(APIS.shareUrl, GlobalData.loginResponseData.account.unionid)
-			this.Share(title, str, url, APIS.shareImageUrl, ContentType.Webpage)
+			title = "豆豆盘锦麻将    " .. "房间号：" .. roomvo.roomId;
 		end
+	else
+	title = Application.productName;
+	str = GlobalData.loginResponseData.account.nickname .. "邀请您一起来玩" .. title;
 	end
+	local url = string.format(APIS.shareUrl, GlobalData.loginResponseData.account.unionid)
+	this.Share(title, str, url, APIS.shareImageUrl, ContentType.Webpage,platformType)
 end
 
--- 大厅里的分享
-function WechatOperate.InviteInHome()
-	local title = Application.productName;
-	local str = GlobalData.loginResponseData.account.nickname .. "邀请您一起来玩" .. title;
-	local url = string.format(APIS.shareUrl, GlobalData.loginResponseData.account.unionid)
-	this.Share(title, str, url, APIS.shareImageUrl, ContentType.Webpage)
-end
 
 -- 分享
-function WechatOperate.Share(title, text, url, imageUrl, ShareType)
+function WechatOperate.Share(title, text, url, imageUrl, ShareType,platformType)
 	local customizeShareParams = ShareContent.New();
 	customizeShareParams:SetTitle(title);
 	customizeShareParams:SetText(text);
@@ -178,5 +176,5 @@ function WechatOperate.Share(title, text, url, imageUrl, ShareType)
 	customizeShareParams:SetImageUrl(imageUrl);
 	customizeShareParams:SetShareType(ShareType);
 	customizeShareParams:SetObjectID("");
-	shareSdk:ShareContent(PlatformType.WeChat, customizeShareParams);
+	shareSdk:ShareContent(platformType, customizeShareParams);
 end

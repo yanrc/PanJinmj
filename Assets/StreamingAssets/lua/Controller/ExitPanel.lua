@@ -1,5 +1,5 @@
 ﻿
-ExitPanel = UIBase(define.ExitPanel, define.PopUI);
+ExitPanel = UIBase(define.Panels.ExitPanel, define.PopUI);
 local this = ExitPanel;
 local transform;
 local gameObject;

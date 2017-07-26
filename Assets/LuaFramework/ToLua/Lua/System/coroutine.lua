@@ -13,115 +13,126 @@ local debug = debug
 local FrameTimer = FrameTimer
 local CoTimer = CoTimer
 
-local comap = {}
-setmetatable(comap, {__mode = "kv"})
+local comap = { }
+setmetatable(comap, { __mode = "kv" })
 
-function coroutine.start(f, ...)	
+function coroutine.start(f, ...)
 	local co = create(f)
-	
+
 	if running() == nil then
 		local flag, msg = resume(co, ...)
-	
-		if not flag then		
-			msg = debug.traceback(co, msg)					
-			error(msg)				
-		end					
-	else
-		local args = {...}
-		local timer = nil
-		
-		local action = function()												
-			local flag, msg = resume(co, unpack(args))			
-	
-			if not flag then				
-				timer:Stop()				
-				msg = debug.traceback(co, msg)				
-				error(msg)						
-			end		
+
+		if not flag then
+			msg = debug.traceback(co, msg)
+			error(msg)
 		end
-			
+	else
+		local args = { ...}
+		local timer = nil
+
+		local action = function()
+			local flag, msg = resume(co, unpack(args))
+
+			if not flag then
+				timer:Stop()
+				msg = debug.traceback(co, msg)
+				error(msg)
+			end
+		end
+
 		timer = FrameTimer.New(action, 0, 1)
 		comap[co] = timer
-		timer:Start()		
+		timer:Start()
 	end
 
 	return co
 end
 
 function coroutine.wait(t, co, ...)
-	local args = {...}
-	co = co or running()		
+	local args = { ...}
+	co = co or running()
 	local timer = nil
-		
-	local action = function()				
+
+	local action = function()
 		local flag, msg = resume(co, unpack(args))
-		
-		if not flag then	
-			timer:Stop()			
-			msg = debug.traceback(co, msg)							
-			error(msg)			
+
+		if not flag then
+			timer:Stop()
+			msg = debug.traceback(co, msg)
+			error(msg)
 			return
 		end
 	end
-	
-	timer = CoTimer.New(action, t, 1)
-	comap[co] = timer	
-	timer:Start()
-	return yield()
-end
 
-function coroutine.step(t, co, ...)
-	local args = {...}
-	co = co or running()		
-	local timer = nil
-	
-	local action = function()						
-		local flag, msg = resume(co, unpack(args))
-	
-		if not flag then							
-			timer:Stop()					
-			msg = debug.traceback(co, msg)					
-			error(msg)
-			return	
-		end		
-	end
-				
-	timer = FrameTimer.New(action, t or 1, 1)
+	timer = CoTimer.New(action, t, 1)
 	comap[co] = timer
 	timer:Start()
 	return yield()
 end
 
-function coroutine.www(www, co)			
-	co = co or running()			
-	local timer = nil			
-			
-	local action = function()				
-		if not www.isDone then		
-			return		
-		end		
-				
-		timer:Stop()		
-		local flag, msg = resume(co)		
-			
-		if not flag then						
-			msg = debug.traceback(co, msg)						
-			error(msg)			
-			return			
-		end				
-	end		
-					
-	timer = FrameTimer.New(action, 1, -1)	
-	comap[co] = timer	
- 	timer:Start()
- 	return yield()
+function coroutine.step(t, co, ...)
+	local args = { ...}
+	co = co or running()
+	local timer = nil
+
+	local action = function()
+		local flag, msg = resume(co, unpack(args))
+
+		if not flag then
+			timer:Stop()
+			msg = debug.traceback(co, msg)
+			error(msg)
+			return
+		end
+	end
+
+	timer = FrameTimer.New(action, t or 1, 1)
+	comap[co] = timer
+	timer:Start()
+	return yield()
+end
+-- 原理是每次update执行一次action
+--自己增加了超时处理
+function coroutine.www(www, timeout, co)
+	co = co or running()
+	local timer = nil
+	local action = function()
+		if not www.isDone then
+			if timeout == nil then
+				return
+			elseif timeout.time > 0 then
+				timeout.time = timeout.time - Time.deltaTime
+				return
+			else
+				if timeout.dotimeout ~= nil then
+					timeout.dotimeout()
+				end
+				timer:Stop()
+				return
+			end
+		end
+
+		timer:Stop()
+		local flag, msg = resume(co)
+
+		if not flag then
+			msg = debug.traceback(co, msg)
+			error(msg)
+			return
+		end
+	end
+
+	timer = FrameTimer.New(action, 1, -1)
+	comap[co] = timer
+	timer:Start()
+	return yield()
 end
 
 function coroutine.stop(co)
- 	local timer = comap[co]
+	local timer = comap[co]
 
- 	if timer ~= nil then
- 		comap[co] = nil
- 		timer:Stop() 		
- 	end
+	if timer ~= nil then
+		comap[co] = nil
+		timer:Stop()
+	end
 end

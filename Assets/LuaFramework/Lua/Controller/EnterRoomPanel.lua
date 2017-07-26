@@ -1,5 +1,5 @@
 
-EnterRoomPanel = UIBase(define.EnterRoomPanel, define.PopUI)
+EnterRoomPanel = UIBase(define.Panels.EnterRoomPanel, define.PopUI)
 local this = EnterRoomPanel;
 
 local transform;
