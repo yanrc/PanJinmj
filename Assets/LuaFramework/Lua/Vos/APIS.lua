@@ -2,7 +2,7 @@ APIS=
 {
 socketUrl = "101.200.197.7";
 --socketUrl = "192.168.1.101";
-chatSocketUrl = "120.77.38.7";
+chatSocketUrl = "101.200.197.7";
 socketPort = 11111;
 chatPort = 10234;
 

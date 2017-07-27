@@ -11,7 +11,7 @@ public class LuaFramework_AppConstWrap
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegConstant("DebugMode", 1);
 		L.RegConstant("ExampleMode", 0);
-		L.RegConstant("UpdateMode", 1);
+		L.RegConstant("UpdateMode", 0);
 		L.RegConstant("LuaByteMode", 0);
 		L.RegConstant("LuaBundleMode", 0);
 		L.RegConstant("TimerInterval", 1);
@@ -25,6 +25,8 @@ public class LuaFramework_AppConstWrap
 		L.RegVar("UserId", get_UserId, set_UserId);
 		L.RegVar("SocketPort", get_SocketPort, set_SocketPort);
 		L.RegVar("SocketAddress", get_SocketAddress, set_SocketAddress);
+		L.RegVar("ChatSocketPort", get_ChatSocketPort, set_ChatSocketPort);
+		L.RegVar("ChatSocketAddress", get_ChatSocketAddress, set_ChatSocketAddress);
 		L.RegVar("UNITY_ANDROID", get_UNITY_ANDROID, set_UNITY_ANDROID);
 		L.RegVar("UNITY_IPHONE", get_UNITY_IPHONE, set_UNITY_IPHONE);
 		L.RegVar("UNITY_STANDALONE_WIN", get_UNITY_STANDALONE_WIN, set_UNITY_STANDALONE_WIN);
@@ -184,6 +186,34 @@ public class LuaFramework_AppConstWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_ChatSocketPort(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushinteger(L, LuaFramework.AppConst.ChatSocketPort);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_ChatSocketAddress(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.ChatSocketAddress);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_UNITY_ANDROID(IntPtr L)
 	{
 		try
@@ -290,6 +320,36 @@ public class LuaFramework_AppConstWrap
 		{
 			string arg0 = ToLua.CheckString(L, 2);
 			LuaFramework.AppConst.SocketAddress = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_ChatSocketPort(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			LuaFramework.AppConst.ChatSocketPort = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_ChatSocketAddress(IntPtr L)
+	{
+		try
+		{
+			string arg0 = ToLua.CheckString(L, 2);
+			LuaFramework.AppConst.ChatSocketAddress = arg0;
 			return 0;
 		}
 		catch(Exception e)

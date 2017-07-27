@@ -13,6 +13,7 @@ public static class LuaBinder
 		TipPanelScriptWrap.Register(L);
 		MahjongWrap.Register(L);
 		LoadingProgressWrap.Register(L);
+		MicroPhoneInputWrap.Register(L);
 		ViewWrap.Register(L);
 		BaseWrap.Register(L);
 		ManagerWrap.Register(L);

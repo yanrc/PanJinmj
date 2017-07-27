@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LuaFramework;
 using YRC;
+using LuaInterface;
 public enum DisType {
     Exception,
     Disconnect,

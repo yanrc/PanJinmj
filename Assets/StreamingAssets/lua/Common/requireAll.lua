@@ -21,7 +21,7 @@ require "Vos/APIS"
 require "vos/AvatarVO"
 require "vos/Account"
 require "vos/ClientRequest"
-
+require "vos/ChatRequest"
 
 require "Data/PlayerItem"
 require "Data/RuleSelect"
@@ -33,6 +33,7 @@ require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"
 
 require "NewModule/Payment"
+require "MicPhone/MicPhone"
 
 require "Common/UIBase"
 for k,v in pairs(define.Panels) do

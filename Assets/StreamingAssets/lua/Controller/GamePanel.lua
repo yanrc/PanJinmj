@@ -172,6 +172,7 @@ function GamePanel.OnCreate(go)
 	chiList_3[1] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_1').gameObject)
 	chiList_3[2] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_2').gameObject)
 	chiList_3[3] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_3').gameObject)
+	MicPhone.OnCreate(go)
 end
 
 
@@ -1832,16 +1833,6 @@ function GamePanel.OutRoomCallbak(buffer)
 	end
 end
 
-local dissoliveRoomType = "0";
-function GamePanel.DissoliveRoomRequest()
-	soundMgr:playSoundByActionButton(1);
-	if (this.isGameStarted) then
-		dissoliveRoomType = "0";
-		TipsManager.LoadDialog("申请解散房间", "你确定要申请解散房间?", this.DoDissoliveRoomRequest, cancle);
-	else
-		TipsManager.SetTips("还没有开始游戏，不能申请退出房间");
-	end
-end
 -- 游戏设置
 function GamePanel.OpenSettingPanel()
 	soundMgr:playSoundByActionButton(1);
@@ -1865,49 +1856,51 @@ function GamePanel.LoadPrefab(perfabName)
 	end )
 end
 
+function GamePanel.DoDissoliveRoomRequest(_type)
+	local data = { };
+	data.roomId = GlobalData.loginResponseData.roomId;
+	data.type = _type;
+	local sendMsg = json.encode(data);
+	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
+	VoteStatus = true
+end
+local disagreeCount-- 不同意的人数
+local VoteStatus-- 申请解散的状态
 -- 申请解散房间回调
-
-local dissoDialog;
 function GamePanel.DissoliveRoomResponse(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
-	local dissoliveRoomResponseVo = json.decode(message);
-	local plyerName = dissoliveRoomResponseVo.accountName;
-	local uuid = dissoliveRoomResponseVo.uuid;
-	if (dissoliveRoomResponseVo.type == "0") then
-		GlobalData.isonApplayExitRoomstatus = true;
-		dissoliveRoomType = "1";
-		resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/Panel_Apply_Exit.prefab" }, function(prefabs)
-			dissoDialog = newObject(prefabs[0])
-			local VoteScript = VoteScript.New(dissoDialog)
-			VoteScript:InitUI(uuid, plyerName, avatarList);
-		end )
-	elseif (dissoliveRoomResponseVo.type == "3") then
-		if (zhuamaPanel ~= nil and GlobalData.isonApplayExitRoomstatus) then
+	local data = json.decode(message);
+	local plyerName = data.accountName;
+	local uuid = data.uuid;
+	-- 发起申请
+	if (data.type == "0") then
+		VoteStatus = true;
+		disagreeCount = 0
+		OpenPanel(VotePanel, uuid, plyerName, avatarList)
+		-- 有人同意
+	elseif (data.type == "1") then
+		VotePanel.DissoliveRoomResponse(1, plyerName)
+		-- 有人拒绝
+	elseif (data.type == "2") then
+		VotePanel.DissoliveRoomResponse(2, plyerName)
+		disagreeCount = disagreeCount + 1;
+		if (disagreeCount >= 2) then
+			VoteStatus = false;
+			TipsManager.SetTips("同意解散房间申请人数不够，本轮投票结束，继续游戏");
+			ClosePanel(VotePanel)
+		end
+		-- 解散
+	elseif (data.type == "3") then
+		if (zhuamaPanel ~= nil and VoteStatus) then
 			destroy(zhuamaPanel)
 		end
-		GlobalData.isonApplayExitRoomstatus = false;
-		if (dissoDialog ~= nil) then
-			dissoDialog.VoteScript.RemoveListener();
-			destroy(dissoDialog);
-		end
+		VoteStatus = false;
+		ClosePanel(VotePanel)
 		GlobalData.isOverByPlayer = true;
 	end
 end
 
-
--- 申请或同意解散房间请求
-function GamePanel.DoDissoliveRoomRequest()
-	local dissoliveRoomRequestVo = DissoliveRoomRequestVo.New();
-	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
-	dissoliveRoomRequestVo.type = dissoliveRoomType;
-	local sendMsg = josn.encode(dissoliveRoomRequestVo);
-	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
-	GlobalData.isonApplayExitRoomstatus = true;
-end
-
-function GamePanel.Cancle()
-end
 
 function GamePanel.ExitOrDissoliveRoom()
 	GlobalData.loginResponseData:ResetData();
@@ -1921,12 +1914,6 @@ function GamePanel.ExitOrDissoliveRoom()
 	this.Clean();
 	soundMgr:playBGM(1);
 	OpenPanel(HomePanel)
-
-	-- while #playerItems > 0 do
-	-- 	local item = playerItems[1];
-	-- 	table.remove(playerItems, 1)
-	-- 	destroy(item.gameObject);
-	-- end
 	ClosePanel(this)
 end
 
@@ -2059,8 +2046,8 @@ end
 
 -- 只加载手牌对象，不排序
 function GamePanel.DispalySelfhanderCard()
-	-- mineList = this.ToList(GlobalData.reEnterRoomData.playerList[this.GetMyIndexFromList()].paiArray)
-	local paiArray = avatarList[this.GetMyIndexFromList()].paiArray
+	local index = this.GetMyIndexFromList()
+	local paiArray = avatarList[index].paiArray
 	for i = 1, #paiArray[1] do
 		if (paiArray[1][i] > 0) then
 			for j = 1, paiArray[1][i] do
@@ -2380,8 +2367,8 @@ function GamePanel.OfflineNotice(buffer)
 	}
 	switch[LocalIndex]()
 	-- 申请解散房间过程中，有人掉线，直接不能解散房间
-	if (GlobalData.isonApplayExitRoomstatus) then
-		VotePanel:Close()
+	if (VoteStatus) then
+		ClosePanel(VotePanel)
 		TipsManager.SetTips("由于" .. avatarList[index].account.nickname .. "离线，系统不能解散房间")
 	end
 end
@@ -2422,15 +2409,12 @@ end
 
 function GamePanel.MicInputNotice(buffer)
 	local status = buffer:ReadInt()
-	local message = buffer:ReadString()
-	local sendUUid = tonumber(message)
-	if (sendUUid > 0) then
-		for i = 1, #playerItems do
-			if (playerItems[i]:GetUuid() ~= -1) then
-				if (sendUUid == playerItems[i]:GetUuid()) then
-					playerItems[i]:ShowChatAction();
-				end
-			end
+	local sendUUid = buffer:ReadInt()
+	local data = buffer:ReadBytes()
+	MicPhone.MicInputNotice(data)
+	for i = 1, #playerItems do
+		if (sendUUid == playerItems[i].uuid) then
+			playerItems[i]:ShowChatAction();
 		end
 	end
 end
@@ -2458,7 +2442,7 @@ function GamePanel.ReturnGameResponse(buffer)
 	local currentCardPoint = returnJsonData.currentCardPoint
 	-- 是否已出牌，等待操作
 	local waitAction = true
-	for i = 0, #this.handerCardList do
+	for i = 1, #this.handerCardList do
 		if #this.handerCardList[i] % 3 == 2 then
 			waitAction = false
 			break
@@ -2565,6 +2549,7 @@ function GamePanel.OnOpen()
 	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
 	BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
 	avatarList = { }
+	MicPhone.OnOpen(avatarList)
 	this.RandShowTime();
 	timeFlag = true;
 	soundMgr:playBGM(2);
@@ -2593,6 +2578,7 @@ end
 -- 移除事件--
 function GamePanel.RemoveListener()
 	UpdateBeat:Remove(this.Update);
+	FixedUpdateBeat:Remove(MicPhone.FixedUpdate);
 	Event.RemoveListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE), this.StartGame)
 	Event.RemoveListener(tostring(APIS.PICKCARD_RESPONSE), this.PickCard)
 	Event.RemoveListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE), this.OtherPickCard)
@@ -2614,13 +2600,13 @@ function GamePanel.RemoveListener()
 	Event.RemoveListener(tostring(APIS.MicInput_Response), this.MicInputNotice)
 	Event.RemoveListener(tostring(APIS.Game_FollowBander_Notice), this.GameFollowBanderNotice)
 	Event.RemoveListener(tostring(APIS.HUPAIALL_RESPONSE), this.HUPAIALL_RESPONSE)
-	Event.RemoveListener(closeGamePanel, this.ExitOrDissoliveRoom)
 end
 
 
 -- 增加事件--
 function GamePanel.AddListener()
 	UpdateBeat:Add(this.Update);
+	FixedUpdateBeat:Add(MicPhone.FixedUpdate);
 	Event.AddListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE), this.StartGame)
 	Event.AddListener(tostring(APIS.PICKCARD_RESPONSE), this.PickCard)
 	Event.AddListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE), this.OtherPickCard)
@@ -2642,5 +2628,4 @@ function GamePanel.AddListener()
 	Event.AddListener(tostring(APIS.MicInput_Response), this.MicInputNotice)
 	Event.AddListener(tostring(APIS.Game_FollowBander_Notice), this.GameFollowBanderNotice)
 	Event.AddListener(tostring(APIS.HUPAIALL_RESPONSE), this.HUPAIALL_RESPONSE)
-	Event.AddListener(closeGamePanel, this.ExitOrDissoliveRoom)
 end

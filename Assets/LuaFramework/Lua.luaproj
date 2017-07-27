@@ -35,6 +35,7 @@
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
     <Folder Include="Lua\Logic\" />
+    <Folder Include="Lua\MicPhone\" />
     <Folder Include="Lua\NewModule\" />
     <Folder Include="Lua\Rules\" />
     <Folder Include="Lua\Vos\" />
@@ -133,15 +134,16 @@
     <Compile Include="Lua\Logic\UIManager.lua" />
     <Compile Include="Lua\Logic\WechatOperate.lua" />
     <Compile Include="Lua\Main.lua" />
+    <Compile Include="Lua\MicPhone\MicPhone.lua" />
     <Compile Include="Lua\NewModule\Payment.lua" />
     <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
     <Compile Include="Lua\Rules\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />
     <Compile Include="Lua\Vos\APIS.lua" />
     <Compile Include="Lua\Vos\AvatarVO.lua" />
+    <Compile Include="Lua\Vos\ChatRequest.lua" />
     <Compile Include="Lua\Vos\ClientRequest.lua" />
     <Compile Include="Lua\Vos\DateVo.lua" />
-    <Compile Include="Lua\Vos\LoginChatRequest.lua" />
     <Compile Include="Lua\Vos\LoginVo.lua" />
     <Compile Include="Lua\YRCUtils.lua" />
   </ItemGroup>

@@ -47,7 +47,8 @@ function StartPanel.RoomBackResponse(buffer)
 		local itemData = GlobalData.reEnterRoomData.playerList[i];
 		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
 			GlobalData.loginResponseData=AvatarVO.New(itemData)
-			-- ChatSocket.getInstance ():sendMsg (LoginChatRequest.New(GlobalData.loginResponseData.account.uuid));
+			local userlist={GlobalData.loginResponseData.account.uuid}
+			networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request,userlist,nil,nil));
 			break;
 		end
 	end

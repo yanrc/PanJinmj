@@ -13,10 +13,12 @@ function BroadcastScript.GameBroadcastNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local noticeString = message;
-	local noticeList = string.split(noticeString, '*')
-	if (noticeList ~= nil) then
-		GlobalData.notices = noticeList
-		Event.Brocast(DisplayBroadcast)
+	if (HomePanel.gameObject.activeSelf) then
+		local noticeList = string.split(noticeString, '*')
+		if (noticeList ~= nil) then
+			GlobalData.notices = noticeList
+			HomePanel.GameBroadcastNotice()
+		end
 	end
 end
 
@@ -37,6 +39,7 @@ end
 function BroadcastScript.RemoveListener()
 	Event.RemoveListener(tostring(APIS.GAME_BROADCAST), this.GameBroadcastNotice)
 	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
+	Event.RemoveListener(tostring(APIS.headRESPONSE), this.HeadResponse)
 end
 
 -- 增加事件--

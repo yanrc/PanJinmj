@@ -42,7 +42,7 @@ function SettingPanel.OnCreate(obj)
 end
 
 function SettingPanel.toJieSan()
-	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？",function() this.DoDissoliveRoomRequest(0) end);
+	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？", function() GamePanel.DoDissoliveRoomRequest(0) ClosePanel(ExitPanel)end);
 	ClosePanel(this)
 end
 
@@ -62,14 +62,7 @@ function SettingPanel.LeaveRoom()
 	local sendMsg = json.encode(vo);
 	networkMgr:SendMessage(ClientRequest.New(APIS.OUT_ROOM_REQUEST, sendMsg));
 end
-function SettingPanel.DoDissoliveRoomRequest(_type)
-	local dissoliveRoomRequestVo = { };
-	dissoliveRoomRequestVo.roomId = GlobalData.loginResponseData.roomId;
-	dissoliveRoomRequestVo.type = _type;
-	local sendMsg = json.encode(dissoliveRoomRequestVo);
-	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
-	GlobalData.isonApplayExitRoomstatus = true;
-end
+
 
 -- 音乐音量
 function SettingPanel.silderChange(value)

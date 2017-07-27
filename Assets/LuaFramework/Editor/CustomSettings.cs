@@ -196,6 +196,7 @@ public static class CustomSettings
         _GT(typeof(LoadingProgress)),
         _GT(typeof(AndroidJavaClass)),
         _GT(typeof(AndroidJavaObject)),
+        _GT(typeof(MicroPhoneInput)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

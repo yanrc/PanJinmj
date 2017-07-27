@@ -246,12 +246,10 @@ end
 function HomePanel.RemoveListener()
 	Event.RemoveListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
 	Event.RemoveListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
-	Event.RemoveListener(DisplayBroadcast, this.GameBroadcastNotice)
 end
 
 -- 增加事件--
 function HomePanel.AddListener()
 	Event.AddListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
 	Event.AddListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
-	Event.AddListener(DisplayBroadcast, this.GameBroadcastNotice)
 end

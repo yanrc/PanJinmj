@@ -85,9 +85,6 @@ function PlayerItem:ShowChatAction()
 	self.chatAction:SetActive(true);
 end
 
-function PlayerItem:GetUuid()
-	return self.uuid
-end
 
 function PlayerItem:Clean()
 	self.headerIcon.sprite = UIManager.DefaultIcon

@@ -24,6 +24,10 @@ function Network.Start()
 	Event.AddListener(Protocal.Message, this.OnMessage);
 	Event.AddListener(Protocal.Exception, this.OnException);
 	Event.AddListener(Protocal.Disconnect, this.OnDisconnect);
+	Event.AddListener(Protocal.ChatConnect, this.OnChatConnect);
+	Event.AddListener(Protocal.ChatMessage, this.OnChatMessage);
+	Event.AddListener(Protocal.ChatException, this.OnChatException);
+	Event.AddListener(Protocal.ChatDisconnect, this.OnChatDisconnect);
 end
 
 -- Socket消息--
@@ -80,7 +84,48 @@ function Network.OnMessage(buffer)
 	end
 	logWarn('OnMessage-------->>>');
 end
+-- 当连接建立时--
+function Network.OnChatConnect()
+	logWarn("Chat Server connected!!");
+--	islogging = true
+--	coroutine.start(this.Sendheart)
+end
 
+-- 异常断线--
+function Network.OnChatException()
+--	islogging = false;
+--	-- NetManager:SendConnect();
+--	networkMgr:SendConnect()
+	logError("OnChatException------->>>>");
+end
+
+-- 连接中断，或者被踢掉--
+function Network.OnChatDisconnect()
+--	islogging = false;
+	logError("OnChatDisconnect------->>>>");
+end
+
+-- 登录返回--
+function Network.OnChatMessage(buffer)
+--	if TestProtoType == ProtocalType.BINARY then
+--		this.TestLoginBinary(buffer);
+--	end
+--	if TestProtoType == ProtocalType.PB_LUA then
+--		this.TestLoginPblua(buffer);
+--	end
+--	if TestProtoType == ProtocalType.PBC then
+--		this.TestLoginPbc(buffer);
+--	end
+--	if TestProtoType == ProtocalType.SPROTO then
+--		this.TestLoginSproto(buffer);
+--	end
+--	----------------------------------------------------
+--	local ctrl = CtrlManager.GetCtrl(CtrlNames.Message);
+--	if ctrl ~= nil then
+--		ctrl:Awake();
+--	end
+	logWarn('OnChatMessage-------->>>');
+end
 -- 二进制登录--
 function Network.TestLoginBinary(buffer)
 	local protocal = buffer:ReadByte();

@@ -34,7 +34,6 @@ function GlobalData.ReinitData()
 	this.reEnterRoomData = nil;
 	this.singalGameOverList = nil;
 	this.lotteryDatas = nil;
-	this.isonApplayExitRoomstatus = false;
 	this.isOverByPlayer = false;
 	this.loginVo = nil;
 	this.isChiState = false;

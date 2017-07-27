@@ -9,7 +9,7 @@ namespace LuaFramework {
         private SocketClient socket;
         static readonly object m_lockObject = new object();
         static Queue<KeyValuePair<int, ByteBuffer>> mEvents = new Queue<KeyValuePair<int, ByteBuffer>>();
-
+        private ChatSocket chatsocket;
         SocketClient SocketClient {
             get { 
                 if (socket == null)
@@ -17,13 +17,22 @@ namespace LuaFramework {
                 return socket;                    
             }
         }
-
+        ChatSocket ChatSocket
+        {
+            get
+            {
+                if (chatsocket == null)
+                    chatsocket = new ChatSocket();
+                return chatsocket;
+            }
+        }
         void Awake() {
             Init();
         }
 
         void Init() {
             SocketClient.OnRegister();
+            ChatSocket.OnRegister();
         }
 
         public void OnInit() {
@@ -73,12 +82,19 @@ namespace LuaFramework {
         public void SendMessage(ByteBuffer buffer) {
             SocketClient.SendMessage(buffer);
         }
-
+        /// <summary>
+        /// 发送SOCKET消息
+        /// </summary>
+        public void SendChatMessage(ByteBuffer buffer)
+        {
+            ChatSocket.SendMessage(buffer);
+        }
         /// <summary>
         /// 析构函数
         /// </summary>
         new void OnDestroy() {
             SocketClient.OnRemove();
+            ChatSocket.OnRemove();
             Debug.Log("~NetworkManager was destroy");
         }
     }

@@ -10,8 +10,7 @@ function ShopPanel.OnCreate(obj)
 	ItemsRoot = obj.transform:FindChild("content")
 	btnClose = obj.transform:FindChild("btnclose").gameObject
 	this.lua:AddClick(btnClose, this.CloseClick)
-	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) coroutine.start(this.GetItemInfos, prefabs) end)
-
+--resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) coroutine.start(this.GetItemInfos, prefabs) end)
 end
 -- 请求并保存商品信息
 function ShopPanel.GetItemInfos(prefabs)
