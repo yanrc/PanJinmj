@@ -50,7 +50,7 @@ function PlayerItem:Update()
 		end
 	end
 	if (self.showChatTime > 0) then
-		self.showTime = self.showTime - 1;
+		self.showChatTime = self.showChatTime - 1;
 		if (self.showChatTime <= 0) then
 			self.chatAction:SetActive(false);
 		end

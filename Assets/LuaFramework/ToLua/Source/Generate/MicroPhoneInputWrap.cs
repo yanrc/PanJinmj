@@ -9,7 +9,6 @@ public class MicroPhoneInputWrap
 		L.BeginClass(typeof(MicroPhoneInput), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("getInstance", getInstance);
 		L.RegFunction("StartRecord", StartRecord);
-		L.RegFunction("StopRecord", StopRecord);
 		L.RegFunction("GetClipData", GetClipData);
 		L.RegFunction("PlayClipData", PlayClipData);
 		L.RegFunction("PlayClipDataBy", PlayClipDataBy);
@@ -44,22 +43,6 @@ public class MicroPhoneInputWrap
 			ToLua.CheckArgsCount(L, 1);
 			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
 			obj.StartRecord();
-			return 0;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int StopRecord(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
-			obj.StopRecord();
 			return 0;
 		}
 		catch(Exception e)

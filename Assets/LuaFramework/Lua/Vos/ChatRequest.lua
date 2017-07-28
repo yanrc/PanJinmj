@@ -12,7 +12,7 @@ function ChatRequest.New(headcode, userList,myuuid, ChatSound)
 	if myuuid~=nil then
 		buffer:WriteInt(myuuid)
 	end
-	if (ChatSound~=nil and #ChatSound > 0) then
+	if (ChatSound~=nil and ChatSound.Length > 0) then
 		buffer:WriteBytes(ChatSound)
 	end
 	print(string.format("lua ChatRequest:headcode=%#x,ChatSound=%s", headcode, ChatSound))

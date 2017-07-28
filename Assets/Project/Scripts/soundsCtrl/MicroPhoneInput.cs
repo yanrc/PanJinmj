@@ -61,24 +61,7 @@ public class MicroPhoneInput : MonoBehaviour {
 		}  
 		GetComponent<AudioSource>().Play ();  
 		Debug.Log("StartRecord");   
-	}  
-
-	public  void StopRecord()  
-	{  
-		Debuger.Log("StopRecord");  
-		if (micArray.Length == 0)  
-		{  
-			Debug.Log("No Record Device!");  
-			return;  
-		}  
-		if (!Microphone.IsRecording(null))  
-		{  
-			return;  
-		}  
-		Microphone.End (null);  
-		GetComponent<AudioSource>().Stop();
-		PlayRecord ();
-	}  
+	}   
 
 	public Byte[] GetClipData()  
 	{  
