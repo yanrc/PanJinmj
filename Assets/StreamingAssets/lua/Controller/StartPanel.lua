@@ -33,6 +33,8 @@ function StartPanel.LoginCallBack(buffer)
 	ClosePanel(WaitingPanel)
 	soundMgr:playBGM(1);
 	GlobalData.loginResponseData = AvatarVO.New(json.decode(message));
+	local userlist={GlobalData.loginResponseData.account.uuid}
+	networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request,userlist,nil,nil));
 	OpenPanel(HomePanel)
 	ClosePanel(this)
 end
@@ -96,14 +98,7 @@ function StartPanel.doLogin()
 		WechatOperate.Login();
 	end
 end
--- Update is called once per frame
---function StartPanel.Update()
---	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
---	if (Input.GetKey(KeyCode.Escape)) then
---		-- 在登录界面panelCreateDialog肯定是null
---		OpenPanel(ExitPanel)
---	end
---end
+
 
 function StartPanel.OpenXieyiPanel()
 	soundMgr:playSoundByActionButton(1);

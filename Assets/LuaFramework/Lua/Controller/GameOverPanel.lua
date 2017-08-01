@@ -76,17 +76,17 @@ end
 -- 设置房间信息
 function GameOverPanel:InitRoomBaseInfo()
 	timeText.text = DateTime.Now:ToString("yyyy-MM-dd");
-	roomNoText.text = "房间号：" .. GlobalData.roomVo.roomId;
-	jushuText.text = "圈数：" ..(GlobalData.totalTimes - GlobalData.surplusTimes) .. "/" .. GlobalData.totalTimes;
-	if (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_ZHUANZHUAN) then
+	roomNoText.text = "房间号：" .. RoomData.roomId;
+	jushuText.text = "圈数：" ..(RoomData.roundNumber - RoomData.surplusTimes) .. "/" .. RoomData.roundNumber;
+	if (RoomData.roomType == GameConfig.GAME_TYPE_ZHUANZHUAN) then
 		title.text = "转转麻将";
-	elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_HUASHUI) then
+	elseif (RoomData.roomType == GameConfig.GAME_TYPE_HUASHUI) then
 		title.text = "划水麻将";
-	elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_CHANGSHA) then
+	elseif (RoomData.roomType == GameConfig.GAME_TYPE_CHANGSHA) then
 		title.text = "长沙麻将";
-	elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_GUANGDONG) then
+	elseif (RoomData.roomType == GameConfig.GAME_TYPE_GUANGDONG) then
 		title.text = "广东麻将";
-	elseif (GlobalData.roomVo.roomType == GameConfig.GAME_TYPE_PANJIN) then
+	elseif (RoomData.roomType == GameConfig.GAME_TYPE_PANJIN) then
 		title.text = "盘锦麻将";
 	end
 end
@@ -96,9 +96,9 @@ function GameOverPanel:GetMas()
 end
 
 function GameOverPanel:SetSignalContent()
-	if (GlobalData.hupaiResponseVo ~= nil) then
-		for i = 1, #GlobalData.hupaiResponseVo.avatarList do
-			local itemdata = GlobalData.hupaiResponseVo.avatarList[i];
+	if (#RoundOverData>0) then
+		for i = 1, #RoundOverData.avatarList do
+			local itemdata = RoundOverData.avatarList[i];
 			local item = newObject(SingalItem)
 			item.transform:SetParent(SignalEndPanel.transform)
 			item.transform.localScale = Vector3.one;
@@ -110,8 +110,8 @@ function GameOverPanel:SetSignalContent()
 end
 
 function GameOverPanel:SetFinalContent()
-	if (GlobalData.finalGameEndVo ~= nil and GlobalData.finalGameEndVo.totalInfo ~= nil) then
-		local itemdatas = GlobalData.finalGameEndVo.totalInfo;
+	if (#RoomOverData>0 and RoundOverData.totalInfo ~= nil) then
+		local itemdatas = RoomOverData.totalInfo;
 		local itemCtrls = { }
 		local topScore = itemdatas[1].scores;
 		local topPaoshou = itemdatas[1].dianpao;
@@ -136,7 +136,7 @@ function GameOverPanel:SetFinalContent()
 		end
 		itemCtrls[lastTopIndex].IsWiner = true;
 		itemCtrls[lastPaoshouIndex].IsPaoshou = true;
-		local owerUuid = GlobalData.finalGameEndVo.theowner;
+		local owerUuid = RoomOverData.theowner;
 		for i = 1, #itemdatas do
 			local itemdata = itemdatas[i];
 			-- 庄家
@@ -161,6 +161,7 @@ function GameOverPanel.ReStratGame()
 	networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.encode(Readyvo)));
 	soundMgr:playSoundByActionButton(1);
 	ClosePanel(this)
+	RoundOverData={}
 end
 
 function GameOverPanel.ShowSingle(isNextBanker)
@@ -169,14 +170,14 @@ function GameOverPanel.ShowSingle(isNextBanker)
 	btnShare:SetActive(false);
 	btnReturn:SetActive(false);
 	-- 本轮结束，显示查看战绩按钮
-	if (GlobalData.surplusTimes <= 0 or GlobalData.isOverByPlayer) then
+	if (RoomData.surplusTimes <= 0 or RoomData.isOverByPlayer) then
 		btnShowFinal:SetActive(true);
 		btnContinue:SetActive(false);
 	else
 		btnShowFinal:SetActive(false);
 		btnContinue:SetActive(true);
-		ReadySelect[1].gameObject:SetActive(GlobalData.roomVo.duanMen);
-		ReadySelect[2].gameObject:SetActive(GlobalData.roomVo.jiaGang);
+		ReadySelect[1].gameObject:SetActive(RoomData.duanMen);
+		ReadySelect[2].gameObject:SetActive(RoomData.jiaGang);
 		ReadySelect[1].interactable = isNextBanker;
 	end
 	this.SetSignalContent();
@@ -198,7 +199,11 @@ function GameOverPanel.ShareFinal()
 	soundMgr:playSoundByActionButton(1);
 end
 -------------------模板-------------------------
+--一轮结束
 function GameOverPanel.CloseClick()
+	RoundOverData={}
+	RoomData={}
+	RoomOverData={}
 	ClosePanel(this)
 	ClosePanel(GamePanel)
 	OpenPanel(HomePanel)

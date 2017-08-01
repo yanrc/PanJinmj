@@ -11,7 +11,7 @@ require "Logic/LoginManager"
 require "Logic/BroadcastScript"
 require "Logic/Test"
 require "Logic/UIManager"
-require "Logic/ButtonAction"
+
 require "Logic/TopAndBottomCardScript"
 require "Logic/BottomScript"
 require "Logic/WechatOperate"

@@ -12,7 +12,7 @@ local ChiSelect2
 local ChiSelect3
 -- ¹¹Ôìº¯Êý
 function ButtonAction.New(transform)
-	local ButtonAction = { }
+	local buttonAction = { }
 	setmetatable(ButtonAction, mt)
 	huBtn = transform:FindChild("btnList/huBtn").gameObject
 	gangBtn = transform:FindChild("btnList/GangButton").gameObject
@@ -30,7 +30,7 @@ function ButtonAction.New(transform)
 	GamePanel.lua:AddClick(ChiSelect1, GamePanel.MyChiBtnClick2,1)
 	GamePanel.lua:AddClick(ChiSelect2, GamePanel.MyChiBtnClick2,2)
 	GamePanel.lua:AddClick(ChiSelect3, GamePanel.MyChiBtnClick2,3)
-	return ButtonAction
+	return buttonAction
 end
 
 function ButtonAction.CleanBtnShow()

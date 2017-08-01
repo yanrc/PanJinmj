@@ -1,0 +1,2 @@
+LoginData={}
+local this=LoginData

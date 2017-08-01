@@ -31,6 +31,7 @@ ToggleGroup=UnityEngine.UI.ToggleGroup
 AndroidJavaClass=UnityEngine.AndroidJavaClass
 RuntimePlatform=UnityEngine.RuntimePlatform
 AndroidJavaObject=UnityEngine.AndroidJavaObject
+Microphone=UnityEngine.Microphone
 
 List_int=System.Collections.Generic.List_int
 DateTime=System.DateTime

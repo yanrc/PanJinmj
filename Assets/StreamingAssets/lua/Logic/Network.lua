@@ -21,9 +21,15 @@ local islogging = false;
 function Network.Start()
 	logWarn("Network.Start!!");
 	Event.AddListener(Protocal.Connect, this.OnConnect);
+	Event.AddListener(Protocal.ConnectFail, this.OnConnectFail);
 	Event.AddListener(Protocal.Message, this.OnMessage);
 	Event.AddListener(Protocal.Exception, this.OnException);
 	Event.AddListener(Protocal.Disconnect, this.OnDisconnect);
+	Event.AddListener(Protocal.ChatConnect, this.OnChatConnect);
+	Event.AddListener(Protocal.ChatMessage, this.OnChatMessage);
+	Event.AddListener(Protocal.ChatException, this.OnChatException);
+	Event.AddListener(Protocal.ChatDisconnect, this.OnChatDisconnect);
+	Event.AddListener(Protocal.ChatConnectFail, this.ChatConnectFail);
 end
 
 -- Socket消息--
@@ -44,43 +50,93 @@ function Network.OnConnect()
 	islogging = true
 	coroutine.start(this.Sendheart)
 end
-
--- 异常断线--
+-- 当连接失败时，回到登录页--
+function Network.OnConnectFail()
+	logWarn("Game Server connect fail!!");
+	OpenPanel(StartPanel)
+end
+-- 异常断线,重连--
 function Network.OnException()
+	logWarn("OnException------->>>>");
 	islogging = false;
-	-- NetManager:SendConnect();
+	coroutine.stop(this.Sendheart)
 	networkMgr:SendConnect()
-	logError("OnException------->>>>");
 end
 
--- 连接中断，或者被踢掉--
+-- 连接中断，或者被踢掉，回到登录页--
 function Network.OnDisconnect()
+	logWarn("OnDisconnect------->>>>");
 	islogging = false;
-	logError("OnDisconnect------->>>>");
+	coroutine.stop(this.Sendheart)
+	OpenPanel(StartPanel)
 end
 
 -- 登录返回--
 function Network.OnMessage(buffer)
-	if TestProtoType == ProtocalType.BINARY then
-		this.TestLoginBinary(buffer);
-	end
-	if TestProtoType == ProtocalType.PB_LUA then
-		this.TestLoginPblua(buffer);
-	end
-	if TestProtoType == ProtocalType.PBC then
-		this.TestLoginPbc(buffer);
-	end
-	if TestProtoType == ProtocalType.SPROTO then
-		this.TestLoginSproto(buffer);
-	end
-	----------------------------------------------------
-	local ctrl = CtrlManager.GetCtrl(CtrlNames.Message);
-	if ctrl ~= nil then
-		ctrl:Awake();
-	end
+--	if TestProtoType == ProtocalType.BINARY then
+--		this.TestLoginBinary(buffer);
+--	end
+--	if TestProtoType == ProtocalType.PB_LUA then
+--		this.TestLoginPblua(buffer);
+--	end
+--	if TestProtoType == ProtocalType.PBC then
+--		this.TestLoginPbc(buffer);
+--	end
+--	if TestProtoType == ProtocalType.SPROTO then
+--		this.TestLoginSproto(buffer);
+--	end
+--	----------------------------------------------------
+--	local ctrl = CtrlManager.GetCtrl(CtrlNames.Message);
+--	if ctrl ~= nil then
+--		ctrl:Awake();
+--	end
 	logWarn('OnMessage-------->>>');
 end
+-- 当连接建立时--
+function Network.OnChatConnect()
+	logWarn("Chat Server connected!!");
+	-- islogging = true
+	-- coroutine.start(this.Sendheart)
+end
+-- 当连接失败时--
+function Network.ChatConnectFail()
+	logWarn("Game Server connect fail!!");
+end
+-- 异常断线--
+function Network.OnChatException()
+	-- islogging = false;
+	-- -- NetManager:SendConnect();
+	-- networkMgr:SendConnect()
+	logWarn("OnChatException------->>>>");
+end
 
+-- 连接中断，或者被踢掉--
+function Network.OnChatDisconnect()
+	-- islogging = false;
+	logWarn("OnChatDisconnect------->>>>");
+end
+
+-- 登录返回--
+function Network.OnChatMessage(buffer)
+	-- if TestProtoType == ProtocalType.BINARY then
+	-- 	this.TestLoginBinary(buffer);
+	-- end
+	-- if TestProtoType == ProtocalType.PB_LUA then
+	-- 	this.TestLoginPblua(buffer);
+	-- end
+	-- if TestProtoType == ProtocalType.PBC then
+	-- 	this.TestLoginPbc(buffer);
+	-- end
+	-- if TestProtoType == ProtocalType.SPROTO then
+	-- 	this.TestLoginSproto(buffer);
+	-- end
+	-- ----------------------------------------------------
+	-- local ctrl = CtrlManager.GetCtrl(CtrlNames.Message);
+	-- if ctrl ~= nil then
+	-- 	ctrl:Awake();
+	-- end
+	logWarn('OnChatMessage-------->>>');
+end
 -- 二进制登录--
 function Network.TestLoginBinary(buffer)
 	local protocal = buffer:ReadByte();
@@ -125,24 +181,24 @@ function Network.TestLoginSproto(buffer)
 	local code = buffer:ReadBuffer();
 
 	local sp = sproto.parse [[
-			    .Person {
-			        name 0 : string
-			        id 1 : integer
-			        email 2 : string
+							    .Person {
+							        name 0 : string
+							        id 1 : integer
+							        email 2 : string
 
-			        .PhoneNumber {
-			            number 0 : string
-			            type 1 : integer
-			        }
+							        .PhoneNumber {
+							            number 0 : string
+							            type 1 : integer
+							        }
 
-			        phone 3 : *PhoneNumber
-			    }
+							        phone 3 : *PhoneNumber
+							    }
 
-			    .AddressBook {
-			        person 0 : *Person(id)
-			        others 1 : *Person
-			    }
-			    ]]
+							    .AddressBook {
+							        person 0 : *Person(id)
+							        others 1 : *Person
+							    }
+							    ]]
 	local addr = sp:decode("AddressBook", code)
 	print_r(addr)
 	log('TestLoginSproto: protocal:>' .. protocal);
@@ -154,5 +210,11 @@ function Network.Unload()
 	Event.RemoveListener(Protocal.Message);
 	Event.RemoveListener(Protocal.Exception);
 	Event.RemoveListener(Protocal.Disconnect);
+	Event.RemoveListener(Protocal.ConnectFail);
+	Event.RemoveListener(Protocal.ChatConnect);
+	Event.RemoveListener(Protocal.ChatMessage);
+	Event.RemoveListener(Protocal.ChatException);
+	Event.RemoveListener(Protocal.ChatDisconnect);
+	Event.RemoveListener(Protocal.ChatConnectFail);
 	logWarn('Unload Network...');
 end

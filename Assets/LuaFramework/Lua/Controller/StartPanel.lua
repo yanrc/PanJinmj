@@ -1,6 +1,6 @@
 
 
-StartPanel = UIBase(define.Panels.StartPanel,define.FixUI)
+StartPanel = UIBase(define.Panels.StartPanel, define.FixUI)
 local this = StartPanel
 local transform;
 local gameObject;
@@ -21,7 +21,7 @@ function StartPanel.OnCreate(obj)
 	btnLogin = transform:FindChild("Button").gameObject;
 	this.lua:AddClick(btnLogin, this.Login);
 	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
-	
+
 end
 
 
@@ -33,33 +33,34 @@ function StartPanel.LoginCallBack(buffer)
 	ClosePanel(WaitingPanel)
 	soundMgr:playBGM(1);
 	GlobalData.loginResponseData = AvatarVO.New(json.decode(message));
-	OpenPanel(HomePanel)
+	local userlist = { GlobalData.loginResponseData.account.uuid }
+	networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));
 	ClosePanel(this)
+	OpenPanel(HomePanel)
 end
 function StartPanel.RoomBackResponse(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	ClosePanel(WaitingPanel)
-	GlobalData.reEnterRoomData = json.decode(message);
+	RoomData = json.decode(message);
+	RoomData.enterType = 3
 	log("Lua:RoomBackResponse=" .. message);
-	log("Lua:RoomBackResponse playerList.length=" .. #GlobalData.reEnterRoomData.playerList)
-	for i = 1, #GlobalData.reEnterRoomData.playerList do
-		local itemData = GlobalData.reEnterRoomData.playerList[i];
+	for i = 1, #RoomData.playerList do
+		local itemData = RoomData.playerList[i];
 		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
-			GlobalData.loginResponseData=AvatarVO.New(itemData)
-			local userlist={GlobalData.loginResponseData.account.uuid}
-			networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request,userlist,nil,nil));
+			GlobalData.loginResponseData = AvatarVO.New(itemData)
+			local userlist = { GlobalData.loginResponseData.account.uuid }
+			networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));
 			break;
 		end
 	end
-	OpenPanel(GamePanel)
 	ClosePanel(this)
+	OpenPanel(GamePanel)
 end
 
 function StartPanel.ConnectTime(time)
 	coroutine.wait(1)
 	networkMgr:SendConnect();
-	GlobalData.isonLoginPage = true;
 end
 
 function StartPanel.OnConnect()
@@ -81,14 +82,14 @@ function StartPanel.Login()
 	-- 初始化界面数值
 	if (agreeProtocol.isOn) then
 		this.doLogin();
-		OpenPanel(WaitingPanel,"进入游戏中")
+		OpenPanel(WaitingPanel, "进入游戏中")
 	else
 		log("lua:请先同意用户使用协议");
 		TipsManager.SetTips("请先同意用户使用协议", 1);
 	end
 end
 function StartPanel.doLogin()
-	log("UNITY_EDITOR="..tostring(UNITY_EDITOR)..",UNITY_STANDALONE_WIN="..tostring(UNITY_STANDALONE_WIN))
+	log("UNITY_EDITOR=" .. tostring(UNITY_EDITOR) .. ",UNITY_STANDALONE_WIN=" .. tostring(UNITY_STANDALONE_WIN))
 	if UNITY_EDITOR or UNITY_STANDALONE_WIN then
 		-- 用于测试 不用微信登录
 		resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/LoginPanel.prefab' }, LoginManager.TestLogin);
@@ -96,14 +97,7 @@ function StartPanel.doLogin()
 		WechatOperate.Login();
 	end
 end
--- Update is called once per frame
---function StartPanel.Update()
---	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
---	if (Input.GetKey(KeyCode.Escape)) then
---		-- 在登录界面panelCreateDialog肯定是null
---		OpenPanel(ExitPanel)
---	end
---end
+
 
 function StartPanel.OpenXieyiPanel()
 	soundMgr:playSoundByActionButton(1);
@@ -132,15 +126,14 @@ end
 -------------------模板-------------------------
 function StartPanel.OnOpen()
 	soundMgr:playBGM(1);
-	GlobalData.isonLoginPage = true;
 	versionText.text = "版本号：" .. Application.version;
-	OpenPanel(WaitingPanel,"正在连接服务器")
+	OpenPanel(WaitingPanel, "正在连接服务器")
 	-- 1秒后开始连接
 	coroutine.start(this.ConnectTime, 1);
 end
 -- 移除事件--
 function StartPanel.RemoveListener()
-	--UpdateBeat:Remove(this.Update);
+	-- UpdateBeat:Remove(this.Update);
 	Event.RemoveListener(Protocal.Connect, this.OnConnect);
 	Event.RemoveListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
 	Event.RemoveListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)
@@ -148,7 +141,7 @@ end
 
 -- 增加事件--
 function StartPanel.AddListener()
-	--UpdateBeat:Add(this.Update);
+	-- UpdateBeat:Add(this.Update);
 	Event.AddListener(Protocal.Connect, this.OnConnect);
 	Event.AddListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
 	Event.AddListener(tostring(APIS.BACK_LOGIN_RESPONSE), this.RoomBackResponse)

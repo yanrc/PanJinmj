@@ -55,6 +55,12 @@ function Game.OnInitOK()
 	logWarn('LuaFramework InitOK--->>>');
 end
 
+--重置全部数据
+function Game.ClearData()
+
+
+end
+
 -- 测试协同--
 function Game.test_coroutine()
 	logWarn("1111");

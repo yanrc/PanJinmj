@@ -79,6 +79,7 @@ public class ChatSocket
         {
             //断网时会提示Not connected
             Debug.LogWarning(e.Message);
+            NetworkManager.AddEvent(Protocal.ChatConnectFail, new ByteBuffer());
         }
     }
 
@@ -249,9 +250,9 @@ public class ChatSocket
             ByteBuffer LOGbuffer = new ByteBuffer(message);
             int Headcode = LOGbuffer.ReadInt();
             int sendUuid = LOGbuffer.ReadInt();
-            int soundLen = LOGbuffer.ReadInt();
+            //int soundLen = LOGbuffer.ReadInt();
             byte[] sound = LOGbuffer.ReadBytes();
-            Debuger.Log(string.Format("OnReceivedMessage:headcode={0},sendUuid={1},soundLen={2}", Headcode.ToString("x8"), sendUuid, soundLen));
+            Debuger.Log(string.Format("OnReceivedMessage:headcode={0},sendUuid={1},sound.Length={2}", Headcode.ToString("x8"), sendUuid, sound.Length));
         }
         ByteBuffer buffer = new ByteBuffer(message);
         int mainId = buffer.ReadInt();

@@ -2,9 +2,9 @@ APIS=
 {
 socketUrl = "101.200.197.7";
 --socketUrl = "192.168.1.101";
-chatSocketUrl = "120.77.38.7";
+chatSocketUrl = "101.200.197.7";
 socketPort = 11111;
-chatPort = 10234;
+chatPort = 10123;
 
 UPDATE_INFO_JSON_URL =string.format("http://%s:8888/download/update.xml",socketUrl) ;--服务器上最新的软件版本信息存储文件
 PIC_PATH =string.format("http://%s:8888/download/",socketUrl);

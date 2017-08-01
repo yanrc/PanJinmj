@@ -37,6 +37,7 @@ function _UIBase:Close()
 		if (self.gameObject.activeSelf) then
 			self.gameObject:SetActive(false)
 			self.RemoveListener()
+			self.OnClose()
 		end
 	end
 end
@@ -44,7 +45,10 @@ end
 function _UIBase.AddListener()
 
 end
-function _UIBase.RemoveListener()
+function _UIBase.OnOpen()
+
+end
+function _UIBase.OnClose()
 
 end
 _UIBase.__index = function(t, k)

@@ -68,8 +68,8 @@ function BottomScript:ReSetPoisitonCallBack()
 	end
 end
 
-function BottomScript:Init(cardPoint, islaizi)
-	log("BottomScript:cardPoint=" .. cardPoint)
+function BottomScript:Init(cardPoint)
+	local islaizi=RoomData.guiPai == cardPoint
 	self.CardPoint = cardPoint
 	self.gameObject:GetComponent("Animation").enabled = islaizi;
 	self.guiIcon.gameObject:SetActive(islaizi);

@@ -16,13 +16,15 @@ function ExitPanel.OnCreate(obj)
 	this:Init(obj)
 	btnExit = transform:FindChild('Image_Bg/Button_Sure').gameObject
 	btnCancel = transform:FindChild('Image_Bg/Button_Cancle').gameObject
-	title=transform:FindChild('Image_Bg/Title'):GetComponent('Text')
-	content=transform:FindChild('Image_Bg/Content'):GetComponent('Text')
+	title = transform:FindChild('Image_Bg/Title'):GetComponent('Text')
+	content = transform:FindChild('Image_Bg/Content'):GetComponent('Text')
 	this.lua:AddClick(btnCancel, this.CloseClick)
 end
 
 
 function ExitPanel.Exit()
+	ClosePanel(this)
+	soundMgr:playSoundByActionButton(1);
 	if UNITY_ANDROID then
 		Application.Quit()
 	elseif UNITY_IPHONE then
@@ -34,6 +36,8 @@ end
 -------------------模板-------------------------
 function ExitPanel.CloseClick()
 	ClosePanel(this)
+	soundMgr:playSoundByActionButton(1);
+
 end
 
 function ExitPanel.OnOpen(titleStr, des, f)

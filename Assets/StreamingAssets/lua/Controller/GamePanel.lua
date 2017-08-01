@@ -5,9 +5,8 @@ local this = GamePanel;
 local gameObject;
 local transform
 local playerItems = { }
-local timeFlag = false
 local versionText
-local btnActionScript
+
 local dialog_fanhui
 local showTimeNumber = 0
 -- 牌数组，二维
@@ -27,7 +26,7 @@ local PengGangList_T
 local PengGangList_B
 local PengGangList
 --
-local avatarList
+local avatarList-- 玩家列表
 local bankerIndex-- 庄家index
 local LeavedRoundNumText
 local isFirstOpen
@@ -56,7 +55,7 @@ local ReadySelect = { } -- 游戏准备时的选择
 local btnReadyGame
 local timer = 0
 local noticeGameObject-- 滚动消息
-local dialog_fanhui_text-- 离开房间面板上的文字
+
 local Number-- 桌子中间显示的数字（剩余时间）
 local touziObj-- 骰子
 local dirGameList = { }-- 桌面指示灯
@@ -95,14 +94,15 @@ local chiList_3 = { }
 local LastAvarIndex = 1
 local isQiangHu = false
 local showNoticeNumber = 0
+local timeFlag = false
+
 function GamePanel.OnCreate(go)
 	gameObject = go;
 	transform = go.transform
 	this:Init(go)
 
 	versionText = transform:FindChild('Text_version'):GetComponent('Text');
-	btnActionScript = ButtonAction.New(transform);
-	dialog_fanhui = transform:FindChild('jiesan')
+	ButtonAction.New(transform);
 	LeavedRoundNumText = transform:FindChild('Leaved1/Text'):GetComponent('Text');
 	ruleText = transform:FindChild('Rule'):GetComponent('Text');
 	btnInviteFriend = transform:FindChild('Button_invite_friend').gameObject;
@@ -151,10 +151,7 @@ function GamePanel.OnCreate(go)
 	btnReadyGame = transform:FindChild('Panel/Button').gameObject
 	Number = transform:FindChild('table/Number'):GetComponent('Text')
 	noticeGameObject = transform:FindChild("Image_Notice_BG").gameObject
-	dialog_fanhui_text = transform:FindChild('jiesan/Image_Bg/tip_text'):GetComponent('Text')
 	btnSetting = transform:FindChild('soundClose').gameObject
-	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Sure').gameObject, this.Tuichu)
-	this.lua:AddClick(dialog_fanhui:FindChild('Image_Bg/Button_Cancle').gameObject, this.Quxiao)
 	this.lua:AddClick(btnSetting, this.OpenSettingPanel)
 	this.lua:AddClick(btnJieSan, this.QuiteRoom)
 	this.lua:AddClick(btnReadyGame, this.ReadyGame)
@@ -182,7 +179,7 @@ end
 
 function GamePanel.InitPanel()
 	this.Clean()
-	btnActionScript.CleanBtnShow()
+	ButtonAction.CleanBtnShow()
 end
 
 function GamePanel.InitArrayList()
@@ -433,25 +430,25 @@ function GamePanel.ActionBtnShow(buffer)
 	log("GamePanel ActionBtnShow:msg =" .. tostring(message));
 	passStr = "";
 	local strs = string.split(message, ',')
-	btnActionScript.ShowBtn(5, true);
+	ButtonAction.ShowBtn(5, true);
 	for i = 1, #strs do
 		if string.match(strs[i], "hu") then
-			btnActionScript.ShowBtn(1, true);
+			ButtonAction.ShowBtn(1, true);
 			passStr = passStr .. "hu_"
 		end
 		if string.match(strs[i], "qianghu") then
 			putOutCardPoint = string.split(strs[i], ':')[2]
-			btnActionScript.ShowBtn(1, true);
+			ButtonAction.ShowBtn(1, true);
 			isQiangHu = true;
 			passStr = passStr .. "qianghu_"
 		end
 		if string.match(strs[i], "peng") then
-			btnActionScript.ShowBtn(3, true);
+			ButtonAction.ShowBtn(3, true);
 			putOutCardPoint = string.split(strs[i], ':')[3]
 			passStr = passStr .. "peng_"
 		end
 		if string.match(strs[i], "gang") then
-			btnActionScript.ShowBtn(2, true);
+			ButtonAction.ShowBtn(2, true);
 			gangPaiList = string.split(strs[i], ':');
 			table.remove(gangPaiList, 1)
 			passStr = passStr .. "gang_"
@@ -476,7 +473,7 @@ function GamePanel.ActionBtnShow(buffer)
 				cpoint.twoCardPoint = strChiList[2]
 				table.insert(chiPaiPointList, cpoint)
 			end
-			btnActionScript.ShowBtn(4, true);
+			ButtonAction.ShowBtn(4, true);
 			passStr = passStr .. "chi_"
 		end
 	end
@@ -1342,7 +1339,7 @@ end
 
 -- 点击放弃按钮
 function GamePanel.MyPassBtnClick()
-	btnActionScript.CleanBtnShow();
+	ButtonAction.CleanBtnShow();
 	networkMgr:SendMessage(ClientRequest.New(APIS.GAVEUP_REQUEST, "gaveup|" .. passStr));
 end
 
@@ -1350,7 +1347,7 @@ function GamePanel.MyPengBtnClick()
 	local cardvo = { };
 	cardvo.cardPoint = putOutCardPoint;
 	networkMgr:SendMessage(ClientRequest.New(APIS.PENGPAI_REQUEST, json.encode(cardvo)));
-	btnActionScript.CleanBtnShow();
+	ButtonAction.CleanBtnShow();
 end
 
 
@@ -1375,7 +1372,7 @@ end
 
 -- 显示可吃牌的显示
 function GamePanel.ShowChiList()
-	btnActionScript.CleanBtnShow();
+	ButtonAction.CleanBtnShow();
 	for i = 1, #canChiList do
 		if (i <= #chiPaiPointList) then
 			canChiList[i].gameObject:SetActive(true);
@@ -1409,7 +1406,7 @@ function GamePanel.MyChiBtnClick()
 		cardvo.onePoint = cpoint.oneCardPoint;
 		cardvo.twoPoint = cpoint.twoCardPoint;
 		networkMgr:SendMessage(ClientRequest.New(APIS.CHIPAI_REQUEST, json.encode(cardvo)));
-		btnActionScript.CleanBtnShow();
+		ButtonAction.CleanBtnShow();
 	else
 		this.ShowChiList();
 	end
@@ -1444,7 +1441,7 @@ function GamePanel.MyGangBtnClick()
 	GangRequestVO.gangType = 0;
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))
 	soundMgr:playSoundByAction("gang", GlobalData.loginResponseData.account.sex);
-	btnActionScript.CleanBtnShow();
+	ButtonAction.CleanBtnShow();
 	this.PengGangHuEffectCtrl("gang");
 	gangPaiList = nil;
 end
@@ -1635,7 +1632,7 @@ function GamePanel.HupaiRequest()
 		end
 		local sendMsg = json.encode(requestVo);
 		networkMgr:SendMessage(ClientRequest.New(APIS.HUPAI_REQUEST, sendMsg));
-		btnActionScript.CleanBtnShow();
+		ButtonAction.CleanBtnShow();
 		-- GlobalData.isChiState = false;
 	end
 end
@@ -1783,11 +1780,11 @@ end
 function GamePanel.QuiteRoom()
 	soundMgr:playSoundByActionButton(1);
 	if (bankerIndex == this.GetMyIndexFromList()) then
-		dialog_fanhui_text.text = "亲，确定要解散房间吗?";
+		OpenPanel(ExitPanel, "提示", "亲，确定要解散房间吗?", this.Tuichu);
 	else
-		dialog_fanhui_text.text = "亲，确定要离开房间吗?";
+		OpenPanel(ExitPanel, "提示", "亲，确定要离开房间吗?", this.Tuichu);
 	end
-	dialog_fanhui.gameObject:SetActive(true);
+
 end
 -- 退出房间按钮点击
 function GamePanel.Tuichu()
@@ -1796,13 +1793,8 @@ function GamePanel.Tuichu()
 	vo.roomId = GlobalData.roomVo.roomId;
 	local sendMsg = json.encode(vo)
 	networkMgr:SendMessage(ClientRequest.New(APIS.OUT_ROOM_REQUEST, sendMsg));
-	dialog_fanhui.gameObject:SetActive(false);
 end
--- 取消退出房间
-function GamePanel.Quxiao()
-	soundMgr:playSoundByActionButton(1);
-	dialog_fanhui.gameObject:SetActive(false);
-end
+
 
 function GamePanel.OutRoomCallbak(buffer)
 	local status = buffer:ReadInt()
@@ -2408,7 +2400,6 @@ function GamePanel.ReadyGame()
 end
 
 function GamePanel.MicInputNotice(buffer)
-	local status = buffer:ReadInt()
 	local sendUUid = buffer:ReadInt()
 	local data = buffer:ReadBytes()
 	MicPhone.MicInputNotice(data)
@@ -2461,6 +2452,7 @@ function GamePanel.ReturnGameResponse(buffer)
 		if (currentCardPoint ~= nil) then
 			local cardPoint
 			if (currentCardPoint == -2) then
+				local count = #this.handerCardList[1]
 				cardPoint = this.handerCardList[1][count].CardPoint;
 			else
 				cardPoint = currentCardPoint
@@ -2549,7 +2541,6 @@ function GamePanel.OnOpen()
 	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
 	BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
 	avatarList = { }
-	MicPhone.OnOpen(avatarList)
 	this.RandShowTime();
 	timeFlag = true;
 	soundMgr:playBGM(2);
@@ -2574,6 +2565,8 @@ function GamePanel.OnOpen()
 	TipsManager.SetTips("", 0);
 	dialog_fanhui.gameObject:SetActive(false);
 	this.InitbtnJieSan();
+	MicPhone.OnOpen(avatarList)
+	this.isGameStarted = false
 end
 -- 移除事件--
 function GamePanel.RemoveListener()

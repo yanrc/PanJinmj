@@ -58,10 +58,10 @@ function SignalOverItem:SetUI(itemData, Banker)
 	self.totalScroe.text = tostring(itemData.totalScore);
 	self.gangScore.text = tostring(itemData.gangScore);
 	self.fanCount.text = tostring(itemData.totalScore - itemData.gangScore)
-	self.huFlagImg.enabled =(itemData.uuid == GlobalData.hupaiResponseVo.winnerId);
+	self.huFlagImg.enabled =(itemData.uuid == RoundOverData.winnerId);
 	self.Banker.enabled =(itemData.uuid == Banker);
 	self.JiaGang.text = "";
-	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == GlobalData.mainUuid)
+	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == Banker)
 	self:AnalysisPaiInfo(itemData);
 end
 
@@ -116,7 +116,7 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 			table.insert(self.chiPaiList, temp)
 		end
 	end
-	if (itemData.uuid == GlobalData.hupaiResponseVo.winnerId) then
+	if (itemData.uuid == RoundOverData.winnerId) then
 		paiArray[itemData.cardPoint+1] = paiArray[itemData.cardPoint+1] -1;
 	end
 	if (itemData.huType ~= nil) then
@@ -141,7 +141,7 @@ function SignalOverItem:ArrangePai(itemData)
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
+				objCtrl:Init(cardPoint, 3)
 			end
 		end
 		startPosition = startPosition + 8
@@ -156,7 +156,7 @@ function SignalOverItem:ArrangePai(itemData)
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
+				objCtrl:Init(cardPoint, 3)
 
 			end
 		end
@@ -172,7 +172,7 @@ function SignalOverItem:ArrangePai(itemData)
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
+				objCtrl:Init(cardPoint, 3)
 			end
 		end
 		startPosition = startPosition + 8
@@ -189,12 +189,12 @@ function SignalOverItem:ArrangePai(itemData)
 				obj.transform.localPosition = Vector2.New(startPosition, 0);
 				startPosition = startPosition + 36
 				local objCtrl = TopAndBottomCardScript.New(obj)
-				objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
+				objCtrl:Init(cardPoint, 3)
 			end
 		end
 	end
 	startPosition = startPosition + 8
-	if (itemData.cardPoint > -1 and itemData.uuid == GlobalData.hupaiResponseVo.winnerId) then
+	if (itemData.cardPoint > -1 and itemData.uuid == RoundOverData.winnerId) then
 		local cardPoint = itemData.cardPoint
 		local obj = newObject(UIManager.TopAndBottomCard)
 		obj.transform:SetParent(self.paiArrayPanel)
@@ -202,7 +202,7 @@ function SignalOverItem:ArrangePai(itemData)
 		obj.transform.localPosition = Vector2.New(startPosition, 0);
 		startPosition = startPosition + 36
 		local objCtrl = TopAndBottomCardScript.New(obj)
-		objCtrl:Init(cardPoint, 3, GlobalData.roomVo.guiPai == cardPoint)
+		objCtrl:Init(cardPoint, 3)
 	end
 	startPosition = startPosition + 52
 end

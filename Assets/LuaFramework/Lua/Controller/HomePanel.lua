@@ -93,7 +93,7 @@ function HomePanel.CloseRoomCardPanel()
 end
 
 function HomePanel.CheckEnterInRoom()
-	if (GlobalData.roomVo ~= nil and GlobalData.roomVo.roomId ~= nil) then
+	if (RoomData ~= nil and RoomData.roomId ~= nil) then
 		OpenPanel(GamePanel)
 	end
 end
@@ -132,7 +132,7 @@ end
 
 function HomePanel.OpenEnterRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	-- if (GlobalData.roomVo.roomId == nil or GlobalData.roomVo.roomId == 0) then
+	-- if (RoomData.roomId == nil or RoomData.roomId == 0) then
 	OpenPanel(EnterRoomPanel)
 	-- else
 	-- TipsManager.SetTips("当前正在房间状态，无法加入新的房间");
@@ -239,7 +239,6 @@ end
 -------------------模板-------------------------
 function HomePanel.OnOpen()
 	this.InitUI();
-	GlobalData.isonLoginPage = false;
 	-- this.CheckEnterInRoom();
 end
 -- 移除事件--

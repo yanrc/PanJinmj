@@ -42,7 +42,12 @@ function SettingPanel.OnCreate(obj)
 end
 
 function SettingPanel.toJieSan()
-	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？", function() GamePanel.DoDissoliveRoomRequest(0) ClosePanel(ExitPanel)end);
+	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？",
+	function()
+		soundMgr:playSoundByActionButton(1);
+		GamePanel.DoDissoliveRoomRequest(0)
+		ClosePanel(ExitPanel)
+	end );
 	ClosePanel(this)
 end
 
@@ -57,6 +62,7 @@ end
 
 
 function SettingPanel.LeaveRoom()
+	soundMgr:playSoundByActionButton(1);
 	local vo = { };
 	vo.roomId = GlobalData.roomVo.roomId;
 	local sendMsg = json.encode(vo);

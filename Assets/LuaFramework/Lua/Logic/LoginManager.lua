@@ -54,16 +54,15 @@ function LoginManager.TestLoginClick()
 	coroutine.start(GlobalData.GetIpAddress, function(IPstr)
 		loginvo.IP = IPstr;
 		local data = json.encode(loginvo);
-		GlobalData.loginVo = loginvo;
-		GlobalData.loginResponseData = AvatarVO.New();
-		GlobalData.loginResponseData.account = Account.New();
-		GlobalData.loginResponseData.account.city = loginvo.city;
-		GlobalData.loginResponseData.account.openid = loginvo.openId;
-		GlobalData.loginResponseData.account.nickname = loginvo.nickName;
-		GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
-		GlobalData.loginResponseData.account.unionid = loginvo.unionid;
-		GlobalData.loginResponseData.account.sex = loginvo.sex;
-		GlobalData.loginResponseData.IP = loginvo.IP;
+--		GlobalData.loginResponseData = AvatarVO.New();
+--		GlobalData.loginResponseData.account = Account.New();
+--		GlobalData.loginResponseData.account.city = loginvo.city;
+--		GlobalData.loginResponseData.account.openid = loginvo.openId;
+--		GlobalData.loginResponseData.account.nickname = loginvo.nickName;
+--		GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
+--		GlobalData.loginResponseData.account.unionid = loginvo.unionid;
+--		GlobalData.loginResponseData.account.sex = loginvo.sex;
+--		GlobalData.loginResponseData.IP = loginvo.IP;
 		networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST, data));
 	end )
 	destroy(this.go);

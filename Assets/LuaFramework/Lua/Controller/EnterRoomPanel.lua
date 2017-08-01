@@ -47,7 +47,7 @@ end
 
 
 -- 数字按钮点击
-function EnterRoomPanel.OnClickHandle(number,go)
+function EnterRoomPanel.OnClickHandle(number, go)
 	this.Number(number);
 end
 
@@ -100,56 +100,49 @@ end
 function EnterRoomPanel.ServiceErrorNotice(buffer)
 	this.Clear();
 end
-local connectRetruen = false;
 
 function EnterRoomPanel.ConnectTime(time)
-	connectRetruen = false;
 	coroutine.wait(time)
-	if (not connectRetruen) then
-		-- 超过5秒还没连接成功显示失败
-		connectRetruen = true;
-		ClosePanel(WaitingPanel)
-	end
+	ClosePanel(WaitingPanel)
 end
 -- 房间不存在时不会收到这个回调，而是返回错误消息
 function EnterRoomPanel.OnJoinRoomCallBack(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
+	log("Lua:OnJoinRoomCallBack=" .. message)
 	ClosePanel(WaitingPanel)
 	if (status == 1) then
 		local data = json.decode(message)
-		GlobalData.roomJoinResponseData = data
-		log("Lua:OnJoinRoomCallBack=" .. message)
-		GlobalData.roomVo.addWordCard = data.addWordCard;
-		GlobalData.roomVo.hong = data.hong;
-		GlobalData.roomVo.ma = data.ma;
-		GlobalData.roomVo.name = data.name;
-		GlobalData.roomVo.roomId = data.roomId;
-		GlobalData.roomVo.roomType = data.roomType;
-		GlobalData.roomVo.roundNumber = data.roundNumber;
-		GlobalData.roomVo.sevenDouble = data.sevenDouble;
-		GlobalData.roomVo.xiaYu = data.xiaYu;
-		GlobalData.roomVo.ziMo = data.ziMo;
-		GlobalData.roomVo.gangHu = data.gangHu;
-		GlobalData.roomVo.guiPai = data.guiPai;
-		GlobalData.roomVo.pingHu = data.pingHu;
-		GlobalData.roomVo.jue = data.jue;
-		GlobalData.roomVo.baoSanJia = data.baoSanJia;
-		GlobalData.roomVo.jiaGang = data.jiaGang;
-		GlobalData.roomVo.gui = data.gui;
-		GlobalData.roomVo.duanMen = data.duanMen;
-		GlobalData.roomVo.jihu = data.jihu;
-		GlobalData.roomVo.qingYiSe = data.qingYiSe;
-		GlobalData.roomVo.menqing = data.menqing;
-		GlobalData.roomVo.siguiyi = data.siguiyi;
-		GlobalData.surplusTimes = data.roundNumber;
+		RoomData.enterType=2
+		RoomData.addWordCard = data.addWordCard;
+		RoomData.hong = data.hong;
+		RoomData.ma = data.ma;
+		RoomData.name = data.name;
+		RoomData.roomId = data.roomId;
+		RoomData.roomType = data.roomType;
+		RoomData.roundNumber = data.roundNumber;
+		RoomData.sevenDouble = data.sevenDouble;
+		RoomData.xiaYu = data.xiaYu;
+		RoomData.ziMo = data.ziMo;
+		RoomData.gangHu = data.gangHu;
+		RoomData.guiPai = data.guiPai;
+		RoomData.pingHu = data.pingHu;
+		RoomData.jue = data.jue;
+		RoomData.baoSanJia = data.baoSanJia;
+		RoomData.jiaGang = data.jiaGang;
+		RoomData.gui = data.gui;
+		RoomData.duanMen = data.duanMen;
+		RoomData.jihu = data.jihu;
+		RoomData.qingYiSe = data.qingYiSe;
+		RoomData.menqing = data.menqing;
+		RoomData.siguiyi = data.siguiyi;
+		RoomData.jiaGang = data.jiaGang;
+		RoomData.duanMen = data.duanMen;
+		RoomData.surplusTimes = data.roundNumber;
 		GlobalData.loginResponseData.roomId = data.roomId;
-		GlobalData.reEnterRoomData = nil;
-		OpenPanel(GamePanel)
-		connectRetruen = true;
 		ClosePanel(this)
-		GlobalData.roomVo.jiaGang = data.jiaGang;
-		GlobalData.roomVo.duanMen = data.duanMen;
+		ClosePanel(HomePanel)
+		OpenPanel(GamePanel)
 	else
 		this.Clear();
 		TipsManager.SetTips(message);

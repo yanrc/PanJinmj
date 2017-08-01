@@ -7,11 +7,11 @@ function UIManager.InitPanels()
 	log("Lua:UIManager.InitPanels")
 	Event.AddListener(define.PanelsInited, this.OnInited)
 	for k, v in pairs(define.Panels) do
-		this.PanelNum=this.PanelNum+1
+		this.PanelNum = this.PanelNum + 1
 		_G[v]:Awake()
 	end
 end
---面板都加载好了，再加载预制体
+-- 面板都加载好了，再加载预制体
 function UIManager.OnInited(panel)
 	this.PanelNum = this.PanelNum - 1
 	if (this.PanelNum == 0) then
@@ -58,6 +58,14 @@ function ClosePanel(panel)
 		log("Lua:ClosePop==>" .. panel.name)
 	end
 	panel:Close()
+end
+
+-- 返回登陆界面
+function UIManager.ReturnStartPanel()
+	for k, v in pairs(define.Panels) do
+		_G[v]:Close()
+	end
+	OpenPanel(StartPanel)
 end
 
 function UIManager.Update()

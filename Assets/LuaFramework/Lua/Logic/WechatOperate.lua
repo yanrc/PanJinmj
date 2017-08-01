@@ -29,16 +29,15 @@ function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 			coroutine.start(GlobalData.GetIpAddress, function(IPstr)
 				loginvo.IP = IPstr;
 				local data = json.encode(loginvo);
-				GlobalData.loginVo = loginvo;
-				GlobalData.loginResponseData = AvatarVO.New();
-				GlobalData.loginResponseData.account = Account.New();
-				GlobalData.loginResponseData.account.city = loginvo.city;
-				GlobalData.loginResponseData.account.openid = loginvo.openId;
-				GlobalData.loginResponseData.account.nickname = loginvo.nickName;
-				GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
-				GlobalData.loginResponseData.account.unionid = loginvo.unionid;
-				GlobalData.loginResponseData.account.sex = loginvo.sex;
-				GlobalData.loginResponseData.IP = loginvo.IP;
+--				GlobalData.loginResponseData = AvatarVO.New();
+--				GlobalData.loginResponseData.account = Account.New();
+--				GlobalData.loginResponseData.account.city = loginvo.city;
+--				GlobalData.loginResponseData.account.openid = loginvo.openId;
+--				GlobalData.loginResponseData.account.nickname = loginvo.nickName;
+--				GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
+--				GlobalData.loginResponseData.account.unionid = loginvo.unionid;
+--				GlobalData.loginResponseData.account.sex = loginvo.sex;
+--				GlobalData.loginResponseData.IP = loginvo.IP;
 				networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST, data));
 			end )
 		end
@@ -116,11 +115,9 @@ end
 function WechatOperate.InviteFriend(platformType)
 	local str = "";
 	local title
-	log(GlobalData.roomVo)
-	if (GlobalData.roomVo.roomId ~= nil and GlobalData.roomVo.roomId > 0) then
-		local roomvo = GlobalData.roomVo;
-		GlobalData.totalTimes = roomvo.roundNumber;
-		GlobalData.surplusTimes = roomvo.roundNumber;
+	log(RoomData)
+	if (RoomData.roomId ~= nil and RoomData.roomId > 0) then
+		local roomvo = RoomData;
 		if (roomvo.hong) then
 			str = str .. "红中麻将,";
 		else

@@ -34,6 +34,8 @@ end
 function Game.OnInitOK()
 	AppConst.SocketPort = APIS.socketPort;
 	AppConst.SocketAddress = APIS.socketUrl;
+	AppConst.ChatSocketPort = APIS.chatPort;
+	AppConst.ChatSocketAddress = APIS.chatSocketUrl;
 	WechatOperate.AddListener()
 	--加载面板
 	UIManager.InitPanels();

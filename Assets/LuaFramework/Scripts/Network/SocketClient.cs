@@ -73,6 +73,7 @@ public class SocketClient {
         {
             //断网时会提示Not connected
             Debug.LogWarning(e.Message);
+            NetworkManager.AddEvent(Protocal.ConnectFail, new ByteBuffer());
         }
     }
 
@@ -135,7 +136,7 @@ public class SocketClient {
         ByteBuffer buffer = new ByteBuffer();
         buffer.WriteShort((short)protocal);
         NetworkManager.AddEvent(protocal, buffer);
-        Debug.LogError("Connection was closed by the server:>" + msg + ":Distype:>" + dis);
+        Debug.LogError("Connection was closed by the server:msg=" + msg + ",Distype=" + dis);
     }
 
     /// <summary>

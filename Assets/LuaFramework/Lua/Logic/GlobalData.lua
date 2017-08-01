@@ -1,7 +1,7 @@
 --管理器--
 GlobalData = {};
 local this = GlobalData;
-local isonLoginPage=false;
+
 
 this.messageBoxContents={
 "快点啦，时间很宝贵的！",
@@ -19,24 +19,9 @@ this.messageBoxContents={
 --this.wwwSpriteImage={}
 
 
---重新初始化数据
+--重新初始化数据(后期需要重点优化的地方)
 function GlobalData.ReinitData()
-	this.isDrag = false;
 	this.loginResponseData = nil;
-	this.roomJoinResponseData = nil;
-	this.roomVo = {};
-	this.hupaiResponseVo = nil;
-	this.finalGameEndVo = nil;
-	this.roomAvatarVoList = nil;
-	this.surplusTimes = 0;
-	this.totalTimes = 0;
-	this.userMaJiangKind = 0;
-	this.reEnterRoomData = nil;
-	this.singalGameOverList = nil;
-	this.lotteryDatas = nil;
-	this.isOverByPlayer = false;
-	this.loginVo = nil;
-	this.isChiState = false;
 end
 function GlobalData.GetIpAddress(callback)
     local www = WWW("http://1212.ip138.com/ic.asp");

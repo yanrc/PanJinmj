@@ -25,7 +25,6 @@ end
 -- 打开九江设置面板
 function CreateRoomPanel.OpenJiuJiangSettingPanel()
 	soundMgr:playSoundByActionButton(1);
-	GlobalData.userMaJiangKind = 4;
 	PlayerPrefs.SetInt("userDefaultMJ", 4);
 	panelDevoloping:SetActive(false);
 	PanelManager:CreatePanel('JiuJiangPanel', nil);
@@ -118,7 +117,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 	if (GlobalData.loginResponseData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")
 		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
-		GlobalData.roomVo = sendVo;
+		RoomData = sendVo;
 	else
 		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
 	end
@@ -141,7 +140,7 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 	if (GlobalData.loginResponseData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")
 		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
-		GlobalData.roomVo = sendVo;
+		RoomData = sendVo;
 	else
 		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
 	end
@@ -169,15 +168,15 @@ function CreateRoomPanel.OnCreateRoomCallback(buffer)
 	log("lua:OnCreateRoomCallback=" .. message);
 	if (status == 1) then
 		local roomid = tonumber(message);
-		GlobalData.roomVo.roomId = roomid;
+		RoomData.roomId = roomid;
+		RoomData.enterType = 1;
 		GlobalData.loginResponseData.roomId = roomid;
 		GlobalData.loginResponseData.main = true;
 		GlobalData.loginResponseData.isOnLine = true;
 		GlobalData.loginResponseData.scores = 0;
-		GlobalData.reEnterRoomData = nil;
-		OpenPanel(GamePanel)
 		ClosePanel(this)
 		ClosePanel(HomePanel)
+		OpenPanel(GamePanel)
 	else
 		TipsManager.SetTips(message);
 	end

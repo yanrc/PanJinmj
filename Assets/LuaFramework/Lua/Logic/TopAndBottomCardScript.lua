@@ -17,8 +17,8 @@ function TopAndBottomCardScript.New(obj)
 	return topAndBottomCardScript
 end
 
-function TopAndBottomCardScript:Init(cardPoint, LocalIndex, islaizi)
-	log("TopAndBottomCardScript:cardPoint="..cardPoint)
+function TopAndBottomCardScript:Init(cardPoint, LocalIndex)
+	local islaizi=RoomData.guiPai == cardPoint
 	self.CardPoint = cardPoint
 	self.gameObject:GetComponent("Animation").enabled = islaizi;
 	self.guiIcon.gameObject:SetActive(islaizi);
