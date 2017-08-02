@@ -26,18 +26,18 @@ function WechatOperate.GetUserInforCallback(reqID, state, _type, data)
 			loginvo.province = data:get_Item("province");
 			loginvo.city = data:get_Item("city");
 			loginvo.sex = data:get_Item("sex");
-			coroutine.start(GlobalData.GetIpAddress, function(IPstr)
+			coroutine.start(CoMgr.GetIpAddress, function(IPstr)
 				loginvo.IP = IPstr;
 				local data = json.encode(loginvo);
---				GlobalData.loginResponseData = AvatarVO.New();
---				GlobalData.loginResponseData.account = Account.New();
---				GlobalData.loginResponseData.account.city = loginvo.city;
---				GlobalData.loginResponseData.account.openid = loginvo.openId;
---				GlobalData.loginResponseData.account.nickname = loginvo.nickName;
---				GlobalData.loginResponseData.account.headicon = loginvo.headIcon;
---				GlobalData.loginResponseData.account.unionid = loginvo.unionid;
---				GlobalData.loginResponseData.account.sex = loginvo.sex;
---				GlobalData.loginResponseData.IP = loginvo.IP;
+				LoginData = AvatarVO.New();
+				LoginData.account = Account.New();
+				LoginData.account.openid = loginvo.openId;
+--				LoginData.account.city = loginvo.city;
+--				LoginData.account.nickname = loginvo.nickName;
+--				LoginData.account.headicon = loginvo.headIcon;
+--				LoginData.account.unionid = loginvo.unionid;
+--				LoginData.account.sex = loginvo.sex;
+--				LoginData.IP = loginvo.IP;
 				networkMgr:SendMessage(ClientRequest.New(APIS.LOGIN_REQUEST, data));
 			end )
 		end
@@ -155,9 +155,9 @@ function WechatOperate.InviteFriend(platformType)
 		end
 	else
 	title = Application.productName;
-	str = GlobalData.loginResponseData.account.nickname .. "邀请您一起来玩" .. title;
+	str = LoginData.account.nickname .. "邀请您一起来玩" .. title;
 	end
-	local url = string.format(APIS.shareUrl, GlobalData.loginResponseData.account.unionid)
+	local url = string.format(APIS.shareUrl, LoginData.account.unionid)
 	this.Share(title, str, url, APIS.shareImageUrl, ContentType.Webpage,platformType)
 end
 

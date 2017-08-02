@@ -10,6 +10,11 @@ function RulePanel.OnCreate(obj)
 	InnerText = obj.transform:FindChild("contentBg/ScorllPanel/Text"):GetComponent("Text")
 	btnClose=obj.transform:FindChild("Image_Bg/Button_Back").gameObject
 	this.lua:AddClick(btnClose, this.CloseClick)
+	local ruleText=""
+	for i=1,#PanjinRuleText do
+		ruleText=ruleText..PanjinRuleText[i]
+	end
+	InnerText.text=ruleText
 end
 
 function RulePanel.CloseClick()

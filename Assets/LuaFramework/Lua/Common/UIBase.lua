@@ -45,6 +45,9 @@ end
 function _UIBase.AddListener()
 
 end
+function _UIBase.RemoveListener()
+
+end
 function _UIBase.OnOpen()
 
 end

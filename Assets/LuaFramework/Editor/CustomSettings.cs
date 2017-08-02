@@ -42,7 +42,10 @@ public static class CustomSettings
         _DT(typeof(System.Action<int>)),
         _DT(typeof(System.Comparison<int>)),
         _DT(typeof(DG.Tweening.TweenCallback)),
+        _DT(typeof(UnityEngine.Events.UnityAction<int>)),
         _DT(typeof(UnityEngine.Events.UnityAction<float>)),
+        _DT(typeof(UnityEngine.Events.UnityAction<string>)),
+        _DT(typeof(UnityEngine.Events.UnityAction<bool>)),
         _DT(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler)),
     };
 
@@ -198,6 +201,8 @@ public static class CustomSettings
         _GT(typeof(AndroidJavaObject)),
         _GT(typeof(MicroPhoneInput)),
         _GT(typeof(Microphone)),
+        _GT(typeof(InputField)),
+        _GT(typeof(InputField.OnChangeEvent)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

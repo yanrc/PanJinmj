@@ -112,34 +112,8 @@ function EnterRoomPanel.OnJoinRoomCallBack(buffer)
 	log("Lua:OnJoinRoomCallBack=" .. message)
 	ClosePanel(WaitingPanel)
 	if (status == 1) then
-		local data = json.decode(message)
+		RoomData = json.decode(message)
 		RoomData.enterType=2
-		RoomData.addWordCard = data.addWordCard;
-		RoomData.hong = data.hong;
-		RoomData.ma = data.ma;
-		RoomData.name = data.name;
-		RoomData.roomId = data.roomId;
-		RoomData.roomType = data.roomType;
-		RoomData.roundNumber = data.roundNumber;
-		RoomData.sevenDouble = data.sevenDouble;
-		RoomData.xiaYu = data.xiaYu;
-		RoomData.ziMo = data.ziMo;
-		RoomData.gangHu = data.gangHu;
-		RoomData.guiPai = data.guiPai;
-		RoomData.pingHu = data.pingHu;
-		RoomData.jue = data.jue;
-		RoomData.baoSanJia = data.baoSanJia;
-		RoomData.jiaGang = data.jiaGang;
-		RoomData.gui = data.gui;
-		RoomData.duanMen = data.duanMen;
-		RoomData.jihu = data.jihu;
-		RoomData.qingYiSe = data.qingYiSe;
-		RoomData.menqing = data.menqing;
-		RoomData.siguiyi = data.siguiyi;
-		RoomData.jiaGang = data.jiaGang;
-		RoomData.duanMen = data.duanMen;
-		RoomData.surplusTimes = data.roundNumber;
-		GlobalData.loginResponseData.roomId = data.roomId;
 		ClosePanel(this)
 		ClosePanel(HomePanel)
 		OpenPanel(GamePanel)

@@ -114,7 +114,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 	end
 	sendVo.roomType = GameConfig.GAME_TYPE_PANJIN;
 	local sendMsg = json.encode(sendVo);
-	if (GlobalData.loginResponseData.account.roomcard > 0) then
+	if (LoginData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")
 		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
 		RoomData = sendVo;
@@ -137,7 +137,7 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 	sendVo.kunmai = jiujiang.GetKunmai();
 	sendVo.hongzhonglaizi = jiujiang.GetHongzhongLaizi();
 	local sendMsg = json.encode(sendVo);
-	if (GlobalData.loginResponseData.account.roomcard > 0) then
+	if (LoginData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")
 		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
 		RoomData = sendVo;
@@ -170,10 +170,9 @@ function CreateRoomPanel.OnCreateRoomCallback(buffer)
 		local roomid = tonumber(message);
 		RoomData.roomId = roomid;
 		RoomData.enterType = 1;
-		GlobalData.loginResponseData.roomId = roomid;
-		GlobalData.loginResponseData.main = true;
-		GlobalData.loginResponseData.isOnLine = true;
-		GlobalData.loginResponseData.scores = 0;
+		LoginData.main = true;
+		LoginData.isOnLine = true;
+		LoginData.scores = 0;
 		ClosePanel(this)
 		ClosePanel(HomePanel)
 		OpenPanel(GamePanel)

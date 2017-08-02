@@ -5,7 +5,7 @@ require "Common/Enums"
 
 require "Rules/JiuJiangPanel"
 
-require "Logic.GlobalData"
+
 require "Logic/TipsManager"
 require "Logic/LoginManager"
 require "Logic/BroadcastScript"
@@ -28,13 +28,17 @@ require "Data/RuleSelect"
 require "Data/SignalOverItem"
 require "Data/FinalOverItem"
 require "Data/ShopItem"
+require "Data/RoomData"
+require "Data/RoomOverData"
+require "Data/RoundOverData"
+require "Data/LoginData"
 
 require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"
 
 require "NewModule/Payment"
 require "MicPhone/MicPhone"
-
+require "MicPhone/MessageBox"
 require "Common/UIBase"
 for k,v in pairs(define.Panels) do
 	require("Controller/" .. v)

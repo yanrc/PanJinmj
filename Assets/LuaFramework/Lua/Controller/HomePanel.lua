@@ -66,20 +66,20 @@ function HomePanel.ContactInfoResponse(buffer)
 end
 
 function HomePanel.InitUI()
-	if (GlobalData.loginResponseData ~= nil) then
-		local headIcon = GlobalData.loginResponseData.account.headicon;
-		local nickName = GlobalData.loginResponseData.account.nickname;
-		local roomCardcount = GlobalData.loginResponseData.account.roomcard;
+	if (LoginData ~= nil) then
+		local headIcon = LoginData.account.headicon;
+		local nickName = LoginData.account.nickname;
+		local roomCardcount = LoginData.account.roomcard;
 		cardCountText.text = tostring(roomCardcount);
 		nickNameText.text = nickName;
-		IpText.text = "ID:" .. tostring(GlobalData.loginResponseData.account.uuid);
+		IpText.text = "ID:" .. tostring(LoginData.account.uuid);
 		CoMgr.LoadImg(headIconImg, headIcon);
 	end
 end
 
 function HomePanel.ShowUserInfoPanel()
 	soundMgr:playSoundByActionButton(1);
-	OpenPanel(UserInfoPanel, GlobalData.loginResponseData)
+	OpenPanel(UserInfoPanel, LoginData)
 end
 
 function HomePanel.ShowRoomCardPanel()
@@ -115,11 +115,7 @@ end
 -- 打开创建房间的对话框
 function HomePanel.OpenCreateRoomDialog()
 	soundMgr:playSoundByActionButton(1);
-	-- if (GlobalData.loginResponseData == nil or GlobalData.loginResponseData.roomId == 0) then
 	OpenPanel(CreateRoomPanel)
-	-- else
-	-- TipsManager.SetTips("当前正在房间状态，无法创建房间");
-	-- end
 end
 
 function HomePanel.Button_fankui()
@@ -188,7 +184,7 @@ function HomePanel.CardChangeNotice(buffer)
 	local oldCount = tonumber(cardCountText.text);
 	local newCount = tonumber(message);
 	cardCountText.text = message;
-	GlobalData.loginResponseData.account.roomcard = newCount;
+	LoginData.account.roomcard = newCount;
 	if newCount > oldCount then
 		contactInfoContent.text = "恭喜您获得" ..(newCount - oldCout) .. "张房卡"
 	else
@@ -212,9 +208,9 @@ function HomePanel.GameBroadcastNotice()
 end
 
 function HomePanel.SetNoticeTextMessage()
-	if (GlobalData.notices ~= nil and #GlobalData.notices > 0) then
+	if (BroadcastScript.noticeList ~= nil and #BroadcastScript.noticeList > 0) then
 		noticeText.transform.localPosition = Vector3.New(500, noticeText.transform.localPosition.y);
-		noticeText.text = GlobalData.notices[showNum];
+		noticeText.text = BroadcastScript.noticeList[showNum];
 		local time = string.len(noticeText.text) * 0.5 + 422 / 56;
 		local tweener = noticeText.transform:DOLocalMove(Vector3.New(- string.len(noticeText.text) * 40, noticeText.transform.localPosition.y), time / 1.6, false);
 		tweener:OnComplete(this.MoveCompleted)
@@ -224,7 +220,7 @@ end
 
 function HomePanel.MoveCompleted()
 	showNum = showNum + 1
-	if (showNum == #GlobalData.notices) then
+	if (showNum == #BroadcastScript.noticeList) then
 		showNum = 1
 	end
 	this.SetNoticeTextMessage();

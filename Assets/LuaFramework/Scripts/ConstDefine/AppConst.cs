@@ -30,7 +30,8 @@ namespace LuaFramework
 #else
          true;
 #endif                       
-        public const bool LuaByteMode = false;                      //Lua字节码模式-默认关闭 
+        public const bool LuaByteMode = true;                      //Lua字节码模式-默认关闭 
+
         public const bool LuaBundleMode = false;                    //Lua代码AssetBundle模式
 
         public const int TimerInterval = 1;

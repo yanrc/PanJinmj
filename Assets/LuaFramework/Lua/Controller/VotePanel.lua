@@ -74,7 +74,7 @@ function VotePanel.OnOpen(uuid, sponsor, avatarvoList)
 	leftTime = 200
 	btnConfirm:SetActive(false)
 	btnCancel:SetActive(false)
-	if GlobalData.loginResponseData.account.uuid ~= uuid then
+	if LoginData.account.uuid ~= uuid then
 		btnConfirm:SetActive(true)
 		btnCancel:SetActive(true)
 	end

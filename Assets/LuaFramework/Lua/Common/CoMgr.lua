@@ -43,3 +43,13 @@ function CoMgr.download(url, callback)
 	dicForDownLoad[url]=nil;
 	callback(www);
 end
+
+function CoMgr.GetIpAddress(callback)
+    local www = WWW("http://1212.ip138.com/ic.asp");
+	local timeout={time=5,dotimeout=function() callback("IP获取失败") end}
+    coroutine.www(www,timeout)
+    local all = www.text;
+	log(all)
+	local tempip =string.match(all,"%d+.%d+.%d+.%d+");
+	callback(tempip)
+end

@@ -39,6 +39,7 @@ function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_L&R.prefab" }, function(prefabs) this.GangBack_LR = prefabs[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab" }, function(prefabs) this.GangBack_T = prefabs[0] end)
 	resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite) this.DefaultIcon = sprite[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) this.ShopItem=prefabs[0] end)
 end
 
 function OpenPanel(panel, ...)
@@ -65,6 +66,10 @@ function UIManager.ReturnStartPanel()
 	for k, v in pairs(define.Panels) do
 		_G[v]:Close()
 	end
+	LoginData={}
+	RoomData={}
+	RoundOverData={}
+	RoomOverData={}
 	OpenPanel(StartPanel)
 end
 

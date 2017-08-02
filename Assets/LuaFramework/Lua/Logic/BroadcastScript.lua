@@ -14,9 +14,8 @@ function BroadcastScript.GameBroadcastNotice(buffer)
 	local message = buffer:ReadString()
 	local noticeString = message;
 	if (HomePanel.gameObject.activeSelf) then
-		local noticeList = string.split(noticeString, '*')
-		if (noticeList ~= nil) then
-			GlobalData.notices = noticeList
+		this.noticeList = string.split(noticeString, '*')
+		if (this.noticeList ~= nil) then
 			HomePanel.GameBroadcastNotice()
 		end
 	end

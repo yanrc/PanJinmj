@@ -3,6 +3,7 @@ local this = ShopPanel
 local gameObject
 local btnClose
 local ItemsRoot
+local flg = false
 -- 启动事件--
 function ShopPanel.OnCreate(obj)
 	gameObject = obj;
@@ -10,20 +11,20 @@ function ShopPanel.OnCreate(obj)
 	ItemsRoot = obj.transform:FindChild("content")
 	btnClose = obj.transform:FindChild("btnclose").gameObject
 	this.lua:AddClick(btnClose, this.CloseClick)
---resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) coroutine.start(this.GetItemInfos, prefabs) end)
 end
 -- 请求并保存商品信息
-function ShopPanel.GetItemInfos(prefabs)
-	local www = WWW("http://dqc.qrz123.com/MaJiangManage/charge/getChargeInfo")
+function ShopPanel.GetItemInfos()
+	local url = string.format("http://dqc.qrz123.com/MaJiangManage/charge/getChargeInfo?uuid=%d", LoginData.account.uuid)
+	local www = WWW(url)
 	coroutine.www(www)
 	local data = json.decode(www.text)
 	local infos = data.list
-
+	this.state = data.upmgr
 	for i = 1, #infos do
-		local go = newObject(prefabs[0], ItemsRoot)
-		go.transform.localScale=Vector3.one
-		ShopItem.New(go, infos[i])
-		this.lua:AddClick(go, Payment.WXPay, infos[i][1])
+		local go = newObject(UIManager.ShopItem, ItemsRoot)
+		go.transform.localScale = Vector3.one
+		local item = ShopItem.New(go, infos[i])
+		this.lua:AddClick(go, ShopItem.Click, item)
 	end
 end
 
@@ -32,5 +33,8 @@ function ShopPanel.CloseClick()
 end
 
 function ShopPanel.OnOpen()
-
+	if not flg then
+		coroutine.start(this.GetItemInfos)
+		flg = true
+	end
 end

@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 3070682006
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 509aec33d6858767256750e99f37358c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Lua/Data/SignalOverItem.lua.bytes
+- Assets/Lua/Data/RuleSelect.lua.bytes
+- Assets/Lua/Data/PlayerItem.lua.bytes
+- Assets/Lua/Data/FinalOverItem.lua.bytes
+- Assets/Lua/Data/RoomData.lua.bytes
+- Assets/Lua/Data/LoginData.lua.bytes
+- Assets/Lua/Data/ShopItem.lua.bytes
+- Assets/Lua/Data/RoundOverData.lua.bytes
+- Assets/Lua/Data/RoomOverData.lua.bytes
+Dependencies: []

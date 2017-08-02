@@ -80,7 +80,7 @@ function MicPhone.StopRecord()
 	end
 	Microphone.End(nil);
 	audio:Stop();
-	local myuuid=GlobalData.loginResponseData.account.uuid
+	local myuuid=LoginData.account.uuid
 	networkMgr:SendChatMessage(ChatRequest.New(APIS.MicInput_Request, this.GetUserList(), myuuid, MicroPhoneInput.getInstance():GetClipData()))
 	this.PlayRecord();
 end
@@ -98,7 +98,7 @@ end
 function MicPhone.GetUserList()
 	local userList = { }
 	for i = 1, #avatarList do
-		if (avatarList[i].account.uuid ~= GlobalData.loginResponseData.account.uuid) then
+		if (avatarList[i].account.uuid ~= LoginData.account.uuid) then
 			table.insert(userList, avatarList[i].account.uuid)
 		end
 	end

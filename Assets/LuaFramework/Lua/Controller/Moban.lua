@@ -9,8 +9,9 @@ function Moban.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform
 	this:Init(obj)
-	-- this.lua:AddClick( ExitPanel.btnExit, this.Exit);
-	-- this.lua:AddClick( ExitPanel.btnCancel, this.Cancel);
+--	this.lua:AddClick(btnConfirm, this.Confirm);
+--	this.lua:AddClick(btnCancel, this.Cancel);
+--	this.lua:AddClick(btnClose, this.CloseClick);
 	logWarn("Start lua--->>" .. gameObject.name);
 end
 

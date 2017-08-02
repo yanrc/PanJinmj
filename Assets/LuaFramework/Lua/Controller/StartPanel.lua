@@ -32,8 +32,8 @@ function StartPanel.LoginCallBack(buffer)
 	log("LUA:StartPanel.LoginCallBack=" .. message);
 	ClosePanel(WaitingPanel)
 	soundMgr:playBGM(1);
-	GlobalData.loginResponseData = AvatarVO.New(json.decode(message));
-	local userlist = { GlobalData.loginResponseData.account.uuid }
+	LoginData = AvatarVO.New(json.decode(message));
+	local userlist = { LoginData.account.uuid }
 	networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));
 	ClosePanel(this)
 	OpenPanel(HomePanel)
@@ -47,9 +47,9 @@ function StartPanel.RoomBackResponse(buffer)
 	log("Lua:RoomBackResponse=" .. message);
 	for i = 1, #RoomData.playerList do
 		local itemData = RoomData.playerList[i];
-		if (itemData.account.openid == GlobalData.loginResponseData.account.openid) then
-			GlobalData.loginResponseData = AvatarVO.New(itemData)
-			local userlist = { GlobalData.loginResponseData.account.uuid }
+		if (itemData.account.openid == LoginData.account.openid) then
+			LoginData = AvatarVO.New(itemData)
+			local userlist = { LoginData.account.uuid }
 			networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));
 			break;
 		end
@@ -78,7 +78,6 @@ function StartPanel.OnConnect()
 end
 
 function StartPanel.Login()
-	GlobalData.ReinitData();
 	-- 初始化界面数值
 	if (agreeProtocol.isOn) then
 		this.doLogin();

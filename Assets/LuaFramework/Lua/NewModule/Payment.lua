@@ -19,7 +19,7 @@ function Payment.GetHttp(itemId)
 	OpenPanel(WaitingPanel, "请稍等...")
 	-- 获取信息
 	local url = "http://dqc.qrz123.com/MaJiangManage/charge/weixin"
-	local userId = GlobalData.loginResponseData.account.uuid
+	local userId = LoginData.account.uuid
 	local time = DateTime.Now:ToString("yyyyMMddHH");
 	local md5 = GameToolScript.GetMD5(userId .. time .. itemId)
 	url = url .. string.format("?userId=%s&itemId=%s&identify=%s", userId, itemId, md5);

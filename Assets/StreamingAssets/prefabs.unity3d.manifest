@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2268042368
+CRC: 1594726958
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 565db35597332076422631824c361914
+    Hash: b42e97e323a3abd06635c448bccb1865
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e724e11d37c7174e5e390b433bcd9372
+    Hash: 5da13b159a48c8c7e663dbbd9749c1fd
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -45,6 +45,8 @@ ClassTypes:
   Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 575553740, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -104,15 +106,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: ad41bb6b708bd1e4fa13eab889087b33, type: 3}
+  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
@@ -206,6 +206,7 @@ Assets:
 - Assets/Project/Prefabs/ThrowCard/TopAndBottomCard.prefab
 - Assets/Project/Prefabs/ShopPanel.prefab
 - Assets/Project/Prefabs/ShopItem.prefab
+- Assets/Project/Prefabs/InviteCodePanel.prefab
 - Assets/Project/Prefabs/XieyiPanel.prefab
 - Assets/Project/Prefabs/card/PutOutCard.prefab
 - Assets/Project/Prefabs/EnterRoomPanel.prefab

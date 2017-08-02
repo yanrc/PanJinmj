@@ -101,8 +101,15 @@ end
 -- ÒôÆµ ´Ó1001-1011
 function PlayerItem:ShowChatMessage(index)
 	self.showTime = 200;
+	if index > 3000 then
+		index = index - 2000
+		soundMgr:playMessageBoxSound(index, 0)
+	else
+		index = index - 1000
+		soundMgr:playMessageBoxSound(index, 1)
+	end
 	index = index - 1000;
-	self.chatMessage.text = GlobalData.messageBoxContents[index];
+	self.chatMessage.text = MessageBox.MessageBoxContents[index];
 	self.chatPaoPao:SetActive(true);
 end
 

@@ -4,7 +4,7 @@ AvatarVO=
 account={};--json生成AvatarVO类时也新生成了Account类，其中包含了玩家的头像地址
 --public int cardIndex;
 isOnLine=false;
-IsReady=false;
+isReady=false;
 --庄家
 main=false;
 roomId=0;
