@@ -26,8 +26,8 @@ local avatarvo =avatarvo or {}
 end
 
 function AvatarVO:ResetData()
-	isOnLine = false;
-	isReady = false;
-	main = false;
-	roomId = 0;
+	self.isOnLine = false;
+	self.isReady = false;
+	self.main = false;
+	self.roomId = 0;
 end

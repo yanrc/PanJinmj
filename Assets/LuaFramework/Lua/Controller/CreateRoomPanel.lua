@@ -91,7 +91,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 			if (i == 1) then
 				sendVo.jihu = true
 			elseif (i == 2) then
-				sendVo.duanmen = true
+				sendVo.duanMen = true
 			elseif (i == 3) then
 				sendVo.gui = 2
 			elseif (i == 4) then
@@ -113,6 +113,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 		rule = bit.rshift(rule, 1);
 	end
 	sendVo.roomType = GameConfig.GAME_TYPE_PANJIN;
+	sendVo.addWordCard = true
 	local sendMsg = json.encode(sendVo);
 	if (LoginData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")

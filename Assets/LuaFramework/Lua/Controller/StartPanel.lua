@@ -31,7 +31,6 @@ function StartPanel.LoginCallBack(buffer)
 	local message = buffer:ReadString()
 	log("LUA:StartPanel.LoginCallBack=" .. message);
 	ClosePanel(WaitingPanel)
-	soundMgr:playBGM(1);
 	LoginData = AvatarVO.New(json.decode(message));
 	local userlist = { LoginData.account.uuid }
 	networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));

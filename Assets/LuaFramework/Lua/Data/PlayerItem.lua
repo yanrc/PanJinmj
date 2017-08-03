@@ -32,8 +32,8 @@ function PlayerItem.New(go)
 	playerItem.offlineImage = go.transform:FindChild('Image_offline'):GetComponent('Image')
 	playerItem.chatMessage = go.transform:FindChild('chatBg/Text'):GetComponent('Text')
 	playerItem.chatPaoPao = go.transform:FindChild('chatBg').gameObject
-	playerItem.HuFlag = go.transform:FindChild('Image_hu').gameObject
-	playerItem.jiaGang = go.transform:FindChild('Text_jiagang'):GetComponent('Text')
+	playerItem.HuFlag = go.transform:FindChild('Image_hu'):GetComponent('Image')
+	playerItem.jiaGang = go.transform:FindChild('jiagang'):GetComponent('Image')
 	playerItem.showTime = 0
 	playerItem.showChatTime = 0
 	playerItem.uuid = -1
@@ -72,14 +72,6 @@ function PlayerItem:SetAvatarVo(avatar)
 	end
 end
 
-function PlayerItem:SetBankImg(flag)
-	self.bankerImg.enabled = flag;
-end
-
-function PlayerItem:SetReadyImg(flag)
-	self.readyImg.enabled = flag;
-end
-
 function PlayerItem:ShowChatAction()
 	self.showChatTime = 120;
 	self.chatAction:SetActive(true);
@@ -90,14 +82,13 @@ function PlayerItem:Clean()
 	self.headerIcon.sprite = UIManager.DefaultIcon
 	self.bankerImg.enabled = false
 	self.readyImg.enabled = false
+	self.offlineImage.enabled = false
 	self.scoreText.text = "";
-	self.nameText = ""
+	self.nameText.text = ""
 	self.uuid = -1;
+	self.avatarvo = nil
 end
 
-function PlayerItem:SetPlayerOffline(value)
-	self.offlineImage.enabled = value
-end
 -- “Ù∆µ ¥”1001-1011
 function PlayerItem:ShowChatMessage(index)
 	self.showTime = 200;
@@ -121,6 +112,4 @@ function PlayerItem.DisplayAvatorIp(self)
 	end
 end
 
-function PlayerItem:SetHuFlag(value)
-	self.HuFlag:SetActive(value);
-end
+

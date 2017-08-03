@@ -17,7 +17,7 @@ FinalOverItem = {
 	Nickname = "",
 	IsWiner = false,
 	IsPaoshou = false,
-	Icon = "",
+	iconUrl = "",
 }
 local mt = { }-- 元表（基类）
 mt.__index = FinalOverItem-- index方法
@@ -65,5 +65,5 @@ function FinalOverItem:SetUI(itemData)
 	self.angangCount.text = itemData.angang;
 	self.minggangCount.text = itemData.minggang;
 	self.finalScore.text = itemData.scores;
-	CoMgr.LoadImg(icon, self.Icon);
+	CoMgr.LoadImg(self.icon, self.iconUrl);
 end

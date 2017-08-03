@@ -18,19 +18,47 @@ function TopAndBottomCardScript.New(obj)
 end
 
 function TopAndBottomCardScript:Init(cardPoint, LocalIndex)
-	local islaizi=RoomData.guiPai == cardPoint
+	local islaizi = RoomData.guiPai == cardPoint
 	self.CardPoint = cardPoint
 	self.gameObject:GetComponent("Animation").enabled = islaizi;
 	self.guiIcon.gameObject:SetActive(islaizi);
 	local switch =
 	{
-		[1] = "Assets/Project/DynaImages/Cards/Big/b",
-		[2] = "Assets/Project/DynaImages/Cards/Left&Right/lr",
-		[3] = "Assets/Project/DynaImages/Cards/Small/s",
-		[4] = "Assets/Project/DynaImages/Cards/Left&Right/lr"
+		[1] = UIManager.bCards[cardPoint + 1],
+		[2] = UIManager.lrCards[cardPoint + 1],
+		[3] = UIManager.sCards[cardPoint + 1],
+		[4] = UIManager.lrCards[cardPoint + 1],
 	}
-	local path = switch[LocalIndex]
-	resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)
-		self.cardImg.sprite = sprite[0]
-	end )
+	if switch[LocalIndex] then
+		self.cardImg.sprite = newObject(switch[LocalIndex])
+	else
+		switch =
+		{
+			[1] = function()
+				resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/Cards/Big/b" .. cardPoint .. ".png" }, function(sprite)
+					self.cardImg.sprite = sprite[0]
+					UIManager.bCards[cardPoint + 1] = sprite[0]
+				end )
+			end,
+			[2] = function()
+				resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/Cards/Left&Right/lr" .. cardPoint .. ".png" }, function(sprite)
+					self.cardImg.sprite = sprite[0]
+					UIManager.lrCards[cardPoint + 1] = sprite[0]
+				end )
+			end,
+			[3] = function()
+				resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/Cards/Small/s" .. cardPoint .. ".png" }, function(sprite)
+					self.cardImg.sprite = sprite[0]
+					UIManager.sCards[cardPoint + 1] = sprite[0]
+				end )
+			end,
+			[4] = function()
+				resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/Cards/Left&Right/lr" .. cardPoint .. ".png" }, function(sprite)
+					self.cardImg.sprite = sprite[0]
+					UIManager.lrCards[cardPoint + 1] = sprite[0]
+				end )
+			end,
+		}
+		switch[LocalIndex]()
+	end
 end

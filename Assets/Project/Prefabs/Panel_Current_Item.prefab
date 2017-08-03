@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 22427118}
   - component: {fileID: 22278100}
   - component: {fileID: 11434584}
-  - component: {fileID: 11420196}
   m_Layer: 5
   m_Name: Panel_Current_Item
   m_TagString: Untagged
@@ -402,28 +401,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11420196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ee6b4e9dea1f445b57d156f5c33227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nickName: {fileID: 11440040}
-  resultDes: {fileID: 11472122}
-  huFlagImg: {fileID: 176396}
-  totalScroe: {fileID: 11447124}
-  fanCount: {fileID: 11493912}
-  gangScore: {fileID: 11410660}
-  paiArrayPanel: {fileID: 196254}
-  zhongMaFlag: {fileID: 11411498}
-  GenzhuangFlag: {fileID: 181386}
-  Banker: {fileID: 114673515708110710}
-  JiaGnag: {fileID: 114250746968871944}
 --- !u!114 &11428888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1132,15 +1109,15 @@ GameObject:
   m_Component:
   - component: {fileID: 224657253648833634}
   - component: {fileID: 222991041454469102}
-  - component: {fileID: 114250746968871944}
+  - component: {fileID: 114162771637982422}
   m_Layer: 5
-  m_Name: Text_jiagang
+  m_Name: jiagang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114250746968871944
+--- !u!114 &114162771637982422
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1148,31 +1125,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456094759658934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16446799, g: 0.8602941, b: 0.28443804, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u52A0\u94A2"
+  m_Sprite: {fileID: 21300000, guid: 475912d47a10b5845a2ca40dd3395e74, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114673515708110710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1227,8 +1198,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 117, y: 9.5}
-  m_SizeDelta: {x: 120, y: 50}
+  m_AnchoredPosition: {x: -93.1, y: -38.4}
+  m_SizeDelta: {x: 72.5, y: 67.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224766667386500762
 RectTransform:

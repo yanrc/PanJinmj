@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3781178797
+CRC: 803958778
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d068832f2baf56a772f388b553eddd3d
+    Hash: b6a803a576a9eab7fa899731c9521e3d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -130,6 +130,7 @@ Assets:
 - Assets/Project/Textures/Buttons/chat_normal.png
 - Assets/Project/Textures/Buttons/overfanhui.png
 - Assets/Project/Textures/Other/green.png
+- Assets/Project/Textures/Effect/jiagang.png
 - Assets/Project/Textures/JionGame/1.png
 - Assets/Project/Textures/Unused/0_.png
 - Assets/Project/Textures/Unused/enter_room_dialog_bg.png
@@ -212,6 +213,7 @@ Assets:
 - Assets/Project/Textures/Buttons/huodong.png
 - Assets/Project/Textures/Unused/fangjian.png
 - "Assets/Project/Textures/prize/tab/\u63A8\u5E7F\u5458\u62DB\u52DF2.png"
+- Assets/Project/Textures/Effect/duanmen.png
 - Assets/Project/Textures/Other/item_bg.png
 - Assets/Project/Textures/JionGame/0.png
 - Assets/Project/Textures/Other/shuiyin.png

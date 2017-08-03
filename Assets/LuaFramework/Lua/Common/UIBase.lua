@@ -42,6 +42,17 @@ function _UIBase:Close()
 	end
 end
 
+function _UIBase:ChangePanel(panel)
+	if (self._type ~= define.FixUI) then
+		log("wrong type=>"..self.name)
+	end
+	if (panel._type ~= define.FixUI) then
+		log("wrong type=>"..panel.name)
+	end
+	OpenPanel(panel)
+	ClosePanel(self)
+end
+
 function _UIBase.AddListener()
 
 end

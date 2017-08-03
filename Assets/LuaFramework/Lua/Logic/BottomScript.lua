@@ -35,12 +35,12 @@ end
 function BottomScript:OnPointerDown(eventData)
 	if (self.IsTingLock) then return end
 	if (self.islaizi) then return end
+	self.offset.x = self.transform.position.x - eventData.pressPosition.x;
+	self.offset.y = self.transform.position.y - eventData.pressPosition.y;
 	if (self.selected) then
 		self:SendObjectToCallBack();
 		self.selected = false;
 	else
-		self.offset.x = self.transform.position.x - eventData.pressPosition.x;
-		self.offset.y = self.transform.position.y - eventData.pressPosition.y;
 		self.selected = true;
 	end
 end
@@ -48,10 +48,10 @@ end
 function BottomScript:OnPointerUp(eventData)
 	if (self.IsTingLock) then return end
 	if (self.islaizi) then return end
+	self.transform.position = eventData.pressPosition + self.offset;
 	if (self.transform.localPosition.y > -122) then
 		self:SendObjectToCallBack();
 	else
-		self.transform.position = eventData.pressPosition + self.offset;
 		self:ReSetPoisitonCallBack();
 	end
 end
@@ -69,13 +69,18 @@ function BottomScript:ReSetPoisitonCallBack()
 end
 
 function BottomScript:Init(cardPoint)
-	local islaizi=RoomData.guiPai == cardPoint
+	local islaizi = RoomData.guiPai == cardPoint
 	self.CardPoint = cardPoint
 	self.gameObject:GetComponent("Animation").enabled = islaizi;
 	self.guiIcon.gameObject:SetActive(islaizi);
 	self.islaizi = islaizi;
-	local path = "Assets/Project/DynaImages/Cards/Big/b"
-	resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)
-		self.cardImg.sprite =newObject(sprite[0])
-	end )
+	if UIManager.bCards[cardPoint + 1] then
+		self.cardImg.sprite = newObject(UIManager.bCards[cardPoint + 1])
+	else
+		local path = "Assets/Project/DynaImages/Cards/Big/b"
+		resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)
+			self.cardImg.sprite = newObject(sprite[0])
+			UIManager.bCards[cardPoint + 1] = sprite[0]
+		end )
+	end
 end

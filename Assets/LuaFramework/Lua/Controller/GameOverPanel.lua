@@ -96,7 +96,7 @@ function GameOverPanel:GetMas()
 end
 
 function GameOverPanel:SetSignalContent()
-	if (#RoundOverData>0) then
+	if (next(RoundOverData) and RoundOverData.avatarList ~= nil) then
 		for i = 1, #RoundOverData.avatarList do
 			local itemdata = RoundOverData.avatarList[i];
 			local item = newObject(SingalItem)
@@ -110,7 +110,7 @@ function GameOverPanel:SetSignalContent()
 end
 
 function GameOverPanel:SetFinalContent()
-	if (#RoomOverData>0 and RoundOverData.totalInfo ~= nil) then
+	if (next(RoomOverData) and RoomOverData.totalInfo ~= nil) then
 		local itemdatas = RoomOverData.totalInfo;
 		local itemCtrls = { }
 		local topScore = itemdatas[1].scores;
@@ -146,8 +146,8 @@ function GameOverPanel:SetFinalContent()
 			local account = GamePanel.GetAccount(itemdata.uuid);
 			-- 头像和名称
 			if (account ~= nil) then
-				itemCtrls.Icon = account.headicon;
-				itemCtrls.Nickname = account.nickname;
+				itemCtrls[i].iconUrl = account.headicon;
+				itemCtrls[i].Nickname = account.nickname;
 			end
 			itemCtrls[i]:SetUI(itemdata);
 		end
@@ -161,7 +161,7 @@ function GameOverPanel.ReStratGame()
 	networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.encode(Readyvo)));
 	soundMgr:playSoundByActionButton(1);
 	ClosePanel(this)
-	RoundOverData={}
+	RoundOverData = { }
 end
 
 function GameOverPanel.ShowSingle(isNextBanker)
@@ -173,6 +173,8 @@ function GameOverPanel.ShowSingle(isNextBanker)
 	if (RoomData.surplusTimes <= 0 or RoomData.isOverByPlayer) then
 		btnShowFinal:SetActive(true);
 		btnContinue:SetActive(false);
+		ReadySelect[1].gameObject:SetActive(false);
+		ReadySelect[2].gameObject:SetActive(false);
 	else
 		btnShowFinal:SetActive(false);
 		btnContinue:SetActive(true);
@@ -199,11 +201,8 @@ function GameOverPanel.ShareFinal()
 	soundMgr:playSoundByActionButton(1);
 end
 -------------------模板-------------------------
---一轮结束
+-- 整轮结束
 function GameOverPanel.CloseClick()
-	RoundOverData={}
-	RoomData={}
-	RoomOverData={}
 	ClosePanel(this)
 	ClosePanel(GamePanel)
 	OpenPanel(HomePanel)

@@ -25,6 +25,7 @@ end
 -- @return: format string of the table
 function Test.DumpTab(tab, ind)
 	if (tab == nil) then return "nil" end;
+	if (not next(tab)) then return "{}" end;
 	local str = "{";
 	if (ind == nil) then ind = "  "; end;
 	-- //each of table
@@ -54,7 +55,7 @@ function Test.DumpTab(tab, ind)
 		elseif (type(v) == "thread") then
 			s = "thread : " .. tostring(v);
 		elseif (type(v) == "userdata") then
-			s = "userdata : " .. tostring(v);
+			s = "userdata : " .. (tostring(v) or "destroyed");
 		else
 			s = "unknow : " .. tostring(v);
 		end;

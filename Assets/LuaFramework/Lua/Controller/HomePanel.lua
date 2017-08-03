@@ -92,11 +92,11 @@ function HomePanel.CloseRoomCardPanel()
 	roomCardPanel:SetActive(false);
 end
 
-function HomePanel.CheckEnterInRoom()
-	if (RoomData ~= nil and RoomData.roomId ~= nil) then
-		OpenPanel(GamePanel)
-	end
-end
+--function HomePanel.CheckEnterInRoom()
+--	if (RoomData ~= nil and RoomData.roomId ~= nil) then
+--		OpenPanel(GamePanel)
+--	end
+--end
 
 function HomePanel.Button_openWeb()
 	soundMgr:playSoundByActionButton(1);
@@ -235,6 +235,7 @@ end
 -------------------模板-------------------------
 function HomePanel.OnOpen()
 	this.InitUI();
+	soundMgr:playBGM(1);
 	-- this.CheckEnterInRoom();
 end
 -- 移除事件--

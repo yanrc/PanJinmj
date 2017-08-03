@@ -130,7 +130,6 @@
     <Compile Include="Lua\Logic\LuaClass.lua" />
     <Compile Include="Lua\Logic\Network.lua" />
     <Compile Include="Lua\Controller\UserInfoPanel.lua" />
-    <Compile Include="Lua\Logic\SocketEventHandle.lua" />
     <Compile Include="Lua\Logic\Test.lua" />
     <Compile Include="Lua\Logic\TipsManager.lua" />
     <Compile Include="Lua\Logic\TopAndBottomCardScript.lua" />

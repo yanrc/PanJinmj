@@ -45,7 +45,7 @@ function SignalOverItem.New(obj)
 	-- 庄家图片
 	this.Banker = obj.transform:FindChild("Text_Palyer_Name/Image_banker"):GetComponent("Image")
 	-- 加钢文字
-	this.JiaGang = obj.transform:FindChild("Text_Palyer_Name/Text_jiagang"):GetComponent("Text")
+	this.JiaGang = obj.transform:FindChild("Text_Palyer_Name/jiagang"):GetComponent("Image")
 	this.gangPaiList = { }
 	this.pengPaiList = { }
 	this.chiPaiList = { }
@@ -60,7 +60,7 @@ function SignalOverItem:SetUI(itemData, Banker)
 	self.fanCount.text = tostring(itemData.totalScore - itemData.gangScore)
 	self.huFlagImg.enabled =(itemData.uuid == RoundOverData.winnerId);
 	self.Banker.enabled =(itemData.uuid == Banker);
-	self.JiaGang.text = "";
+	self.JiaGang.enabled=(itemData.jiaGang)
 	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == Banker)
 	self:AnalysisPaiInfo(itemData);
 end
@@ -95,8 +95,11 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 		local pengs = string.split(pengpaiStr, ',')
 		for i = 1, #pengs do
 			local cardPoint = tonumber(pengs[i])
+			--此处服务器有坑，补杠后碰没去掉
+			if paiArray[cardPoint+1]>2 then
 			paiArray[cardPoint+1] = paiArray[cardPoint+1] -3;
 			table.insert(self.pengPaiList, cardPoint)
+			end
 		end
 	end
 	-- 吃
