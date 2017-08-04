@@ -38,6 +38,8 @@ function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab" }, function(prefabs) this.GangBack_T = prefabs[0] end)
 	resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/morentouxiang.jpg' }, function(sprite) this.DefaultIcon = sprite[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) this.ShopItem = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/RecordItem.prefab" }, function(prefabs) this.RecordItem = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/DetailItem.prefab" }, function(prefabs) this.DetailItem = prefabs[0] end)
 	this.InitCards()
 end
 
@@ -55,7 +57,7 @@ function UIManager.InitCards()
 	for i = 1, 34 do
 		table.insert(path, "Assets/Project/DynaImages/Cards/Small/s" ..(i - 1) .. ".png")
 	end
-	--resMgr:LoadSprite('dynaimages', path, function(prefabs) end)
+	-- resMgr:LoadSprite('dynaimages', path, function(prefabs) end)
 	LoadingProgress.ClearProgressBar();
 	OpenPanel(StartPanel)
 end
@@ -68,7 +70,7 @@ function OpenPanel(panel, ...)
 	end
 	local args = { ...};
 	xpcall(
-	function() panel:Open(unpack(args)) end, log
+	function() panel:Open(unpack(args)) end, logError
 	)
 end
 
@@ -80,7 +82,7 @@ function ClosePanel(panel)
 		log("Lua:ClosePop==>" .. panel.name)
 	end
 	xpcall(
-	function() panel:Close() end, log
+	function() panel:Close() end, logError
 	)
 end
 

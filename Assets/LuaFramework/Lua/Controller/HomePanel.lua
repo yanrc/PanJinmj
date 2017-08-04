@@ -54,6 +54,7 @@ function HomePanel.OnCreate(go)
 	this.lua:AddClick(btnBuy, this.OpenShop);
 	this.lua:AddClick(btnShop, this.OpenShop);
 	this.lua:AddClick(btnShare, this.Share);
+	this.lua:AddClick(btnRecord, this.OpenRecord);
 end
 
 
@@ -92,11 +93,11 @@ function HomePanel.CloseRoomCardPanel()
 	roomCardPanel:SetActive(false);
 end
 
---function HomePanel.CheckEnterInRoom()
---	if (RoomData ~= nil and RoomData.roomId ~= nil) then
---		OpenPanel(GamePanel)
---	end
---end
+-- function HomePanel.CheckEnterInRoom()
+-- if (RoomData ~= nil and RoomData.roomId ~= nil) then
+-- 	OpenPanel(GamePanel)
+-- end
+-- end
 
 function HomePanel.Button_openWeb()
 	soundMgr:playSoundByActionButton(1);
@@ -148,6 +149,11 @@ function HomePanel.OpenShop()
 	OpenPanel(ShopPanel)
 end
 
+-- 打开回放
+function HomePanel.OpenRecord()
+	soundMgr:playSoundByActionButton(1);
+	OpenPanel(RecordPanel)
+end
 -- 打开游戏规则对话框
 
 function HomePanel.OpenGameRuleDialog()

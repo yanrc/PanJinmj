@@ -36,6 +36,7 @@
     <Folder Include="Lua\Data\" />
     <Folder Include="Lua\Logic\" />
     <Folder Include="Lua\MicPhone\" />
+    <Folder Include="Lua\Record\" />
     <Folder Include="Lua\NewModule\" />
     <Folder Include="Lua\Rules\" />
     <Folder Include="Lua\Vos\" />
@@ -139,6 +140,10 @@
     <Compile Include="Lua\MicPhone\MessageBox.lua" />
     <Compile Include="Lua\MicPhone\MicPhone.lua" />
     <Compile Include="Lua\NewModule\Payment.lua" />
+    <Compile Include="Lua\Record\DetailItem.lua" />
+    <Compile Include="Lua\Record\PlayRecordPanel.lua" />
+    <Compile Include="Lua\Record\RecordItem.lua" />
+    <Compile Include="Lua\Record\RecordPanel.lua" />
     <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
     <Compile Include="Lua\Rules\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />

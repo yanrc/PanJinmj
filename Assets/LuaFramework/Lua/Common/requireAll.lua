@@ -36,11 +36,33 @@ require "Data/LoginData"
 require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"
 
+require "Common/UIBase"
+require "Record/RecordPanel"
+require "Record/RecordItem"
+require "Record/DetailItem"
+require "Record/PlayRecordPanel"
+
 require "NewModule/Payment"
 require "MicPhone/MicPhone"
 require "MicPhone/MessageBox"
-require "Common/UIBase"
-for k,v in pairs(define.Panels) do
-	require("Controller/" .. v)
-end
+
+require("Controller/CreateRoomPanel")
+require("Controller/DialogPanel")
+require("Controller/EnterRoomPanel")
+require("Controller/ExitPanel")
+require("Controller/GameOverPanel")
+require("Controller/GamePanel")
+require("Controller/HomePanel")
+require("Controller/InviteCodePanel")
+require("Controller/MessagePanel")
+require("Controller/RulePanel")
+require("Controller/SettingPanel")
+require("Controller/SharePanel")
+require("Controller/ShopPanel")
+require("Controller/StartPanel")
+require("Controller/UserInfoPanel")
+require("Controller/VotePanel")
+require("Controller/WaitingPanel")
+
+
 json = require "cjson"

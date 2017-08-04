@@ -403,7 +403,7 @@ function GamePanel.CreateMoPaiGameObject(LocalIndex)
 	local obj = newObject(BottomPrefabs[LocalIndex])
 	obj.transform:SetParent(parentList[LocalIndex])
 	if (LocalIndex == 2) then
-		obj.transform:SetSiblingIndex(0)
+		obj.transform:SetAsFirstSibling()
 	end
 	obj.transform.localPosition = switch[LocalIndex]
 	obj.transform.localScale = Vector3.one;
@@ -497,7 +497,7 @@ end
 
 -- 手牌排序，鬼牌移到最前
 -- point：最后摸的那张牌值
-function GamePanel.SortMyCardList(point)
+function GamePanel.SortMyCardList()
 	table.sort(this.handerCardList[1],
 	function(a, b)
 		-- print("a=" .. Test.DumpTab(a))
@@ -513,17 +513,6 @@ function GamePanel.SortMyCardList(point)
 			return a.CardPoint < b.CardPoint
 		end
 	end )
-	-- 最后摸的一张牌
-	if (point ~= nil) then
-		for i = 1, #this.handerCardList[1] do
-			if this.handerCardList[1][i].CardPoint == point then
-				local temp = this.handerCardList[1][i]
-				table.remove(this.handerCardList[1], i)
-				table.insert(this.handerCardList[1], temp)
-				break
-			end
-		end
-	end
 end
 
 -- 初始化手牌
@@ -575,7 +564,7 @@ function GamePanel.InitOtherCardList(LocalIndex, count)
 		local go = newObject(BottomPrefabs[LocalIndex])
 		go.transform:SetParent(parentList[LocalIndex]);
 		if (LocalIndex == 2) then
-			go.transform:SetSiblingIndex(0)
+			go.transform:SetAsFirstSibling()
 		end
 		go.transform.localScale = Vector3.one;
 		table.insert(this.handerCardList[LocalIndex], go)
@@ -706,7 +695,7 @@ function GamePanel.ThrowBottom(CardPoint, LocalIndex, pos, isActive)
 	objCtrl:Init(CardPoint, LocalIndex);
 	obj.name = tostring(CardPoint);
 	obj.transform.localScale = Vector3.one;
-	if (LocalIndex == 2) then obj.transform:SetSiblingIndex(0) end
+	if (LocalIndex == 2) then obj.transform:SetAsFirstSibling() end
 	table.insert(tableCardList[LocalIndex], obj)
 	if (not isActive) then obj:SetActive(false) end
 	this.SetPointGameObject(obj);
@@ -799,7 +788,7 @@ function GamePanel.PengCard(buffer)
 		obj.transform.localScale = Vector3.one;
 		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
 		if (LocalIndex == 2) then
-			obj.transform:SetSiblingIndex(0);
+			obj.transform:SetAsFirstSibling();
 		end
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(cardVo.cardPoint, LocalIndex);
@@ -860,7 +849,7 @@ function GamePanel.ChiCard(buffer)
 		obj.transform.localScale = Vector3.one;
 		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
 		if LocalIndex == 2 then
-			obj.transform:SetSiblingIndex(0);
+			obj.transform:SetAsFirstSibling();
 		end
 		local objCtrl = TopAndBottomCardScript.New(obj);
 		if (i == 1) then
@@ -1004,7 +993,7 @@ function GamePanel.OtherGang(buffer)
 			obj.transform.localScale = Vector3.one
 			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
 			if (LocalIndex == 2 and i < 4) then
-				obj.transform:SetSiblingIndex(0);
+				obj.transform:SetAsFirstSibling();
 			end
 			table.insert(tempGangList, obj)
 		end
@@ -1028,7 +1017,7 @@ function GamePanel.OtherGang(buffer)
 			obj.transform.localScale = Vector3.one;
 			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
 			if (LocalIndex == 2 and i < 4) then
-				obj.transform:SetSiblingIndex(0);
+				obj.transform:SetAsFirstSibling();
 			end
 			local objCtrl = TopAndBottomCardScript.New(obj)
 			objCtrl:Init(cardVo.cardPoint, LocalIndex);
@@ -1440,6 +1429,7 @@ end
 -- end
 -- end
 
+-- 摧毁gameobject
 function GamePanel.CleanList(list)
 	for k, v in pairs(list) do
 		if type(v) == "table" then
@@ -2345,7 +2335,16 @@ function GamePanel.ReturnGameResponse(buffer)
 			else
 				cardPoint = currentCardPoint
 			end
-			this.SortMyCardList(cardPoint)
+			this.SortMyCardList()
+			-- 最后摸的一张牌
+			for i = 1, #this.handerCardList[1] do
+				if this.handerCardList[1][i].CardPoint == cardPoint then
+					local temp = this.handerCardList[1][i]
+					table.remove(this.handerCardList[1], i)
+					table.insert(this.handerCardList[1], temp)
+					break
+				end
+			end
 		end
 	end
 	this.SetPosition(1)

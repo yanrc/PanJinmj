@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 22415538}
   - component: {fileID: 11413326}
   m_Layer: 5
-  m_Name: Panel_GamePlayBack
+  m_Name: PlayRecordPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

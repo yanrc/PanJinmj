@@ -30,7 +30,7 @@ namespace LuaFramework {
         /// 添加单击事件
         /// </summary>
         public void AddClick(GameObject go, LuaFunction luafunc) {
-            if (go == null || luafunc == null)
+            if (go == null || luafunc == null || !go.GetComponent<Button>())
             {
                 Debugger.LogError("GameObject="+go+ ",LuaFunction="+luafunc.name);
                 return;
@@ -47,7 +47,7 @@ namespace LuaFramework {
         /// </summary>
         public void AddClick(GameObject go, LuaFunction luafunc,object arg)
         {
-            if (go == null || luafunc == null)
+            if (go == null || luafunc == null|| !go.GetComponent<Button>())
             {
                 Debugger.LogError("GameObject=" + go + ",LuaFunction=" + luafunc);
                 return;

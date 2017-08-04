@@ -1,13 +1,13 @@
 
 -- 输出日志--
 function log(str)
-	-- Util.Log(tostring(str));
-	print(debug.traceback(tostring(str)))
+	Util.Log(tostring(str));
+	--print(debug.traceback(tostring(str)))
 end
 
 -- 错误日志--
 function logError(str)
-	Util.LogError(str);
+	Util.LogError(debug.traceback(tostring(str)));
 end
 
 -- 警告日志--

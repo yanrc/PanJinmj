@@ -8,7 +8,6 @@ ShopItem = {
 local mt = { }-- 元表（基类）
 mt.__index = ShopItem-- index方法
 
-local Instance = nil
 function ShopItem.New(go, info)
 	local shopItem = { }
 	setmetatable(shopItem, mt)

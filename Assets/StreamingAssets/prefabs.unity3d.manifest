@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2555410882
+CRC: 507434461
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3fe0f40346a36392864863980c01972e
+    Hash: 4fa23957d5a6270ed0f859a70c326195
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 21bf4fd8f46cedffcca70d64a7589928
+    Hash: 33e673ab381520f08674b36e57a3c34a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -49,6 +49,8 @@ ClassTypes:
   Script: {fileID: 575553740, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -2061169968, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -104,23 +106,21 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2660ef3f076125d41bd90aa0f671d0ad, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
+  Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
+  Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
+  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
+  Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 0a0adf16af4cc0749b04ba188d4fc306, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
+  Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 9d3cfa88d946cca4995d9d1428ef3aef, type: 3}
 - Class: 114
@@ -129,8 +129,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f62e78f15d27ebe409a90be72fa3157b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 30d3803917d611548ae8ac81d28fa885, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 8b380fa41f7581b42b24700d94d2beb2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1d20b4b6b053f0d4db7bba580acf1bcc, type: 3}
 - Class: 114
@@ -142,15 +140,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: ece12d1c0ce3ad0448def8b1260e82e0, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 12087461b8b3d8d40b7ca7da9b58941c, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 0875524f47461044c8babd919114161f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 7bc8a7c6fa181ee4992247917041135e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1207094a5e99f974d908db7f057a06bb, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 6f4eda26de482974f865fc5c6fd2d7bc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 73b02ef32def42b458094dcc1d57599f, type: 3}
 - Class: 114
@@ -160,9 +154,15 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc6bd678eb3945341906665ce7758580, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 9444246d7342d6b48b9cbbaa7d46ad75, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e4dfccfc394c6f40ac5caac8229325c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 71e60f9fefb27b0458552cb7237ac9b3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d5fe7916c30d62043b74ad00c1ad6b6f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0a0adf16af4cc0749b04ba188d4fc306, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -186,7 +186,7 @@ Assets:
 - Assets/Project/Prefabs/card/Bottom_T.prefab
 - Assets/Project/Prefabs/Panel_Current_Item.prefab
 - Assets/Project/Prefabs/RulePanel.prefab
-- Assets/Project/Prefabs/ZhanItem.prefab
+- Assets/Project/Prefabs/DetailItem.prefab
 - Assets/Project/Prefabs/Pointer.prefab
 - Assets/Project/Prefabs/PengGangCard/GangBack_T.prefab
 - Assets/Project/Prefabs/playBack/HandCard_R.prefab
@@ -210,7 +210,7 @@ Assets:
 - Assets/Project/Prefabs/EnterRoomPanel.prefab
 - Assets/Project/Prefabs/ZhuanZhuanPanel.prefab
 - Assets/Project/Prefabs/RawImage.prefab
-- Assets/Project/Prefabs/ZhanRoomItem.prefab
+- Assets/Project/Prefabs/RecordItem.prefab
 - Assets/Project/Prefabs/DebugPanel.prefab
 - Assets/Project/Prefabs/JiuJiangPanel.prefab
 - Assets/Project/Prefabs/Panel_Rank_Dialog.prefab
@@ -221,7 +221,7 @@ Assets:
 - Assets/Project/Prefabs/PengGangCard/gangBack.prefab
 - Assets/Project/Prefabs/PengGangCard/PengGangCard_R.prefab
 - Assets/Project/Prefabs/card/Bottom_R.prefab
-- Assets/Project/Prefabs/Panel_Report.prefab
+- Assets/Project/Prefabs/RecordPanel.prefab
 - Assets/Project/Prefabs/MicBg.prefab
 - Assets/Project/Prefabs/Panel_Center_Operate.prefab
 - Assets/Project/Prefabs/PengGangCard/PenggangCard_T.prefab
@@ -237,6 +237,7 @@ Assets:
 - Assets/Project/Prefabs/PanJinPanel.prefab
 - Assets/Project/Prefabs/Panel_wating.prefab
 - Assets/Project/Prefabs/ThrowCard/ThrowCard_R.prefab
+- Assets/Project/Prefabs/PlayRecordPanel.prefab
 - Assets/Project/Prefabs/ThrowCard/ZhongMa.prefab
 - Assets/Project/Prefabs/PengGangCard/PengGangCard_B.prefab
 - Assets/Project/Prefabs/ChangShaPanel.prefab
