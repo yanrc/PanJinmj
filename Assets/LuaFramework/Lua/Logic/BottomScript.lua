@@ -1,7 +1,7 @@
 BottomScript = {
 	gameObject,
 	transform,
-	CardPoint,
+	cardPoint,
 	guiIcon,
 	cardImg,
 	selected = false,
@@ -70,7 +70,7 @@ end
 
 function BottomScript:Init(cardPoint)
 	local islaizi = RoomData.guiPai == cardPoint
-	self.CardPoint = cardPoint
+	self.cardPoint = cardPoint
 	self.gameObject:GetComponent("Animation").enabled = islaizi;
 	self.guiIcon.gameObject:SetActive(islaizi);
 	self.islaizi = islaizi;
@@ -79,7 +79,9 @@ function BottomScript:Init(cardPoint)
 	else
 		local path = "Assets/Project/DynaImages/Cards/Big/b"
 		resMgr:LoadSprite('dynaimages', { path .. cardPoint .. ".png" }, function(sprite)
-			self.cardImg.sprite = newObject(sprite[0])
+			if not IsNil(self.gameObject) then
+				self.cardImg.sprite = newObject(sprite[0])
+			end
 			UIManager.bCards[cardPoint + 1] = sprite[0]
 		end )
 	end

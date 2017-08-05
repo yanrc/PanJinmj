@@ -37,10 +37,12 @@ require "Rules/JiuJiangPanel"
 require "Rules/PanjinRule"
 
 require "Common/UIBase"
+
 require "Record/RecordPanel"
 require "Record/RecordItem"
 require "Record/DetailItem"
 require "Record/PlayRecordPanel"
+require "Record/RecordPlayerItem"
 
 require "NewModule/Payment"
 require "MicPhone/MicPhone"

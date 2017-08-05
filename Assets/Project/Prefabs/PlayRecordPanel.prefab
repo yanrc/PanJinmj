@@ -45,9 +45,8 @@ GameObject:
   - component: {fileID: 22457700}
   - component: {fileID: 22219264}
   - component: {fileID: 11494544}
-  - component: {fileID: 11470972}
   m_Layer: 5
-  m_Name: Player_R
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +97,7 @@ GameObject:
   - component: {fileID: 9580064}
   - component: {fileID: 11458404}
   m_Layer: 5
-  m_Name: GangEffect_B
+  m_Name: GangEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22453186}
   m_Layer: 5
-  m_Name: PenggangListL
+  m_Name: parent4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,7 +215,7 @@ GameObject:
   - component: {fileID: 11407644}
   - component: {fileID: 11406428}
   m_Layer: 5
-  m_Name: exitBtn
+  m_Name: btnExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,7 +355,7 @@ GameObject:
   - component: {fileID: 11404166}
   - component: {fileID: 11467852}
   m_Layer: 5
-  m_Name: stopBtn
+  m_Name: btnStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +373,7 @@ GameObject:
   - component: {fileID: 11424678}
   - component: {fileID: 11449862}
   m_Layer: 5
-  m_Name: playBtn
+  m_Name: btnPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,7 +476,7 @@ GameObject:
   - component: {fileID: 22200440}
   - component: {fileID: 11443824}
   m_Layer: 5
-  m_Name: Leaved1
+  m_Name: LeftRound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22470354}
   m_Layer: 9
-  m_Name: ThrowCardsListB
+  m_Name: parent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,7 +646,7 @@ GameObject:
   - component: {fileID: 22271846}
   - component: {fileID: 11423924}
   m_Layer: 5
-  m_Name: Image
+  m_Name: process
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,9 +746,8 @@ GameObject:
   - component: {fileID: 22425186}
   - component: {fileID: 22286776}
   - component: {fileID: 11461966}
-  - component: {fileID: 11415228}
   m_Layer: 5
-  m_Name: Player_B
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +766,7 @@ GameObject:
   - component: {fileID: 9535312}
   - component: {fileID: 11405860}
   m_Layer: 5
-  m_Name: PengEffect_B
+  m_Name: PengEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -787,7 +785,7 @@ GameObject:
   - component: {fileID: 9509766}
   - component: {fileID: 11437290}
   m_Layer: 5
-  m_Name: GangEffect_B
+  m_Name: GangEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -994,7 +992,7 @@ GameObject:
   - component: {fileID: 9504946}
   - component: {fileID: 11409174}
   m_Layer: 5
-  m_Name: Chi_B (3)
+  m_Name: ChiEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1009,7 +1007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22450948}
   m_Layer: 5
-  m_Name: ThrowCardsListLeft
+  m_Name: parent4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1026,7 +1024,7 @@ GameObject:
   - component: {fileID: 22219946}
   - component: {fileID: 11429718}
   m_Layer: 5
-  m_Name: Leaved
+  m_Name: LeftCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1045,7 +1043,7 @@ GameObject:
   - component: {fileID: 9513042}
   - component: {fileID: 11468646}
   m_Layer: 5
-  m_Name: PengEffect_B
+  m_Name: PengEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1062,7 @@ GameObject:
   - component: {fileID: 9585640}
   - component: {fileID: 11467230}
   m_Layer: 5
-  m_Name: PengEffect_B
+  m_Name: PengEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1150,7 +1148,7 @@ GameObject:
   - component: {fileID: 9535826}
   - component: {fileID: 11499234}
   m_Layer: 5
-  m_Name: HuEffect_B
+  m_Name: HuEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1181,7 +1179,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 22415538}
-  - component: {fileID: 11413326}
   m_Layer: 5
   m_Name: PlayRecordPanel
   m_TagString: Untagged
@@ -1271,7 +1268,7 @@ GameObject:
   - component: {fileID: 9544244}
   - component: {fileID: 11428260}
   m_Layer: 5
-  m_Name: HuEffect_B
+  m_Name: HuEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1338,9 +1335,8 @@ GameObject:
   - component: {fileID: 22415608}
   - component: {fileID: 22262386}
   - component: {fileID: 11454784}
-  - component: {fileID: 11444592}
   m_Layer: 5
-  m_Name: Player_L
+  m_Name: Player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1389,9 +1385,8 @@ GameObject:
   - component: {fileID: 22437030}
   - component: {fileID: 22273910}
   - component: {fileID: 11408664}
-  - component: {fileID: 11456842}
   m_Layer: 5
-  m_Name: Player_T
+  m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1442,7 +1437,7 @@ GameObject:
   - component: {fileID: 11445554}
   - component: {fileID: 11483204}
   m_Layer: 5
-  m_Name: nextBtn
+  m_Name: btnForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1457,7 +1452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22433258}
   m_Layer: 5
-  m_Name: PenggangListB
+  m_Name: parent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1504,7 +1499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22466390}
   m_Layer: 5
-  m_Name: ThrowCardsListRight
+  m_Name: parent2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1551,7 +1546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22440434}
   m_Layer: 5
-  m_Name: PenggangListT
+  m_Name: parent3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1603,7 +1598,7 @@ GameObject:
   - component: {fileID: 11466944}
   - component: {fileID: 11405136}
   m_Layer: 5
-  m_Name: frontBtn
+  m_Name: btnBackward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,7 +1616,7 @@ GameObject:
   - component: {fileID: 11480792}
   - component: {fileID: 9507114}
   m_Layer: 5
-  m_Name: Liuju_B
+  m_Name: LiujuEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1640,7 +1635,7 @@ GameObject:
   - component: {fileID: 9599724}
   - component: {fileID: 11465928}
   m_Layer: 5
-  m_Name: PengEffect_B
+  m_Name: PengEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1824,7 +1819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22472236}
   m_Layer: 5
-  m_Name: PenggangListR
+  m_Name: parent2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1843,7 +1838,7 @@ GameObject:
   - component: {fileID: 9503478}
   - component: {fileID: 11452960}
   m_Layer: 5
-  m_Name: HuEffect_B
+  m_Name: HuEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1862,7 +1857,7 @@ GameObject:
   - component: {fileID: 9558292}
   - component: {fileID: 11454912}
   m_Layer: 5
-  m_Name: GangEffect_B
+  m_Name: GangEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1983,7 +1978,7 @@ GameObject:
   - component: {fileID: 9510268}
   - component: {fileID: 11466734}
   m_Layer: 5
-  m_Name: GangEffect_B
+  m_Name: GangEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1998,7 +1993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22403060}
   m_Layer: 5
-  m_Name: ThrowCardsListTop
+  m_Name: parent3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2079,7 +2074,7 @@ Animator:
   m_GameObject: {fileID: 149962}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1610ca8691b16e44fa4cd53a1895fc5a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2452,7 +2447,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: exitSure_Click
         m_Mode: 1
         m_Arguments:
@@ -2678,7 +2673,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: front_Click
         m_Mode: 1
         m_Arguments:
@@ -2801,7 +2796,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: exit_Click
         m_Mode: 1
         m_Arguments:
@@ -3136,56 +3131,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u4F60\u786E\u5B9A\u8981\u9000\u51FA\u56DE\u653E\u5417\uFF1F"
---- !u!114 &11413326
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9444246d7342d6b48b9cbbaa7d46ad75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastTime: 0
-  Number: {fileID: 0}
-  roomRemark: {fileID: 11457780}
-  liujuEffectGame: {fileID: 175666}
-  otherPengCard: 0
-  otherGangCard: 0
-  parentList:
-  - {fileID: 224433425176386292}
-  - {fileID: 224745247323952718}
-  - {fileID: 224736028967271380}
-  - {fileID: 224790298214134256}
-  outparentList:
-  - {fileID: 22470354}
-  - {fileID: 22466390}
-  - {fileID: 22403060}
-  - {fileID: 22450948}
-  dirGameList:
-  - {fileID: 126928}
-  - {fileID: 142016}
-  - {fileID: 146666}
-  - {fileID: 165524}
-  playerItems:
-  - {fileID: 11415228}
-  - {fileID: 11470972}
-  - {fileID: 11456842}
-  - {fileID: 11444592}
-  LeavedCastNumText: {fileID: 11418762}
-  LeavedRoundNumText: {fileID: 11405708}
-  playBtn: {fileID: 125380}
-  stopBtn: {fileID: 123640}
-  processText: {fileID: 11496702}
-  pengGangParentList:
-  - {fileID: 22433258}
-  - {fileID: 22472236}
-  - {fileID: 22440434}
-  - {fileID: 22453186}
-  genZhuang: {fileID: 129202}
-  exitPanel: {fileID: 185332}
-  imgDuanMen: {fileID: 114988965170650272}
 --- !u!114 &11413520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3240,29 +3185,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11415228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4dfccfc394c6f40ac5caac8229325c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headerIcon: {fileID: 11461966}
-  bankerImg: {fileID: 11411440}
-  nameText: {fileID: 11406954}
-  readyImg: {fileID: 11470020}
-  scoreText: {fileID: 11469166}
-  dir: 42
-  HuFlag: {fileID: 182034}
-  pengEffect: {fileID: 175720}
-  gangEffect: {fileID: 107638}
-  huEffect: {fileID: 1363971524092158}
-  chiEffect: {fileID: 1713708836647130}
-  jiaGang: {fileID: 114424095429757110}
 --- !u!114 &11416010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4022,7 +3944,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: exitCancel_Click
         m_Mode: 1
         m_Arguments:
@@ -4143,29 +4065,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11444592
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 162896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4dfccfc394c6f40ac5caac8229325c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headerIcon: {fileID: 11454784}
-  bankerImg: {fileID: 11496534}
-  nameText: {fileID: 11433674}
-  readyImg: {fileID: 11416298}
-  scoreText: {fileID: 11402734}
-  dir: 4c
-  HuFlag: {fileID: 177360}
-  pengEffect: {fileID: 151788}
-  gangEffect: {fileID: 189604}
-  huEffect: {fileID: 188740}
-  chiEffect: {fileID: 149962}
-  jiaGang: {fileID: 114502060623561672}
 --- !u!114 &11444906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4346,7 +4245,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: play_Click
         m_Mode: 1
         m_Arguments:
@@ -4603,29 +4502,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11456842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4dfccfc394c6f40ac5caac8229325c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headerIcon: {fileID: 11408664}
-  bankerImg: {fileID: 11456936}
-  nameText: {fileID: 11476698}
-  readyImg: {fileID: 11449598}
-  scoreText: {fileID: 11410260}
-  dir: 54
-  HuFlag: {fileID: 143872}
-  pengEffect: {fileID: 143280}
-  gangEffect: {fileID: 197946}
-  huEffect: {fileID: 159944}
-  chiEffect: {fileID: 1503051731031886}
-  jiaGang: {fileID: 114060070054922878}
 --- !u!114 &11456936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5109,7 +4985,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: stop_Click
         m_Mode: 1
         m_Arguments:
@@ -5205,29 +5081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lasttime: 15
---- !u!114 &11470972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4dfccfc394c6f40ac5caac8229325c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headerIcon: {fileID: 11494544}
-  bankerImg: {fileID: 11482422}
-  nameText: {fileID: 11444906}
-  readyImg: {fileID: 11460542}
-  scoreText: {fileID: 11402814}
-  dir: 52
-  HuFlag: {fileID: 194462}
-  pengEffect: {fileID: 151706}
-  gangEffect: {fileID: 143726}
-  huEffect: {fileID: 156074}
-  chiEffect: {fileID: 1259314446728490}
-  jiaGang: {fileID: 114296024174259432}
 --- !u!114 &11476698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5543,7 +5396,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11413326}
+      - m_Target: {fileID: 0}
         m_MethodName: next_Click
         m_Mode: 1
         m_Arguments:
@@ -7775,8 +7628,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22415536}
-  - {fileID: 22446682}
   - {fileID: 22460564}
+  - {fileID: 22446682}
   - {fileID: 22467750}
   - {fileID: 22495084}
   - {fileID: 22433658}
@@ -7822,7 +7675,7 @@ RectTransform:
   - {fileID: 22491408}
   - {fileID: 22487676}
   m_Father: {fileID: 22445910}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8169,7 +8022,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22445910}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9007,7 +8860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224736028967271380}
   m_Layer: 5
-  m_Name: Top
+  m_Name: parent3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9026,7 +8879,7 @@ GameObject:
   - component: {fileID: 95439106347713666}
   - component: {fileID: 114915475506016768}
   m_Layer: 5
-  m_Name: Chi_B (1)
+  m_Name: ChiEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9081,7 +8934,7 @@ GameObject:
   - component: {fileID: 95824625097514856}
   - component: {fileID: 114495296253850516}
   m_Layer: 5
-  m_Name: HuEffect_B
+  m_Name: HuEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9130,7 +8983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224197612865175760}
   m_Layer: 5
-  m_Name: HanderCardParent
+  m_Name: HandCardParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9164,7 +9017,7 @@ GameObject:
   - component: {fileID: 222707775262536284}
   - component: {fileID: 114988965170650272}
   m_Layer: 5
-  m_Name: Image
+  m_Name: imgDuanMen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9219,7 +9072,7 @@ GameObject:
   - component: {fileID: 95308835194939038}
   - component: {fileID: 114946599490538688}
   m_Layer: 5
-  m_Name: Chi_B (2)
+  m_Name: ChiEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9270,7 +9123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224433425176386292}
   m_Layer: 5
-  m_Name: bottom
+  m_Name: parent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9302,7 +9155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224790298214134256}
   m_Layer: 5
-  m_Name: Left
+  m_Name: parent4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9338,7 +9191,7 @@ GameObject:
   - component: {fileID: 95470991045206414}
   - component: {fileID: 114647154787091566}
   m_Layer: 5
-  m_Name: Chi_B
+  m_Name: ChiEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9372,7 +9225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224745247323952718}
   m_Layer: 5
-  m_Name: Right
+  m_Name: parent2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9489,7 +9342,7 @@ Animator:
   m_GameObject: {fileID: 1503051731031886}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1610ca8691b16e44fa4cd53a1895fc5a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9506,7 +9359,7 @@ Animator:
   m_GameObject: {fileID: 1259314446728490}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1610ca8691b16e44fa4cd53a1895fc5a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -9523,7 +9376,7 @@ Animator:
   m_GameObject: {fileID: 1713708836647130}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1610ca8691b16e44fa4cd53a1895fc5a, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

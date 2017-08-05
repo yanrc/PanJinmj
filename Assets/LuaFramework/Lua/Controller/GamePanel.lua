@@ -473,14 +473,14 @@ function GamePanel.ActionBtnShow(buffer)
 			-- 格式：chi：出牌玩家：出的牌|牌1_牌2_牌3| 牌1_牌2_牌3
 			-- eg:"chi:1:2|1_2_3|2_3_4"
 			local strChi = string.split(strs[i], '|');
-			local CardPoint = string.split(strChi[1], ':')[3];
+			local cardPoint = string.split(strChi[1], ':')[3];
 			chiPaiPointList = { };
 			for m = 2, #strChi do
 				local strChiList = string.split(strChi[m], '_');
 				local cpoint = { };
-				cpoint.putCardPoint = CardPoint;
+				cpoint.putCardPoint = cardPoint;
 				for n = 1, #strChiList do
-					if (strChiList[n] == CardPoint) then
+					if (strChiList[n] == cardPoint) then
 						table.remove(strChiList, n)
 					end
 				end
@@ -503,14 +503,14 @@ function GamePanel.SortMyCardList()
 		-- print("a=" .. Test.DumpTab(a))
 		-- print("b=" .. Test.DumpTab(b))
 		-- b是鬼牌
-		if b.CardPoint == RoomData.guiPai then
+		if b.cardPoint == RoomData.guiPai then
 			return false
 			-- a是鬼牌
-		elseif (a.CardPoint == RoomData.guiPai) then
+		elseif (a.cardPoint == RoomData.guiPai) then
 			return true
 			-- 都不是鬼牌，比较大小
 		else
-			return a.CardPoint < b.CardPoint
+			return a.cardPoint < b.cardPoint
 		end
 	end )
 end
@@ -520,14 +520,14 @@ function GamePanel.InitMyCardListAndOtherCard(mineList, topCount, leftCount, rig
 	for i = 1, #mineList[1] do
 		if (mineList[1][i] > 0) then
 			for j = 1, mineList[1][i] do
-				local CardPoint = i - 1
+				local cardPoint = i - 1
 				local go = newObject(BottomPrefabs[1])
 				go.transform:SetParent(parentList[1]);
 				go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 				local objCtrl = BottomScript.New(go)
 				objCtrl.OnSendMessage = this.CardChange;
 				objCtrl.ReSetPoisiton = this.CardSelect;
-				objCtrl:Init(CardPoint);
+				objCtrl:Init(cardPoint);
 				table.insert(this.handerCardList[1], objCtrl)
 			end
 		end
@@ -604,9 +604,9 @@ function GamePanel.CardChange(objCtrl)
 	if (CurLocalIndex == 1) then
 		objCtrl.OnSendMessage = nil;
 		objCtrl.ReSetPoisiton = nil;
-		local CardPoint = objCtrl.CardPoint;
-		-- this.PushOutFromMineList(CardPoint);
-		this.CreatePutOutCardAndPlayAction(CardPoint, this.GetMyIndexFromList() -1, objCtrl.transform.position);
+		local cardPoint = objCtrl.cardPoint;
+		-- this.PushOutFromMineList(cardPoint);
+		this.CreatePutOutCardAndPlayAction(cardPoint, this.GetMyIndexFromList() -1, objCtrl.transform.position);
 		-- 将打出牌移除
 		for k, v in pairs(this.handerCardList[1]) do
 			if v == objCtrl then
@@ -620,7 +620,7 @@ function GamePanel.CardChange(objCtrl)
 		this.SetPosition(1);
 		-- 出牌动画
 		local cardvo = { }
-		cardvo.cardPoint = CardPoint;
+		cardvo.cardPoint = cardPoint;
 		networkMgr:SendMessage(ClientRequest.New(APIS.CHUPAI_REQUEST, json.encode(cardvo)));
 		LastAvarIndex = 1;
 	end
@@ -687,13 +687,13 @@ function GamePanel.SetDirGameObjectAction(LocalIndex)
 	CurLocalIndex = LocalIndex;
 end
 
-function GamePanel.ThrowBottom(CardPoint, LocalIndex, pos, isActive)
+function GamePanel.ThrowBottom(cardPoint, LocalIndex, pos, isActive)
 	local obj = newObject(ThrowPrefabs[LocalIndex])
 	obj.transform:SetParent(outparentList[LocalIndex])
 	obj.transform.localPosition = pos
 	local objCtrl = TopAndBottomCardScript.New(obj)
-	objCtrl:Init(CardPoint, LocalIndex);
-	obj.name = tostring(CardPoint);
+	objCtrl:Init(cardPoint, LocalIndex);
+	obj.name = tostring(cardPoint);
 	obj.transform.localScale = Vector3.one;
 	if (LocalIndex == 2) then obj.transform:SetAsFirstSibling() end
 	table.insert(tableCardList[LocalIndex], obj)
@@ -760,7 +760,7 @@ function GamePanel.PengCard(buffer)
 		local removeCount = 0
 		for i = #this.handerCardList[1], 1, -1 do
 			local objCtrl = this.handerCardList[1][i];
-			if (objCtrl.CardPoint == cardVo.cardPoint) then
+			if (objCtrl.cardPoint == cardVo.cardPoint) then
 				table.remove(this.handerCardList[1], i)
 				destroy(objCtrl.gameObject);
 				removeCount = removeCount + 1;
@@ -781,12 +781,11 @@ function GamePanel.PengCard(buffer)
 	this.SetPosition(LocalIndex);
 	-- 显示碰牌
 	local tempList = { }
-	local prefab = CPGPrefabs[LocalIndex]
 	for i = 1, 3 do
-		local obj = newObject(prefab)
+		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
 		obj.transform.localScale = Vector3.one;
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		if (LocalIndex == 2) then
 			obj.transform:SetAsFirstSibling();
 		end
@@ -816,7 +815,7 @@ function GamePanel.ChiCard(buffer)
 	if (LocalIndex == 1) then
 		-- 第一个吃牌
 		for k, v in pairs(this.handerCardList[1]) do
-			if (v.CardPoint == cardVo.onePoint) then
+			if (v.cardPoint == cardVo.onePoint) then
 				table.remove(this.handerCardList[1], k)
 				destroy(v.gameObject)
 				break
@@ -824,7 +823,7 @@ function GamePanel.ChiCard(buffer)
 		end
 		-- 第二个吃牌
 		for k, v in pairs(this.handerCardList[1]) do
-			if (v.CardPoint == cardVo.twoPoint) then
+			if (v.cardPoint == cardVo.twoPoint) then
 				destroy(v.gameObject)
 				table.remove(this.handerCardList[1], k)
 				break
@@ -841,13 +840,12 @@ function GamePanel.ChiCard(buffer)
 		end
 	end
 	this.SetPosition(LocalIndex);
-	local prefab = CPGPrefabs[LocalIndex]
 	local tempList = { }
 	for i = 1, 3 do
-		local obj = newObject(prefab)
+		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
 		obj.transform.localScale = Vector3.one;
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		if LocalIndex == 2 then
 			obj.transform:SetAsFirstSibling();
 		end
@@ -880,7 +878,7 @@ function GamePanel.GangCard(buffer)
 		local removeCount = 0;
 		for i = #this.handerCardList[1], 1, -1 do
 			local objCtrl = this.handerCardList[1][i];
-			if (objCtrl.CardPoint == cardVo.cardPoint) then
+			if (objCtrl.cardPoint == cardVo.cardPoint) then
 				table.remove(this.handerCardList[1], i)
 				destroy(objCtrl.gameObject);
 				removeCount = removeCount + 1;
@@ -902,7 +900,7 @@ function GamePanel.GangCard(buffer)
 			end
 			obj.transform:SetParent(cpgParent[LocalIndex])
 			obj.transform.localScale = Vector3.one
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 			table.insert(tempGangList, obj)
 		end
 		table.insert(PengGangList[LocalIndex], tempGangList)
@@ -917,7 +915,7 @@ function GamePanel.GangCard(buffer)
 		local removeCount = 0;
 		for i = #this.handerCardList[1], 1, -1 do
 			local objCtrl = this.handerCardList[1][i];
-			if (objCtrl.CardPoint == cardVo.cardPoint) then
+			if (objCtrl.cardPoint == cardVo.cardPoint) then
 				table.remove(this.handerCardList[1], i)
 				destroy(objCtrl.gameObject);
 				removeCount = removeCount + 1;
@@ -931,7 +929,7 @@ function GamePanel.GangCard(buffer)
 			local obj = newObject(CPGPrefabs[1])
 			obj.transform:SetParent(cpgParent[1])
 			obj.transform.localScale = Vector3.one;
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 			local objCtrl = TopAndBottomCardScript.New(obj)
 			objCtrl:Init(cardVo.cardPoint, 1);
 			table.insert(tempGangList, obj)
@@ -941,7 +939,7 @@ function GamePanel.GangCard(buffer)
 	else
 		for i = 1, #this.handerCardList[1] do
 			local objCtrl = this.handerCardList[1][i];
-			if (objCtrl.CardPoint == cardVo.cardPoint) then
+			if (objCtrl.cardPoint == cardVo.cardPoint) then
 				table.remove(this.handerCardList[1], i)
 				destroy(objCtrl.gameObject);
 				break;
@@ -952,7 +950,7 @@ function GamePanel.GangCard(buffer)
 		local obj = newObject(CPGPrefabs[1])
 		obj.transform:SetParent(cpgParent[1])
 		obj.transform.localScale = Vector3.one;
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, index - 1, 4)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, index, 4)
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(cardVo.cardPoint, 1)
 		table.insert(PengGangList[LocalIndex][index], obj)
@@ -991,7 +989,7 @@ function GamePanel.OtherGang(buffer)
 			end
 			obj.transform:SetParent(cpgParent[LocalIndex])
 			obj.transform.localScale = Vector3.one
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 			if (LocalIndex == 2 and i < 4) then
 				obj.transform:SetAsFirstSibling();
 			end
@@ -1015,7 +1013,7 @@ function GamePanel.OtherGang(buffer)
 			local obj = newObject(CPGPrefabs[LocalIndex])
 			obj.transform:SetParent(cpgParent[LocalIndex])
 			obj.transform.localScale = Vector3.one;
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 			if (LocalIndex == 2 and i < 4) then
 				obj.transform:SetAsFirstSibling();
 			end
@@ -1032,7 +1030,7 @@ function GamePanel.OtherGang(buffer)
 		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
 		obj.transform.localScale = Vector3.one;
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, index - 1, 4)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, index, 4)
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(cardVo.cardPoint, LocalIndex)
 		table.insert(PengGangList[LocalIndex][index], obj)
@@ -1065,8 +1063,8 @@ function GamePanel.BuhuaRemoveCard(cardPoint, LocalIndex)
 	if (LocalIndex == 0) then
 		for i = 1, #this.handerCardList[1] do
 			local temp = this.handerCardList[1][i];
-			local CardPoint = temp.CardPoint;
-			if (CardPoint == cardPoint) then
+			local cardPoint = temp.cardPoint;
+			if (cardPoint == cardPoint) then
 				table.remove(this.handerCardList[1], i)
 				destroy(temp.gameObject);
 				temp = nil
@@ -1156,7 +1154,7 @@ function GamePanel.GetPaiInpeng(cardPoint, LocalIndex)
 	end
 	-- 循环遍历比对点数
 	for i = 1, #jugeList do
-		if (type(jugeList[i][1]) == "table" and jugeList[i][1].CardPoint == cardPoint) then
+		if (type(jugeList[i][1]) == "table" and jugeList[i][1].cardPoint == cardPoint) then
 			return i
 		end
 	end
@@ -1181,17 +1179,17 @@ function GamePanel.OnChipSelect(objCtrl, isSelected)
 	-- 		return
 	-- 	end
 	-- 	if (oneChiCardPoint == -1) then
-	-- 		oneChiCardPoint = objCtrl.CardPoint;
+	-- 		oneChiCardPoint = objCtrl.cardPoint;
 	-- 	else
-	-- 		twoChiCardPoint = objCtrl.CardPoint;
+	-- 		twoChiCardPoint = objCtrl.cardPoint;
 	-- 	end
 	-- 	obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -272);
 	-- 	objCtrl.selected = true;
 	-- else
 	-- 	-- 取消选择
-	-- 	if (oneChiCardPoint == objCtrl.CardPoint) then
+	-- 	if (oneChiCardPoint == objCtrl.cardPoint) then
 	-- 		oneChiCardPoint = -1;
-	-- 	elseif (twoChiCardPoint == objCtrl.CardPoint) then
+	-- 	elseif (twoChiCardPoint == objCtrl.cardPoint) then
 	-- 		twoChiCardPoint = -1;
 	-- 	end
 	-- 	obj.transform.localPosition = Vector3.New(obj.transform.localPosition.x, -292);
@@ -1204,7 +1202,7 @@ end
 function GamePanel.InsertCardIntoList(objCtrl)
 	-- 插入牌的方法
 	if (objCtrl ~= nil) then
-		local curCardPoint = objCtrl.CardPoint;
+		local curCardPoint = objCtrl.cardPoint;
 		-- 得到当前牌指针
 		if (curCardPoint == RoomData.guiPai) then
 			table.insert(this.handerCardList[1], 1, objCtrl)
@@ -1212,7 +1210,7 @@ function GamePanel.InsertCardIntoList(objCtrl)
 			return;
 		else
 			for i = 1, #this.handerCardList[1] do
-				local cardPoint = this.handerCardList[1][i].CardPoint;
+				local cardPoint = this.handerCardList[1][i].cardPoint;
 				if (cardPoint ~= RoomData.guiPai and cardPoint >= curCardPoint) then
 					table.insert(this.handerCardList[1], i, objCtrl)
 					return;
@@ -1294,7 +1292,7 @@ function GamePanel.HubtnClick()
 		requestVo.type = "qianghu";
 		cardPoint = putOutCardPoint;
 	else
-		cardPoint = this.handerCardList[1][#this.handerCardList[1]].CardPoint
+		cardPoint = this.handerCardList[1][#this.handerCardList[1]].cardPoint
 	end
 	requestVo.cardPoint = cardPoint;
 	local sendMsg = json.encode(requestVo);
@@ -2111,7 +2109,7 @@ function GamePanel.DoDisplayMGangCard(LocalIndex, point)
 	for i = 1, 4 do
 		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		obj.transform.localScale = Vector3.one;
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(point, LocalIndex);
@@ -2140,7 +2138,7 @@ function GamePanel.DoDisplayAnGangCard(LocalIndex, point, show)
 		end
 		table.insert(TempList, obj)
 		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2 and i < 4) then
 			obj.transform:SetAsFirstSibling()
@@ -2157,7 +2155,7 @@ function GamePanel.DoDisplayPengCard(LocalIndex, point)
 		local pos = switch[LocalIndex](i)
 		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2) then
 			obj.transform:SetAsFirstSibling()
@@ -2177,7 +2175,7 @@ function GamePanel.DoDisplayChiCard(LocalIndex, chipai)
 		local pos = switch[LocalIndex](i)
 		local obj = newObject(CPGPrefabs[LocalIndex])
 		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex], i)
+		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex]+1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2) then
 			obj.transform:SetAsFirstSibling()
@@ -2331,14 +2329,14 @@ function GamePanel.ReturnGameResponse(buffer)
 			local cardPoint
 			if (currentCardPoint == -2) then
 				local count = #this.handerCardList[1]
-				cardPoint = this.handerCardList[1][count].CardPoint;
+				cardPoint = this.handerCardList[1][count].cardPoint;
 			else
 				cardPoint = currentCardPoint
 			end
 			this.SortMyCardList()
 			-- 最后摸的一张牌
 			for i = 1, #this.handerCardList[1] do
-				if this.handerCardList[1][i].CardPoint == cardPoint then
+				if this.handerCardList[1][i].cardPoint == cardPoint then
 					local temp = this.handerCardList[1][i]
 					table.remove(this.handerCardList[1], i)
 					table.insert(this.handerCardList[1], temp)
@@ -2358,7 +2356,7 @@ function GamePanel.ReturnGameResponse(buffer)
 	-- 	local count = #this.handerCardList[1]
 	-- 	-- 吃碰杠之后
 	-- 	if (currentCardPoint == -2) then
-	-- 		local cardPoint = this.handerCardList[1][count].CardPoint;
+	-- 		local cardPoint = this.handerCardList[1][count].cardPoint;
 	-- 		-- SelfAndOtherPutoutCard = cardPoint;
 	-- 		this.SortMyCardList()
 	-- 		-- 摸牌之后

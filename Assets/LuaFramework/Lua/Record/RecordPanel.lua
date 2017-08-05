@@ -123,7 +123,12 @@ end
 -------------------模板-------------------------
 function RecordPanel.CloseClick()
 	soundMgr:playSoundByActionButton(1);
-	ClosePanel(this)
+	if DetailPage.activeSelf then
+		RecordPage:SetActive(true)
+		DetailPage:SetActive(false)
+	else
+		ClosePanel(this)
+	end
 end
 
 function RecordPanel.OnOpen()

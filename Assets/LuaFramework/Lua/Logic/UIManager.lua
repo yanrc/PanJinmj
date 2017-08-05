@@ -40,6 +40,10 @@ function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/ShopItem.prefab" }, function(prefabs) this.ShopItem = prefabs[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/RecordItem.prefab" }, function(prefabs) this.RecordItem = prefabs[0] end)
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/DetailItem.prefab" }, function(prefabs) this.DetailItem = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/playBack/HandCard_B.prefab" }, function(prefabs) this.HandCard_B = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/playBack/HandCard_R.prefab" }, function(prefabs) this.HandCard_R = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/playBack/HandCard_T.prefab" }, function(prefabs) this.HandCard_T = prefabs[0] end)
+	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/playBack/HandCard_L.prefab" }, function(prefabs) this.HandCard_L = prefabs[0] end)
 	this.InitCards()
 end
 
