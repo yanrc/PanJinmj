@@ -35,22 +35,20 @@ end
 function BottomScript:OnPointerDown(eventData)
 	if (self.IsTingLock) then return end
 	if (self.islaizi) then return end
-	self.offset.x = self.transform.position.x - eventData.pressPosition.x;
-	self.offset.y = self.transform.position.y - eventData.pressPosition.y;
-	if (self.selected) then
-		self:SendObjectToCallBack();
-		self.selected = false;
-	else
-		self.selected = true;
-	end
+	self.offset = self.transform.position - eventData.position
 end
 
 function BottomScript:OnPointerUp(eventData)
 	if (self.IsTingLock) then return end
 	if (self.islaizi) then return end
-	self.transform.position = eventData.pressPosition + self.offset;
-	if (self.transform.localPosition.y > -122) then
-		self:SendObjectToCallBack();
+	if (self.selected) then
+		if not self:SendObjectToCallBack() then
+			self:ReSetPoisitonCallBack();
+		end
+	elseif self.transform.localPosition.y > -122 then
+		if not self:SendObjectToCallBack() then
+			self:ReSetPoisitonCallBack();
+		end
 	else
 		self:ReSetPoisitonCallBack();
 	end
@@ -63,6 +61,9 @@ function BottomScript:SendObjectToCallBack()
 end
 -- 归位事件
 function BottomScript:ReSetPoisitonCallBack()
+	GamePanel.SetPosition(1)
+	self.transform.localPosition = self.transform.localPosition + Vector2.New(0, 20);
+	-- 清除其他牌的选中状态
 	if (self.ReSetPoisiton ~= nil) then
 		self:ReSetPoisiton()
 	end

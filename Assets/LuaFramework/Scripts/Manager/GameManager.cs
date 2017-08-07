@@ -123,7 +123,7 @@ namespace LuaFramework {
                 yield break;
             }
             string dataPath = Util.DataPath;  //数据目录
-            string url = AppConst.WebUrl;
+            string url = AppConst.GetWebUrl();
             string message = string.Empty;
             string random = DateTime.Now.ToString("yyyymmddhhmmss");
             string listUrl = url + "files.txt?v=" + random;

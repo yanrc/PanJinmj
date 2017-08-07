@@ -14,7 +14,7 @@ local print_r = require "3rd/sproto/print_r"
 require "Logic/LuaClass"
 require "Logic/CtrlManager"
 
-require"Common/requireAll"
+require "Common/requireAll"
 -- 管理器--
 Game = { };
 local this = Game;
@@ -22,7 +22,7 @@ local this = Game;
 local game;
 local transform;
 local gameObject;
-local WWW = UnityEngine.WWW;
+
 
 function Game.InitViewPanels()
 	for i = 1, #PanelNames do
@@ -32,30 +32,18 @@ end
 
 -- 初始化完成，发送链接服务器信息--
 function Game.OnInitOK()
-	AppConst.SocketPort = APIS.socketPort;
-	AppConst.SocketAddress = APIS.socketUrl;
-	AppConst.ChatSocketPort = APIS.chatPort;
-	AppConst.ChatSocketAddress = APIS.chatSocketUrl;
 	WechatOperate.AddListener()
-	--加载面板
+	APIS.GameSetting()
+	-- 加载面板
 	UIManager.InitPanels();
-	-- 注册LuaView--
-	-- this.InitViewPanels();
-
-	--[[    this.test_class_func();
-    this.test_pblua_func();
-    this.test_cjson_func();
-    this.test_pbc_func();
-    this.test_lpeg_func();
-    this.test_sproto_func();
-    coroutine.start(this.test_coroutine);--]]
 	CtrlManager.Init();
 	BroadcastScript.Awake()
 	Test.Awake()
 	logWarn('LuaFramework InitOK--->>>');
 end
 
---重置全部数据
+
+-- 重置全部数据
 function Game.ClearData()
 
 
@@ -76,24 +64,24 @@ end
 function Game.test_sproto_func()
 	logWarn("test_sproto_func-------->>");
 	local sp = sproto.parse [[
-		    .Person {
-		        name 0 : string
-		        id 1 : integer
-		        email 2 : string
+				    .Person {
+				        name 0 : string
+				        id 1 : integer
+				        email 2 : string
 
-		        .PhoneNumber {
-		            number 0 : string
-		            type 1 : integer
-		        }
+				        .PhoneNumber {
+				            number 0 : string
+				            type 1 : integer
+				        }
 
-		        phone 3 : *PhoneNumber
-		    }
+				        phone 3 : *PhoneNumber
+				    }
 
-		    .AddressBook {
-		        person 0 : *Person(id)
-		        others 1 : *Person
-		    }
-		    ]]
+				    .AddressBook {
+				        person 0 : *Person(id)
+				        others 1 : *Person
+				    }
+				    ]]
 
 	local ab = {
 		person =

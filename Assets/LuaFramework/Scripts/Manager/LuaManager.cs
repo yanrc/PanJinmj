@@ -95,8 +95,15 @@ namespace LuaFramework {
                 loader.AddBundle("lua/lua_logic.unity3d");
                 loader.AddBundle("lua/lua_micphone.unity3d");
                 loader.AddBundle("lua/lua_newmodule.unity3d");
+                loader.AddBundle("lua/lua_record.unity3d");
                 loader.AddBundle("lua/lua_rules.unity3d");
                 loader.AddBundle("lua/lua_vos.unity3d");
+                loader.AddBundle("lua/lua_games_changsha.unity3d");
+                loader.AddBundle("lua/lua_games_fushun.unity3d");
+                loader.AddBundle("lua/lua_games_jiujiang.unity3d");
+                loader.AddBundle("lua/lua_games_shuangliao.unity3d");
+                loader.AddBundle("lua/lua_games_tuidaohu.unity3d");
+                loader.AddBundle("lua/lua_games_wuxi.unity3d");
 
                 loader.AddBundle("lua/lua.unity3d");
                 loader.AddBundle("lua/lua_cjson.unity3d");

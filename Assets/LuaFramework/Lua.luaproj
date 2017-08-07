@@ -34,8 +34,15 @@
     <Folder Include="Lua\Common\" />
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
+    <Folder Include="Lua\games\changsha\" />
+    <Folder Include="Lua\games\tuidaohu\" />
     <Folder Include="Lua\Logic\" />
     <Folder Include="Lua\MicPhone\" />
+    <Folder Include="Lua\games\jiujiang\" />
+    <Folder Include="Lua\games\fushun\" />
+    <Folder Include="Lua\games\" />
+    <Folder Include="Lua\games\wuxi\" />
+    <Folder Include="Lua\games\shuangliao\" />
     <Folder Include="Lua\Record\" />
     <Folder Include="Lua\NewModule\" />
     <Folder Include="Lua\Rules\" />
@@ -123,6 +130,7 @@
     <Compile Include="Lua\Data\SignalOverItem.lua" />
     <Compile Include="Lua\eventlib.lua" />
     <Compile Include="Lua\events.lua" />
+    <Compile Include="Lua\games\jiujiang\JiujiangRule.lua" />
     <Compile Include="Lua\Logic\BottomScript.lua" />
     <Compile Include="Lua\Logic\BroadcastScript.lua" />
     <Compile Include="Lua\Logic\CtrlManager.lua" />
@@ -145,7 +153,6 @@
     <Compile Include="Lua\Record\RecordItem.lua" />
     <Compile Include="Lua\Record\RecordPanel.lua" />
     <Compile Include="Lua\Record\RecordPlayerItem.lua" />
-    <Compile Include="Lua\Rules\JiuJiangPanel.lua" />
     <Compile Include="Lua\Rules\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />
     <Compile Include="Lua\Vos\APIS.lua" />

@@ -7,12 +7,13 @@ public class LuaFramework_AppConstWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(LuaFramework.AppConst), typeof(System.Object));
+		L.RegFunction("GetWebUrl", GetWebUrl);
 		L.RegFunction("New", _CreateLuaFramework_AppConst);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegConstant("DebugMode", 1);
 		L.RegConstant("ExampleMode", 0);
 		L.RegConstant("UpdateMode", 0);
-		L.RegConstant("LuaByteMode", 0);
+		L.RegConstant("LuaByteMode", 1);
 		L.RegConstant("LuaBundleMode", 0);
 		L.RegConstant("TimerInterval", 1);
 		L.RegConstant("GameFrameRate", 30);
@@ -21,7 +22,6 @@ public class LuaFramework_AppConstWrap
 		L.RegVar("AppPrefix", get_AppPrefix, null);
 		L.RegVar("ExtName", get_ExtName, null);
 		L.RegVar("AssetDir", get_AssetDir, null);
-		L.RegVar("WebUrl", get_WebUrl, null);
 		L.RegVar("UserId", get_UserId, set_UserId);
 		L.RegVar("SocketPort", get_SocketPort, set_SocketPort);
 		L.RegVar("SocketAddress", get_SocketAddress, set_SocketAddress);
@@ -52,6 +52,22 @@ public class LuaFramework_AppConstWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: LuaFramework.AppConst.New");
 			}
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetWebUrl(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			string o = LuaFramework.AppConst.GetWebUrl();
+			LuaDLL.lua_pushstring(L, o);
+			return 1;
 		}
 		catch(Exception e)
 		{
@@ -121,20 +137,6 @@ public class LuaFramework_AppConstWrap
 		try
 		{
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.AssetDir);
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_WebUrl(IntPtr L)
-	{
-		try
-		{
-			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.WebUrl);
 			return 1;
 		}
 		catch(Exception e)

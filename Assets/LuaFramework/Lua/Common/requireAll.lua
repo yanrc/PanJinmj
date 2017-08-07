@@ -3,9 +3,6 @@ require "Common/define"
 require "Common/CoMgr"
 require "Common/Enums"
 
-require "Rules/JiuJiangPanel"
-
-
 require "Logic/TipsManager"
 require "Logic/LoginManager"
 require "Logic/BroadcastScript"
@@ -33,8 +30,9 @@ require "Data/RoomOverData"
 require "Data/RoundOverData"
 require "Data/LoginData"
 
-require "Rules/JiuJiangPanel"
+
 require "Rules/PanjinRule"
+require "games/jiujiang/JiujiangRule"
 
 require "Common/UIBase"
 

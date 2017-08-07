@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 776927771
+CRC: 1144779975
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f2fd1c70ce692d257dfa9766640b3c8c
+    Hash: eddf200fb2ae5b0b37f5a24607224577
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0a678760223cf8f3a76ed5b7fd24bc66
@@ -22,12 +22,14 @@ Assets:
 - Assets/Project/Animations/Image (2).controller
 - Assets/Project/Animations/Pointer.controller
 - Assets/Project/Animations/HuEffect.controller
+- Assets/Project/Animations/cpgEffect.anim
 - Assets/Project/Animations/Black.controller
 - Assets/Project/Animations/waiting.anim
 - Assets/Project/Animations/Red.controller
 - Assets/Project/Animations/SpecialEffects.anim
 - Assets/Project/Animations/Login_btn_anim.anim
 - Assets/Project/Animations/Button_Pressed_Anim.controller
+- Assets/Project/Animations/cpgEffect.controller
 - Assets/Project/Animations/Liuju_B.controller
 - Assets/Project/Animations/Red.anim
 - Assets/Project/Animations/Image (1).controller

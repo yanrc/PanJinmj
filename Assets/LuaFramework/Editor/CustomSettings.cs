@@ -183,7 +183,7 @@ public static class CustomSettings
         _GT(typeof(List<int>)),
         _GT(typeof(Sprite)),
         _GT(typeof(Rect)),
-        _GT(typeof(Toggle)),
+   
         _GT(typeof(System.Collections.Hashtable)),
         _GT(typeof(Dropdown)),
         _GT(typeof(TipPanelScript)),
@@ -191,8 +191,6 @@ public static class CustomSettings
         _GT(typeof(Image)),
         _GT(typeof(Button)),
         _GT(typeof(Mahjong)),
-        _GT(typeof(Slider)),
-        _GT(typeof(Slider.SliderEvent)),
         _GT(typeof(UnityEngine.EventSystems.PointerEventData)),
         _GT(typeof(DateTime)),
         _GT(typeof(ToggleGroup)),
@@ -201,8 +199,13 @@ public static class CustomSettings
         _GT(typeof(AndroidJavaObject)),
         _GT(typeof(MicroPhoneInput)),
         _GT(typeof(Microphone)),
+        _GT(typeof(Slider)),
+        _GT(typeof(Slider.SliderEvent)),
         _GT(typeof(InputField)),
         _GT(typeof(InputField.OnChangeEvent)),
+        _GT(typeof(Toggle)),
+        _GT(typeof(Toggle.ToggleEvent)),
+        _GT(typeof(GameSetting)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

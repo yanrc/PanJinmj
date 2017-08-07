@@ -42,6 +42,7 @@ ClientRequest=AssemblyCSharp.ClientRequest
 ClientResponse=AssemblyCSharp.ClientResponse
 HeadRequest=AssemblyCSharp.HeadRequest
 GameToolScript=AssemblyCSharp.GameToolScript
+GameSetting = GameObject.Find("Utils/GameManager"):GetComponent('GameSetting');
 
 PlatformType=cn.sharesdk.unity3d.PlatformType
 ShareContent=cn.sharesdk.unity3d.ShareContent

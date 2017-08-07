@@ -6,48 +6,62 @@ local gameObject;
 
 -- 规则toggle
 local GameRule = { }
-local panelDevoloping
+-- local panelDevoloping
 
+local currentGame = GameConfig.GAME_TYPE_PANJIN
 -- 启动事件--
 function CreateRoomPanel.OnCreate(obj)
 	gameObject = obj;
 	transform = obj.transform;
 	this:Init(obj)
-	panelDevoloping = transform:FindChild("root/content/Panel_Developing").gameObject
+	-- panelDevoloping = transform:FindChild("root/content/Panel_Developing").gameObject
 	local createButton = transform:FindChild("root/content/Button_Create_Sure").gameObject
 	local cancelButton = transform:FindChild("root/Image_Create_Bg/Button_Delete").gameObject
+	local tab = transform:FindChild("root/Panel_Game_Buttons/Button_base").gameObject
+	local tabsRoot = transform:FindChild("root/Panel_Game_Buttons")
+	local toggleGroup = tabsRoot:GetComponent("ToggleGroup")
 	this.lua:AddClick(createButton, this.CreateRoom);
 	this.lua:AddClick(cancelButton, this.CloseClick);
 	RuleSelectObj = transform:FindChild("root/content/Panel_Game_Setting").gameObject
 	RuleSelect.Init(RuleSelectObj)
+	for i = 1, #APIS.Rules do
+		local obj = newObject(tab, tabsRoot)
+		obj:SetActive(true)
+		local ruletable = APIS.Rules[i]
+		obj.transform:FindChild("Text"):GetComponent("Text").text = ruletable.name
+		local toggle = obj:GetComponent("Toggle")
+		toggle.group = toggleGroup
+		toggle.onValueChanged:AddListener( function(isOn) this.Setting(ruletable, obj, isOn) end)
+		if (i == 1) then
+			toggle.isOn = true
+		end
+	end
 end
 
--- 打开九江设置面板
-function CreateRoomPanel.OpenJiuJiangSettingPanel()
-	soundMgr:playSoundByActionButton(1);
-	PlayerPrefs.SetInt("userDefaultMJ", 4);
-	panelDevoloping:SetActive(false);
-	PanelManager:CreatePanel('JiuJiangPanel', nil);
+function CreateRoomPanel.Setting(ruletable, obj, isOn)
+	if isOn then
+		soundMgr:playSoundByActionButton(1);
+		currentGame = ruletable
+		RuleSelect.Open(ruletable)
+	else
+		RuleSelect.Close(ruletable)
+	end
 end
 
--- 打开九江设置面板
-function CreateRoomPanel.OpenPanJinSettingPanel()
-	soundMgr:playSoundByActionButton(1);
-	panelDevoloping:SetActive(false);
-	RuleSelect.Open(PanjinRule)
-end
+
+-- 设置面板
+-- function CreateRoomPanel.OpenPanJinSettingPanel()
+-- soundMgr:playSoundByActionButton(1);
+-- -- panelDevoloping:SetActive(false);
+-- currentGame = GameConfig.GAME_TYPE_PANJIN
+-- RuleSelect.Open(PanjinRule)
+-- end
 
 
 -- 点击隐藏watingPanel
 function CreateRoomPanel.Cancle()
 	soundMgr:playSoundByActionButton(1);
 	ClosePanel(WaitingPanel)
-end
-
--- 点击下载(过时)
-function CreateRoomPanel.Button_down()
-	soundMgr:playSoundByActionButton(1);
-	Application.OpenURL("http://a.app.qq.com/o/simple.jsp?pkgname=com.pengyoupdk.poker");
 end
 
 -- 显示正在开发中
@@ -74,7 +88,7 @@ end
 
 function CreateRoomPanel.CreatePanjinRoom()
 	soundMgr:playSoundByActionButton(1);
-	local rule = RuleSelect.Select2Int("盘锦麻将")
+	local rule, num = RuleSelect.Select2Int(PanjinRule.name)
 	local sendVo = {
 		roundNumber = 1,
 		pingHu = false,
@@ -86,7 +100,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 		jihu = false,
 	};
 	-- 盘锦麻将为了兼容老版本，不直接发rule
-	for i = 1, 10 do
+	for i = 1, num do
 		if ((bit.band(rule, 1)) == 1) then
 			if (i == 1) then
 				sendVo.jihu = true
@@ -112,7 +126,7 @@ function CreateRoomPanel.CreatePanjinRoom()
 		end
 		rule = bit.rshift(rule, 1);
 	end
-	sendVo.roomType = GameConfig.GAME_TYPE_PANJIN;
+	sendVo.roomType = currentGame;
 	sendVo.addWordCard = true
 	local sendMsg = json.encode(sendVo);
 	if (LoginData.account.roomcard > 0) then
@@ -130,13 +144,40 @@ end
 -- 创建九江麻将房间
 function CreateRoomPanel.CreateJiuJiangRoom()
 	soundMgr:playSoundByActionButton(1);
-	local jiujiang = JiuJiangPanel
-	local sendVo = { };
-	sendVo.roundNumber = jiujiang.GetRoundNumber();
-	sendVo.roomType = GameConfig.GAME_TYPE_SHUANGLIAO;
-	sendVo.mayou = jiujiang.GetMayou();
-	sendVo.kunmai = jiujiang.GetKunmai();
-	sendVo.hongzhonglaizi = jiujiang.GetHongzhongLaizi();
+	local rule, num = RuleSelect.Select2Int(JiujiangRule.name)
+	local sendVo = {
+		roundNumber = 1,
+		mayou = 0,
+		piaofen = 0,
+		gui = 0,
+	};
+	for i = 1, num do
+		if ((bit.band(rule, 1)) == 1) then
+			if (i == 1) then
+				sendVo.mayou = 0
+			elseif (i == 2) then
+				sendVo.mayou = 1
+			elseif (i == 3) then
+				sendVo.mayou = 2
+			elseif (i == 4) then
+				sendVo.piaofen = 0
+			elseif (i == 5) then
+				sendVo.piaofen = 1
+			elseif (i == 6) then
+				sendVo.piaofen = 2
+			elseif (i == 7) then
+				sendVo.gui = 2
+			elseif (i == 8) then
+				sendVo.roundNumber = 16
+			elseif (i == 9) then
+				sendVo.roundNumber = 8
+			elseif (i == 10) then
+				sendVo.roundNumber = 4
+			end
+		end
+		rule = bit.rshift(rule, 1);
+	end
+	sendVo.roomType = currentGame;
 	local sendMsg = json.encode(sendVo);
 	if (LoginData.account.roomcard > 0) then
 		OpenPanel(WaitingPanel, "正在创建房间")
@@ -148,16 +189,16 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 end
 
 function CreateRoomPanel.CreateRoom()
-	local x = 5;
+	local x = currentGame
 	local switch =
 	{
 		[1] = this.CreateZhuanzhuanRoom,
 		[2] = this.CreateHuashuiRoom,
 		[3] = this.CreateChangshaRoom,
 		[4] = this.CreateGuangDongRoom,
-		[5] = this.CreatePanjinRoom,
+		[PanjinRule] = this.CreatePanjinRoom,
 		[6] = this.CreateShuangLiaoRoom,
-		[7] = this.CreateJiuJiangRoom
+		[JiujiangRule] = this.CreateJiuJiangRoom
 	}
 	switch[x]()
 end
@@ -186,7 +227,7 @@ function CreateRoomPanel.CloseClick()
 	ClosePanel(this)
 end
 function CreateRoomPanel.OnOpen()
-	this.OpenPanJinSettingPanel();
+
 end
 -- 移除事件--
 function CreateRoomPanel.RemoveListener()

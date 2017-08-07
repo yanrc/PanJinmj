@@ -37,6 +37,13 @@ function RuleSelect.Open(ruletable)
 		this.GetDefaultSelect(rulestr);
 	end
 end
+function RuleSelect.Close(ruletable)
+	local rulestr = ruletable.name
+	local trans = transform:FindChild(rulestr);
+	if (trans ~= nil) then
+		trans.gameObject:SetActive(false);
+	end
+end
 -- 从表里获取配置
 function RuleSelect.CreateItem(ruletable, parent)
 	local root = nil;
@@ -130,6 +137,7 @@ end
 -- 选择转成数字(和toggle顺序一致)
 function RuleSelect.Select2Int(rulestr)
 	local rule = 0;
+	local num=0; 
 	for i = 1, #groupList do
 		for j = 1, #groupList[i] do
 			if (groupList[i][j].isOn) then
@@ -138,11 +146,12 @@ function RuleSelect.Select2Int(rulestr)
 				rule = bit.lshift(rule, 1);
 			end
 		end
+		num=num+#groupList[i]
 	end
 	print("setrule=" .. rule);
 	-- 保存默认选择
 	PlayerPrefs.SetInt(rulestr, rule);
-	return rule;
+	return rule,num;
 end
 
 

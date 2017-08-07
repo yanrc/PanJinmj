@@ -42,14 +42,6 @@ namespace LuaFramework
         public const string AppPrefix = AppName + "_";              //应用程序前缀
         public const string ExtName = ".unity3d";                   //素材扩展名
         public const string AssetDir = "StreamingAssets";           //素材目录 
-        public const string WebUrl =                                //测试更新地址
-#if UNITY_STANDALONE_WIN
-        "http://101.200.197.7:8090/panjinHotfix/Windows/";
-#elif UNITY_ANDROID
-        "http://101.200.197.7:8090/panjinHotfix/Android/";
-#elif UNITY_IPHONE
-        "http://101.200.197.7:8090/panjinHotfix/iOS/";
-#endif
 
         public static string UserId = string.Empty;                 //用户ID
         public static int SocketPort = 0;                           //Socket服务器端口
@@ -83,5 +75,32 @@ namespace LuaFramework
 #else
         public static bool UNITY_EDITOR = false;
 #endif
+        public static string GetWebUrl()
+        {
+            string WebUrl = "http://101.200.197.7:8090/";
+            Dictionary<string, bool> gamelist = GameObject.FindObjectOfType<GameSetting>().Init();
+            foreach(var item in gamelist)
+            {
+                if(item.Value)
+                {
+                    WebUrl +=item.Key;
+                    break;
+                }
+            }
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                WebUrl+= "/Android/";
+            }
+            else if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                WebUrl = "/iOS/";
+            }
+            else
+            {
+                WebUrl = "/Windows/";
+            }
+            return WebUrl;
+        }
     }
+
 }

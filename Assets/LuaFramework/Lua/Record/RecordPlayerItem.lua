@@ -27,7 +27,7 @@ function RecordPlayerItem.New(go)
 	-- playerItem.offlineImage = go.transform:FindChild('Image_offline'):GetComponent('Image')
 	-- playerItem.chatMessage = go.transform:FindChild('chatBg/Text'):GetComponent('Text')
 	-- playerItem.chatPaoPao = go.transform:FindChild('chatBg').gameObject
-	playerItem.HuFlag = go.transform:FindChild('Image_hu'):GetComponent('Image')
+	playerItem.HuFlag = go.transform:FindChild('Image_hu').gameObject
 	playerItem.jiaGang = go.transform:FindChild('jiagang'):GetComponent('Image')
 	playerItem.ChiEffect = go.transform:FindChild('ChiEffect').gameObject
 	playerItem.PengEffect = go.transform:FindChild('PengEffect').gameObject

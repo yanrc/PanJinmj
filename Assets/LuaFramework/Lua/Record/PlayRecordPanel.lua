@@ -46,7 +46,7 @@ local cardCount
 local stepNum
 local behavieList
 ------------------------------------------
-
+local co
 
 
 
@@ -94,10 +94,11 @@ function PlayRecordPanel.PlayRecord(buffer)
 	behavieList = data.behavieList
 	this.InitArrayList()
 	this.ReBuild(data.playerItems)
-	this.SetRoomRemark(data, avatarList[1].gameRound)
+	this.SetRoomRemark(data)
 	this.InitPlayerItem()
 	this.InitCard()
-	coroutine.start(this.Play)
+	stepNum = 1
+	co = coroutine.start(this.Play)
 end
 
 function PlayRecordPanel.InitPlayerItem()
@@ -142,6 +143,11 @@ function PlayRecordPanel.SetPosition(LocalIndex)
 	}
 	for i = 1, count do
 		tempList[i].gameObject.transform.localPosition = switch[LocalIndex](i)
+		if LocalIndex == 2 then
+			tempList[i].gameObject.transform:SetAsFirstSibling()
+		elseif LocalIndex == 4 then
+			tempList[i].gameObject.transform:SetAsLastSibling()
+		end
 	end
 	if (count % 3 == 2) then
 		tempList[count].gameObject.transform.localPosition = switch[LocalIndex](count + 1)
@@ -205,7 +211,7 @@ function PlayRecordPanel.SortCard(LocalIndex)
 	end )
 end
 
-function PlayRecordPanel.SetRoomRemark(data, CurrentRound)
+function PlayRecordPanel.SetRoomRemark(data)
 	local roomvo = data.roomvo
 	local str = "房间号：\n" .. roomvo.roomId .. "\n";
 	str = str .. "圈数：" .. roomvo.roundNumber .. "\n";
@@ -241,7 +247,7 @@ function PlayRecordPanel.SetRoomRemark(data, CurrentRound)
 	end
 	imgDuanMen.enabled = data.duanmen;
 	LeftCard.text = cardCount
-	LeftRound.text = roomvo.roundNumber - CurrentRound;
+	LeftRound.text = roomvo.roundNumber - roomvo.currentRound;
 end
 
 function PlayRecordPanel.InitArrayList()
@@ -275,52 +281,52 @@ end
 
 
 function PlayRecordPanel.Play()
-	stepNum = 1
 	while (true) do
-		if stepNum < #behavieList then
+		if stepNum <= #behavieList then
 			this.ForwardClick()
-			coroutine.wait(2)
 		else
 			processText.text = "播放进度：100%";
-			return
 		end
+		coroutine.wait(2)
 	end
 end
 
 
 function PlayRecordPanel.PlayClick()
-	btnPlay.SetActive(false);
-	btnStop.SetActive(true);
-	coroutine.start(this.Play)
+	btnPlay:SetActive(false);
+	btnStop:SetActive(true);
+	co = coroutine.start(this.Play)
 end
 
 function PlayRecordPanel.StopClick()
-	btnPlay.SetActive(true);
-	btnStop.SetActive(false);
-	coroutine.stop(this.Play)
+	btnPlay:SetActive(true);
+	btnStop:SetActive(false);
+	coroutine.stop(co)
 end
 
 function PlayRecordPanel.ForwardClick()
-	local temp = behavieList[stepNum];
-	table.insert(usedList, temp)
-	local LocalIndex = indexList[temp.accountindex_id + 1]
-	-- 1出牌，2摸牌，3吃，4碰，5杠，6胡
-	local switch =
-	{
-		[1] = function() this.OutCard(LocalIndex, temp) end,
-		[2] = function() this.PickCard(LocalIndex, temp) end,
-		[3] = function() this.ChiCard(LocalIndex, temp) end,
-		[4] = function() this.PengCard(LocalIndex, temp) end,
-		[5] = function() this.GangCard(LocalIndex, temp) end,
-		[6] = function() this.HuCard(LocalIndex, temp) end,
-		[7] = function() this.QiangGangHu(LocalIndex, temp) end,
-		[8] = function() this.Zhuama(temp) end,
-		[9] = function() this.Liuju() end,
-	}
-	switch[temp.type]()
-	this.SetDirGameObjectAction(LocalIndex);
-	stepNum = stepNum + 1
-	processText.text = "播放进度：" .. stepNum * 100 / #behavieList .. "%";
+	if stepNum <= #behavieList then
+		local temp = behavieList[stepNum];
+		table.insert(usedList, temp)
+		local LocalIndex = indexList[temp.accountindex_id + 1]
+		-- 1出牌，2摸牌，3吃，4碰，5杠，6胡
+		local switch =
+		{
+			[1] = function() this.OutCard(LocalIndex, temp) end,
+			[2] = function() this.PickCard(LocalIndex, temp) end,
+			[3] = function() this.ChiCard(LocalIndex, temp) end,
+			[4] = function() this.PengCard(LocalIndex, temp) end,
+			[5] = function() this.GangCard(LocalIndex, temp) end,
+			[6] = function() this.HuCard(LocalIndex, temp) end,
+			[7] = function() this.QiangGangHu(LocalIndex, temp) end,
+			[8] = function() this.Zhuama(temp) end,
+			[9] = function() this.Liuju() end,
+		}
+		switch[temp.type]()
+		this.SetDirGameObjectAction(LocalIndex);
+		processText.text = "播放进度：" .. math.modf(stepNum * 100 / #behavieList) .. "%";
+		stepNum = stepNum + 1
+	end
 end
 
 function PlayRecordPanel.BackwardClick()
@@ -343,7 +349,7 @@ function PlayRecordPanel.BackwardClick()
 		switch[temp.type]()
 		this.SetDirGameObjectAction(LocalIndex);
 		stepNum = stepNum - 1
-		processText.text = "播放进度：" .. stepNum * 100 / #behavieList .. "%";
+		processText.text = "播放进度：" .. math.modf(stepNum * 100 / #behavieList) .. "%";
 	end
 end
 
@@ -365,7 +371,7 @@ function PlayRecordPanel.PickCard(Index, temp)
 	this.SetPosition(Index)
 end
 function PlayRecordPanel.ChiCard(Index, temp)
-	playerItems[Index].ChiEffect:SetActive(true)
+	coroutine.start(this.ShowEffect, playerItems[Index].ChiEffect)
 	soundMgr:playSoundByAction("chi", avatarList[Index].sex);
 	-- 桌上被消除的牌
 	this.RemoveLastCardOnTable()
@@ -398,7 +404,7 @@ function PlayRecordPanel.ChiCard(Index, temp)
 	table.insert(PengGangList[Index], tempList)
 end
 function PlayRecordPanel.PengCard(Index, temp)
-	playerItems[Index].PengEffect:SetActive(true)
+	coroutine.start(this.ShowEffect, playerItems[Index].PengEffect)
 	soundMgr:playSoundByAction("peng", avatarList[Index].sex);
 	-- 桌上被消除的牌
 	this.RemoveLastCardOnTable()
@@ -426,7 +432,7 @@ end
 
 -- 1.明杠，2.暗杠，3.补杠，4？
 function PlayRecordPanel.GangCard(Index, temp)
-	playerItems[Index].GangEffect:SetActive(true)
+	coroutine.start(this.ShowEffect, playerItems[Index].GangEffect)
 	soundMgr:playSoundByAction("gang", avatarList[Index].sex);
 	local gangType = temp.gangType
 	local cardPoint = tonumber(temp.cardIndex)
@@ -494,13 +500,13 @@ function PlayRecordPanel.GangCard(Index, temp)
 end
 
 function PlayRecordPanel.HuCard(Index, temp)
-	playerItems[Index].HuEffect:SetActive(true)
-	playerItems[Index].HuFlag:SetActive(true)
+	coroutine.start(this.ShowEffect, playerItems[Index].HuEffect)
+	coroutine.start(this.ShowEffect, playerItems[Index].HuFlag)
 	soundMgr:playSoundByAction("hu", avatarList[Index].sex);
 end
 function PlayRecordPanel.QiangGangHu(Index, temp)
-	playerItems[Index].HuEffect:SetActive(true)
-	playerItems[Index].HuFlag:SetActive(true)
+	coroutine.start(this.ShowEffect, playerItems[Index].HuEffect)
+	coroutine.start(this.ShowEffect, playerItems[Index].HuFlag)
 	soundMgr:playSoundByAction("hu", avatarList[Index].sex);
 	local cardPoint = tonumber(temp.cardIndex)
 	this.AddHandCard(Index, cardPoint)
@@ -509,15 +515,23 @@ function PlayRecordPanel.Zhuama(temp)
 
 end
 function PlayRecordPanel.Liuju()
-	LiujuEffect:SetActive(true);
+	coroutine.start(this.ShowEffect, LiujuEffect)
 end
-			    
+
+function PlayRecordPanel.ShowEffect(effect)
+	effect:SetActive(true)
+	coroutine.wait(1)
+	effect:SetActive(false)
+end
+		    
 function PlayRecordPanel.FrontOutCard(Index, temp)
 	local cardPoint = tonumber(temp.cardIndex)
 	this.AddHandCard(Index, cardPoint)
 	this.SortCard(Index)
 	this.SetPosition(Index)
-	this.RemoveLastCardOnTable()
+	local tablelist = tableCardList[Index]
+	destroy(table.remove(tablelist))
+	Pointer:SetActive(false)
 end
 
 function PlayRecordPanel.FrontPickCard(Index, temp)
@@ -659,6 +673,7 @@ end
 
 function PlayRecordPanel.RemoveHandCard(Index, cardPoint, count)
 	local list = handerCardList[Index]
+	log(Test.DumpTab(list))
 	local pos = Vector3.zero
 	for i = #list, 1, -1 do
 		local objCtrl = list[i];
@@ -672,6 +687,8 @@ function PlayRecordPanel.RemoveHandCard(Index, cardPoint, count)
 			end
 		end
 	end
+	logError(string.format("Index=%d,cardPoint=%d,count=%d", Index, cardPoint, count))
+	return pos
 end
 -- 创建打到桌上的牌
 function PlayRecordPanel.AddCardToTable(cardPoint, Index, isActive)
@@ -732,6 +749,10 @@ function PlayRecordPanel.ExitClick()
 end
 -------------------模板-------------------------
 function PlayRecordPanel.CloseClick()
+	GamePanel.CleanList(handerCardList)
+	GamePanel.CleanList(tableCardList)
+	GamePanel.CleanList(PengGangList)
+	coroutine.stop(co)
 	ClosePanel(ExitPanel)
 	ClosePanel(this)
 	soundMgr:playSoundByActionButton(1);

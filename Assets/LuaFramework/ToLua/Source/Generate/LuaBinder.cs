@@ -14,6 +14,7 @@ public static class LuaBinder
 		MahjongWrap.Register(L);
 		LoadingProgressWrap.Register(L);
 		MicroPhoneInputWrap.Register(L);
+		GameSettingWrap.Register(L);
 		ViewWrap.Register(L);
 		BaseWrap.Register(L);
 		ManagerWrap.Register(L);
@@ -117,13 +118,13 @@ public static class LuaBinder
 		L.EndModule();
 		L.BeginModule("UI");
 		UnityEngine_UI_TextWrap.Register(L);
-		UnityEngine_UI_ToggleWrap.Register(L);
 		UnityEngine_UI_DropdownWrap.Register(L);
 		UnityEngine_UI_ImageWrap.Register(L);
 		UnityEngine_UI_ButtonWrap.Register(L);
-		UnityEngine_UI_SliderWrap.Register(L);
 		UnityEngine_UI_ToggleGroupWrap.Register(L);
+		UnityEngine_UI_SliderWrap.Register(L);
 		UnityEngine_UI_InputFieldWrap.Register(L);
+		UnityEngine_UI_ToggleWrap.Register(L);
 		UnityEngine_UI_MaskableGraphicWrap.Register(L);
 		UnityEngine_UI_GraphicWrap.Register(L);
 		UnityEngine_UI_SelectableWrap.Register(L);
@@ -133,6 +134,9 @@ public static class LuaBinder
 		L.BeginModule("InputField");
 		UnityEngine_UI_InputField_OnChangeEventWrap.Register(L);
 		L.RegFunction("OnValidateInput", UnityEngine_UI_InputField_OnValidateInput);
+		L.EndModule();
+		L.BeginModule("Toggle");
+		UnityEngine_UI_Toggle_ToggleEventWrap.Register(L);
 		L.EndModule();
 		L.EndModule();
 		L.BeginModule("EventSystems");
@@ -145,6 +149,7 @@ public static class LuaBinder
 		UnityEngine_Events_UnityEvent_floatWrap.Register(L);
 		UnityEngine_Events_UnityEventBaseWrap.Register(L);
 		UnityEngine_Events_UnityEvent_stringWrap.Register(L);
+		UnityEngine_Events_UnityEvent_boolWrap.Register(L);
 		L.RegFunction("UnityAction", UnityEngine_Events_UnityAction);
 		L.RegFunction("UnityAction_int", UnityEngine_Events_UnityAction_int);
 		L.RegFunction("UnityAction_float", UnityEngine_Events_UnityAction_float);

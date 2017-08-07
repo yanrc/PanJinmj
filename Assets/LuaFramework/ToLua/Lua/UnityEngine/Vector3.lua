@@ -502,11 +502,11 @@ Vector3.__mul = function(va, d)
 end
 
 Vector3.__add = function(va, vb)
-	return _new(va.x + vb.x, va.y + vb.y, va.z + vb.z)
+	return _new(va.x + vb.x, va.y + vb.y, (va.z or 0) - (vb.z or 0))
 end
 
 Vector3.__sub = function(va, vb)
-	return _new(va.x - vb.x, va.y - vb.y, va.z - vb.z)
+	return _new(va.x - vb.x, va.y - vb.y, (va.z or 0) - (vb.z or 0))
 end
 
 Vector3.__unm = function(va)
