@@ -54,9 +54,10 @@ GameConfig.GAME_TYPE_HUASHUI = 2;
 GameConfig.GAME_TYPE_CHANGSHA = 3;
 GameConfig.GAME_TYPE_GUANGDONG = 4;
 GameConfig.GAME_TYPE_PANJIN = 5;
-GameConfig.GAME_TYPE_TUIDAO = 6;
+GameConfig.GAME_TYPE_Wuxi = 6;
 GameConfig.GAME_TYPE_SHUANGLIAO = 7;
 GameConfig.GAME_TYPE_JIUJIANG=8
+GameConfig.GAME_TYPE_TUIDAOHU=9
 
 --Unity的几个宏命令
 UNITY_ANDROID=AppConst.UNITY_ANDROID;
@@ -92,3 +93,4 @@ define.Panels.SharePanel="SharePanel"
 define.Panels.InviteCodePanel="InviteCodePanel"
 define.Panels.RecordPanel="RecordPanel"
 define.Panels.PlayRecordPanel="PlayRecordPanel"
+define.Panels.ZhuaMaPanel ="ZhuaMaPanel"

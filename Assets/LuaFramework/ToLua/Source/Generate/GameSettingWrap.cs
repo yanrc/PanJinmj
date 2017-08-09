@@ -8,15 +8,17 @@ public class GameSettingWrap
 	{
 		L.BeginClass(typeof(GameSetting), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("Init", Init);
+		L.RegFunction("OnValidate", OnValidate);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Panjin", get_Panjin, set_Panjin);
 		L.RegVar("Wuxi", get_Wuxi, set_Wuxi);
-		L.RegVar("ShuangLiao", get_ShuangLiao, set_ShuangLiao);
+		L.RegVar("Shuangliao", get_Shuangliao, set_Shuangliao);
 		L.RegVar("Jiujiang", get_Jiujiang, set_Jiujiang);
 		L.RegVar("Changsha", get_Changsha, set_Changsha);
-		L.RegVar("TuiDaoHu", get_TuiDaoHu, set_TuiDaoHu);
+		L.RegVar("Tuidaohu", get_Tuidaohu, set_Tuidaohu);
 		L.RegVar("Fushun", get_Fushun, set_Fushun);
+		L.RegVar("LOGO", get_LOGO, set_LOGO);
 		L.RegVar("gamelist", get_gamelist, set_gamelist);
 		L.EndClass();
 	}
@@ -31,6 +33,22 @@ public class GameSettingWrap
 			System.Collections.Generic.Dictionary<string,bool> o = obj.Init();
 			ToLua.PushObject(L, o);
 			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int OnValidate(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			GameSetting obj = (GameSetting)ToLua.CheckObject(L, 1, typeof(GameSetting));
+			obj.OnValidate();
+			return 0;
 		}
 		catch(Exception e)
 		{
@@ -95,7 +113,7 @@ public class GameSettingWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_ShuangLiao(IntPtr L)
+	static int get_Shuangliao(IntPtr L)
 	{
 		object o = null;
 
@@ -103,13 +121,13 @@ public class GameSettingWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			GameSetting obj = (GameSetting)o;
-			bool ret = obj.ShuangLiao;
+			bool ret = obj.Shuangliao;
 			LuaDLL.lua_pushboolean(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index ShuangLiao on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Shuangliao on a nil value" : e.Message);
 		}
 	}
 
@@ -152,7 +170,7 @@ public class GameSettingWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_TuiDaoHu(IntPtr L)
+	static int get_Tuidaohu(IntPtr L)
 	{
 		object o = null;
 
@@ -160,13 +178,13 @@ public class GameSettingWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			GameSetting obj = (GameSetting)o;
-			bool ret = obj.TuiDaoHu;
+			bool ret = obj.Tuidaohu;
 			LuaDLL.lua_pushboolean(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index TuiDaoHu on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Tuidaohu on a nil value" : e.Message);
 		}
 	}
 
@@ -186,6 +204,25 @@ public class GameSettingWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Fushun on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LOGO(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			GameSetting obj = (GameSetting)o;
+			UnityEngine.Sprite ret = obj.LOGO;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index LOGO on a nil value" : e.Message);
 		}
 	}
 
@@ -247,7 +284,7 @@ public class GameSettingWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ShuangLiao(IntPtr L)
+	static int set_Shuangliao(IntPtr L)
 	{
 		object o = null;
 
@@ -256,12 +293,12 @@ public class GameSettingWrap
 			o = ToLua.ToObject(L, 1);
 			GameSetting obj = (GameSetting)o;
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
-			obj.ShuangLiao = arg0;
+			obj.Shuangliao = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index ShuangLiao on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Shuangliao on a nil value" : e.Message);
 		}
 	}
 
@@ -304,7 +341,7 @@ public class GameSettingWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_TuiDaoHu(IntPtr L)
+	static int set_Tuidaohu(IntPtr L)
 	{
 		object o = null;
 
@@ -313,12 +350,12 @@ public class GameSettingWrap
 			o = ToLua.ToObject(L, 1);
 			GameSetting obj = (GameSetting)o;
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
-			obj.TuiDaoHu = arg0;
+			obj.Tuidaohu = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index TuiDaoHu on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Tuidaohu on a nil value" : e.Message);
 		}
 	}
 
@@ -338,6 +375,25 @@ public class GameSettingWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Fushun on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LOGO(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			GameSetting obj = (GameSetting)o;
+			UnityEngine.Sprite arg0 = (UnityEngine.Sprite)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Sprite));
+			obj.LOGO = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index LOGO on a nil value" : e.Message);
 		}
 	}
 

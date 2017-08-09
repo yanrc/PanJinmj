@@ -31,8 +31,7 @@ require "Data/RoundOverData"
 require "Data/LoginData"
 
 
-require "Rules/PanjinRule"
-require "games/jiujiang/JiujiangRule"
+
 
 require "Common/UIBase"
 
@@ -63,6 +62,15 @@ require("Controller/StartPanel")
 require("Controller/UserInfoPanel")
 require("Controller/VotePanel")
 require("Controller/WaitingPanel")
-
+require("Controller/ZhuaMaPanel")
 
 json = require "cjson"
+
+require "games/panjin/PanjinRule"
+require "games/panjin/PanjinGame"
+require "games/jiujiang/JiujiangRule"
+require "games/jiujiang/JiujiangGame"
+require "games/changsha/ChangshaRule"
+require "games/changsha/ChangshaGame"
+require "games/tuidaohu/TuidaohuRule"
+require "games/tuidaohu/TuidaohuGame"

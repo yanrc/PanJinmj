@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1766289200
+CRC: 4122489446
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 51ecacb3fa0291174f30e89d6664d471
+    Hash: 298f6c0cb917b5af8126d12315739607
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -14,6 +14,7 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/Project/Textures/Effect/effbu.png
 - Assets/Project/Textures/Buttons/shop.png
 - Assets/Project/Textures/Other/dibu.png
 - Assets/Project/Textures/Buttons/exit.png
@@ -41,7 +42,6 @@ Assets:
 - Assets/Project/Textures/Effect/hu_B.png
 - Assets/Project/Textures/wechatShare/06.png
 - Assets/Project/Textures/Effect/laiziFlg.png
-- Assets/Project/Textures/Unused/paidimian_05.png
 - Assets/Project/Textures/Unused/app_icon.png
 - Assets/Project/Textures/Buttons/rule.png
 - Assets/Project/Textures/Bg/zhanji_room_bg.png
@@ -101,6 +101,7 @@ Assets:
 - Assets/Project/Textures/New_cardsBg/dipai_06.png
 - Assets/Project/Textures/wechatShare/04.png
 - Assets/Project/Textures/Unused/card_number_bg2.png
+- Assets/Project/Textures/Effect/btnbu.png
 - Assets/Project/Textures/Buttons/chakanzhanji_03.png
 - Assets/Project/Textures/prize/Lottery/Lottery.png
 - Assets/Project/Textures/Unused/game_op_ting2.png
@@ -288,7 +289,6 @@ Assets:
 - Assets/Project/Textures/Buttons/fanhui.png
 - Assets/Project/Textures/Effect/genzhuang_34.png
 - Assets/Project/Textures/Unused/paodekuai_title.png
-- Assets/Project/Textures/Other/title.png
 - Assets/Project/Textures/Other/rank_first.png
 - Assets/Project/Textures/Unused/pengcardBk.png
 - Assets/Project/Textures/prize/rule/inactivetab2.png

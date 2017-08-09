@@ -4,6 +4,7 @@ BottomScript = {
 	cardPoint,
 	guiIcon,
 	cardImg,
+	bg,
 	selected = false,
 	islaizi = false,
 	OnSendMessage = nil,
@@ -20,6 +21,7 @@ function BottomScript.New(obj)
 	bottomScript.transform = obj.transform
 	bottomScript.guiIcon = obj.transform:FindChild("RawImage"):GetComponent("RawImage")
 	bottomScript.cardImg = obj.transform:FindChild("Image"):GetComponent("Image")
+	bottomScript.bg = obj.transform:GetComponent("Image")
 	bottomScript.guiIcon.gameObject:SetActive(false);
 	obj:AddComponent(typeof(Mahjong)):Init(bottomScript);
 	setmetatable(bottomScript, mt)

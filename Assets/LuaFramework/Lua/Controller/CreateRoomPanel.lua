@@ -41,7 +41,7 @@ end
 function CreateRoomPanel.Setting(ruletable, obj, isOn)
 	if isOn then
 		soundMgr:playSoundByActionButton(1);
-		currentGame = ruletable
+		currentGame = ruletable.index
 		RuleSelect.Open(ruletable)
 	else
 		RuleSelect.Close(ruletable)
@@ -79,10 +79,51 @@ function CreateRoomPanel.CreateHuashuiRoom()
 end
 
 function CreateRoomPanel.CreateChangshaRoom()
-
+	soundMgr:playSoundByActionButton(1);
+	local rule, num = RuleSelect.Select2Int(ChangshaRule.name)
+	local sendVo = {
+		roundNumber = 1,
+		zhuangxian = false,
+		ma = 0,
+	};
+	for i = 1, num do
+		if ((bit.band(rule, 1)) == 1) then
+			if (i == 1) then
+				sendVo.ma = 5
+			elseif (i == 2) then
+				sendVo.ma = 4
+			elseif (i == 3) then
+				sendVo.ma = 3
+			elseif (i == 4) then
+				sendVo.ma = 2
+			elseif (i == 5) then
+				sendVo.ma = 1
+			elseif (i == 6) then
+				sendVo.ma = 0
+			elseif (i == 7) then
+				sendVo.zhuangxian = true
+			elseif (i == 8) then
+				sendVo.roundNumber = 16
+			elseif (i == 9) then
+				sendVo.roundNumber = 8
+			elseif (i == 10) then
+				sendVo.roundNumber = 4
+			end
+		end
+		rule = bit.rshift(rule, 1);
+	end
+	sendVo.roomType = currentGame;
+	local sendMsg = json.encode(sendVo);
+	if (LoginData.account.roomcard > 0) then
+		OpenPanel(WaitingPanel, "正在创建房间")
+		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
+		RoomData = sendVo;
+	else
+		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
+	end
 end
 
-function CreateRoomPanel.CreateGuangDongRoom()
+function CreateRoomPanel.CreateGuangdongRoom()
 
 end
 
@@ -138,11 +179,11 @@ function CreateRoomPanel.CreatePanjinRoom()
 	end
 end
 
-function CreateRoomPanel.CreateShuangLiaoRoom()
+function CreateRoomPanel.CreateShuangliaoRoom()
 
 end
 -- 创建九江麻将房间
-function CreateRoomPanel.CreateJiuJiangRoom()
+function CreateRoomPanel.CreateJiujiangRoom()
 	soundMgr:playSoundByActionButton(1);
 	local rule, num = RuleSelect.Select2Int(JiujiangRule.name)
 	local sendVo = {
@@ -154,24 +195,67 @@ function CreateRoomPanel.CreateJiuJiangRoom()
 	for i = 1, num do
 		if ((bit.band(rule, 1)) == 1) then
 			if (i == 1) then
-				sendVo.mayou = 0
+				sendVo.gui = 2
 			elseif (i == 2) then
-				sendVo.mayou = 1
+				sendVo.piaofen = 2
 			elseif (i == 3) then
-				sendVo.mayou = 2
+				sendVo.piaofen = 1
 			elseif (i == 4) then
 				sendVo.piaofen = 0
 			elseif (i == 5) then
-				sendVo.piaofen = 1
+				sendVo.mayou = 2
 			elseif (i == 6) then
-				sendVo.piaofen = 2
+				sendVo.mayou = 1
 			elseif (i == 7) then
-				sendVo.gui = 2
+				sendVo.mayou = 0
 			elseif (i == 8) then
 				sendVo.roundNumber = 16
 			elseif (i == 9) then
 				sendVo.roundNumber = 8
 			elseif (i == 10) then
+				sendVo.roundNumber = 4
+			end
+		end
+		rule = bit.rshift(rule, 1);
+	end
+	sendVo.roomType = currentGame;
+	local sendMsg = json.encode(sendVo);
+	if (LoginData.account.roomcard > 0) then
+		OpenPanel(WaitingPanel, "正在创建房间")
+		networkMgr:SendMessage(ClientRequest.New(APIS.CREATEROOM_REQUEST, sendMsg));
+		RoomData = sendVo;
+	else
+		TipsManager.SetTips("您的房卡数量不足,不能创建房间")
+	end
+end
+
+function CreateRoomPanel.CreateTuidaohuRoom()
+	soundMgr:playSoundByActionButton(1);
+	local rule, num = RuleSelect.Select2Int(TuidaohuRule.name)
+	local sendVo = {
+		roundNumber = 1,
+		rule = 0,
+		ma = 0,
+	};
+	for i = 1, num do
+		if ((bit.band(rule, 1)) == 1) then
+			if (i == 1) then
+				sendVo.ma = 1
+			elseif (i == 2) then
+				sendVo.ma = 0
+			elseif (i == 3) then
+				sendVo.rule=sendVo.rule+8
+			elseif (i == 4) then
+				sendVo.rule=sendVo.rule+4
+			elseif (i == 5) then
+				sendVo.rule=sendVo.rule+2
+			elseif (i == 6) then
+				sendVo.rule=sendVo.rule+1
+			elseif (i == 7) then
+				sendVo.roundNumber = 16
+			elseif (i == 8) then
+				sendVo.roundNumber = 8
+			elseif (i == 9) then
 				sendVo.roundNumber = 4
 			end
 		end
@@ -195,10 +279,12 @@ function CreateRoomPanel.CreateRoom()
 		[1] = this.CreateZhuanzhuanRoom,
 		[2] = this.CreateHuashuiRoom,
 		[3] = this.CreateChangshaRoom,
-		[4] = this.CreateGuangDongRoom,
-		[PanjinRule] = this.CreatePanjinRoom,
-		[6] = this.CreateShuangLiaoRoom,
-		[JiujiangRule] = this.CreateJiuJiangRoom
+		[4] = this.CreateGuangdongRoom,
+		[5] = this.CreatePanjinRoom,
+		[6] = this.CreateWuxiRoom,
+		[7] = this.CreateShuangliaoRoom,
+		[8] = this.CreateJiujiangRoom,
+		[9] = this.CreateTuidaohuRoom,
 	}
 	switch[x]()
 end

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3908510575
+CRC: 3670321409
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5eeb6c00963512dd5ca65e8b3730ea41
+    Hash: 4e367433f33364341571c53d82fec6b0
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5666b43baa092bf183912a04b0652d45
+    Hash: 1bb4289b2ea2a7447dd53e1f40b56196
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,13 +34,13 @@ ClassTypes:
 - Class: 111
   Script: {instanceID: 0}
 - Class: 114
+  Script: {instanceID: 0}
+- Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 853051423, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -405508275, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
@@ -61,8 +61,6 @@ ClassTypes:
   Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: -1184210157, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-- Class: 114
-  Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 - Class: 114
@@ -106,19 +104,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2660ef3f076125d41bd90aa0f671d0ad, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
@@ -153,8 +151,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 6ccd7c6ce8e90a84a9ed46c697d00f54, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc6bd678eb3945341906665ce7758580, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 71e60f9fefb27b0458552cb7237ac9b3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d5fe7916c30d62043b74ad00c1ad6b6f, type: 3}
 - Class: 114
@@ -237,7 +233,7 @@ Assets:
 - Assets/Project/Prefabs/ThrowCard/ZhongMa.prefab
 - Assets/Project/Prefabs/PengGangCard/PengGangCard_B.prefab
 - Assets/Project/Prefabs/ChangShaPanel.prefab
-- Assets/Project/Prefabs/Panel_ZhuaMa.prefab
+- Assets/Project/Prefabs/ZhuaMaPanel.prefab
 - Assets/Project/Prefabs/WaitingPanel.prefab
 - Assets/Project/Prefabs/Rank_List_Item.prefab
 - Assets/Project/Prefabs/playBack/HandCard_B.prefab

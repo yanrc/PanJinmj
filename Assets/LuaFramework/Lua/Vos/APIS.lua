@@ -105,8 +105,8 @@ APIS =
 	OTHER_TELE_LOGIN = 0x211211;-- 其他设备登录
 
 }
-local this=APIS
-APIS.Rules={}
+local this = APIS
+APIS.Rules = { }
 function APIS.GameSetting()
 	this.Rules = { }
 	if GameSetting.Panjin then
@@ -124,6 +124,32 @@ function APIS.GameSetting()
 	end
 	if GameSetting.Jiujiang then
 		table.insert(this.Rules, JiujiangRule)
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketPort = 10233;
+		AppConst.ChatSocketPort = 10234;
+		if UNITY_ANDROID then
+			APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=android&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
+		elseif UNITY_IPHONE then
+			APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=ios&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
+		end
+		shareImageUrl = "http://101.200.197.7:8090/panjin/share/logo.png";
+	end
+	if GameSetting.Changsha then
+		table.insert(this.Rules, ChangshaRule)
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketPort = 10233;
+		AppConst.ChatSocketPort = 10234;
+		if UNITY_ANDROID then
+			APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=android&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
+		elseif UNITY_IPHONE then
+			APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=ios&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
+		end
+		shareImageUrl = "http://101.200.197.7:8090/panjin/share/logo.png";
+	end
+if GameSetting.Tuidaohu then
+		table.insert(this.Rules, TuidaohuRule)
 		AppConst.SocketAddress = "120.77.38.7";
 		AppConst.ChatSocketAddress = "120.77.38.7";
 		AppConst.SocketPort = 10233;

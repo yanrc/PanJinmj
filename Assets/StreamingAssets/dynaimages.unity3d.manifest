@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 253063523
+CRC: 726118984
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3e9fec9b62a20b3d40fabcad81fced28
+    Hash: 30186b94df6332654eea9c6ce165a2dc
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
@@ -22,6 +22,7 @@ Assets:
 - Assets/Project/DynaImages/Cards/Small/s15.png
 - Assets/Project/DynaImages/Cards/Small/s8.png
 - Assets/Project/DynaImages/Cards/Big/b20.png
+- Assets/Project/DynaImages/paidimian_05.png
 - Assets/Project/DynaImages/Cards/Left&Right/lr1.png
 - Assets/Project/DynaImages/Cards/Small/s30.png
 - Assets/Project/DynaImages/Cards/Big/b23.png

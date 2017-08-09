@@ -21,6 +21,7 @@ local btnBuy-- 购买按钮
 local btnShop-- 商城按钮
 local btnShare-- 分享按钮
 local btnRecord-- 战绩按钮
+local logo
 showNum = 1
 startFlag = false
 
@@ -45,6 +46,8 @@ function HomePanel.OnCreate(go)
 	btnShop = transform:FindChild("Bottom/shop").gameObject
 	btnShare = transform:FindChild("Bottom/share").gameObject
 	btnRecord = transform:FindChild("Bottom/Record").gameObject
+	logo=transform:FindChild("Image_Bg/logo"):GetComponent("Image")
+	logo.sprite=GameSetting.LOGO
 	this.lua:AddClick(CreateRoomButton, this.OpenCreateRoomDialog);
 	this.lua:AddClick(EnterRoomButton, this.OpenEnterRoomDialog);
 	this.lua:AddClick(headIconbg, this.ShowUserInfoPanel);

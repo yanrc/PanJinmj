@@ -10,6 +10,7 @@ local agreeProtocol;-- toggle
 local xieyiPanel;-- 协议面板
 local xieyiButton;-- 打开协议面板的按钮
 local btnLogin-- 登录按钮
+local logo
 -- 启动事件--
 function StartPanel.OnCreate(obj)
 	gameObject = obj;
@@ -19,6 +20,8 @@ function StartPanel.OnCreate(obj)
 	agreeProtocol = gameObject.transform:FindChild("Toggle"):GetComponent('Toggle');
 	xieyiButton = gameObject.transform:FindChild("Toggle/Label").gameObject;
 	btnLogin = transform:FindChild("Button").gameObject;
+	logo=transform:FindChild("logo"):GetComponent("Image")
+	logo.sprite=GameSetting.LOGO
 	this.lua:AddClick(btnLogin, this.Login);
 	this.lua:AddClick(xieyiButton, this.OpenXieyiPanel);
 

@@ -438,13 +438,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84544ca89919ff64185071723afaecb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panjin: 1
+  Panjin: 0
   Wuxi: 0
-  ShuangLiao: 0
+  Shuangliao: 0
   Jiujiang: 1
-  Changsha: 0
-  TuiDaoHu: 0
+  Changsha: 1
+  Tuidaohu: 1
   Fushun: 0
+  LOGO: {fileID: 21300000, guid: e3c4a6498bacf044c9c164f70d4e154a, type: 3}
 --- !u!1 &1006521394
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,12 +759,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1297055432 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114014223737660080, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1749646360}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1362135708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,15 +1129,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1610758429533456, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114432085070415462, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d,
-        type: 2}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 1297055432}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d, type: 2}
   m_IsPrefabParent: 0

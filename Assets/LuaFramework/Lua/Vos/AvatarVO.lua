@@ -15,6 +15,7 @@ paiArray;--手牌二维数组
 huReturnObjectVO={};--胡牌才有数据，登录过程不管
 scores=0;--分数
 IP="";
+tingPai=false
 }
 local mt = {}--元表（基类）
 mt.__index = AvatarVO--index方法
@@ -24,10 +25,10 @@ local avatarvo =avatarvo or {}
 	setmetatable(avatarvo, mt)
 	return avatarvo
 end
-
+--清除每局的临时数据
 function AvatarVO:ResetData()
 	self.isOnLine = false;
 	self.isReady = false;
 	self.main = false;
-	self.roomId = 0;
+	self.tingPai = false;
 end

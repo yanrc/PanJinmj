@@ -430,7 +430,7 @@ function PlayRecordPanel.PengCard(Index, temp)
 	table.insert(PengGangList[Index], tempList)
 end
 
--- 1.明杠，2.暗杠，3.补杠，4？
+-- 1.明杠，2.暗杠，3.补杠
 function PlayRecordPanel.GangCard(Index, temp)
 	coroutine.start(this.ShowEffect, playerItems[Index].GangEffect)
 	soundMgr:playSoundByAction("gang", avatarList[Index].sex);

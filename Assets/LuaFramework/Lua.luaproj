@@ -35,6 +35,7 @@
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
     <Folder Include="Lua\games\changsha\" />
+    <Folder Include="Lua\games\panjin\" />
     <Folder Include="Lua\games\tuidaohu\" />
     <Folder Include="Lua\Logic\" />
     <Folder Include="Lua\MicPhone\" />
@@ -119,6 +120,7 @@
     <Compile Include="Lua\Controller\StartPanel.lua" />
     <Compile Include="Lua\Controller\VotePanel.lua" />
     <Compile Include="Lua\Controller\WaitingPanel.lua" />
+    <Compile Include="Lua\Controller\ZhuaMaPanel.lua" />
     <Compile Include="Lua\Data\FinalOverItem.lua" />
     <Compile Include="Lua\Data\LoginData.lua" />
     <Compile Include="Lua\Data\PlayerItem.lua" />
@@ -130,7 +132,13 @@
     <Compile Include="Lua\Data\SignalOverItem.lua" />
     <Compile Include="Lua\eventlib.lua" />
     <Compile Include="Lua\events.lua" />
+    <Compile Include="Lua\games\changsha\ChangshaGame.lua" />
+    <Compile Include="Lua\games\changsha\ChangshaRule.lua" />
+    <Compile Include="Lua\games\jiujiang\JiujiangGame.lua" />
     <Compile Include="Lua\games\jiujiang\JiujiangRule.lua" />
+    <Compile Include="Lua\games\panjin\PanjinGame.lua" />
+    <Compile Include="Lua\games\tuidaohu\TuidaohuGame.lua" />
+    <Compile Include="Lua\games\tuidaohu\TuidaohuRule.lua" />
     <Compile Include="Lua\Logic\BottomScript.lua" />
     <Compile Include="Lua\Logic\BroadcastScript.lua" />
     <Compile Include="Lua\Logic\CtrlManager.lua" />
@@ -153,7 +161,7 @@
     <Compile Include="Lua\Record\RecordItem.lua" />
     <Compile Include="Lua\Record\RecordPanel.lua" />
     <Compile Include="Lua\Record\RecordPlayerItem.lua" />
-    <Compile Include="Lua\Rules\PanjinRule.lua" />
+    <Compile Include="Lua\games\panjin\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />
     <Compile Include="Lua\Vos\APIS.lua" />
     <Compile Include="Lua\Vos\AvatarVO.lua" />
