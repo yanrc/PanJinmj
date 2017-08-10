@@ -25,7 +25,7 @@ end
 function ZhuaMaPanel.CreateMaiPai(malist)
 	for i = 1, #malist do
 		local obj = newObject(UIManager.PengGangCard_B, MaPaiPanel)
-		obj.transform.localPosition = Vector2.New(i * 70, 0)
+		obj.transform.localPosition = Vector2.New(-200+i * 70, 0)
 		obj.transform.localScale = Vector3.one;
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(tonumber(malist[i]), 1);
@@ -34,7 +34,7 @@ end
 
 function ZhuaMaPanel.CreateHuPai(cardPoint)
 	local obj = newObject(UIManager.PengGangCard_B, HuPaiPanel)
-	obj.transform.localPosition = Vector2.New(i * 70, 0)
+	obj.transform.localPosition = Vector2.New(-200+i * 70, 0)
 	obj.transform.localScale = Vector3.one;
 	local objCtrl = TopAndBottomCardScript.New(obj)
 	objCtrl:Init(cardPoint, 1);
@@ -45,17 +45,17 @@ function ZhuaMaPanel.MoveMaiPai(winnerIndex, malist)
 	for i = 1, #malist do
 		local cardPoint = tonumber(malist[i])
 		local Index = this.GetZhongMaIndex(winnerIndex, cardPoint)
-		Parents[index].num = Parents[index].num + 1
+		Parents[Index].num = Parents[Index].num + 1
 		local obj = newObject(UIManager.PengGangCard_B, MaPaiPanel)
-		obj.transform.localPosition = Vector2.New(i * 70, 0)
+		obj.transform.localPosition = Vector2.New(-200+i * 70, 0)
 		obj.transform.localScale = Vector3.one;
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(cardPoint, 1);
 		obj.transform:SetParent(Parents[Index].root)
-		local destination = Vector2.New(Parents[index].num * 70, 0)
+		local destination = Vector2.New(-70+Parents[Index].num * 70, 0)
 		local tweener = obj.transform:DOLocalMove(destination, 1, false):OnComplete(
 		function()
-			Parents[index].img:SetActive(true)
+			Parents[Index].img:SetActive(true)
 		end );
 		tweener:SetEase(Ease.OutExpo);
 	end

@@ -32,6 +32,7 @@ AndroidJavaClass=UnityEngine.AndroidJavaClass
 RuntimePlatform=UnityEngine.RuntimePlatform
 AndroidJavaObject=UnityEngine.AndroidJavaObject
 Microphone=UnityEngine.Microphone
+Ease = DG.Tweening.Ease
 
 List_int=System.Collections.Generic.List_int
 DateTime=System.DateTime

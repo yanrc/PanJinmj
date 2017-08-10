@@ -46,11 +46,12 @@ function StartPanel.RoomBackResponse(buffer)
 	ClosePanel(WaitingPanel)
 	RoomData = json.decode(message);
 	RoomData.enterType = 3
+	AvatarVO.SetList(RoomData.playerList)
 	log("Lua:RoomBackResponse=" .. message);
 	for i = 1, #RoomData.playerList do
 		local itemData = RoomData.playerList[i];
 		if (itemData.account.openid == LoginData.account.openid) then
-			LoginData = AvatarVO.New(itemData)
+			LoginData = itemData
 			local userlist = { LoginData.account.uuid }
 			networkMgr:SendChatMessage(ChatRequest.New(APIS.LoginChat_Request, userlist, nil, nil));
 			break;

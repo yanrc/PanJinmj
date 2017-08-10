@@ -43,7 +43,7 @@ function ChangshaGame.ActionBtnShow(buffer)
 			this.ShowBtn(2, true);
 			this.ShowBtn(6, true);
 			GamePanel.gangPaiList = string.split(strs[i], ':');
-			table.remove(GamePanel.gangPaiList, 1)
+			table.remove(this.gangPaiList, 1)
 			GamePanel.passStr = GamePanel.passStr .. "gang_"
 		end
 		if string.match(strs[i], "chi") then
@@ -72,7 +72,7 @@ function ChangshaGame.ActionBtnShow(buffer)
 end
 function ChangshaGame.GangBtnClick()
 	local GangRequestVO = { }
-	GangRequestVO.cardPoint = tonumber(gangPaiList[1])
+	GangRequestVO.cardPoint = tonumber(this.gangPaiList[1])
 	GangRequestVO.gangType = 0;
 	GangRequestVO.kaigang = true;
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))

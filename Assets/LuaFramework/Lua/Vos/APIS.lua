@@ -88,7 +88,6 @@ APIS =
 
 	Game_FollowBander_Notice = 0x100016;-- 跟庄
 
-
 	GAME_BROADCAST = 0x157777;-- 游戏公告
 	CONTACT_INFO_REQUEST = 0x156666;-- 添加房卡请求数据
 	CONTACT_INFO_RESPONSE = 0x155555;-- 添加房卡返回数据
@@ -124,8 +123,8 @@ function APIS.GameSetting()
 	end
 	if GameSetting.Jiujiang then
 		table.insert(this.Rules, JiujiangRule)
-		AppConst.SocketAddress = "120.77.38.7";
-		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketAddress = "127.0.0.1";
+		AppConst.ChatSocketAddress = "127.0.0.1";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
@@ -137,8 +136,8 @@ function APIS.GameSetting()
 	end
 	if GameSetting.Changsha then
 		table.insert(this.Rules, ChangshaRule)
-		AppConst.SocketAddress = "120.77.38.7";
-		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketAddress = "127.0.0.1";
+		AppConst.ChatSocketAddress = "127.0.0.1";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
@@ -150,8 +149,8 @@ function APIS.GameSetting()
 	end
 if GameSetting.Tuidaohu then
 		table.insert(this.Rules, TuidaohuRule)
-		AppConst.SocketAddress = "120.77.38.7";
-		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketAddress = "127.0.0.1";
+		AppConst.ChatSocketAddress = "127.0.0.1";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then

@@ -1,4 +1,4 @@
-local Ease = DG.Tweening.Ease
+
 PlayRecordPanel = UIBase(define.Panels.PlayRecordPanel, define.PopUI);
 local this = PlayRecordPanel;
 local transform;

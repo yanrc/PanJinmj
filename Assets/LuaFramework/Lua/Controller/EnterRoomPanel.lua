@@ -114,6 +114,7 @@ function EnterRoomPanel.OnJoinRoomCallBack(buffer)
 	if (status == 1) then
 		RoomData = json.decode(message)
 		RoomData.enterType=2
+		AvatarVO.SetList(RoomData.playerList)
 		ClosePanel(this)
 		ClosePanel(HomePanel)
 		OpenPanel(GamePanel)

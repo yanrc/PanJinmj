@@ -93,11 +93,11 @@ namespace LuaFramework
             }
             else if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                WebUrl = "/iOS/";
+                WebUrl += "/iOS/";
             }
             else
             {
-                WebUrl = "/Windows/";
+                WebUrl += "/Windows/";
             }
             return WebUrl;
         }

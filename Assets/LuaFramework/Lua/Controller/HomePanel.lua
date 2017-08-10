@@ -1,5 +1,5 @@
 
-local Ease = DG.Tweening.Ease
+
 HomePanel = UIBase(define.Panels.HomePanel, define.FixUI)
 local this = HomePanel;
 local gameObject;

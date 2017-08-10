@@ -1,5 +1,5 @@
 
-local Ease = DG.Tweening.Ease
+
 GamePanel = UIBase(define.Panels.GamePanel, define.FixUI)
 local this = GamePanel
 local CurrentGame = this
@@ -187,8 +187,6 @@ function GamePanel.OnCreate(go)
 	this.imgDuanMen = transform:FindChild('imgDuanMen'):GetComponent('Image');
 	MicPhone.OnCreate(go)
 	MessageBox.OnCreate(transform, this.lua)
-	this.InitArrayList();
-
 	this.lua:AddClick(btnMessageBox, MessageBox.MoveIn)
 	this.lua:AddClick(btnSetting, this.OpenSettingPanel)
 	this.lua:AddClick(btnJieSan, this.QuiteRoom)
@@ -738,9 +736,9 @@ function GamePanel.LockHandCard(Index)
 			this.handerCardList[Index][i].bg.color = Color.gray
 		end
 	else
-		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/paidimian_05.jpg' }, function(sprites)
+		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/paidimian_05.png' }, function(sprites)
 			for i = 1, count do
-				this.handerCardList[i]:GetComponent('Image').sprite = sprites[0]
+				this.handerCardList[Index][i]:GetComponent('Image').sprite = sprites[0]
 				if (Index == 3) then
 					this.handerCardList[Index][i]:GetComponent('RectTransform').sizeDelta = Vector2.New(39, 54)
 				else
@@ -1197,7 +1195,7 @@ function GamePanel.BuBtnClick()
 	local GangRequestVO = { }
 	GangRequestVO.cardPoint = tonumber(this.gangPaiList[1])
 	GangRequestVO.gangType = 0;
-	GangRequestVO.kaigang = true
+	GangRequestVO.kaigang = false
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))
 	-- soundMgr:playSoundByAction("bu", LoginData.account.sex);
 	-- this.PengGangHuEffectCtrl("bu");
@@ -1362,6 +1360,7 @@ function GamePanel.OtherUserJointRoom(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local avatar = json.decode(message);
+	avatar=AvatarVO.New(avatar)
 	this.AddAvatarVOToList(avatar);
 end
 
@@ -2151,6 +2150,7 @@ function GamePanel.OnOpen()
 	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
 	BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
 	Pointer = UIManager.Pointer
+	this.InitArrayList()
 	CurrentGame = this.GetGame()
 	log(CurrentGame)
 	CurrentGame.Start()
@@ -2203,6 +2203,7 @@ function GamePanel.OnClose()
 		this.ReadySelect[i].interactable = true
 	end
 	this.btnReadyGame:SetActive(false);
+	this.Clean();
 end
 -- 移除事件--
 -- function GamePanel.RemoveListener()
