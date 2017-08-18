@@ -2,49 +2,48 @@
 
 GamePanel = UIBase(define.Panels.GamePanel, define.FixUI)
 local this = GamePanel
-local CurrentGame = this
 -----------------------------------------------------------------------------------------------------------------
 -- 需要用到的对象
 local gameObject;
 local transform
 this.playerItems = { }
-local versionText
+this.versionText=nil
 this.LeavedRoundNumText = nil
 this.LeavedCastNumText = nil
-local ruleText
-local btnInviteFriend
-local btnJieSan
-local lbRoomNum-- 大房间号
-local btnMessageBox
-local ExitRoomButton
-local live1
-local live2
-local centerImage
-local guiObj-- 翻开的鬼牌
-local roomRemark-- 房间显示的规则
-local btnSetting-- 设置按钮
+this.ruleText=nil
+this.btnInviteFriend=nil
+this.btnJieSan=nil
+this.lbRoomNum=nil-- 大房间号
+this.btnMessageBox=nil
+this.ExitRoomButton=nil
+this.live1=nil
+this.live2=nil
+this.centerImage=nil
+this.guiObj=nil-- 翻开的鬼牌
+this.roomRemark=nil-- 房间显示的规则
+this.btnSetting=nil-- 设置按钮
 this.btnReadyGame = nil
-local noticeGameObject-- 滚动消息
-local noticeText
-local Number-- 桌子中间显示的数字（剩余时间）
-local touziObj-- 骰子
-local Pointer-- 指针
+this.noticeGameObject=nil-- 滚动消息
+this.noticeText=nil
+this.Number=nil-- 桌子中间显示的数字（剩余时间）
+this.touziObj=nil-- 骰子
+this.Pointer=nil-- 指针
 this.imgDuanMen = nil
 -- 手牌模板
-local BottomPrefabs
+this.BottomPrefabs={}
 -- 桌牌模板
-local ThrowPrefabs
+this.ThrowPrefabs={}
 -- 吃碰杠牌模板
-local CPGPrefabs
+this.CPGPrefabs={}
 -- 暗杠牌模板
-local BackPrefabs
+this.BackPrefabs={}
 -- 吃碰杠胡特效
-local chiEffectGame
-local pengEffectGame
-local gangEffectGame
-local huEffectGame
-local liujuEffectGame
-local effBu
+this.chiEffectGame=nil
+this.pengEffectGame=nil
+this.gangEffectGame=nil
+this.huEffectGame=nil
+this.liujuEffectGame=nil
+this.effBu=nil
 this.huBtn = nil
 this.gangBtn = nil
 this.pengBtn = nil
@@ -55,33 +54,34 @@ this.ChiSelect1 = nil
 this.ChiSelect2 = nil
 this.ChiSelect3 = nil
 this.ReadySelect = { } -- 游戏准备toggle列表
+this.ReadySelectGroup=nil
 this.lbReadySelect = { } -- 游戏准备toggle文字
-local dirGameList = { }-- 桌面指示灯
-local parentList = { }-- 手牌的父对象
-local cpgParent = { }-- 吃碰杠牌的父对象
-local outparentList = { }-- 出牌的父对象
+this.dirGameList = { }-- 桌面指示灯
+this.parentList = { }-- 手牌的父对象
+this.cpgParent = { }-- 吃碰杠牌的父对象
+this.outparentList = { }-- 出牌的父对象
 -- 保存吃牌时的三套牌
-local canChiList = { }
-local chiList_1 = { }
-local chiList_2 = { }
-local chiList_3 = { }
+this.canChiList = { }
+this.chiList_1 = { }
+this.chiList_2 = { }
+this.chiList_3 = { }
 -----------------------------------------------------------------------------------------------------------------
 -- 重要数据
 -- 0自己，1-右边。2-上边。3-左边
 this.handerCardList = { }
 -- 打在桌上的牌,gameObject
-local tableCardList = { }
+this.tableCardList = { }
 -- 玩家列表
 this.avatarList = { }
 -- 吃碰杠list
-local PengGangList = { }
+this.PengGangList = { }
 
 
 ----------------------------------------------------------------------------------------------------------------
 
-local CurLocalIndex = 1;-- 当前操作位
+this.CurLocalIndex = 1;-- 当前操作位
 -- 上一个出牌者
-local LastAvarIndex = 1
+this.LastAvarIndex = 1
 -- 保存碰和点炮胡的牌值
 this.putOutCardPoint = -1
 -- 保存服务器杠按钮通知的牌值
@@ -93,48 +93,45 @@ this.passStr = ""-- “过”操作字符串
 
 ----------------------------------------------------------------------------------------------------------------
 -- 无关紧要的数据
-local disagreeCount = 0-- 不同意的人数
-local VoteStatus = false-- 申请解散的状态
-local showTimeNumber = 0
+
+this.showTimeNumber = 0
 
 this.LeavedCardsNum = 0 -- 剩余牌数
-local timer = 0
+this.timer = 0
 -- 当前显示的消息
-local showNoticeNumber = 1
-local timeFlag = false
+this.showNoticeNumber = 1
+this.timeFlag = false
 GamePanel.__index = GamePanel
 function GamePanel.OnCreate(go)
 	gameObject = go;
 	transform = go.transform
 	this:Init(go)
 
-	versionText = transform:FindChild('Text_version'):GetComponent('Text');
+	this.versionText = transform:FindChild('Text_version'):GetComponent('Text');
 	this.LeavedRoundNumText = transform:FindChild('Leaved1/Text'):GetComponent('Text');
-	ruleText = transform:FindChild('Rule'):GetComponent('Text');
-	btnInviteFriend = transform:FindChild('UIroot/Button_invite_friend').gameObject;
-	btnJieSan = transform:FindChild('UIroot/Button_jiesan').gameObject;
-	lbRoomNum = transform:FindChild('UIroot/lbRoomNum'):GetComponent('Text');
-	ExitRoomButton = transform:FindChild('Button_other'):GetComponent('Button');
-	live1 = transform:FindChild('Leaved'):GetComponent('Image');
-	live2 = transform:FindChild('Leaved1'):GetComponent('Image');
-	centerImage = transform:FindChild('table'):GetComponent('Image');
+	this.ruleText = transform:FindChild('Rule'):GetComponent('Text');
+	this.btnInviteFriend = transform:FindChild('UIroot/Button_invite_friend').gameObject;
+	this.btnJieSan = transform:FindChild('UIroot/Button_jiesan').gameObject;
+	this.lbRoomNum = transform:FindChild('UIroot/lbRoomNum'):GetComponent('Text');
+	this.ExitRoomButton = transform:FindChild('Button_other'):GetComponent('Button');
+	this.live1 = transform:FindChild('Leaved'):GetComponent('Image');
+	this.live2 = transform:FindChild('Leaved1'):GetComponent('Image');
+	this.centerImage = transform:FindChild('table'):GetComponent('Image');
 
-	chiEffectGame = transform:FindChild('ChiEffect_B').gameObject
-	pengEffectGame = transform:FindChild('PengEffect_B').gameObject
-	gangEffectGame = transform:FindChild('GangEffect_B').gameObject
-	huEffectGame = transform:FindChild('HuEffect_B').gameObject
-	liujuEffectGame = transform:FindChild('Liuju_B').gameObject
-	effBu = transform:FindChild('effBu').gameObject
-
-	ruleText = transform:FindChild('Rule'):GetComponent('Text');
+	this.chiEffectGame = transform:FindChild('ChiEffect_B').gameObject
+	this.pengEffectGame = transform:FindChild('PengEffect_B').gameObject
+	this.gangEffectGame = transform:FindChild('GangEffect_B').gameObject
+	this.huEffectGame = transform:FindChild('HuEffect_B').gameObject
+	this.liujuEffectGame = transform:FindChild('Liuju_B').gameObject
+	this.effBu = transform:FindChild('effBu').gameObject
 	this.LeavedCastNumText = transform:FindChild('Leaved/Text'):GetComponent('Text');
-	guiObj = transform:FindChild('gui').gameObject
-	roomRemark = transform:FindChild('Text'):GetComponent('Text')
+	this.guiObj = transform:FindChild('gui').gameObject
+	this.roomRemark = transform:FindChild('Text'):GetComponent('Text')
 	local players = transform:FindChild('playList')
-	dirGameList[1] = transform:FindChild('table/Down/Red1').gameObject
-	dirGameList[2] = transform:FindChild('table/Right/Red2').gameObject
-	dirGameList[3] = transform:FindChild('table/Up/Red3').gameObject
-	dirGameList[4] = transform:FindChild('table/Left/Red4').gameObject
+	this.dirGameList[1] = transform:FindChild('table/Down/Red1').gameObject
+	this.dirGameList[2] = transform:FindChild('table/Right/Red2').gameObject
+	this.dirGameList[3] = transform:FindChild('table/Up/Red3').gameObject
+	this.dirGameList[4] = transform:FindChild('table/Left/Red4').gameObject
 	this.playerItems[1] = PlayerItem.New(players:FindChild('Player_B').gameObject)
 	this.playerItems[2] = PlayerItem.New(players:FindChild('Player_R').gameObject)
 	this.playerItems[3] = PlayerItem.New(players:FindChild('Player_T').gameObject)
@@ -142,39 +139,40 @@ function GamePanel.OnCreate(go)
 
 	this.ReadySelect[1] = transform:FindChild('Panel/DuanMen'):GetComponent('Toggle')
 	this.ReadySelect[2] = transform:FindChild('Panel/Gang'):GetComponent('Toggle')
+	this.ReadySelectGroup=transform:FindChild('Panel'):GetComponent('ToggleGroup')
 	this.lbReadySelect[1] = transform:FindChild('Panel/DuanMen/Label'):GetComponent('Text')
 	this.lbReadySelect[2] = transform:FindChild('Panel/Gang/Label'):GetComponent('Text')
-	parentList[1] = transform:FindChild('handparent/Bottom')
-	parentList[2] = transform:FindChild('handparent/Right')
-	parentList[3] = transform:FindChild('handparent/Top')
-	parentList[4] = transform:FindChild('handparent/Left')
-	cpgParent[1] = transform:FindChild('cpgParent/PenggangListB')
-	cpgParent[2] = transform:FindChild('cpgParent/PenggangListR')
-	cpgParent[3] = transform:FindChild('cpgParent/PenggangListT')
-	cpgParent[4] = transform:FindChild('cpgParent/PenggangListL')
-	outparentList[1] = transform:FindChild('ThrowCardsParent/ThrowCardsListBottom')
-	outparentList[2] = transform:FindChild('ThrowCardsParent/ThrowCardsListRight')
-	outparentList[3] = transform:FindChild('ThrowCardsParent/ThrowCardsListTop')
-	outparentList[4] = transform:FindChild('ThrowCardsParent/ThrowCardsListLeft')
+	this.parentList[1] = transform:FindChild('handparent/Bottom')
+	this.parentList[2] = transform:FindChild('handparent/Right')
+	this.parentList[3] = transform:FindChild('handparent/Top')
+	this.parentList[4] = transform:FindChild('handparent/Left')
+	this.cpgParent[1] = transform:FindChild('cpgParent/PengGangListB')
+	this.cpgParent[2] = transform:FindChild('cpgParent/PengGangListR')
+	this.cpgParent[3] = transform:FindChild('cpgParent/PengGangListT')
+	this.cpgParent[4] = transform:FindChild('cpgParent/PengGangListL')
+	this.outparentList[1] = transform:FindChild('ThrowCardsParent/ThrowCardsListBottom')
+	this.outparentList[2] = transform:FindChild('ThrowCardsParent/ThrowCardsListRight')
+	this.outparentList[3] = transform:FindChild('ThrowCardsParent/ThrowCardsListTop')
+	this.outparentList[4] = transform:FindChild('ThrowCardsParent/ThrowCardsListLeft')
 	this.btnReadyGame = transform:FindChild('Panel/Button').gameObject
-	Number = transform:FindChild('table/Number'):GetComponent('Text')
-	noticeGameObject = transform:FindChild("Image_Notice_BG").gameObject
-	noticeText = transform:FindChild("Image_Notice_BG/textbg/Text"):GetComponent('Text')
-	btnSetting = transform:FindChild('soundClose').gameObject
+	this.Number = transform:FindChild('table/Number'):GetComponent('Text')
+	this.noticeGameObject = transform:FindChild("Image_Notice_BG").gameObject
+	this.noticeText = transform:FindChild("Image_Notice_BG/textbg/Text"):GetComponent('Text')
+	this.btnSetting = transform:FindChild('soundClose').gameObject
 
-	touziObj = transform:FindChild('Panel_touzi').gameObject
-	canChiList[1] = transform:FindChild('ChiList/list_1').gameObject
-	canChiList[2] = transform:FindChild('ChiList/list_2').gameObject
-	canChiList[3] = transform:FindChild('ChiList/list_3').gameObject
-	chiList_1[1] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_1').gameObject)
-	chiList_1[2] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_2').gameObject)
-	chiList_1[3] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_3').gameObject)
-	chiList_2[1] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_1').gameObject)
-	chiList_2[2] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_2').gameObject)
-	chiList_2[3] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_3').gameObject)
-	chiList_3[1] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_1').gameObject)
-	chiList_3[2] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_2').gameObject)
-	chiList_3[3] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_3').gameObject)
+	this.touziObj = transform:FindChild('Panel_touzi').gameObject
+	this.canChiList[1] = transform:FindChild('ChiList/list_1').gameObject
+	this.canChiList[2] = transform:FindChild('ChiList/list_2').gameObject
+	this.canChiList[3] = transform:FindChild('ChiList/list_3').gameObject
+	this.chiList_1[1] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_1').gameObject)
+	this.chiList_1[2] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_2').gameObject)
+	this.chiList_1[3] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_3').gameObject)
+	this.chiList_2[1] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_1').gameObject)
+	this.chiList_2[2] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_2').gameObject)
+	this.chiList_2[3] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_3').gameObject)
+	this.chiList_3[1] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_1').gameObject)
+	this.chiList_3[2] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_2').gameObject)
+	this.chiList_3[3] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_3').gameObject)
 	this.huBtn = transform:FindChild("btnList/huBtn").gameObject
 	this.gangBtn = transform:FindChild("btnList/GangButton").gameObject
 	this.pengBtn = transform:FindChild("btnList/PengButton").gameObject
@@ -184,70 +182,72 @@ function GamePanel.OnCreate(go)
 	this.ChiSelect1 = transform:FindChild("ChiList/list_1/Button").gameObject
 	this.ChiSelect2 = transform:FindChild("ChiList/list_2/Button").gameObject
 	this.ChiSelect3 = transform:FindChild("ChiList/list_3/Button").gameObject
-	btnMessageBox = transform:FindChild('btnMessageBox').gameObject
+	this.btnMessageBox = transform:FindChild('btnMessageBox').gameObject
 	this.imgDuanMen = transform:FindChild('imgDuanMen'):GetComponent('Image');
 	MicPhone.OnCreate(go)
 	MessageBox.OnCreate(transform, this.lua)
-	this.lua:AddClick(btnMessageBox, MessageBox.MoveIn)
-	this.lua:AddClick(btnSetting, this.OpenSettingPanel)
-	this.lua:AddClick(btnJieSan, this.QuiteRoom)
-	this.lua:AddClick(btnInviteFriend, this.InviteFriend)
+	this.lua:AddClick(this.btnMessageBox, MessageBox.MoveIn)
+	this.lua:AddClick(this.btnSetting, function() this:OpenSettingPanel()end)
+	this.lua:AddClick(this.btnJieSan, function() this:QuiteRoom()end)
+	this.lua:AddClick(this.btnInviteFriend,function() this:InviteFriend()end)
 	for i = 1, #this.playerItems do
-		this.lua:AddClick(this.playerItems[i].gameObject, PlayerItem.DisplayAvatorIp, this.playerItems[i])
+		this.lua:AddClick(this.playerItems[i].gameObject,function() PlayerItem:DisplayAvatorIp()end)
 	end
 end
 
 
-function GamePanel.RandShowTime()
-	showTimeNumber = math.random(5000, 10000)
+function GamePanel:RandShowTime()
+	self.showTimeNumber = math.random(5000, 10000)
 end
 
 -- 初始化一次表
-function GamePanel.InitArrayList()
+function GamePanel:InitArrayList()
 	for i = 1, 4 do
-		this.handerCardList[i] = { }
-		tableCardList[i] = { }
-		PengGangList[i] = { }
+		self.handerCardList[i] = { }
+		self.tableCardList[i] = { }
+		self.PengGangList[i] = { }
 	end
 end
 
-function GamePanel.CardSelect(objCtrl)
-	for k, v in pairs(this.handerCardList[1]) do
-		this.handerCardList[1][k].selected = false;
+function GamePanel:CardSelect(objCtrl)
+	self:SetPosition(1)
+	objCtrl.transform.localPosition = objCtrl.transform.localPosition + Vector2.New(0, 20);
+	for k, v in pairs(self.handerCardList[1]) do
+		self.handerCardList[1][k].selected = false;
 	end
 	objCtrl.selected = true
 end
 
-function GamePanel.StartGame(buffer)
+function GamePanel:StartGame(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local sgvo = json.decode(message);
-	this.CleanGameplayUI();
-	this.UpateTimeReStart();
-	this.LeavedRoundNumText.text = tostring(sgvo.surplusRounds)
-	this.InitLeftCard();
-	this.ShowRuleText(sgvo)
+	self.LeavedRoundNumText.text = tostring(sgvo.surplusRounds)
+	self:CleanGameplayUI();
+	self:UpateTimeReStart();	
+	self:InitLeftCard();
+	self:ShowRuleText(sgvo)
 
 	RoomData.guiPai = sgvo.gui;
 	RoomData.surplusTimes = sgvo.surplusRounds
 	RoomData.isOverByPlayer = false;
 
-	this.avatarList[sgvo.bankerId + 1].main = true;
-	local LocalIndex = this.GetLocalIndex(sgvo.bankerId);
-	this.playerItems[LocalIndex].bankerImg.enabled = true
-	this.SetDirGameObjectAction(LocalIndex);
-	this.DisplayTouzi(sgvo.touzi, sgvo.gui);
-	this.InitMyCard(sgvo.paiArray);
+	self.avatarList[sgvo.bankerId + 1].main = true;
+	local LocalIndex = self:GetLocalIndex(sgvo.bankerId);
+	self.playerItems[LocalIndex].bankerImg.enabled = true
+	self:SetDirGameObjectAction(LocalIndex);
+	self:DisplayTouzi(sgvo.touzi, sgvo.gui);
+	self:InitMyCard(sgvo.paiArray);
 	for i = 2, 4 do
 		if i == LocalIndex then
-			this.InitOtherCardList(i, 14);
+			self:InitOtherCardList(i, 14);
 		else
-			this.InitOtherCardList(i, 13);
+			self:InitOtherCardList(i, 13);
 		end
 	end
 end
 
-function GamePanel.ShowRuleText(sgvo)
+function GamePanel:ShowRuleText(sgvo)
 	local ruleStr = "";
 	if (RoomData.pingHu) then
 		ruleStr = ruleStr .. "穷胡\n";
@@ -273,50 +273,50 @@ function GamePanel.ShowRuleText(sgvo)
 	if (RoomData.qingYiSe) then
 		ruleStr = ruleStr .. "清一色\n";
 	end
-	ruleText.text = ruleStr;
+	self.ruleText.text = ruleStr;
 end
 
-function GamePanel.CleanGameplayUI()
-	log("GamePanel.CleanGameplayUI")
+function GamePanel:CleanGameplayUI()
+	log(tostring(self).. ":CleanGameplayUI")
 	RoomData.enterType = 4
 	-- weipaiImg.transform.gameObject:SetActive(false);
-	btnInviteFriend:SetActive(false);
-	btnJieSan:SetActive(false);
-	ExitRoomButton.transform.gameObject:SetActive(false);
-	live1.transform.gameObject:SetActive(true);
-	live2.transform.gameObject:SetActive(true);
+	self.btnInviteFriend:SetActive(false);
+	self.btnJieSan:SetActive(false);
+	self.ExitRoomButton.transform.gameObject:SetActive(false);
+	self.live1.transform.gameObject:SetActive(true);
+	self.live2.transform.gameObject:SetActive(true);
 	-- tab.transform.gameObject:SetActive(true);
-	centerImage.transform.gameObject:SetActive(true);
-	liujuEffectGame:SetActive(false);
-	this.SetAllPlayerReadImgVisbleToFalse();
-	ruleText.text = "";
-	lbRoomNum.text = ""
+	self.centerImage.transform.gameObject:SetActive(true);
+	self.liujuEffectGame:SetActive(false);
+	self:SetAllPlayerReadImgVisbleToFalse();
+	self.ruleText.text = "";
+	self.lbRoomNum.text = ""
 end
 
-function GamePanel.InitLeftCard()
-	this.LeavedCardsNum = 136
-	this.LeavedCardsNum = this.LeavedCardsNum - 53;
-	this.LeavedCastNumText.text = tostring(this.LeavedCardsNum);
+function GamePanel:InitLeftCard()
+	self.LeavedCardsNum = 136
+	self.LeavedCardsNum = self.LeavedCardsNum - 53;
+	self.LeavedCastNumText.text = tostring(self.LeavedCardsNum);
 end
 
-function GamePanel.CardsNumChange()
-	this.LeavedCardsNum = this.LeavedCardsNum - 1;
-	if (this.LeavedCardsNum < 0) then
-		this.LeavedCardsNum = 0;
+function GamePanel:CardsNumChange()
+	self.LeavedCardsNum = self.LeavedCardsNum - 1;
+	if (self.LeavedCardsNum < 0) then
+		self.LeavedCardsNum = 0;
 	end
-	this.LeavedCastNumText.text = tostring(this.LeavedCardsNum);
+	self.LeavedCastNumText.text = tostring(self.LeavedCardsNum);
 end
 
 
-function GamePanel.CreateMoPaiGameObject(LocalIndex)
+function GamePanel:CreateMoPaiGameObject(LocalIndex)
 	local switch = {
-		[1] = Vector2.New(-446 + #this.handerCardList[1] * 80,- 292),
-		[2] = Vector2.New(0,- 301 + #this.handerCardList[2] * 30),
-		[3] = Vector2.New(226 - 37 * #this.handerCardList[3],0),
-		[4] = Vector2.New(0,255 - #this.handerCardList[4] * 30)
+		[1] = Vector2.New(-446 + #self.handerCardList[1] * 80,- 292),
+		[2] = Vector2.New(0,- 301 + #self.handerCardList[2] * 30),
+		[3] = Vector2.New(226 - 37 * #self.handerCardList[3],0),
+		[4] = Vector2.New(0,255 - #self.handerCardList[4] * 30)
 	}
-	local obj = newObject(BottomPrefabs[LocalIndex])
-	obj.transform:SetParent(parentList[LocalIndex])
+	local obj = newObject(self.BottomPrefabs[LocalIndex])
+	obj.transform:SetParent(self.parentList[LocalIndex])
 	if (LocalIndex == 2) then
 		obj.transform:SetAsFirstSibling()
 	end
@@ -325,25 +325,25 @@ function GamePanel.CreateMoPaiGameObject(LocalIndex)
 	return obj
 end
 -- 摸牌
-function GamePanel.PickCard(buffer)
+function GamePanel:PickCard(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local cardvo = json.decode(message);
 	local cardPoint = cardvo.cardPoint;
-	local LocalIndex = this.GetLocalIndex(cardvo.avatarIndex)
-	this.SetDirGameObjectAction(LocalIndex);
-	this.CardsNumChange();
-	local go = this.CreateMoPaiGameObject(LocalIndex)
+	local LocalIndex = self:GetLocalIndex(cardvo.avatarIndex)
+	self:SetDirGameObjectAction(LocalIndex);
+	self:CardsNumChange();
+	local go = self:CreateMoPaiGameObject(LocalIndex)
 	go.name = cardPoint;
 	if (LocalIndex == 1) then
 		go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 		local objCtrl = BottomScript.New(go)
-		objCtrl.OnSendMessage = this.CardChange;
-		objCtrl.ReSetPoisiton = this.CardSelect;
+		objCtrl.OnSendMessage =function(ctrl) self:CardChange(ctrl) end;
+		objCtrl.ReSetPoisiton =function(ctrl) self:CardSelect(ctrl) end;
 		objCtrl:Init(cardPoint);
-		table.insert(this.handerCardList[1], objCtrl)
+		table.insert(self.handerCardList[1], objCtrl)
 	else
-		table.insert(this.handerCardList[LocalIndex], go)
+		table.insert(self.handerCardList[LocalIndex], go)
 	end
 end
 -- 别人摸牌通知
@@ -352,48 +352,48 @@ function GamePanel.OtherPickCard(buffer)
 --	local message = buffer:ReadString()
 --	local json = json.decode(message);
 --	local avatarIndex = json["avatarIndex"];
---	local LocalIndex = this.GetLocalIndex(avatarIndex)
---	this.SetDirGameObjectAction(LocalIndex);
---	this.CardsNumChange();
+--	local LocalIndex = self:GetLocalIndex(avatarIndex)
+--	self.SetDirGameObjectAction(LocalIndex);
+--	self.CardsNumChange();
 --	-- 创建其他玩家的摸牌对象
---	local go = this.CreateMoPaiGameObject(LocalIndex)
---	table.insert(this.handerCardList[LocalIndex], go)
+--	local go = self.CreateMoPaiGameObject(LocalIndex)
+--	table.insert(self.handerCardList[LocalIndex], go)
 end
 -- 胡，杠，碰，吃，pass按钮显示.
-function GamePanel.ActionBtnShow(buffer)
+function GamePanel:ActionBtnShow(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
-	log("GamePanel ActionBtnShow:msg =" .. tostring(message));
-	this.passStr = "";
+	log("ActionBtnShow,msg =" .. tostring(message));
+	self.passStr = "";
 	local strs = string.split(message, ',')
-	this.ShowBtn(5, true);
+	self:ShowBtn(5, true);
 	for i = 1, #strs do
 		if string.match(strs[i], "hu") then
-			this.ShowBtn(1, true);
-			this.passStr = this.passStr .. "hu_"
+			self:ShowBtn(1, true);
+			self.passStr = self.passStr .. "hu_"
 		end
 		if string.match(strs[i], "qianghu") then
-			this.putOutCardPoint = string.split(strs[i], ':')[2]
-			this.ShowBtn(1, true);
-			this.passStr = this.passStr .. "qianghu_"
+			self.putOutCardPoint = string.split(strs[i], ':')[2]
+			self:ShowBtn(1, true);
+			self.passStr = self.passStr .. "qianghu_"
 		end
 		if string.match(strs[i], "peng") then
-			this.ShowBtn(3, true);
-			this.putOutCardPoint = string.split(strs[i], ':')[3]
-			this.passStr = this.passStr .. "peng_"
+			self:ShowBtn(3, true);
+			self.putOutCardPoint = string.split(strs[i], ':')[3]
+			self.passStr = self.passStr .. "peng_"
 		end
 		if string.match(strs[i], "gang") then
-			this.ShowBtn(2, true);
-			this.gangPaiList = string.split(strs[i], ':');
-			table.remove(this.gangPaiList, 1)
-			this.passStr = this.passStr .. "gang_"
+			self:ShowBtn(2, true);
+			self.gangPaiList = string.split(strs[i], ':');
+			table.remove(self.gangPaiList, 1)
+			self.passStr = self.passStr .. "gang_"
 		end
 		if string.match(strs[i], "chi") then
 			-- 格式：chi：出牌玩家：出的牌|牌1_牌2_牌3| 牌1_牌2_牌3
 			-- eg:"chi:1:2|1_2_3|2_3_4"
 			local strChi = string.split(strs[i], '|');
 			local cardPoint = string.split(strChi[1], ':')[3];
-			this.chiPaiPointList = { };
+			self.chiPaiPointList = { };
 			for m = 2, #strChi do
 				local strChiList = string.split(strChi[m], '_');
 				local cpoint = { };
@@ -405,22 +405,22 @@ function GamePanel.ActionBtnShow(buffer)
 				end
 				cpoint.oneCardPoint = strChiList[1]
 				cpoint.twoCardPoint = strChiList[2]
-				table.insert(this.chiPaiPointList, cpoint)
+				table.insert(self.chiPaiPointList, cpoint)
 			end
-			this.ShowBtn(4, true);
-			this.passStr = this.passStr .. "chi_"
+			self:ShowBtn(4, true);
+			self.passStr = self.passStr .. "chi_"
 		end
 	end
 end
 
 -- 手牌排序，鬼牌移到最前
 -- point：最后摸的那张牌值
-function GamePanel.SortMyCardList()
-	local selfIndex = this.GetMyIndexFromList()
-	if this.avatarList[selfIndex].tingPai then
+function GamePanel:SortMyCardList()
+	local selfIndex = self:GetMyIndexFromList()
+	if self.avatarList[selfIndex].tingPai then
 		return
 	end
-	table.sort(this.handerCardList[1],
+	table.sort(self.handerCardList[1],
 	function(a, b)
 		-- print("a=" .. Test.DumpTab(a))
 		-- print("b=" .. Test.DumpTab(b))
@@ -438,33 +438,33 @@ function GamePanel.SortMyCardList()
 end
 
 -- 初始化手牌
-function GamePanel.InitMyCard(mineList)
+function GamePanel:InitMyCard(mineList)
 	for i = 1, #mineList[1] do
 		if (mineList[1][i] > 0) then
 			for j = 1, mineList[1][i] do
 				local cardPoint = i - 1
-				local go = newObject(BottomPrefabs[1])
-				go.transform:SetParent(parentList[1]);
+				local go = newObject(self.BottomPrefabs[1])
+				go.transform:SetParent(self.parentList[1]);
 				go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 				local objCtrl = BottomScript.New(go)
-				objCtrl.OnSendMessage = this.CardChange;
-				objCtrl.ReSetPoisiton = this.CardSelect;
+				objCtrl.OnSendMessage =function(ctrl) self:CardChange(ctrl) end;
+				objCtrl.ReSetPoisiton =function(ctrl) self:CardSelect(ctrl) end;
 				objCtrl:Init(cardPoint);
-				table.insert(this.handerCardList[1], objCtrl)
+				table.insert(self.handerCardList[1], objCtrl)
 			end
 		end
 	end
-	this.SortMyCardList();
-	this.SetPosition(1)
+	self:SortMyCardList();
+	self:SetPosition(1)
 end
 
-function GamePanel.SetAllPlayerReadImgVisbleToFalse()
-	for _, v in pairs(this.playerItems) do
+function GamePanel:SetAllPlayerReadImgVisbleToFalse()
+	for _, v in pairs(self.playerItems) do
 		v.readyImg.enabled = false
 	end
 end
-function GamePanel.HidePlayerItemImg()
-	for _, v in pairs(this.playerItems) do
+function GamePanel:HidePlayerItemImg()
+	for _, v in pairs(self.playerItems) do
 		v.HuFlag.enabled = false
 		v.jiaGang.enabled = false
 		v.bankerImg.enabled = false
@@ -472,18 +472,18 @@ function GamePanel.HidePlayerItemImg()
 end
 
 -- 初始化其他人的手牌
-function GamePanel.InitOtherCardList(LocalIndex, count)
-	log("GamePanel.InitOtherCardList")
+function GamePanel:InitOtherCardList(LocalIndex, count)
+	log("InitOtherCardList")
 	for i = 1, count do
-		local go = newObject(BottomPrefabs[LocalIndex])
-		go.transform:SetParent(parentList[LocalIndex]);
+		local go = newObject(self.BottomPrefabs[LocalIndex])
+		go.transform:SetParent(self.parentList[LocalIndex]);
 		if (LocalIndex == 2) then
 			go.transform:SetAsFirstSibling()
 		end
 		go.transform.localScale = Vector3.one;
-		table.insert(this.handerCardList[LocalIndex], go)
+		table.insert(self.handerCardList[LocalIndex], go)
 	end
-	this.SetPosition(LocalIndex)
+	self:SetPosition(LocalIndex)
 end
 
 -- 摸牌
@@ -495,11 +495,11 @@ end
 -- go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 -- go.transform.localPosition = Vector3.New(580, -292);
 -- local objCtrl = BottomScript.New(go)
--- objCtrl.OnSendMessage = this.CardChange;
--- objCtrl.ReSetPoisiton = this.CardSelect;
+-- objCtrl.OnSendMessage = self.CardChange;
+-- objCtrl.ReSetPoisiton = self.CardSelect;
 -- objCtrl:Init(cardPoint);
--- --this.InsertCardIntoList(objCtrl);
--- table.insert(this.handerCardList[1], objCtrl)
+-- --self.InsertCardIntoList(objCtrl);
+-- table.insert(self.handerCardList[1], objCtrl)
 -- end
 -- function GamePanel.PutCardIntoMineList(cardPoint)
 -- if (mineList[1][cardPoint] < 4) then
@@ -513,61 +513,61 @@ end
 -- end
 
 -- 自己出牌（自己收不到出牌通知）
-function GamePanel.CardChange(objCtrl)
+function GamePanel:CardChange(objCtrl)
 	-- 这时候才能出牌
-	if (CurLocalIndex == 1) then
+	if (self.CurLocalIndex == 1) then
 		objCtrl.OnSendMessage = nil;
 		objCtrl.ReSetPoisiton = nil;
 		local cardPoint = objCtrl.cardPoint;
-		-- this.PushOutFromMineList(cardPoint);
-		this.CreatePutOutCardAndPlayAction(cardPoint, this.GetMyIndexFromList() -1, objCtrl.transform.position);
+		-- self.PushOutFromMineList(cardPoint);
+		self:CreatePutOutCardAndPlayAction(cardPoint, self:GetMyIndexFromList() -1, objCtrl.transform.position);
 		-- 将打出牌移除
-		for k, v in pairs(this.handerCardList[1]) do
+		for k, v in pairs(self.handerCardList[1]) do
 			if v == objCtrl then
-				table.remove(this.handerCardList[1], k)
+				table.remove(self.handerCardList[1], k)
 				destroy(v.gameObject);
 				break
 			end
 		end
 		-- 出完牌排序
-		this.SortMyCardList()
-		this.SetPosition(1);
+		self:SortMyCardList()
+		self:SetPosition(1);
 		-- 出牌动画
 		local cardvo = { }
 		cardvo.cardPoint = cardPoint;
 		networkMgr:SendMessage(ClientRequest.New(APIS.CHUPAI_REQUEST, json.encode(cardvo)));
-		LastAvarIndex = 1;
-		CurLocalIndex = 2
-		this.CleanBtnShow();
+		self.LastAvarIndex = 1;
+		self.CurLocalIndex = 2
+		self:CleanBtnShow();
 		return true
 	end
 	return false
 end
 -- 接收到其它人的出牌通知
-function GamePanel.OtherPutOutCard(buffer)
-	print("GamePanel.OtherPutOutCard")
+function GamePanel:OtherPutOutCard(buffer)
+	print("OtherPutOutCard")
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local json = json.decode(message);
 	local cardPoint = json["cardIndex"];
 	local curAvatarIndex = json["curAvatarIndex"];
-	local LocalIndex = this.GetLocalIndex(curAvatarIndex);
-	local count = #this.handerCardList[LocalIndex]
-	local obj = this.handerCardList[LocalIndex][count];
-	this.CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, obj.transform.position);
-	table.remove(this.handerCardList[LocalIndex])
+	local LocalIndex = self:GetLocalIndex(curAvatarIndex);
+	local count = #self.handerCardList[LocalIndex]
+	local obj = self.handerCardList[LocalIndex][count];
+	self:CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, obj.transform.position);
+	table.remove(self.handerCardList[LocalIndex])
 	destroy(obj)
-	LastAvarIndex = LocalIndex;
+	self.LastAvarIndex = LocalIndex;
 end
 -- 创建打来的的牌对象，并且开始播放动画
--- curAvatarIndex:在this.avatarList里的下标
-function GamePanel.CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, position)
-	log("GamePanel.CreatePutOutCardAndPlayAction")
-	soundMgr:playSound(cardPoint, this.avatarList[curAvatarIndex + 1].account.sex);
-	local LocalIndex = this.GetLocalIndex(curAvatarIndex);
+-- curAvatarIndex:在self.avatarList里的下标
+function GamePanel:CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, position)
+	log("CreatePutOutCardAndPlayAction")
+	soundMgr:playSound(cardPoint, self.avatarList[curAvatarIndex + 1].account.sex);
+	local LocalIndex = self:GetLocalIndex(curAvatarIndex);
 	-- 飞出去的牌
-	local obj = newObject(ThrowPrefabs[LocalIndex])
-	obj.transform:SetParent(outparentList[LocalIndex])
+	local obj = newObject(self.ThrowPrefabs[LocalIndex])
+	obj.transform:SetParent(self.outparentList[LocalIndex])
 	obj.transform.localPosition = position
 	obj.transform.localScale = Vector3.one
 	obj.name = "putOutCard";
@@ -577,8 +577,8 @@ function GamePanel.CreatePutOutCardAndPlayAction(cardPoint, curAvatarIndex, posi
 		obj.transform:SetAsFirstSibling();
 	end
 	-- 显示在桌上的牌
-	local destination = this.TableCardPosition(LocalIndex)
-	local go = this.ThrowBottom(cardPoint, LocalIndex, destination, false)
+	local destination = self:TableCardPosition(LocalIndex)
+	local go = self:ThrowBottom(cardPoint, LocalIndex, destination, false)
 	local tweener = obj.transform:DOLocalMove(destination, 1, false):OnComplete(
 	function()
 		if (obj ~= nil) then
@@ -595,33 +595,33 @@ end
 
 
 -- 设置红色箭头的显示方向
-function GamePanel.SetDirGameObjectAction(LocalIndex)
+function GamePanel:SetDirGameObjectAction(LocalIndex)
 	-- 重新计时
-	this.UpateTimeReStart();
-	for i = 1, #dirGameList do
-		dirGameList[i]:SetActive(false);
+	self:UpateTimeReStart();
+	for i = 1, #self.dirGameList do
+		self.dirGameList[i]:SetActive(false);
 	end
-	dirGameList[LocalIndex]:SetActive(true);
-	CurLocalIndex = LocalIndex;
+	self.dirGameList[LocalIndex]:SetActive(true);
+	self.CurLocalIndex = LocalIndex;
 end
 
-function GamePanel.ThrowBottom(cardPoint, LocalIndex, pos, isActive)
-	local obj = newObject(ThrowPrefabs[LocalIndex])
-	obj.transform:SetParent(outparentList[LocalIndex])
+function GamePanel:ThrowBottom(cardPoint, LocalIndex, pos, isActive)
+	local obj = newObject(self.ThrowPrefabs[LocalIndex])
+	obj.transform:SetParent(self.outparentList[LocalIndex])
 	obj.transform.localPosition = pos
 	local objCtrl = TopAndBottomCardScript.New(obj)
 	objCtrl:Init(cardPoint, LocalIndex);
 	obj.name = tostring(cardPoint);
 	obj.transform.localScale = Vector3.one;
 	if (LocalIndex == 2) then obj.transform:SetAsFirstSibling() end
-	table.insert(tableCardList[LocalIndex], obj)
+	table.insert(self.tableCardList[LocalIndex], obj)
 	if (not isActive) then obj:SetActive(false) end
-	this.SetPointGameObject(obj);
+	self:SetPointGameObject(obj);
 	return obj
 end
 
 -- 吃碰杠牌的位置，i:第几墩，j:第几张牌
-function GamePanel.CPGPosition(LocalIndex, i, j)
+function GamePanel:CPGPosition(LocalIndex, i, j)
 	local switch =
 	{
 		[1] = function(i, j)
@@ -657,98 +657,98 @@ function GamePanel.CPGPosition(LocalIndex, i, j)
 	return pos
 end
 
-function GamePanel.PengCard(buffer)
-	print("GamePanel.PengCard")
+function GamePanel:PengCard(buffer)
+	log("PengCard")
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local cardVo = json.decode(message);
-	local LocalIndex = this.GetLocalIndex(cardVo.avatarId);
+	local LocalIndex = self:GetLocalIndex(cardVo.avatarId);
 	-- 设置方向灯
-	this.SetDirGameObjectAction(LocalIndex);
+	self:SetDirGameObjectAction(LocalIndex);
 	-- 播放特效
-	this.PengGangHuEffectCtrl("peng");
-	soundMgr:playSoundByAction("peng", this.avatarList[cardVo.avatarId + 1].account.sex);
+	self:PengGangHuEffectCtrl("peng");
+	soundMgr:playSoundByAction("peng", self.avatarList[cardVo.avatarId + 1].account.sex);
 	-- 销毁桌上被碰的牌
-	this.RemoveLastCardOnTable()
+	self:RemoveLastCardOnTable()
 	local cardPoint = cardVo.cardPoint
 	-- 消除手牌
-	this.RemoveHandCard(LocalIndex, cardPoint, 2)
-	this.AddCPGToTable(LocalIndex, cardPoint, 3, 0)
-	this.SetPosition(LocalIndex);
+	self:RemoveHandCard(LocalIndex, cardPoint, 2)
+	self:AddCPGToTable(LocalIndex, cardPoint, 3, 0)
+	self:SetPosition(LocalIndex);
 end
 
 
-function GamePanel.ChiCard(buffer)
-	print("GamePanel.ChiCard")
+function GamePanel:ChiCard(buffer)
+	log("ChiCard")
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local cardVo = json.decode(message);
-	local LocalIndex = this.GetLocalIndex(cardVo.avatarId);
-	this.SetDirGameObjectAction(LocalIndex);
-	this.PengGangHuEffectCtrl("chi");
-	soundMgr:playSoundByAction("chi", this.avatarList[cardVo.avatarId + 1].account.sex);
+	local LocalIndex = self:GetLocalIndex(cardVo.avatarId);
+	self:SetDirGameObjectAction(LocalIndex);
+	self:PengGangHuEffectCtrl("chi");
+	soundMgr:playSoundByAction("chi", self.avatarList[cardVo.avatarId + 1].account.sex);
 	-- 销毁桌上被吃的牌
-	this.RemoveLastCardOnTable()
-	this.RemoveHandCard(LocalIndex, cardVo.onePoint, 1)
-	this.RemoveHandCard(LocalIndex, cardVo.twoPoint, 1)
-	this.AddCPGToTable(LocalIndex, { cardVo.cardPoint, cardVo.onePoint, cardVo.twoPoint })
-	this.SetPosition(LocalIndex);
+	self:RemoveLastCardOnTable()
+	self:RemoveHandCard(LocalIndex, cardVo.onePoint, 1)
+	self:RemoveHandCard(LocalIndex, cardVo.twoPoint, 1)
+	self:AddCPGToTable(LocalIndex, { cardVo.cardPoint, cardVo.onePoint, cardVo.twoPoint })
+	self:SetPosition(LocalIndex);
 end
 
 -- 0.明杠，1.暗杠，2.补杠
-function GamePanel.GangCard(buffer)
+function GamePanel:GangCard(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local cardVo = json.decode(message);
-	this.PengGangHuEffectCtrl("gang");
-	soundMgr:playSoundByAction("gang", this.avatarList[cardVo.avatarId + 1].account.sex)
-	local LocalIndex = this.GetLocalIndex(cardVo.avatarId);
-	this.SetDirGameObjectAction(LocalIndex);
+	self:PengGangHuEffectCtrl("gang");
+	soundMgr:playSoundByAction("gang", self.avatarList[cardVo.avatarId + 1].account.sex)
+	local LocalIndex = self:GetLocalIndex(cardVo.avatarId);
+	self:SetDirGameObjectAction(LocalIndex);
 	local gangType = cardVo.type;
 	local cardPoint = cardVo.cardPoint
 	local kaigang = cardVo.kaigang
 	-- 明杠
 	if gangType == 0 then
 		-- 销毁桌上被碰的牌
-		this.RemoveLastCardOnTable()
+		self:RemoveLastCardOnTable()
 		-- 去掉三张手牌
-		this.RemoveHandCard(LocalIndex, cardPoint, 3)
-		this.AddCPGToTable(LocalIndex, cardPoint, 4, 0)
+		self:RemoveHandCard(LocalIndex, cardPoint, 3)
+		self:AddCPGToTable(LocalIndex, cardPoint, 4, 0)
 		-- 暗杠
 	elseif (gangType == 1) then
 		-- 去掉四张手牌
-		this.RemoveHandCard(LocalIndex, cardPoint, 4)
-		this.AddCPGToTable(LocalIndex, cardPoint, 1, 3)
+		self:RemoveHandCard(LocalIndex, cardPoint, 4)
+		self:AddCPGToTable(LocalIndex, cardPoint, 1, 3)
 		-- 补杠
 	elseif gangType == 2 then
-		this.RemoveHandCard(LocalIndex, cardPoint, 1)
-		this.AddCPGToTable(LocalIndex, cardPoint)
+		self:RemoveHandCard(LocalIndex, cardPoint, 1)
+		self:AddCPGToTable(LocalIndex, cardPoint)
 	end
 	if kaigang then
-		this.avatarList[cardVo.avatarId + 1].tingPai = true
-		this.LockHandCard(LocalIndex)
+		self.avatarList[cardVo.avatarId + 1].tingPai = true
+		self:LockHandCard(LocalIndex)
 	end
-	this.SetPosition(LocalIndex);
+	self:SetPosition(LocalIndex);
 end
 
-function GamePanel.LockHandCard(Index)
-	local count = #this.handerCardList[Index]
+function GamePanel:LockHandCard(Index)
+	local count = #self.handerCardList[Index]
 	if count % 3 == 2 then
 		count = count - 1
 	end
 	if Index == 1 then
 		for i = 1, count do
-			this.handerCardList[Index][i].IsTingLock = true
-			this.handerCardList[Index][i].bg.color = Color.gray
+			self.handerCardList[Index][i].IsTingLock = true
+			self.handerCardList[Index][i].bg.color = Color.gray
 		end
 	else
 		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/paidimian_05.png' }, function(sprites)
 			for i = 1, count do
-				this.handerCardList[Index][i]:GetComponent('Image').sprite = sprites[0]
+				self.handerCardList[Index][i]:GetComponent('Image').sprite = sprites[0]
 				if (Index == 3) then
-					this.handerCardList[Index][i]:GetComponent('RectTransform').sizeDelta = Vector2.New(39, 54)
+					self.handerCardList[Index][i]:GetComponent('RectTransform').sizeDelta = Vector2.New(39, 54)
 				else
-					this.handerCardList[Index][i]:GetComponent('RectTransform').sizeDelta = Vector2.New(45, 30)
+					self.handerCardList[Index][i]:GetComponent('RectTransform').sizeDelta = Vector2.New(45, 30)
 				end
 			end
 		end )
@@ -756,16 +756,16 @@ function GamePanel.LockHandCard(Index)
 end
 
 -- 牌值，第几墩，显示几张牌，盖几张牌
-function GamePanel.AddCPGToTable(LocalIndex, cardPoint, shownum, hidenum)
+function GamePanel:AddCPGToTable(LocalIndex, cardPoint, shownum, hidenum)
 	-- 吃
 	if type(cardPoint) == "table" then
 		local tempList = { };
 		tempList.cardPoint = cardPoint[1]
 		for i = 1, #cardPoint do
-			local obj = newObject(CPGPrefabs[LocalIndex])
-			obj.transform:SetParent(cpgParent[LocalIndex])
+			local obj = newObject(self.CPGPrefabs[LocalIndex])
+			obj.transform:SetParent(self.cpgParent[LocalIndex])
 			obj.transform.localScale = Vector3.one;
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+			obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 			if (LocalIndex == 2) then
 				obj.transform:SetAsFirstSibling();
 			end
@@ -773,27 +773,27 @@ function GamePanel.AddCPGToTable(LocalIndex, cardPoint, shownum, hidenum)
 			objCtrl:Init(cardPoint[i], LocalIndex);
 			table.insert(tempList, obj)
 		end
-		table.insert(PengGangList[LocalIndex], tempList)
+		table.insert(self.PengGangList[LocalIndex], tempList)
 	else
-		local index = this.GetPaiInpeng(cardPoint, LocalIndex);
+		local index = self:GetPaiInpeng(cardPoint, LocalIndex);
 		if index == -1 then
 			local tempList = { };
 			tempList.cardPoint = cardPoint
 			for i = 1, hidenum do
-				local obj = newObject(BackPrefabs[LocalIndex])
-				obj.transform:SetParent(cpgParent[LocalIndex])
+				local obj = newObject(self.BackPrefabs[LocalIndex])
+				obj.transform:SetParent(self.cpgParent[LocalIndex])
 				obj.transform.localScale = Vector3.one;
-				obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+				obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 				if (LocalIndex == 2) then
 					obj.transform:SetAsFirstSibling();
 				end
 				table.insert(tempList, obj)
 			end
 			for i = 1, shownum do
-				local obj = newObject(CPGPrefabs[LocalIndex])
-				obj.transform:SetParent(cpgParent[LocalIndex])
+				local obj = newObject(self.CPGPrefabs[LocalIndex])
+				obj.transform:SetParent(self.cpgParent[LocalIndex])
 				obj.transform.localScale = Vector3.one;
-				obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i + hidenum)
+				obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i + hidenum)
 				if (LocalIndex == 2) then
 					obj.transform:SetAsFirstSibling();
 				end
@@ -801,22 +801,22 @@ function GamePanel.AddCPGToTable(LocalIndex, cardPoint, shownum, hidenum)
 				objCtrl:Init(cardPoint, LocalIndex);
 				table.insert(tempList, obj)
 			end
-			table.insert(PengGangList[LocalIndex], tempList)
+			table.insert(self.PengGangList[LocalIndex], tempList)
 			-- 补杠
 		else
-			local obj = newObject(CPGPrefabs[LocalIndex])
-			obj.transform:SetParent(cpgParent[LocalIndex])
+			local obj = newObject(self.CPGPrefabs[LocalIndex])
+			obj.transform:SetParent(self.cpgParent[LocalIndex])
 			obj.transform.localScale = Vector3.one;
-			obj.transform.localPosition = this.CPGPosition(LocalIndex, index, 4)
+			obj.transform.localPosition = self:CPGPosition(LocalIndex, index, 4)
 			local objCtrl = TopAndBottomCardScript.New(obj)
 			objCtrl:Init(cardPoint, LocalIndex)
-			table.insert(PengGangList[LocalIndex][index], obj)
+			table.insert(self.PengGangList[LocalIndex][index], obj)
 		end
 	end
 end
 
-function GamePanel.RemoveHandCard(Index, cardPoint, count)
-	local list = this.handerCardList[Index]
+function GamePanel:RemoveHandCard(Index, cardPoint, count)
+	local list = self.handerCardList[Index]
 	local pos = Vector3.zero
 	if Index == 1 then
 		for i = #list, 1, -1 do
@@ -840,114 +840,114 @@ function GamePanel.RemoveHandCard(Index, cardPoint, count)
 	return pos
 end
 -- 消除打到桌上的牌
-function GamePanel.RemoveLastCardOnTable()
-	destroy(table.remove(tableCardList[LastAvarIndex]));
-	Pointer:SetActive(false)
+function GamePanel:RemoveLastCardOnTable()
+	destroy(table.remove(self.tableCardList[self.LastAvarIndex]));
+	self.Pointer:SetActive(false)
 end
 -- 补花动画
-function GamePanel.BuHua(response)
-	this.PengGangHuEffectCtrl("buhua");
+function GamePanel:BuHua(response)
+	self:PengGangHuEffectCtrl("buhua");
 	local cardVo = json.decode(response.message);
-	SoundCtrl.getInstance().playSoundByAction("buhua", this.avatarList[cardVo.avatarIndex].account.sex);
-	local LocalIndex = this.GetLocalIndex(cardVo.avatarIndex);
+	SoundCtrl.getInstance().playSoundByAction("buhua", self.avatarList[cardVo.avatarIndex].account.sex);
+	local LocalIndex = self:GetLocalIndex(cardVo.avatarIndex);
 	for i = 1, #cardVo.huaPaiList do
-		this.CardsNumChange();
-		this.BuhuaRemoveCard(cardVo.huaPaiList[i], LocalIndex);
-		this.BuhuaPutCard(cardVo.huaPaiList[i], LocalIndex);
+		self:CardsNumChange();
+		self:BuhuaRemoveCard(cardVo.huaPaiList[i], LocalIndex);
+		self:BuhuaPutCard(cardVo.huaPaiList[i], LocalIndex);
 		if (LocalIndex == 0) then
-			this.BuhuaAddCard(cardVo.cardList[i], LocalIndex);
+			self:BuhuaAddCard(cardVo.cardList[i], LocalIndex);
 		else
-			this.CreateMoPaiGameObject(LocalIndex);
+			self:CreateMoPaiGameObject(LocalIndex);
 		end
 	end
-	this.UpateTimeReStart();
-	this.SetDirGameObjectAction(LocalIndex);
+	self:UpateTimeReStart();
+	self:SetDirGameObjectAction(LocalIndex);
 end
 
 -- 去除手上花牌
 
-function GamePanel.BuhuaRemoveCard(cardPoint, LocalIndex)
+function GamePanel:BuhuaRemoveCard(cardPoint, LocalIndex)
 	if (LocalIndex == 0) then
-		for i = 1, #this.handerCardList[1] do
-			local temp = this.handerCardList[1][i];
+		for i = 1, #self.handerCardList[1] do
+			local temp = self.handerCardList[1][i];
 			local cardPoint = temp.cardPoint;
 			if (cardPoint == cardPoint) then
-				table.remove(this.handerCardList[1], i)
+				table.remove(self.handerCardList[1], i)
 				destroy(temp.gameObject);
 				temp = nil
 				break;
 			end
 		end
-		-- this.PushOutFromMineList(cardPoint);
-		this.SetPosition(1);
+		-- self.PushOutFromMineList(cardPoint);
+		self:SetPosition(1);
 	else
-		local temp = this.handerCardList[LocalIndex][1];
-		table.remove(this.handerCardList[LocalIndex], 1)
+		local temp = self.handerCardList[LocalIndex][1];
+		table.remove(self.handerCardList[LocalIndex], 1)
 		destroy(temp);
 	end
 end
 -- 桌上显示花牌
-function GamePanel.BuhuaPutCard(cardPoint, LocalIndex)
+function GamePanel:BuhuaPutCard(cardPoint, LocalIndex)
 
 end
 
 -- 补牌
-function GamePanel.BuhuaAddCard(LocalIndex, cardPoint)
+function GamePanel:BuhuaAddCard(LocalIndex, cardPoint)
 	-- SelfAndOtherPutoutCard = cardPoint;
-	-- this.PutCardIntoMineList(cardPoint);
-	local go = newObject(BottomPrefabs[1])
+	-- self.PutCardIntoMineList(cardPoint);
+	local go = newObject(self.BottomPrefabs[1])
 	go.name = cardPoint;
-	go.transform:SetParent(parentList[1]);
+	go.transform:SetParent(self.parentList[1]);
 	go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 	go.transform.localPosition = Vector3.New(580, -292);
 	local objCtrl = BottomScript.New(go)
-	objCtrl.OnSendMessage = this.CardChange;
-	objCtrl.ReSetPoisiton = this.CardSelect;
+	objCtrl.OnSendMessage = function(ctrl) self:CardChange(ctrl) end;
+	objCtrl.ReSetPoisiton = function(ctrl) self:CardSelect(ctrl) end;
 	objCtrl:Init(cardPoint);
-	table.insert(this.handerCardList[1], objCtrl)
+	table.insert(self.handerCardList[1], objCtrl)
 end
 
 
-function GamePanel.PengGangHuEffectCtrl(effectType)
-	local effobj = pengEffectGame
+function GamePanel:PengGangHuEffectCtrl(effectType)
+	local effobj = self.pengEffectGame
 	if (effectType == "peng") then
-		effobj = pengEffectGame
+		effobj = self.pengEffectGame
 	elseif (effectType == "gang") then
-		effobj = gangEffectGame
+		effobj = self.gangEffectGame
 	elseif (effectType == "hu") then
-		effobj = huEffectGame
+		effobj = self.huEffectGame
 	elseif (effectType == "liuju") then
-		effobj = liujuEffectGame
+		effobj = self.liujuEffectGame
 	elseif (effectType == "chi") then
-		effobj = chiEffectGame
+		effobj = self.chiEffectGame
 	elseif (effectType == "bu") then
-		effobj = effBu
+		effobj = self.effBu
 	end
 	effobj:SetActive(true)
 	coroutine.start(
 	function()
-		coroutine.wait(1)
+		coroutine.wait(0.8)
 		effobj:SetActive(false)
 	end
 	)
 end
 
 
--- function GamePanel.AddListToPengGangList(LocalIndex, tempList)
--- log("GamePanel.AddListToPengGangList")
+-- function GamePanel.AddListToself.PengGangList(LocalIndex, tempList)
+-- log("GamePanel.AddListToself.PengGangList")
 -- local switch =
 -- {
 -- 	[1] = function()
--- 		table.insert(PengGangList_B, tempList)
+-- 		table.insert(self.PengGangList_B, tempList)
 -- 	end,
 -- 	[2] = function()
--- 		table.insert(PengGangList_R, tempList)
+-- 		table.insert(self.PengGangList_R, tempList)
 -- 	end,
 -- 	[3] = function()
--- 		table.insert(PengGangList_T, tempList)
+-- 		table.insert(self.PengGangList_T, tempList)
 -- 	end,
 -- 	[4] = function()
--- 		table.insert(PengGangList_L, tempList)
+-- 		table.insert(self.PengGangList_L, tempList)
 -- 	end
 -- }
 -- switch[LocalIndex]()
@@ -955,8 +955,8 @@ end
 
 
 
-function GamePanel.GetPaiInpeng(cardPoint, LocalIndex)
-	local jugeList = PengGangList[LocalIndex]
+function GamePanel:GetPaiInpeng(cardPoint, LocalIndex)
+	local jugeList = self.PengGangList[LocalIndex]
 	if (jugeList == nil or #jugeList == 0) then
 		return -1;
 	end
@@ -969,13 +969,13 @@ function GamePanel.GetPaiInpeng(cardPoint, LocalIndex)
 	return -1;
 end
 -- 设置顶针
-function GamePanel.SetPointGameObject(parent)
+function GamePanel:SetPointGameObject(parent)
 	if (parent ~= nil) then
-		Pointer.transform:SetParent(parent.transform);
-		Pointer.transform.localScale = Vector3.one;
-		Pointer.transform.localPosition = Vector3.New(0, parent.transform:GetComponent("RectTransform").sizeDelta.y / 2 + 10);
-		Pointer.transform:SetParent(transform);
-		Pointer:SetActive(true)
+		self.Pointer.transform:SetParent(parent.transform);
+		self.Pointer.transform.localScale = Vector3.one;
+		self.Pointer.transform.localPosition = Vector3.New(0, parent.transform:GetComponent("RectTransform").sizeDelta.y / 2 + 10);
+		self.Pointer.transform:SetParent(transform);
+		self.Pointer:SetActive(true)
 	end
 end
 
@@ -1007,32 +1007,32 @@ end
 
 
 
-function GamePanel.InsertCardIntoList(objCtrl)
-	-- 插入牌的方法
-	if (objCtrl ~= nil) then
-		local curCardPoint = objCtrl.cardPoint;
-		-- 得到当前牌指针
-		if (curCardPoint == RoomData.guiPai) then
-			table.insert(this.handerCardList[1], 1, objCtrl)
-			-- 鬼牌放到最前面
-			return;
-		else
-			for i = 1, #this.handerCardList[1] do
-				local cardPoint = this.handerCardList[1][i].cardPoint;
-				if (cardPoint ~= RoomData.guiPai and cardPoint >= curCardPoint) then
-					table.insert(this.handerCardList[1], i, objCtrl)
-					return;
-				end
-			end
-			table.insert(this.handerCardList[1], objCtrl)
-		end
-	end
-end
+--function GamePanel:InsertCardIntoList(objCtrl)
+--	-- 插入牌的方法
+--	if (objCtrl ~= nil) then
+--		local curCardPoint = objCtrl.cardPoint;
+--		-- 得到当前牌指针
+--		if (curCardPoint == RoomData.guiPai) then
+--			table.insert(self.handerCardList[1], 1, objCtrl)
+--			-- 鬼牌放到最前面
+--			return;
+--		else
+--			for i = 1, #self.handerCardList[1] do
+--				local cardPoint = self.handerCardList[1][i].cardPoint;
+--				if (cardPoint ~= RoomData.guiPai and cardPoint >= curCardPoint) then
+--					table.insert(self.handerCardList[1], i, objCtrl)
+--					return;
+--				end
+--			end
+--			table.insert(self.handerCardList[1], objCtrl)
+--		end
+--	end
+--end
 
 -- 设置牌位置
-function GamePanel.SetPosition(LocalIndex)
-	print("GamePanel.SetPosition")
-	local tempList = this.handerCardList[LocalIndex]
+function GamePanel:SetPosition(LocalIndex)
+	print("SetPosition")
+	local tempList = self.handerCardList[LocalIndex]
 	local count = #tempList;
 	switch =
 	{
@@ -1048,282 +1048,244 @@ function GamePanel.SetPosition(LocalIndex)
 		tempList[count].gameObject.transform.localPosition = switch[LocalIndex](count + 1)
 	end
 end
-function GamePanel.Update()
-	timer = timer - Time.deltaTime;
-	if (timer < 0) then
-		timer = 0;
+function GamePanel:Update()
+	self.timer = self.timer - Time.deltaTime;
+	if (self.timer < 0) then
+		self.timer = 0;
 	end
-	Number.text = math.floor(timer);
-	if (timeFlag) then
-		showTimeNumber = showTimeNumber - 1;
-		if (showTimeNumber < 0) then
-			timeFlag = false;
-			showTimeNumber = 0;
-			this.PlayNoticeAction();
+	self.Number.text = math.floor(self.timer);
+	if (self.timeFlag) then
+		self.showTimeNumber = self.showTimeNumber - 1;
+		if (self.showTimeNumber < 0) then
+			self.timeFlag = false;
+			self.showTimeNumber = 0;
+			self:PlayNoticeAction();
 		end
 	end
 end
 
-function GamePanel.PlayNoticeAction()
-	noticeGameObject:SetActive(true);
+function GamePanel:PlayNoticeAction()
+	self.noticeGameObject:SetActive(true);
 	if (BroadcastScript.noticeMegs ~= nil and #BroadcastScript.noticeMegs ~= 0) then
-		noticeText.transform.localPosition = Vector3.New(500, noticeText.transform.localPosition.y);
-		noticeText.text = BroadcastScript.noticeMegs[showNoticeNumber];
-		local time = noticeText.text.Length * 0.5 + 422 / 56;
-		local tweener = noticeText.transform:DOLocalMove(
-		Vector3.New(- noticeText.text.Length * 28, noticeText.transform.localPosition.y), time, false)
-		.OnComplete(MoveCompleted);
+		self.noticeText.transform.localPosition = Vector3.New(500, self.noticeText.transform.localPosition.y);
+		self.noticeText.text = BroadcastScript.noticeMegs[self.showNoticeNumber];
+		local time = self.noticeText.text.Length * 0.5 + 422 / 56;
+		local tweener = self.noticeText.transform:DOLocalMove(
+		Vector3.New(- self.noticeText.text.Length * 28, self.noticeText.transform.localPosition.y), time, false)
+		.OnComplete(function() self:MoveCompleted() end);
 		tweener:SetEase(Ease.Linear);
 	end
 end
 
-function GamePanel.MoveCompleted()
-	showNoticeNumber = showNoticeNumber + 1;
-	if (showNoticeNumber == #BroadcastScript.noticeMegs) then
-		showNoticeNumber = 0;
+function GamePanel:MoveCompleted()
+	self.showNoticeNumber = self.showNoticeNumber + 1;
+	if (self.showNoticeNumber == #BroadcastScript.noticeMegs) then
+		self.showNoticeNumber = 0;
 	end
-	noticeGameObject:SetActive(false);
-	this.RandShowTime();
-	timeFlag = true;
+	self.noticeGameObject:SetActive(false);
+	self:RandShowTime();
+	self.timeFlag = true;
 end
 
 -- 重新开始计时
-function GamePanel.UpateTimeReStart()
-	timer = 16;
+function GamePanel:UpateTimeReStart()
+	self.timer = 16;
 end
 
 -- 胡牌按钮点击
-function GamePanel.HubtnClick()
+function GamePanel:HubtnClick()
 	local cardPoint
 	local requestVo = { };
-	if (this.putOutCardPoint ~= -1) then
+	if (self.putOutCardPoint ~= -1) then
 		requestVo.type = "qianghu";
-		cardPoint = this.putOutCardPoint;
+		cardPoint = self.putOutCardPoint;
 	else
-		cardPoint = this.handerCardList[1][#this.handerCardList[1]].cardPoint
+		cardPoint = self.handerCardList[1][#self.handerCardList[1]].cardPoint
 	end
 	requestVo.cardPoint = cardPoint;
 	local sendMsg = json.encode(requestVo);
 	networkMgr:SendMessage(ClientRequest.New(APIS.HUPAI_REQUEST, sendMsg));
-	this.CleanBtnShow();
-	this.CompleteBtnAction()
+	self:CleanBtnShow();
+	self:CompleteBtnAction()
 end
 -- 点击放弃按钮
-function GamePanel.PassBtnClick()
-	networkMgr:SendMessage(ClientRequest.New(APIS.GAVEUP_REQUEST, "gaveup|" .. this.passStr));
-	this.CleanBtnShow();
-	this.CompleteBtnAction()
+function GamePanel:PassBtnClick()
+	networkMgr:SendMessage(ClientRequest.New(APIS.GAVEUP_REQUEST, "gaveup|" .. self.passStr));
+	self:CleanBtnShow();
+	self:CompleteBtnAction()
 end
 
-function GamePanel.PengBtnClick()
+function GamePanel:PengBtnClick()
 	local cardvo = { };
-	cardvo.cardPoint = this.putOutCardPoint;
+	cardvo.cardPoint = self.putOutCardPoint;
 	networkMgr:SendMessage(ClientRequest.New(APIS.PENGPAI_REQUEST, json.encode(cardvo)));
-	this.CleanBtnShow();
-	this.CompleteBtnAction()
+	self:CleanBtnShow();
+	self:CompleteBtnAction()
 end
 
 
-function GamePanel.ShowChipai(idx)
-	local cpoint = this.chiPaiPointList[idx];
+function GamePanel:ShowChipai(idx)
+	local cpoint = self.chiPaiPointList[idx];
 	if (idx == 1) then
-		chiList_1[1]:Init(cpoint.putCardPoint)
-		chiList_1[2]:Init(cpoint.oneCardPoint)
-		chiList_1[3]:Init(cpoint.twoCardPoint)
+		self.chiList_1[1]:Init(cpoint.putCardPoint)
+		self.chiList_1[2]:Init(cpoint.oneCardPoint)
+		self.chiList_1[3]:Init(cpoint.twoCardPoint)
 	end
 	if (idx == 2) then
-		chiList_2[1]:Init(cpoint.putCardPoint)
-		chiList_2[2]:Init(cpoint.oneCardPoint)
-		chiList_2[3]:Init(cpoint.twoCardPoint)
+		self.chiList_2[1]:Init(cpoint.putCardPoint)
+		self.chiList_2[2]:Init(cpoint.oneCardPoint)
+		self.chiList_2[3]:Init(cpoint.twoCardPoint)
 	end
 	if (idx == 3) then
-		chiList_3[1]:Init(cpoint.putCardPoint)
-		chiList_3[2]:Init(cpoint.oneCardPoint)
-		chiList_3[3]:Init(cpoint.twoCardPoint)
+		self.chiList_3[1]:Init(cpoint.putCardPoint)
+		self.chiList_3[2]:Init(cpoint.oneCardPoint)
+		self.chiList_3[3]:Init(cpoint.twoCardPoint)
 	end
 end
 
 -- 显示可吃牌的显示
-function GamePanel.ShowChiList()
-	this.CleanBtnShow();
-	for i = 1, #canChiList do
-		if (i <= #this.chiPaiPointList) then
-			canChiList[i].gameObject:SetActive(true);
-			this.ShowChipai(i);
+function GamePanel:ShowChiList()
+	self:CleanBtnShow();
+	for i = 1, #self.canChiList do
+		if (i <= #self.chiPaiPointList) then
+			self.canChiList[i].gameObject:SetActive(true);
+			self:ShowChipai(i);
 		else
-			canChiList[i].gameObject:SetActive(false);
+			self.canChiList[i].gameObject:SetActive(false);
 		end
 	end
 end
 
 -- 吃牌选择点击
-function GamePanel.ChiBtnClick2(idx, go)
-	local cpoint = this.chiPaiPointList[idx];
+function GamePanel:ChiBtnClick2(idx, go)
+	local cpoint = self.chiPaiPointList[idx];
 	local cardvo = { }
 	cardvo.cardPoint = cpoint.putCardPoint;
 	cardvo.onePoint = cpoint.oneCardPoint;
 	cardvo.twoPoint = cpoint.twoCardPoint;
 	networkMgr:SendMessage(ClientRequest.New(APIS.CHIPAI_REQUEST, json.encode(cardvo)));
-	for i = 1, #canChiList do
-		canChiList[i].gameObject:SetActive(false);
+	for i = 1, #self.canChiList do
+		self.canChiList[i].gameObject:SetActive(false);
 	end
-	this.CompleteBtnAction()
+	self:CompleteBtnAction()
 end
 
 -- 吃按钮点击
-function GamePanel.ChiBtnClick()
-	if (#this.chiPaiPointList == 1) then
-		local cpoint = this.chiPaiPointList[1];
+function GamePanel:ChiBtnClick()
+	if (#self.chiPaiPointList == 1) then
+		local cpoint = self.chiPaiPointList[1];
 		local cardvo = { };
-		this.UpateTimeReStart();
+		self:UpateTimeReStart();
 		cardvo.cardPoint = cpoint.putCardPoint;
 		cardvo.onePoint = cpoint.oneCardPoint;
 		cardvo.twoPoint = cpoint.twoCardPoint;
 		networkMgr:SendMessage(ClientRequest.New(APIS.CHIPAI_REQUEST, json.encode(cardvo)));
-		this.CleanBtnShow();
-		this.CompleteBtnAction()
+		self:CleanBtnShow();
+		self:CompleteBtnAction()
 	else
-		this.ShowChiList();
+		self:ShowChiList();
 	end
 end
 
-function GamePanel.GangBtnClick()
+function GamePanel:GangBtnClick()
 	local GangRequestVO = { }
-	GangRequestVO.cardPoint = tonumber(this.gangPaiList[1])
+	GangRequestVO.cardPoint = tonumber(self.gangPaiList[1])
 	GangRequestVO.gangType = 0;
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))
-	soundMgr:playSoundByAction("gang", LoginData.account.sex);
-	this.PengGangHuEffectCtrl("gang");
-	this.CleanBtnShow();
-	this.CompleteBtnAction()
+	self:CleanBtnShow();
+	self:CompleteBtnAction()
 end
-function GamePanel.BuBtnClick()
+function GamePanel:BuBtnClick()
 	local GangRequestVO = { }
-	GangRequestVO.cardPoint = tonumber(this.gangPaiList[1])
+	GangRequestVO.cardPoint = tonumber(self.gangPaiList[1])
 	GangRequestVO.gangType = 0;
 	GangRequestVO.kaigang = false
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))
-	-- soundMgr:playSoundByAction("bu", LoginData.account.sex);
-	-- this.PengGangHuEffectCtrl("bu");
-	this.CleanBtnShow();
-	this.CompleteBtnAction()
+	self:CleanBtnShow();
+	self:CompleteBtnAction()
 end
 -- 每局结束销毁牌
-function GamePanel.Clean()
-	this.CleanList(this.handerCardList)
-	this.CleanList(tableCardList)
-	this.CleanList(PengGangList)
-	guiObj:SetActive(false);
-	Pointer:SetActive(false)
-	this.imgDuanMen.enabled = false
-	this.CleanBtnShow()
-	this.CompleteBtnAction()
+function GamePanel:Clean()
+	CleanList(self.handerCardList)
+	CleanList(self.tableCardList)
+	CleanList(self.PengGangList)
+	self.guiObj:SetActive(false);
+	self.Pointer:SetActive(false)
+	self.imgDuanMen.enabled = false
+	self:CleanBtnShow()
+	self:CompleteBtnAction()
 end
 
--- function GamePanel.CleanList(list)
--- if (type(list) == "table") then
--- 	for i = #list, 1, -1 do
--- 		local temp = list[i]
--- 		if type(temp) == "table" then
--- 			if not IsNil(temp.gameObject) then
--- 				destroy(temp.gameObject)
--- 				table.remove(list, i)
--- 			else
--- 				this.CleanList(temp)
--- 			end
--- 		else
--- 			if not IsNil(temp.gameObject) then
--- 				destroy(temp.gameObject)
--- 				table.remove(list, i)
--- 			end
--- 		end
--- 	end
--- end
--- end
-
--- 摧毁gameobject
-function GamePanel.CleanList(list)
-	for k, v in pairs(list) do
-		if type(v) == "table" then
-			this.CleanList(v)
-		elseif type(v) == "userdata" then
-			if not IsNil(v.gameObject) then
-				destroy(v.gameObject)
-				list[k] = nil
-			end
-		end
-	end
-end
-
-function GamePanel.SetRoomRemark()
+function GamePanel:SetRoomRemark()
 	local roomvo = RoomData;
 	local str = "房间号：\n" .. roomvo.roomId .. "\n"
 	.. "圈数:" .. roomvo.roundNumber .. "\n\n"
-	roomRemark.text = str;
+	self.roomRemark.text = str;
 end
 
-function GamePanel.AddAvatarVOToList(avatar)
-	table.insert(this.avatarList, avatar)
-	this.SetSeat(avatar);
+function GamePanel:AddAvatarVOToList(avatar)
+	table.insert(self.avatarList, avatar)
+	RoomData.playerList=self.avatarList
+	self:SetSeat(avatar);
 end
 -- 创建房间
-function GamePanel.CreateRoomAddAvatarVO(avatar)
-	this.avatarList = { }
-	this.AddAvatarVOToList(avatar);
-	this.SetRoomRemark();
-	this.ReadyGame();
+function GamePanel:CreateRoomAddAvatarVO(avatar)
+	self.avatarList = { }
+	self:AddAvatarVOToList(avatar);
+	self:SetRoomRemark();
+	self:ReadyGame();
 end
 
 -- 加入房间
-function GamePanel.JoinToRoom(avatars)
-	this.avatarList = avatars;
+function GamePanel:JoinToRoom(avatars)
+	self.avatarList = avatars;
 	for i = 1, #avatars do
-		this.SetSeat(avatars[i])
+		self:SetSeat(avatars[i])
 	end
-	this.SetRoomRemark();
+	self:SetRoomRemark();
 	if (RoomData.jiaGang) then
-		this.ReadySelect[1].gameObject:SetActive(RoomData.duanMen);
-		this.ReadySelect[2].gameObject:SetActive(RoomData.jiaGang);
-		this.btnReadyGame:SetActive(true);
-		this.ReadySelect[1].interactable = false;
+		self.ReadySelect[1].gameObject:SetActive(RoomData.duanMen);
+		self.ReadySelect[2].gameObject:SetActive(RoomData.jiaGang);
+		self.btnReadyGame:SetActive(true);
+		self.ReadySelect[1].interactable = false;
 	else
-		this.ReadyGame();
+		self:ReadyGame();
 	end
 end
 
 -- 设置当前角色的座位
-function GamePanel.SetSeat(avatar)
+function GamePanel:SetSeat(avatar)
 	-- 游戏结束后用的数据，勿删！！！
 	if (avatar.account.uuid == LoginData.account.uuid) then
-		this.playerItems[1]:SetAvatarVo(avatar);
+		self.playerItems[1]:SetAvatarVo(avatar);
 	else
-		local myIndex = this.GetMyIndexFromList();
-		local curAvaIndex = this.GetIndex(avatar.account.uuid)
+		local myIndex = self:GetMyIndexFromList();
+		local curAvaIndex = self:GetIndex(avatar.account.uuid)
 		local seatIndex = 1 + curAvaIndex - myIndex;
 		if (seatIndex < 1) then
 			seatIndex = 4 + seatIndex;
 		end
-		this.playerItems[seatIndex]:SetAvatarVo(avatar);
+		self.playerItems[seatIndex]:SetAvatarVo(avatar);
 	end
 end
--- 获取自己在this.avatarList中的下标，等于服务器下标+1
-function GamePanel.GetMyIndexFromList()
-	if (this.avatarList ~= nil) then
-		for i = 1, #this.avatarList do
-			if (this.avatarList[i].account.uuid == LoginData.account.uuid or this.avatarList[i].account.openid == LoginData.account.openid) then
-				LoginData.account.uuid = this.avatarList[i].account.uuid;
+-- 获取自己在self.avatarList中的下标，等于服务器下标+1
+function GamePanel:GetMyIndexFromList()
+	if (self.avatarList ~= nil) then
+		for i = 1, #self.avatarList do
+			if (self.avatarList[i].account.uuid == LoginData.account.uuid or self.avatarList[i].account.openid == LoginData.account.openid) then
+				LoginData.account.uuid = self.avatarList[i].account.uuid;
 				return i
 			end
 		end
 	end
 	return 1;
 end
--- 获取玩家在this.avatarList中的下标，等于服务器下标+1
-function GamePanel.GetIndex(uuid)
-	if (this.avatarList ~= nil) then
-		for i = 1, #this.avatarList do
-			if (this.avatarList[i].account ~= nil) then
-				if (this.avatarList[i].account.uuid == uuid) then
+-- 获取玩家在self.avatarList中的下标，等于服务器下标+1
+function GamePanel:GetIndex(uuid)
+	if (self.avatarList ~= nil) then
+		for i = 1, #self.avatarList do
+			if (self.avatarList[i].account ~= nil) then
+				if (self.avatarList[i].account.uuid == uuid) then
 					return i;
 				end
 			end
@@ -1332,125 +1294,96 @@ function GamePanel.GetIndex(uuid)
 	end
 end
 -- 服务器下标转本地下标
-function GamePanel.GetLocalIndex(serverIndex)
-	local Index = this.GetMyIndexFromList();
+function GamePanel:GetLocalIndex(serverIndex)
+	local Index = self:GetMyIndexFromList();
 	return(serverIndex - Index + 5) % 4 + 1;
 end
--- 获取庄家在this.avatarList中的下标，等于服务器下标+1
-function GamePanel.GetBanker()
-	if (this.avatarList ~= nil) then
-		for i = 1, #this.avatarList do
-			if (this.avatarList[i].main) then
-				return i
-			end
-		end
-		return 1
-	end
-end
 
-function GamePanel.GetAccount(uuid)
-	if (this.avatarList ~= nil) then
-		for i = 1, #this.avatarList do
-			if (this.avatarList[i].account ~= nil) then
-				if (this.avatarList[i].account.uuid == uuid) then
-					return this.avatarList[i].account
-				end
-			end
-		end
-		return nil
-	end
-end
-
-function GamePanel.OtherUserJointRoom(buffer)
-	log("GamePanel.OtherUserJointRoom")
+function GamePanel:OtherUserJointRoom(buffer)
+	log("OtherUserJointRoom")
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local avatar = json.decode(message);
 	avatar = AvatarVO.New(avatar)
-	this.AddAvatarVOToList(avatar);
+	self:AddAvatarVOToList(avatar);
 end
 
 
 
-function GamePanel.HupaiCallBack(buffer)
+function GamePanel:HupaiCallBack(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	RoundOverData = json.decode(message);
 	local scores = RoundOverData.currentScore;
-	this.HupaiCoinChange(scores);
+	self:HupaiCoinChange(scores);
 	if (RoundOverData.type == "0") then
-		this.PengGangHuEffectCtrl("hu");
+		self:PengGangHuEffectCtrl("hu");
 		for i = 1, #RoundOverData.avatarList do
-			local LocalIndex = this.GetLocalIndex(i - 1);
+			local LocalIndex = self:GetLocalIndex(i - 1);
 			if (RoundOverData.avatarList[i].cardPoint > -1) then
 				if (RoundOverData.avatarList[i].uuid ~= RoundOverData.avatarList[i].dianPaoId) then
-					soundMgr:playSoundByAction("hu", this.avatarList[i].account.sex);
+					soundMgr:playSoundByAction("hu", self.avatarList[i].account.sex);
 				else
-					soundMgr:playSoundByAction("zimo", this.avatarList[i].account.sex);
+					soundMgr:playSoundByAction("zimo", self.avatarList[i].account.sex);
 				end
-				this.playerItems[LocalIndex].HuFlag.enabled = true
+				self.playerItems[LocalIndex].HuFlag.enabled = true
 			else
-				this.playerItems[LocalIndex].HuFlag.enabled = false
+				self.playerItems[LocalIndex].HuFlag.enabled = false
 			end
 		end
 		local allMas = RoundOverData.allMas;
-		coroutine.start(this.Invoke, this.OpenGameOverPanelSignal, 3, allMas)
+		coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 	elseif (RoundOverData.type == "1") then
 		soundMgr:playSoundByAction("liuju", LoginData.account.sex);
-		this.PengGangHuEffectCtrl("liuju");
-		coroutine.start(this.Invoke, this.OpenGameOverPanelSignal, 3)
+		self:PengGangHuEffectCtrl("liuju");
+	coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 	else
-		coroutine.start(this.Invoke, this.OpenGameOverPanelSignal, 3)
+		coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 	end
 end
 
-function GamePanel.Invoke(f, time, ...)
-	coroutine.wait(time)
-	f(...)
-end
 
-function GamePanel.HupaiCoinChange(scores)
+function GamePanel:HupaiCoinChange(scores)
 	local scoreList = string.split(scores, ',')
 	if (scoreList ~= nil and #scoreList > 0) then
 		for i = 1, #scoreList - 1 do
 			local itemstr = scoreList[i];
 			local uuid = tonumber(string.split(itemstr, ':')[1]);
 			local score = tonumber(string.split(itemstr, ':')[2]);
-			local LocalIndex = this.GetLocalIndex(this.GetIndex(uuid) -1)
-			this.playerItems[LocalIndex].scoreText.text = tostring(score);
-			this.avatarList[this.GetIndex(uuid)].scores = score;
+			local LocalIndex = self:GetLocalIndex(self:GetIndex(uuid) -1)
+			self.playerItems[LocalIndex].scoreText.text = tostring(score);
+			self.avatarList[self:GetIndex(uuid)].scores = score;
 		end
 	end
 end
 
 
 -- 单局结束重置数据的地方
-function GamePanel.OpenGameOverPanelSignal(allMas)
+function GamePanel:OpenGameOverPanelSignal()
 	local isNextBanker = RoundOverData.nextBankerId == LoginData.account.uuid
 	ClosePanel(ZhuaMaPanel)
 	OpenPanel(GameOverPanel, isNextBanker)
-	this.Clean();
-	this.HidePlayerItemImg();
-	for i = 1, #this.avatarList do
-		this.avatarList[i]:ResetData()
+	self:Clean();
+	self:HidePlayerItemImg();
+	for i = 1, #self.avatarList do
+		self.avatarList[i]:ResetData()
 	end
-	this.InitArrayList()
-	allMas = "";
+	self:InitArrayList()
 end
 
 
 -- 退出房间确认面板
-function GamePanel.QuiteRoom()
+function GamePanel:QuiteRoom()
 	soundMgr:playSoundByActionButton(1);
-	if (1 == this.GetMyIndexFromList()) then
-		OpenPanel(ExitPanel, "提示", "亲，确定要解散房间吗?", this.Tuichu);
+	if (1 == self:GetMyIndexFromList()) then
+		OpenPanel(ExitPanel, "提示", "亲，确定要解散房间吗?",function() self:Tuichu()end);
 	else
-		OpenPanel(ExitPanel, "提示", "亲，确定要离开房间吗?", this.Tuichu);
+		OpenPanel(ExitPanel, "提示", "亲，确定要离开房间吗?", function() self:Tuichu()end);
 	end
 
 end
 -- 退出房间按钮点击
-function GamePanel.Tuichu()
+function GamePanel:Tuichu()
 	ClosePanel(ExitPanel)
 	soundMgr:playSoundByActionButton(1);
 	local vo = { };
@@ -1460,7 +1393,7 @@ function GamePanel.Tuichu()
 end
 
 
-function GamePanel.OutRoomCallbak(buffer)
+function GamePanel:OutRoomCallbak(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local responseMsg = json.decode(message)
@@ -1468,21 +1401,21 @@ function GamePanel.OutRoomCallbak(buffer)
 		if (responseMsg.type == "0") then
 			local uuid = responseMsg.uuid;
 			if (uuid ~= LoginData.account.uuid) then
-				local index = this.GetIndex(uuid);
-				table.remove(this.avatarList, index)
-				for i = 1, #this.playerItems do
-					this.playerItems[i]:SetAvatarVo(nil);
+				local index = self:GetIndex(uuid);
+				table.remove(self.avatarList, index)
+				for i = 1, #self.playerItems do
+					self.playerItems[i]:SetAvatarVo(nil);
 				end
-				if (this.avatarList ~= nil) then
-					for i = 1, #this.avatarList do
-						this.SetSeat(this.avatarList[i]);
+				if (self.avatarList ~= nil) then
+					for i = 1, #self.avatarList do
+						self:SetSeat(self.avatarList[i]);
 					end
 				end
 			else
-				this:ChangePanel(HomePanel)
+				self:ChangePanel(HomePanel)
 			end
 		else
-			this:ChangePanel(HomePanel)
+			self:ChangePanel(HomePanel)
 		end
 	else
 		TipsManager.SetTips("退出房间失败：" .. tostring(responseMsg.error));
@@ -1490,39 +1423,21 @@ function GamePanel.OutRoomCallbak(buffer)
 end
 
 -- 游戏设置
-function GamePanel.OpenSettingPanel()
+function GamePanel:OpenSettingPanel()
 	soundMgr:playSoundByActionButton(1);
 	local _type = 4
 	if (RoomData.enterType == 4) then
 		_type = 2;
-	elseif (1 == GamePanel.GetMyIndexFromList()) then
+	elseif (1 == GamePanel:GetMyIndexFromList()) then
 		_type = 3;
 	end
 	OpenPanel(SettingPanel, _type)
 end
 
-local panelCreateDialog;-- 界面上打开的dialog
-function GamePanel.LoadPrefab(perfabName)
-	resMgr:LoadPrefab('prefabs', { perfabName .. ".prefab" }, function(prefabs)
-		panelCreateDialog = newObject(prefabs[0])
-		panelCreateDialog.transform.parent = gameObject.transform;
-		panelCreateDialog.transform.localScale = Vector3.one;
-		panelCreateDialog:GetComponent("RectTransform").offsetMax = Vector2.zero;
-		panelCreateDialog:GetComponent("RectTransform").offsetMin = Vector2.zero;
-	end )
-end
 
-function GamePanel.DoDissoliveRoomRequest(_type)
-	local data = { };
-	data.roomId = RoomData.roomId;
-	data.type = _type;
-	local sendMsg = json.encode(data);
-	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
-	VoteStatus = true
-end
 
 -- 申请解散房间回调
-function GamePanel.DissoliveRoomResponse(buffer)
+function GamePanel:DissoliveRoomResponse(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local data = json.decode(message);
@@ -1530,176 +1445,176 @@ function GamePanel.DissoliveRoomResponse(buffer)
 	local uuid = data.uuid;
 	-- 发起申请
 	if (data.type == "0") then
-		VoteStatus = true;
-		disagreeCount = 0
-		OpenPanel(VotePanel, uuid, plyerName, this.avatarList)
+		VotePanel.VoteStatus = true;
+		VotePanel.disagreeCount = 0
+		OpenPanel(VotePanel, uuid, plyerName, self.avatarList)
 		-- 有人同意
 	elseif (data.type == "1") then
 		VotePanel.DissoliveRoomResponse(1, plyerName)
 		-- 有人拒绝
 	elseif (data.type == "2") then
 		VotePanel.DissoliveRoomResponse(2, plyerName)
-		disagreeCount = disagreeCount + 1;
-		if (disagreeCount >= 2) then
-			VoteStatus = false;
+		VotePanel.disagreeCount = VotePanel.disagreeCount + 1;
+		if (VotePanel.disagreeCount >= 2) then
+			VotePanel.VoteStatus = false;
 			TipsManager.SetTips("同意解散房间申请人数不够，本轮投票结束，继续游戏");
 			ClosePanel(VotePanel)
 		end
 		-- 解散
 	elseif (data.type == "3") then
-		VoteStatus = false;
+		VotePanel.VoteStatus = false;
 		ClosePanel(VotePanel)
 		RoomData.isOverByPlayer = true;
 	end
 end
 
-function GamePanel.GameReadyNotice(buffer)
+function GamePanel:GameReadyNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local data = json.decode(message);
 	local avatarIndex = data["avatarIndex"];
-	local seatIndex = this.GetLocalIndex(avatarIndex)
-	this.playerItems[seatIndex].readyImg.enabled = true
-	this.avatarList[avatarIndex + 1].isReady = true;
+	local seatIndex = self:GetLocalIndex(avatarIndex)
+	self.playerItems[seatIndex].readyImg.enabled = true
+	self.avatarList[avatarIndex + 1].isReady = true;
 end
 
 -- 隐藏跟庄
-function GamePanel.GameFollowBanderNotice(buffer)
+function GamePanel:GameFollowBanderNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	genZhuang:SetActive(true);
-	coroutine.start(this.Invoke(this.HideGenzhuang, 2))
+	coroutine.start(Invoke,function() self:HideGenzhuang()end, 2)
 end
 
-function GamePanel.HideGenzhuang()
+function GamePanel:HideGenzhuang()
 	genZhuang:SetActive(false);
 end
 
-function GamePanel.ReEnterRoom()
+function GamePanel:ReEnterRoom()
 	if (RoomData.enterType == 3) then
 		-- 服务器的坑
 		if (RoomData.gui <= 0) then
 			RoomData.guiPai = -1
 		end
-		this.SetRoomRemark();
+		self:SetRoomRemark();
 		-- 设置座位
-		this.avatarList = RoomData.playerList;
-		for i = 1, #this.avatarList do
-			this.SetSeat(this.avatarList[i]);
+		self.avatarList = RoomData.playerList;
+		for i = 1, #self.avatarList do
+			self:SetSeat(self.avatarList[i]);
 		end
-		local selfIndex = this.GetMyIndexFromList()
-		LoginData.account.roomcard = this.avatarList[selfIndex].account.roomcard;
-		local selfPaiArray = this.avatarList[selfIndex].paiArray;
+		local selfIndex = self:GetMyIndexFromList()
+		LoginData.account.roomcard = self.avatarList[selfIndex].account.roomcard;
+		local selfPaiArray = self.avatarList[selfIndex].paiArray;
 		if (selfPaiArray == nil or #selfPaiArray == 0) then
 			-- 游戏还没有开始
-			-- 		if (not this.avatarList[selfIndex].isReady and RoomDataRoomData.currentRound==0) then
-			-- 			this.ReadyGame();
+			-- 		if (not self.avatarList[selfIndex].isReady and RoomDataRoomData.currentRound==0) then
+			-- 			self.ReadyGame();
 			-- 		end
 			-- 牌局已开始
 		else
-			this.CleanGameplayUI();
+			self:CleanGameplayUI();
 			-- 显示打牌数据
-			this.DisplayTableCards();
+			self:DisplayTableCards();
 			-- 显示鬼牌
-			this.DisplayGuiPai();
+			self:DisplayGuiPai();
 			-- 显示其他玩家的手牌
-			this.DisplayOtherHandercard();
+			self:DisplayOtherHandercard();
 			-- 显示杠牌
-			this.DisplayallGangCard();
+			self:DisplayallGangCard();
 			-- 显示碰牌
-			this.DisplayPengCard();
+			self:DisplayPengCard();
 			-- 显示吃牌
-			this.DisplayChiCard();
-			this.DispalySelfhanderCard();
+			self:DisplayChiCard();
+			self:DispalySelfhanderCard();
 			networkMgr:SendMessage(ClientRequest.New(APIS.REQUEST_CURRENT_DATA, "dd"));
 		end
 	end
 end
 
 -- 只加载手牌对象，不排序
-function GamePanel.DispalySelfhanderCard()
-	local index = this.GetMyIndexFromList()
-	local paiArray = this.avatarList[index].paiArray
+function GamePanel:DispalySelfhanderCard()
+	local index = self:GetMyIndexFromList()
+	local paiArray = self.avatarList[index].paiArray
 	for i = 1, #paiArray[1] do
 		if (paiArray[1][i] > 0) then
 			for j = 1, paiArray[1][i] do
-				local go = newObject(BottomPrefabs[1]);
+				local go = newObject(self.BottomPrefabs[1]);
 				-- 设置父节点
-				go.transform:SetParent(parentList[1]);
+				go.transform:SetParent(self.parentList[1]);
 				go.transform.localScale = Vector3.New(1.1, 1.1, 1);
 				local objCtrl = BottomScript.New(go)
 				local point = i - 1
-				objCtrl.OnSendMessage = this.CardChange;
-				objCtrl.ReSetPoisiton = this.CardSelect;
+				objCtrl.OnSendMessage = function(ctrl) self:CardChange(ctrl) end;
+				objCtrl.ReSetPoisiton = function(ctrl) self:CardSelect(ctrl) end;
 				objCtrl:Init(point)
 				-- 增加游戏对象
-				table.insert(this.handerCardList[1], objCtrl)
+				table.insert(self.handerCardList[1], objCtrl)
 			end
 		end
 	end
 end
 
-function GamePanel.ToList(param)
-	local returnData = { };
-	for i = 1, #param do
+--function GamePanel:ToList(param)
+--	local returnData = { };
+--	for i = 1, #param do
 
-		local temp = { };
-		for j = 1, #param[i] do
-			temp[j] = param[i][j]
-		end
-		returnData[i] = temp
-	end
-	return returnData;
-end
+--		local temp = { };
+--		for j = 1, #param[i] do
+--			temp[j] = param[i][j]
+--		end
+--		returnData[i] = temp
+--	end
+--	return returnData;
+--end
 
-function GamePanel.MyselfSoundActionPlay()
-	this.playerItems[1]:ShowChatAction();
+function GamePanel:MyselfSoundActionPlay()
+	self.playerItems[1]:ShowChatAction();
 end
 -- 桌牌位置
-function GamePanel.TableCardPosition(LocalIndex)
+function GamePanel:TableCardPosition(LocalIndex)
 	local switch =
 	{
-		[1] = Vector2.New(-261 + #tableCardList[1] % 14 * 37,math.modf(#tableCardList[1] / 14) * 67),
-		[2] = Vector2.New((math.modf(#tableCardList[2] / 13) * -54),- 180 + #tableCardList[2] % 13 * 28),
-		[3] = Vector2.New(289 - #tableCardList[3] % 14 * 37,math.modf(#tableCardList[3] / 14) * -67),
-		[4] = Vector2.New(math.modf(#tableCardList[4] / 13) * 54,152 - #tableCardList[4] % 13 * 28)
+		[1] = Vector2.New(-261 + #self.tableCardList[1] % 14 * 37,math.modf(#self.tableCardList[1] / 14) * 67),
+		[2] = Vector2.New((math.modf(#self.tableCardList[2] / 13) * -54),- 180 + #self.tableCardList[2] % 13 * 28),
+		[3] = Vector2.New(289 - #self.tableCardList[3] % 14 * 37,math.modf(#self.tableCardList[3] / 14) * -67),
+		[4] = Vector2.New(math.modf(#self.tableCardList[4] / 13) * 54,152 - #self.tableCardList[4] % 13 * 28)
 	}
 	return switch[LocalIndex]
 end
 -- 重连显示打牌数据
-function GamePanel.DisplayTableCards()
-	log("GamePanel.DisplayTableCards")
+function GamePanel:DisplayTableCards()
+	log("DisplayTableCards")
 
 	for i = 1, #RoomData.playerList do
 		local chupai = RoomData.playerList[i].chupais;
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(RoomData.playerList[i].account.uuid) -1);
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(RoomData.playerList[i].account.uuid) -1);
 		if (chupai ~= nil and #chupai > 0) then
 			for j = 1, #chupai do
-				local pos = this.TableCardPosition(LocalIndex)
-				this.ThrowBottom(chupai[j], LocalIndex, pos, true);
+				local pos = self:TableCardPosition(LocalIndex)
+				self:ThrowBottom(chupai[j], LocalIndex, pos, true);
 			end
 		end
 	end
 end
 
 -- 显示桌面鬼牌
-function GamePanel.DisplayTouzi(touzi, gui)
+function GamePanel:DisplayTouzi(touzi, gui)
 	if (gui ~= -1 and RoomData.roomType == 4 and RoomData.gui == 2) then
 		-- 显示骰子
 		local r1 = touzi / 10;
 		local r2 = touzi % 10;
-		touziObj.TouziActionScript = TouziActionScript.New()
-		local bts = touziObj.TouziActionScript;
+		self.touziObj.TouziActionScript = TouziActionScript.New()
+		local bts = self.touziObj.TouziActionScript;
 		bts:SetResult(r1, r2);
-		touziObj:SetActive(true);
-		coroutine.start(this.Invoke(this.DisplayGuiPai, 5.5))
+		self.touziObj:SetActive(true);
+		coroutine.start(Invoke,function() self:DisplayGuiPai() end, 5.5)
 	else
-		this.DisplayGuiPai();
+		self:DisplayGuiPai();
 	end
 end
 
 -- 获取显示赖子皮（鬼牌2万 显示1万）
-function GamePanel.GetDisplayGuiPai(gui)
+function GamePanel:GetDisplayGuiPai(gui)
 	if (gui == 0 or gui == 9 or gui == 18) then
 		return gui + 8;
 	elseif (gui == 27) then
@@ -1714,40 +1629,40 @@ function GamePanel.GetDisplayGuiPai(gui)
 end
 
 -- 显示桌面鬼牌
-function GamePanel.DisplayGuiPai()
-	log("GamePanel.DisplayGuiPai")
-	touziObj:SetActive(false);
+function GamePanel:DisplayGuiPai()
+	log("DisplayGuiPai")
+	self.touziObj:SetActive(false);
 	local gui = RoomData.guiPai;
 	if (gui ~= -1 and(RoomData.hong or RoomData.gui > 0)) then
 		-- 显示鬼牌
 		-- int mGui = getDisplayGuiPai(gui);//盘锦玩法，显示当前鬼牌的前一张
-		local objCtrl = TopAndBottomCardScript.New(guiObj)
+		local objCtrl = TopAndBottomCardScript.New(self.guiObj)
 		objCtrl:Init(gui, 3);
-		guiObj:SetActive(true);
+		self.guiObj:SetActive(true);
 	end
 end
 
 -- 重连显示其他人的手牌
-function GamePanel.DisplayOtherHandercard()
-	log("GamePanel.DisplayOtherHandercard")
+function GamePanel:DisplayOtherHandercard()
+	log("DisplayOtherHandercard")
 	for i = 1, #RoomData.playerList do
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(RoomData.playerList[i].account.uuid) -1);
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(RoomData.playerList[i].account.uuid) -1);
 		local count = RoomData.playerList[i].commonCards;
 		if (LocalIndex ~= 1) then
-			this.InitOtherCardList(LocalIndex, count);
+			self:InitOtherCardList(LocalIndex, count);
 			if RoomData.playerList[i].tingPai then
-				this.LockHandCard(LocalIndex)
+				self:LockHandCard(LocalIndex)
 			end
 		end
 	end
 end
 
 -- 杠牌重连
-function GamePanel.DisplayallGangCard()
-	log("GamePanel.DisplayallGangCard")
+function GamePanel:DisplayallGangCard()
+	log("DisplayallGangCard")
 	for i = 1, #RoomData.playerList do
 		local paiArrayType = RoomData.playerList[i].paiArray[2];
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(RoomData.playerList[i].account.uuid) -1);
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(RoomData.playerList[i].account.uuid) -1);
 		if (table.indexOf(paiArrayType, 2) > -1) then
 			local gangString = RoomData.playerList[i].huReturnObjectVO.totalInfo.gang;
 			if (gangString ~= nil) then
@@ -1761,9 +1676,9 @@ function GamePanel.DisplayallGangCard()
 					gangpaiObj.type = items[3];
 					RoomData.playerList[i].paiArray[1][gangpaiObj.cardPoint + 1] = RoomData.playerList[i].paiArray[1][gangpaiObj.cardPoint + 1] -4;
 					if (gangpaiObj.type == "an") then
-						this.DoDisplayAnGangCard(LocalIndex, gangpaiObj.cardPoint, true);
+						self:DoDisplayAnGangCard(LocalIndex, gangpaiObj.cardPoint, true);
 					else
-						this.DoDisplayMGangCard(LocalIndex, gangpaiObj.cardPoint);
+						self:DoDisplayMGangCard(LocalIndex, gangpaiObj.cardPoint);
 					end
 				end
 			end
@@ -1774,31 +1689,29 @@ end
 
 
 -- 碰牌重连（这个逻辑写得很反人类）
-function GamePanel.DisplayPengCard()
-	log("GamePanel.DisplayPengCard")
+function GamePanel:DisplayPengCard()
+	log("DisplayPengCard")
 	for i = 1, #RoomData.playerList do
 		local paiArrayType = RoomData.playerList[i].paiArray[2];
 		-- 第二个数组存储了碰的牌
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(RoomData.playerList[i].account.uuid) -1);
-		if (table.indexOf(paiArrayType, 1) > -1) then
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(RoomData.playerList[i].account.uuid) -1);
 			-- 1代表碰的那张牌
 			for j = 1, #paiArrayType do
 				if (paiArrayType[j] == 1 and RoomData.playerList[i].paiArray[1][j] > 0) then
 					-- 服务器没去掉已经吃碰杠的牌，所以处理一下（主要是要去掉自己的）
 					RoomData.playerList[i].paiArray[1][j] = RoomData.playerList[i].paiArray[1][j] -3;
-					this.DoDisplayPengCard(LocalIndex, j - 1);
+					self:DoDisplayPengCard(LocalIndex, j - 1);
 				end
 			end
-		end
 	end
 end
 
 
 -- 吃牌重连
-function GamePanel.DisplayChiCard()
-	log("GamePanel.DisplayChiCard")
+function GamePanel:DisplayChiCard()
+	log("DisplayChiCard")
 	for i = 1, #RoomData.playerList do
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(RoomData.playerList[i].account.uuid) -1);
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(RoomData.playerList[i].account.uuid) -1);
 		local chiPaiArray = RoomData.playerList[i].chiPaiArray;
 		if #chiPaiArray > 0 then
 			for j = 1, #chiPaiArray do
@@ -1809,7 +1722,7 @@ function GamePanel.DisplayChiCard()
 						RoomData.playerList[i].paiArray[1][index] = RoomData.playerList[i].paiArray[1][index] -1;
 					end
 				end
-				this.DoDisplayChiCard(LocalIndex, chiPaiArray[j]);
+				self:DoDisplayChiCard(LocalIndex, chiPaiArray[j]);
 			end
 		end
 	end
@@ -1817,25 +1730,25 @@ end
 
 
 -- 补花牌的重连
-function GamePanel.DisplayBuhua(playerList)
+function GamePanel:DisplayBuhua(playerList)
 	for i = 1, #playerList do
-		local LocalIndex = this.GetLocalIndex(this.GetIndex(playerList[i].account.uuid) -1);
+		local LocalIndex = self:GetLocalIndex(self:GetIndex(playerList[i].account.uuid) -1);
 		local buhualist = playerList[i].buhuas;
 		if (#buhualist > 0) then
 			for j = 1, j < #buhualist do
-				this.BuhuaPutCard(buhualist[j], LocalIndex);
+				self:BuhuaPutCard(buhualist[j], LocalIndex);
 			end
 		end
 	end
 end
 -- 重连显示明杠
-function GamePanel.DoDisplayMGangCard(LocalIndex, point)
-	log("GamePanel.DoDisplayMGangCard")
+function GamePanel:DoDisplayMGangCard(LocalIndex, point)
+	log("DoDisplayMGangCard")
 	local TempList = { };
 	for i = 1, 4 do
-		local obj = newObject(CPGPrefabs[LocalIndex])
-		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+		local obj = newObject(self.CPGPrefabs[LocalIndex])
+		obj.transform:SetParent(self.cpgParent[LocalIndex])
+		obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 		obj.transform.localScale = Vector3.one;
 		local objCtrl = TopAndBottomCardScript.New(obj)
 		objCtrl:Init(point, LocalIndex);
@@ -1844,44 +1757,44 @@ function GamePanel.DoDisplayMGangCard(LocalIndex, point)
 		end
 		table.insert(TempList, obj)
 	end
-	table.insert(PengGangList[LocalIndex], TempList)
+	table.insert(self.PengGangList[LocalIndex], TempList)
 end
 
 
 -- 显示暗杠牌
 -- show:是否显示暗杠牌值
-function GamePanel.DoDisplayAnGangCard(LocalIndex, point, show)
-	log("GamePanel.DoDisplayAnGangCard")
+function GamePanel:DoDisplayAnGangCard(LocalIndex, point, show)
+	log("DoDisplayAnGangCard")
 	local TempList = { };
 	for i = 1, 4 do
 		local obj = nil
 		if (i == 4 and show) then
-			obj = newObject(CPGPrefabs[LocalIndex])
+			obj = newObject(self.CPGPrefabs[LocalIndex])
 			local objCtrl = TopAndBottomCardScript.New(obj)
 			objCtrl:Init(point, LocalIndex);
 		else
-			obj = newObject(BackPrefabs[LocalIndex])
+			obj = newObject(self.BackPrefabs[LocalIndex])
 		end
 		table.insert(TempList, obj)
-		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+		obj.transform:SetParent(self.cpgParent[LocalIndex])
+		obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2 and i < 4) then
 			obj.transform:SetAsFirstSibling()
 		end
 	end
-	table.insert(PengGangList[LocalIndex], TempList)
+	table.insert(self.PengGangList[LocalIndex], TempList)
 end
 
 -- 重连显示碰牌
-function GamePanel.DoDisplayPengCard(LocalIndex, point)
-	log("GamePanel.DoDisplayPengCard")
+function GamePanel:DoDisplayPengCard(LocalIndex, point)
+	log("DoDisplayPengCard")
 	local TempList = { };
 	for i = 1, 3 do
 		local pos = switch[LocalIndex](i)
-		local obj = newObject(CPGPrefabs[LocalIndex])
-		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+		local obj = newObject(self.CPGPrefabs[LocalIndex])
+		obj.transform:SetParent(self.cpgParent[LocalIndex])
+		obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2) then
 			obj.transform:SetAsFirstSibling()
@@ -1890,18 +1803,18 @@ function GamePanel.DoDisplayPengCard(LocalIndex, point)
 		objCtrl:Init(point, LocalIndex);
 		table.insert(TempList, objCtrl)
 	end
-	table.insert(PengGangList[LocalIndex], TempList)
+	table.insert(self.PengGangList[LocalIndex], TempList)
 end
 -- 重连显示吃牌
 -- chipai一组吃牌的牌值
-function GamePanel.DoDisplayChiCard(LocalIndex, chipai)
-	log("GamePanel.DoDisplayChiCard")
+function GamePanel:DoDisplayChiCard(LocalIndex, chipai)
+	log("DoDisplayChiCard")
 	local TempList = { };
 	for i = 1, 3 do
 		local pos = switch[LocalIndex](i)
-		local obj = newObject(CPGPrefabs[LocalIndex])
-		obj.transform:SetParent(cpgParent[LocalIndex])
-		obj.transform.localPosition = this.CPGPosition(LocalIndex, #PengGangList[LocalIndex] + 1, i)
+		local obj = newObject(self.CPGPrefabs[LocalIndex])
+		obj.transform:SetParent(self.cpgParent[LocalIndex])
+		obj.transform.localPosition = self:CPGPosition(LocalIndex, #self.PengGangList[LocalIndex] + 1, i)
 		obj.transform.localScale = Vector3.one;
 		if (LocalIndex == 2) then
 			obj.transform:SetAsFirstSibling()
@@ -1910,104 +1823,105 @@ function GamePanel.DoDisplayChiCard(LocalIndex, chipai)
 		objCtrl:Init(chipai[i], LocalIndex);
 		table.insert(TempList, obj)
 	end
-	table.insert(PengGangList[LocalIndex], TempList)
+	table.insert(self.PengGangList[LocalIndex], TempList)
 end
 
-function GamePanel.InviteFriend()
+function GamePanel:InviteFriend()
 	soundMgr:playSoundByActionButton(1);
 	OpenPanel(SharePanel)
 end
 
 -- 用户离线回调
-function GamePanel.OfflineNotice(buffer)
+function GamePanel:OfflineNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local uuid = tonumber(message);
-	local index = this.GetIndex(uuid) -1;
-	local LocalIndex = this.GetLocalIndex(index);
-	this.playerItems[LocalIndex].offlineImage.enabled = true
+	local index = self:GetIndex(uuid) -1;
+	local LocalIndex = self:GetLocalIndex(index);
+	self.playerItems[LocalIndex].offlineImage.enabled = true
 	-- 申请解散房间过程中，有人掉线，直接不能解散房间
-	if (VoteStatus) then
+	if (VotePanel.VoteStatus) then
 		ClosePanel(VotePanel)
-		TipsManager.SetTips("由于" .. this.avatarList[index].account.nickname .. "离线，系统不能解散房间")
+		TipsManager.SetTips("由于" .. self.avatarList[index].account.nickname .. "离线，系统不能解散房间")
 	end
 end
 
 -- 用户上线提醒
-function GamePanel.OnlineNotice(buffer)
+function GamePanel:OnlineNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local uuid = tonumber(message);
-	local index = this.GetIndex(uuid) -1;
-	local LocalIndex = this.GetLocalIndex(index);
-	this.playerItems[LocalIndex].offlineImage.enabled = false
+	local index = self:GetIndex(uuid) -1;
+	local LocalIndex = self:GetLocalIndex(index);
+	self.playerItems[LocalIndex].offlineImage.enabled = false
 end
 
-function GamePanel.MessageBoxNotice(buffer)
+function GamePanel:MessageBoxNotice(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local arr = string.split(message, '|')
 	local uuid = tonumber(arr[2]);
-	local LocalIndex = this.GetLocalIndex(this.GetIndex(uuid) -1);
+	local LocalIndex = self:GetLocalIndex(self:GetIndex(uuid) -1);
 	local index = tonumber(arr[1])
-	this.ShowChatMessage(LocalIndex, index)
+	self:ShowChatMessage(LocalIndex, index)
 end
-function GamePanel.ShowChatMessage(LocalIndex, index)
-	this.playerItems[LocalIndex]:ShowChatMessage(index);
+function GamePanel:ShowChatMessage(LocalIndex, index)
+	self.playerItems[LocalIndex]:ShowChatMessage(index);
 end
 
 -- 发准备消息
-function GamePanel.ReadyGame()
-	-- print(debug.traceback("ReadyGame"))
+function GamePanel:ReadyGame()
+	soundMgr:playSoundByActionButton(1);
+	local readyvo = { };
 	networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.encode(readyvo)));
 end
 
-function GamePanel.MicInputNotice(buffer)
+function GamePanel:MicInputNotice(buffer)
 	local sendUUid = buffer:ReadInt()
 	local data = buffer:ReadBytes()
 	MicPhone.MicInputNotice(data)
-	for i = 1, #this.playerItems do
-		if (sendUUid == this.playerItems[i].uuid) then
-			this.playerItems[i]:ShowChatAction();
+	for i = 1, #self.playerItems do
+		if (sendUUid == self.playerItems[i].uuid) then
+			self.playerItems[i]:ShowChatAction();
 		end
 	end
 end
 -- 完成一次按钮操作
-function GamePanel.CompleteBtnAction()
-	this.putOutCardPoint = -1
-	this.gangPaiList = { }
-	this.kaigangPaiList = { };
-	this.chiPaiPointList = { }
-	this.passStr = ""
+function GamePanel:CompleteBtnAction()
+	self.putOutCardPoint = -1
+	self.gangPaiList = { }
+	self.kaigangPaiList = { };
+	self.chiPaiPointList = { }
+	self.passStr = ""
 end
 
-function GamePanel.CleanBtnShow()
-	this.huBtn:SetActive(false);
-	this.gangBtn:SetActive(false);
-	this.pengBtn:SetActive(false);
-	this.chiBtn:SetActive(false);
-	this.passBtn:SetActive(false);
-	this.btnBu:SetActive(false)
+function GamePanel:CleanBtnShow()
+	self.huBtn:SetActive(false);
+	self.gangBtn:SetActive(false);
+	self.pengBtn:SetActive(false);
+	self.chiBtn:SetActive(false);
+	self.passBtn:SetActive(false);
+	self.btnBu:SetActive(false)
 end
 
-function GamePanel.ShowBtn(btntype, value)
+function GamePanel:ShowBtn(btntype, value)
 	if (btntype == 1) then
-		this.huBtn:SetActive(value)
+		self.huBtn:SetActive(value)
 	end
 	if (btntype == 2) then
-		this.gangBtn:SetActive(value)
+		self.gangBtn:SetActive(value)
 	end
 	if (btntype == 3) then
-		this.pengBtn:SetActive(value)
+		self.pengBtn:SetActive(value)
 	end
 	if (btntype == 4) then
-		this.chiBtn:SetActive(value)
+		self.chiBtn:SetActive(value)
 	end
 	if (btntype == 5) then
-		this.passBtn:SetActive(value)
+		self.passBtn:SetActive(value)
 	end
 	if (btntype == 6) then
-		this.btnBu:SetActive(value)
+		self.btnBu:SetActive(value)
 	end
 end
 
@@ -2015,7 +1929,7 @@ end
 -- 应该这样修改
 -- 1)确定当前是等待出牌还是等待操作
 -- 2)等谁出牌,或者谁刚出完牌
-function GamePanel.ReturnGameResponse(buffer)
+function GamePanel:ReturnGameResponse(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local returnstr = message;
@@ -2023,9 +1937,9 @@ function GamePanel.ReturnGameResponse(buffer)
 	-- 1.显示剩余牌的张数和圈数
 	local surplusCards = returnJsonData.surplusCards;
 	local gameRound = returnJsonData.gameRound;
-	this.LeavedCastNumText.text = tostring(surplusCards);
-	this.LeavedCardsNum = surplusCards;
-	this.LeavedRoundNumText.text = tostring(gameRound);
+	self.LeavedCastNumText.text = tostring(surplusCards);
+	self.LeavedCardsNum = surplusCards;
+	self.LeavedRoundNumText.text = tostring(gameRound);
 	RoomData.surplusTimes = gameRound;
 
 	local curAvatarIndex = returnJsonData.curAvatarIndex;
@@ -2034,85 +1948,52 @@ function GamePanel.ReturnGameResponse(buffer)
 	local currentCardPoint = returnJsonData.currentCardPoint
 	-- 是否已出牌，等待操作
 	local waitAction = true
-	for i = 1, #this.handerCardList do
-		if #this.handerCardList[i] % 3 == 2 then
+	for i = 1, #self.handerCardList do
+		if #self.handerCardList[i] % 3 == 2 then
 			waitAction = false
 			break
 		end
 	end
 	-- 出牌后等待操作
 	if (waitAction) then
-		local LocalIndex = this.GetLocalIndex(curAvatarIndex);
-		this.SetDirGameObjectAction(LocalIndex);
-		this.SortMyCardList()
+		local LocalIndex = self:GetLocalIndex(curAvatarIndex);
+		self:SetDirGameObjectAction(LocalIndex);
+		self:SortMyCardList()
 		-- 等待出牌
 	else
-		local LocalIndex = this.GetLocalIndex(pickAvatarIndex);
-		this.SetDirGameObjectAction(LocalIndex);
+		local LocalIndex = self:GetLocalIndex(pickAvatarIndex);
+		self:SetDirGameObjectAction(LocalIndex);
 		-- 自己摸牌
 		if (currentCardPoint ~= nil) then
 			local cardPoint
 			if (currentCardPoint == -2) then
-				local count = #this.handerCardList[1]
-				cardPoint = this.handerCardList[1][count].cardPoint;
+				local count = #self.handerCardList[1]
+				cardPoint = self.handerCardList[1][count].cardPoint;
 			else
 				cardPoint = currentCardPoint
 			end
-			this.SortMyCardList()
+			self:SortMyCardList()
 			-- 最后摸的一张牌
-			for i = 1, #this.handerCardList[1] do
-				if this.handerCardList[1][i].cardPoint == cardPoint then
-					local temp = this.handerCardList[1][i]
-					table.remove(this.handerCardList[1], i)
-					table.insert(this.handerCardList[1], temp)
+			for i = 1, #self.handerCardList[1] do
+				if self.handerCardList[1][i].cardPoint == cardPoint then
+					local temp = self.handerCardList[1][i]
+					table.remove(self.handerCardList[1], i)
+					table.insert(self.handerCardList[1], temp)
 					break
 				end
 			end
 		end
 	end
-	this.SetPosition(1)
-	local index = this.GetMyIndexFromList()
-	if this.avatarList[index].tingPai then
-		this.LockHandCard(1)
+	self:SetPosition(1)
+	local index = self:GetMyIndexFromList()
+	if self.avatarList[index].tingPai then
+		self:LockHandCard(1)
 	end
-	LastAvarIndex = this.GetLocalIndex(curAvatarIndex)
-	if (tableCardList[LastAvarIndex] ~= nil and #tableCardList[LastAvarIndex] ~= 0) then
-		local obj = tableCardList[LastAvarIndex][#tableCardList[LastAvarIndex]];
-		this.SetPointGameObject(obj);
+	self.LastAvarIndex = self:GetLocalIndex(curAvatarIndex)
+	if (self.tableCardList[self.LastAvarIndex] ~= nil and #self.tableCardList[self.LastAvarIndex] ~= 0) then
+		local obj = self.tableCardList[self.LastAvarIndex][#self.tableCardList[self.LastAvarIndex]];
+		self:SetPointGameObject(obj);
 	end
-	-- local LocalIndex = this.GetLocalIndex(pickAvatarIndex)
-	-- if (LocalIndex == this.GetMyIndexFromList()) then
-	-- 	local count = #this.handerCardList[1]
-	-- 	-- 吃碰杠之后
-	-- 	if (currentCardPoint == -2) then
-	-- 		local cardPoint = this.handerCardList[1][count].cardPoint;
-	-- 		-- SelfAndOtherPutoutCard = cardPoint;
-	-- 		this.SortMyCardList()
-	-- 		-- 摸牌之后
-	-- 	elseif (count % 3 == 2) then
-	-- 		local cardPoint = returnJsonData.currentCardPoint;
-	-- 		-- SelfAndOtherPutoutCard = cardPoint;
-	-- 		this.SortMyCardList(cardPoint)
-	-- 	end
-	-- 	this.SetDirGameObjectAction(1);
-	-- else
-	-- 	this.SortMyCardList()
-	-- 	-- 别人摸牌
-	-- 	this.SetDirGameObjectAction(LocalIndex);
-	-- 	local count = #this.handerCardList[LocalIndex]
-	-- 	if (count % 3 ~= 2) then
-	-- 		local go = this.CreateMoPaiGameObject(LocalIndex)
-	-- 		table.insert(this.handerCardList[LocalIndex], go)
-	-- 	end
-	-- end
-	-- this.SetPosition(1)
-	-- if (tableCardList[LastAvarIndex] == nil or #tableCardList[LastAvarIndex] == 0) then
-	-- 	-- 刚启动
-	-- else
-	-- 	local obj = tableCardList[LastAvarIndex][#tableCardList[LastAvarIndex]];
-	-- 	cardOnTable = obj;
-	-- 	this.SetPointGameObject(cardOnTable);
-	-- end
 end
 
 
@@ -2120,21 +2001,21 @@ end
 
 
 -- 解散房间按钮
-function GamePanel.InitbtnJieSan()
-	if (1 == this.GetMyIndexFromList()) then
+function GamePanel:InitbtnJieSan()
+	if (1 == self:GetMyIndexFromList()) then
 		-- 我是房主（一开始庄家是房主）
 		resMgr:LoadSprite('dynaimages', { 'Assets/Project/DynaImages/jiesan.png' }, function(sprite)
-			btnJieSan:GetComponent("Image").sprite = sprite[0]
+			self.btnJieSan:GetComponent("Image").sprite = sprite[0]
 		end )
 	else
 		resMgr:LoadSprite('dynaimages', { "Assets/Project/DynaImages/leaveRoom.png" }, function(sprite)
-			btnJieSan:GetComponent("Image").sprite = sprite[0]
+			self.btnJieSan:GetComponent("Image").sprite = sprite[0]
 		end )
 	end
 
 end
 
-function GamePanel.HUPAIALL_RESPONSE(buffer)
+function GamePanel:HUPAIALL_RESPONSE(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	RoomOverData = json.decode(message);
@@ -2142,128 +2023,143 @@ end
 
 
 -- 测试方法，用来打印table
-function GamePanel.Test()
+function GamePanel:Test()
 	return {
-		this.avatarList,
-		this.handerCardList,
-		PengGangList,
-		tableCardList,
+		self.avatarList,
+		self.handerCardList,
+		self.PengGangList,
+		self.tableCardList,
 	}
 end
 ------------------------------------------------------------
-function GamePanel.OnOpen()
+function GamePanel:OnOpen()
 	log(Test.DumpTab(RoomData))
-	BottomPrefabs = { UIManager.Bottom_B, UIManager.Bottom_R, UIManager.Bottom_T, UIManager.Bottom_L }
-	ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
-	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
-	BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
-	Pointer = UIManager.Pointer
-	this.InitArrayList()
-	CurrentGame = this.GetGame()
-	log(CurrentGame)
-	CurrentGame.Start()
-	this.RandShowTime();
-	this.imgDuanMen.enabled = false
-	timeFlag = true;
+	self.BottomPrefabs = { UIManager.Bottom_B, UIManager.Bottom_R, UIManager.Bottom_T, UIManager.Bottom_L }
+	self.ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
+	self.CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
+	self.BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
+	self.Pointer = UIManager.Pointer
+	self:InitArrayList()
+	self:RandShowTime();
+	self.imgDuanMen.enabled = false
+	self.timeFlag = true;
 	soundMgr:playBGM(2);
-	versionText.text = "V" .. Application.version;
-	lbRoomNum.text = "房间号：" .. RoomData.roomId;
+	self.versionText.text = "V" .. Application.version;
+	self.lbRoomNum.text = "房间号：" .. RoomData.roomId;
 	if (RoomData.enterType == 3) then
 		-- 短线重连进入房间
-		CurrentGame.ReEnterRoom();
+		self:ReEnterRoom();
 	elseif (RoomData.enterType == 2) then
 		-- 进入他人房间
-		CurrentGame.JoinToRoom(RoomData.playerList);
+		self:JoinToRoom(RoomData.playerList);
 	else
 		-- 创建房间
-		CurrentGame.CreateRoomAddAvatarVO(LoginData);
+		self:CreateRoomAddAvatarVO(LoginData);
 	end
-	this.InitbtnJieSan();
-	MicPhone.OnOpen(this.avatarList)
+	MicPhone.OnOpen(self.avatarList)
+	self:InitbtnJieSan();
+	self:Change();
 end
 
-function GamePanel.GetGame()
-	local switch = {
-		[1] = ZhuanzhuanGame,
-		[2] = PanjinGame,
-		[3] = ChangshaGame,
-		[4] = GuangdongGame,
-		[5] = PanjinGame,
-		[6] = WuxiGame,
-		[7] = ShuangliaoGame,
-		[8] = JiujiangGame,
-		[9] = TuidaohuGame,
-	}
-	return switch[RoomData.roomType]
-end
 
-function GamePanel.OnClose()
-	CurrentGame.End()
+
+function GamePanel:OnClose()
 	LoginData:ResetData();
 	RoomData = { }
 	RoundOverData = { }
 	RoomOverData = { }
-	for i = 1, #this.playerItems do
-		this.playerItems[i]:Clean()
+	for i = 1, #self.playerItems do
+		self.playerItems[i]:Clean()
 	end
-	for i = 1, #this.ReadySelect do
-		this.ReadySelect[i].gameObject:SetActive(false)
-		this.ReadySelect[i].interactable = true
+	for i = 1, #self.ReadySelect do
+		self.ReadySelect[i].gameObject:SetActive(false)
+		self.ReadySelect[i].interactable = true
 	end
-	this.btnReadyGame:SetActive(false);
-	this.Clean();
+	self.btnReadyGame:SetActive(false);
+	self:Clean();
+	self:Recovery()
 end
--- 移除事件--
--- function GamePanel.RemoveListener()
--- UpdateBeat:Remove(this.Update);
--- FixedUpdateBeat:Remove(MicPhone.FixedUpdate);
--- Event.RemoveListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE), this.StartGame)
--- Event.RemoveListener(tostring(APIS.PICKCARD_RESPONSE), this.PickCard)
--- Event.RemoveListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE), this.OtherPickCard)
--- Event.RemoveListener(tostring(APIS.CHUPAI_RESPONSE), this.OtherPutOutCard)
--- Event.RemoveListener(tostring(APIS.JOIN_ROOM_NOICE), this.OtherUserJointRoom)
--- Event.RemoveListener(tostring(APIS.PENGPAI_RESPONSE), this.PengCard)
--- Event.RemoveListener(tostring(APIS.CHIPAI_RESPONSE), this.ChiCard)
--- Event.RemoveListener(tostring(APIS.GANGPAI_RESPONSE), this.GangCard)
--- Event.RemoveListener(tostring(APIS.OTHER_GANGPAI_NOICE), this.GangCard)
--- Event.RemoveListener(tostring(APIS.RETURN_INFO_RESPONSE), this.ActionBtnShow)
--- Event.RemoveListener(tostring(APIS.HUPAI_RESPONSE), this.HupaiCallBack)
--- Event.RemoveListener(tostring(APIS.OUT_ROOM_RESPONSE), this.OutRoomCallbak)
--- Event.RemoveListener(tostring(APIS.DISSOLIVE_ROOM_RESPONSE), this.DissoliveRoomResponse)
--- Event.RemoveListener(tostring(APIS.PrepareGame_MSG_RESPONSE), this.GameReadyNotice)
--- Event.RemoveListener(tostring(APIS.OFFLINE_NOTICE), this.OfflineNotice)
--- Event.RemoveListener(tostring(APIS.MessageBox_Notice), this.MessageBoxNotice)
--- Event.RemoveListener(tostring(APIS.RETURN_ONLINE_RESPONSE), this.ReturnGameResponse)
--- Event.RemoveListener(tostring(APIS.ONLINE_NOTICE), this.OnlineNotice)
--- Event.RemoveListener(tostring(APIS.MicInput_Response), this.MicInputNotice)
--- Event.RemoveListener(tostring(APIS.Game_FollowBander_Notice), this.GameFollowBanderNotice)
--- Event.RemoveListener(tostring(APIS.HUPAIALL_RESPONSE), this.HUPAIALL_RESPONSE)
--- end
+--改变
+function GamePanel:Change()
+	--空方法，用来被子类重写
+end
+--恢复
+function GamePanel:Recovery()
+--空方法，用来被子类重写
+end
 
 
 -- 增加事件--
--- function GamePanel.AddListener()
--- UpdateBeat:Add(this.Update);
--- FixedUpdateBeat:Add(MicPhone.FixedUpdate);
--- Event.AddListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE), this.StartGame)
--- Event.AddListener(tostring(APIS.PICKCARD_RESPONSE), this.PickCard)
--- Event.AddListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE), this.OtherPickCard)
--- Event.AddListener(tostring(APIS.CHUPAI_RESPONSE), this.OtherPutOutCard)
--- Event.AddListener(tostring(APIS.JOIN_ROOM_NOICE), this.OtherUserJointRoom)
--- Event.AddListener(tostring(APIS.PENGPAI_RESPONSE), this.PengCard)
--- Event.AddListener(tostring(APIS.CHIPAI_RESPONSE), this.ChiCard)
--- Event.AddListener(tostring(APIS.GANGPAI_RESPONSE), this.GangCard)
--- Event.AddListener(tostring(APIS.OTHER_GANGPAI_NOICE), this.GangCard)
--- Event.AddListener(tostring(APIS.RETURN_INFO_RESPONSE), this.ActionBtnShow)
--- Event.AddListener(tostring(APIS.HUPAI_RESPONSE), this.HupaiCallBack)
--- Event.AddListener(tostring(APIS.OUT_ROOM_RESPONSE), this.OutRoomCallbak)
--- Event.AddListener(tostring(APIS.DISSOLIVE_ROOM_RESPONSE), this.DissoliveRoomResponse)
--- Event.AddListener(tostring(APIS.PrepareGame_MSG_RESPONSE), this.GameReadyNotice)
--- Event.AddListener(tostring(APIS.OFFLINE_NOTICE), this.OfflineNotice)
--- Event.AddListener(tostring(APIS.MessageBox_Notice), this.MessageBoxNotice)
--- Event.AddListener(tostring(APIS.RETURN_ONLINE_RESPONSE), this.ReturnGameResponse)
--- Event.AddListener(tostring(APIS.ONLINE_NOTICE), this.OnlineNotice)
--- Event.AddListener(tostring(APIS.MicInput_Response), this.MicInputNotice)
--- Event.AddListener(tostring(APIS.Game_FollowBander_Notice), this.GameFollowBanderNotice)
--- Event.AddListener(tostring(APIS.HUPAIALL_RESPONSE), this.HUPAIALL_RESPONSE)
--- end
+function GamePanel:AddListener()
+	UpdateBeat:Add(self.Update,self);
+	FixedUpdateBeat:Add(MicPhone.FixedUpdate);
+	Event.AddListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE),function(buffer) self:StartGame(buffer) end)
+	Event.AddListener(tostring(APIS.PICKCARD_RESPONSE), function(buffer) self:PickCard(buffer) end)
+	Event.AddListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE), function(buffer) self:OtherPickCard(buffer) end)
+	Event.AddListener(tostring(APIS.CHUPAI_RESPONSE), function(buffer) self:OtherPutOutCard(buffer) end)
+	Event.AddListener(tostring(APIS.JOIN_ROOM_NOICE), function(buffer) self:OtherUserJointRoom(buffer) end)
+	Event.AddListener(tostring(APIS.PENGPAI_RESPONSE),function(buffer) self:PengCard(buffer) end)
+	Event.AddListener(tostring(APIS.CHIPAI_RESPONSE), function(buffer) self:ChiCard(buffer) end)
+	Event.AddListener(tostring(APIS.GANGPAI_RESPONSE),function(buffer) self:GangCard(buffer) end)
+	Event.AddListener(tostring(APIS.OTHER_GANGPAI_NOICE),function(buffer) self:GangCard(buffer) end)
+	Event.AddListener(tostring(APIS.RETURN_INFO_RESPONSE),function(buffer) self:ActionBtnShow(buffer) end)
+	Event.AddListener(tostring(APIS.HUPAI_RESPONSE), function(buffer) self:HupaiCallBack(buffer) end)
+	Event.AddListener(tostring(APIS.OUT_ROOM_RESPONSE), function(buffer) self:OutRoomCallbak(buffer) end)
+	Event.AddListener(tostring(APIS.DISSOLIVE_ROOM_RESPONSE), function(buffer) self:DissoliveRoomResponse(buffer) end)
+	Event.AddListener(tostring(APIS.PrepareGame_MSG_RESPONSE), function(buffer) self:GameReadyNotice(buffer) end)
+	Event.AddListener(tostring(APIS.OFFLINE_NOTICE), function(buffer) self:OfflineNotice(buffer) end)
+	Event.AddListener(tostring(APIS.MessageBox_Notice), function(buffer) self:MessageBoxNotice(buffer) end)
+	Event.AddListener(tostring(APIS.RETURN_ONLINE_RESPONSE), function(buffer) self:ReturnGameResponse(buffer) end)
+	Event.AddListener(tostring(APIS.ONLINE_NOTICE), function(buffer) self:OnlineNotice(buffer) end)
+	Event.AddListener(tostring(APIS.MicInput_Response), function(buffer) self:MicInputNotice(buffer) end)
+	Event.AddListener(tostring(APIS.Game_FollowBander_Notice), function(buffer) self:GameFollowBanderNotice(buffer) end)
+	Event.AddListener(tostring(APIS.HUPAIALL_RESPONSE), function(buffer) self:HUPAIALL_RESPONSE(buffer) end)
+	
+
+	self.lua:AddClick(self.huBtn,function() self:HubtnClick() end)
+	self.lua:AddClick(self.gangBtn,function() self:GangBtnClick() end)
+	self.lua:AddClick(self.pengBtn, function() self:PengBtnClick() end)
+	self.lua:AddClick(self.chiBtn, function() self:ChiBtnClick() end)
+	self.lua:AddClick(self.passBtn, function() self:PassBtnClick() end)
+	self.lua:AddClick(self.btnBu, function() self:BuBtnClick() end)
+	self.lua:AddClick(self.ChiSelect1,function(go) self:ChiBtnClick2(1,go) end)
+	self.lua:AddClick(self.ChiSelect2, function(go) self:ChiBtnClick2(2,go) end)
+	self.lua:AddClick(self.ChiSelect3, function(go) self:ChiBtnClick2(3,go) end)
+	self.lua:AddClick(self.btnReadyGame, function() self:ReadyGame() end)
+end
+-- 移除事件--
+function GamePanel:RemoveListener()
+	UpdateBeat:Remove(self.Update,self);
+	FixedUpdateBeat:Remove(MicPhone.FixedUpdate);
+	Event.RemoveListener(tostring(APIS.STARTGAME_RESPONSE_NOTICE))
+	Event.RemoveListener(tostring(APIS.PICKCARD_RESPONSE))
+	Event.RemoveListener(tostring(APIS.OTHER_PICKCARD_RESPONSE_NOTICE))
+	Event.RemoveListener(tostring(APIS.CHUPAI_RESPONSE))
+	Event.RemoveListener(tostring(APIS.JOIN_ROOM_NOICE))
+	Event.RemoveListener(tostring(APIS.PENGPAI_RESPONSE))
+	Event.RemoveListener(tostring(APIS.CHIPAI_RESPONSE))
+	Event.RemoveListener(tostring(APIS.GANGPAI_RESPONSE))
+	Event.RemoveListener(tostring(APIS.OTHER_GANGPAI_NOICE))
+	Event.RemoveListener(tostring(APIS.RETURN_INFO_RESPONSE))
+	Event.RemoveListener(tostring(APIS.HUPAI_RESPONSE))
+	Event.RemoveListener(tostring(APIS.OUT_ROOM_RESPONSE))
+	Event.RemoveListener(tostring(APIS.DISSOLIVE_ROOM_RESPONSE))
+	Event.RemoveListener(tostring(APIS.PrepareGame_MSG_RESPONSE))
+	Event.RemoveListener(tostring(APIS.OFFLINE_NOTICE))
+	Event.RemoveListener(tostring(APIS.MessageBox_Notice))
+	Event.RemoveListener(tostring(APIS.RETURN_ONLINE_RESPONSE))
+	Event.RemoveListener(tostring(APIS.ONLINE_NOTICE))
+	Event.RemoveListener(tostring(APIS.MicInput_Response))
+	Event.RemoveListener(tostring(APIS.Game_FollowBander_Notice))
+	Event.RemoveListener(tostring(APIS.HUPAIALL_RESPONSE))
+	self.lua:ResetClick(self.huBtn)
+	self.lua:ResetClick(self.gangBtn)
+	self.lua:ResetClick(self.pengBtn)
+	self.lua:ResetClick(self.chiBtn)
+	self.lua:ResetClick(self.passBtn)
+	self.lua:ResetClick(self.btnBu)
+	self.lua:ResetClick(self.ChiSelect1)
+	self.lua:ResetClick(self.ChiSelect2)
+	self.lua:ResetClick(self.ChiSelect3)
+	self.lua:ResetClick(self.btnReadyGame)
+end

@@ -749,16 +749,16 @@ function PlayRecordPanel.ExitClick()
 end
 -------------------模板-------------------------
 function PlayRecordPanel.CloseClick()
-	GamePanel.CleanList(handerCardList)
-	GamePanel.CleanList(tableCardList)
-	GamePanel.CleanList(PengGangList)
+	CleanList(handerCardList)
+	CleanList(tableCardList)
+	CleanList(PengGangList)
 	coroutine.stop(co)
 	ClosePanel(ExitPanel)
 	ClosePanel(this)
 	soundMgr:playSoundByActionButton(1);
 end
 
-function PlayRecordPanel.OnOpen()
+function PlayRecordPanel:OnOpen()
 	BottomPrefabs = { UIManager.HandCard_B, UIManager.HandCard_R, UIManager.HandCard_T, UIManager.HandCard_L }
 	ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
 	CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
@@ -766,11 +766,11 @@ function PlayRecordPanel.OnOpen()
 	Pointer = UIManager.Pointer
 end
 -- 移除事件--
-function PlayRecordPanel.RemoveListener()
+function PlayRecordPanel:RemoveListener()
 	Event.RemoveListener(tostring(APIS.GAME_BACK_PLAY_RESPONSE), this.PlayRecord)
 end
 
 -- 增加事件--
-function PlayRecordPanel.AddListener()
+function PlayRecordPanel:AddListener()
 	Event.AddListener(tostring(APIS.GAME_BACK_PLAY_RESPONSE), this.PlayRecord)
 end

@@ -9,6 +9,9 @@ local lbTime-- 倒计时label
 local lbNameList = { }
 local lbResult = { }
 local leftTime-- 剩余时间
+
+this.disagreeCount = 0-- 不同意的人数
+this.VoteStatus = false-- 申请解散的状态
 -- 启动事件--
 function VotePanel.OnCreate(obj)
 	gameObject = obj;
@@ -54,7 +57,7 @@ function VotePanel.TimeChange()
 end
 
 function VotePanel.Confirm()
-	GamePanel.DoDissoliveRoomRequest(1)
+	this.DoDissoliveRoomRequest(1)
 	btnConfirm:SetActive(false)
 	btnCancel:SetActive(false)
 end
@@ -62,15 +65,24 @@ end
 
 
 function VotePanel.Cancel()
-	GamePanel.DoDissoliveRoomRequest(2)
+	this.DoDissoliveRoomRequest(2)
 	btnConfirm:SetActive(false)
 	btnCancel:SetActive(false)
+end
+
+function VotePanel.DoDissoliveRoomRequest(_type)
+	local data = { };
+	data.roomId = RoomData.roomId;
+	data.type = _type;
+	local sendMsg = json.encode(data);
+	networkMgr:SendMessage(ClientRequest.New(APIS.DISSOLIVE_ROOM_REQUEST, sendMsg));
+	this.VoteStatus = true
 end
 -------------------模板-------------------------
 
 
 -- 发起人uuid,名字，玩家列表
-function VotePanel.OnOpen(uuid, sponsor, avatarvoList)
+function VotePanel:OnOpen(uuid, sponsor, avatarvoList)
 	leftTime = 200
 	btnConfirm:SetActive(false)
 	btnCancel:SetActive(false)
@@ -89,11 +101,11 @@ function VotePanel.OnOpen(uuid, sponsor, avatarvoList)
 	end
 end
 -- 移除事件--
-function VotePanel.RemoveListener()
+function VotePanel:RemoveListener()
 	coroutine.stop(this.TimeChange)
 end
 
 -- 增加事件--
-function VotePanel.AddListener()
+function VotePanel:AddListener()
 	coroutine.start(this.TimeChange)
 end

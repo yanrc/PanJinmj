@@ -22,15 +22,15 @@ function WaitingPanel.FixedUpdate()
 end
 -------------------模板-------------------------
 -- 移除事件--
-function WaitingPanel.RemoveListener()
+function WaitingPanel:RemoveListener()
 	FixedUpdateBeat:Remove(this.FixedUpdate);
 end
 
 
-function WaitingPanel.OnOpen(des)
+function WaitingPanel:OnOpen(des)
 	label.text = des
 end
 -- 增加事件--
-function WaitingPanel.AddListener()
+function WaitingPanel:AddListener()
 	FixedUpdateBeat:Add(this.FixedUpdate);
 end

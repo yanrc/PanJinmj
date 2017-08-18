@@ -19,6 +19,7 @@ local buttons = { }
 local btnClose
 local posOut
 local posIn
+
 function MessageBox.OnCreate(parent, lua)
 	gameObject = parent:FindChild('MessageBox').gameObject
 	transform = gameObject.transform
@@ -41,7 +42,7 @@ function MessageBox.btnClick(index)
 	end
 	local sendMsg = index .. '|' .. LoginData.account.uuid
 	networkMgr:SendMessage(ClientRequest.New(APIS.MessageBox_Request, sendMsg));
-	GamePanel.ShowChatMessage(1, index)
+	GamePanel:ShowChatMessage(1, index)
 	this.MoveOut()
 end
 

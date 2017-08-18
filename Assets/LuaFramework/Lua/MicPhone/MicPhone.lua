@@ -46,7 +46,7 @@ function MicPhone.OnPointerUp()
 		end
 		this.StopRecord();
 
-		GamePanel.MyselfSoundActionPlay();
+		GamePanel:MyselfSoundActionPlay();
 	end
 	coroutine.start( function()
 		coroutine.wait(5)

@@ -117,7 +117,7 @@ function EnterRoomPanel.OnJoinRoomCallBack(buffer)
 		AvatarVO.SetList(RoomData.playerList)
 		ClosePanel(this)
 		ClosePanel(HomePanel)
-		OpenPanel(GamePanel)
+	OpenPanel(StartPanel.GetGame(RoomData.roomType))
 	else
 		this.Clear();
 		TipsManager.SetTips(message);
@@ -128,17 +128,17 @@ function EnterRoomPanel.CloseClick()
 	ClosePanel(this)
 end
 
-function EnterRoomPanel.OnOpen()
+function EnterRoomPanel:OnOpen()
 	this.Clear()
 end
 -- 移除事件--
-function EnterRoomPanel.RemoveListener()
+function EnterRoomPanel:RemoveListener()
 	Event.RemoveListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
 	Event.RemoveListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 end
 
 -- 增加事件--
-function EnterRoomPanel.AddListener()
+function EnterRoomPanel:AddListener()
 	Event.AddListener(tostring(APIS.ERROR_RESPONSE), this.ServiceErrorNotice)
 	Event.AddListener(tostring(APIS.JOIN_ROOM_RESPONSE), this.OnJoinRoomCallBack)
 end

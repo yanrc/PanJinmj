@@ -105,7 +105,7 @@ function PlayerItem:ShowChatMessage(index)
 end
 
 
-function PlayerItem.DisplayAvatorIp(self)
+function PlayerItem:DisplayAvatorIp()
 	if (self.avatarvo ~= nil) then
 		OpenPanel(UserInfoPanel, self.avatarvo)
 		soundMgr:playSoundByActionButton(1);

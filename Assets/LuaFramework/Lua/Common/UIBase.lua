@@ -26,8 +26,8 @@ function _UIBase:Open(...)
 		if (not self.gameObject.activeSelf) then
 			self.gameObject:SetActive(true)
 			self.transform:SetAsLastSibling();
-			self.AddListener()
-			self.OnOpen(...)
+			self:AddListener()
+			self:OnOpen(...)
 		end
 	end
 end
@@ -36,8 +36,8 @@ function _UIBase:Close()
 	if (self.gameObject) then
 		if (self.gameObject.activeSelf) then
 			self.gameObject:SetActive(false)
-			self.RemoveListener()
-			self.OnClose()
+			self:RemoveListener()
+			self:OnClose()
 		end
 	end
 end
@@ -53,16 +53,16 @@ function _UIBase:ChangePanel(panel)
 	ClosePanel(self)
 end
 
-function _UIBase.AddListener()
+function _UIBase:AddListener()
 
 end
-function _UIBase.RemoveListener()
+function _UIBase:RemoveListener()
 
 end
-function _UIBase.OnOpen()
+function _UIBase:OnOpen()
 
 end
-function _UIBase.OnClose()
+function _UIBase:OnClose()
 
 end
 _UIBase.__index = function(t, k)

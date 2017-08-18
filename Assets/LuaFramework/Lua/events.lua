@@ -8,15 +8,12 @@ local EventLib = require "eventlib"
 local Event = {}
 local events = {}
 
-function Event.AddListener(event,handler,table)
+function Event.AddListener(event,handler)
 	if not event or type(event) ~= "string" then
 		error("event parameter in addlistener function has to be string, " .. type(event) .. " not right.")
 	end
 	if not handler or type(handler) ~= "function" then
 		error("handler parameter in addlistener function has to be function, " .. type(handler) .. " not right")
-	end
-	if not table or type(table) ~= "table" then
-		error("table parameter in addlistener function has to be table, " .. type(table) .. " not right")
 	end
 	if not events[event] then
 		--create the Event with name
@@ -24,7 +21,7 @@ function Event.AddListener(event,handler,table)
 	end
 
 	--conn this handler
-	events[event]:connect(handler,table)
+	events[event]:connect(handler)
 end
 
 function Event.Brocast(event,...)

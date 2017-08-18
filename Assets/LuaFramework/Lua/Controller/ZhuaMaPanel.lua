@@ -101,14 +101,14 @@ end
 
 -------------------模板-------------------------
 
-function ZhuaMaPanel.OnOpen()
+function ZhuaMaPanel:OnOpen()
 	for i = 1, #Parents do
 		Parents[i].num = 0
 		Parents[i].img:SetActive(false)
 	end
 end
 
-function ZhuaMaPanel.OnClose()
-	GamePanel.CleanList(MaPaiList)
-	GamePanel.CleanList(HuPaiList)
+function ZhuaMaPanel:OnClose()
+	CleanList(MaPaiList)
+	CleanList(HuPaiList)
 end

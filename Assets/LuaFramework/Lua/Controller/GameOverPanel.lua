@@ -103,7 +103,7 @@ function GameOverPanel:SetSignalContent()
 			item.transform:SetParent(SignalEndPanel.transform)
 			item.transform.localScale = Vector3.one;
 			local itemCtrl = SignalOverItem.New(item)
-			local Banker = GamePanel.GetBanker()
+			local Banker = this.GetBanker()
 			itemCtrl:SetUI(itemdata, Banker);
 		end
 	end
@@ -143,7 +143,7 @@ function GameOverPanel:SetFinalContent()
 			if (owerUuid == itemdata.uuid) then
 				itemCtrls[i].IsMain = true;
 			end
-			local account = GamePanel.GetAccount(itemdata.uuid);
+			local account = this.GetAccount(itemdata.uuid);
 			-- 头像和名称
 			if (account ~= nil) then
 				itemCtrls[i].iconUrl = account.headicon;
@@ -200,16 +200,41 @@ function GameOverPanel.ShareFinal()
 	WechatOperate.ShareAchievementToWeChat(PlatformType.WeChat);
 	soundMgr:playSoundByActionButton(1);
 end
+
+function GameOverPanel.GetAccount(uuid)
+	if (RoomData.playerList ~= nil) then
+		for i = 1, #RoomData.playerList do
+			if (RoomData.playerList[i].account ~= nil) then
+				if (RoomData.playerList[i].account.uuid == uuid) then
+					return RoomData.playerList[i].account
+				end
+			end
+		end
+		return nil
+	end
+end
+
+-- 获取庄家在self.avatarList中的下标，等于服务器下标+1
+function GameOverPanel.GetBanker()
+	if (RoomData.avatarList ~= nil) then
+		for i = 1, #RoomData.avatarList do
+			if (RoomData.avatarList[i].main) then
+				return i
+			end
+		end
+		return 1
+	end
+end
 -------------------模板-------------------------
 -- 整轮结束
 function GameOverPanel.CloseClick()
 	ClosePanel(this)
-	ClosePanel(GamePanel)
+	ClosePanel(StartPanel.GetGame(RoomData.roomType))
 	OpenPanel(HomePanel)
 end
 
 -- 设置面板的显示内容
-function GameOverPanel.OnOpen(isNextBanker)
+function GameOverPanel:OnOpen(isNextBanker)
 	print("GameOverPanel.OnOpen")
 	this.InitRoomBaseInfo();
 	this.ClearPanel();

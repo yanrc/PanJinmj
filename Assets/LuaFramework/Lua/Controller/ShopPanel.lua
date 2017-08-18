@@ -32,7 +32,7 @@ function ShopPanel.CloseClick()
 	ClosePanel(this)
 end
 
-function ShopPanel.OnOpen()
+function ShopPanel:OnOpen()
 	if not flg then
 		coroutine.start(this.GetItemInfos)
 		flg = true

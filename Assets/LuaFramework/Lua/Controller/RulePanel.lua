@@ -23,7 +23,7 @@ function RulePanel.CloseClick()
 	ClosePanel(this)
 end
 
-function RulePanel.OnOpen()
+function RulePanel:OnOpen()
 	page = 1
 	this.ShowPage(page)
 end

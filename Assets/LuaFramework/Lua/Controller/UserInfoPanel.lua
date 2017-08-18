@@ -21,7 +21,7 @@ function UserInfoPanel.CloseClick()
 	ClosePanel(this)
 end
 
-function UserInfoPanel.OnOpen(userInfo)
+function UserInfoPanel:OnOpen(userInfo)
 	headIconPath = userInfo.account.headicon;
 	IP.text = "IP:" .. userInfo.IP;
 	ID.text = "ID:" .. tostring(userInfo.account.uuid)

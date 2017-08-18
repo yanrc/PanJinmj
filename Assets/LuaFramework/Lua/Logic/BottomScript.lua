@@ -63,8 +63,6 @@ function BottomScript:SendObjectToCallBack()
 end
 -- 归位事件
 function BottomScript:ReSetPoisitonCallBack()
-	GamePanel.SetPosition(1)
-	self.transform.localPosition = self.transform.localPosition + Vector2.New(0, 20);
 	-- 清除其他牌的选中状态
 	if (self.ReSetPoisiton ~= nil) then
 		self:ReSetPoisiton()

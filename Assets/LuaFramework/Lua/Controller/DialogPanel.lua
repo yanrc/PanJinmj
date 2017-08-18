@@ -26,7 +26,7 @@ end
 function DialogPanel.CloseClick()
 ClosePanel(this)
 end
-function DialogPanel.OnOpen(title, msg, yescallback, nocallback)
+function DialogPanel:OnOpen(title, msg, yescallback, nocallback)
 	this.lua:ResetClick(btnConfirm)
 	this.lua:ResetClick(btnCancel)
 	texttitle.text = title
@@ -35,11 +35,11 @@ function DialogPanel.OnOpen(title, msg, yescallback, nocallback)
 	this.lua:AddClick(btnCancel, nocallback or this.CloseClick)
 end
 -- 移除事件--
-function DialogPanel.RemoveListener()
+function DialogPanel:RemoveListener()
 
 end
 
 -- 增加事件--
-function DialogPanel.AddListener()
+function DialogPanel:AddListener()
 
 end

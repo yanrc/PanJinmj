@@ -16,6 +16,6 @@ function MessagePanel.CloseClick()
 	ClosePanel(this)
 end
 
-function MessagePanel.OnOpen()
+function MessagePanel:OnOpen()
 
 end

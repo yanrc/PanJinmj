@@ -94,8 +94,11 @@ end
 function UIManager.ReturnStartPanel()
 	log(debug.traceback())
 	for k, v in pairs(define.Panels) do
-		_G[v]:Close()
+		if v ~= "GamePanel" then
+			ClosePanel(_G[v])
+		end
 	end
+	ClosePanel(StartPanel.GetGame(RoomData.roomType))
 	LoginData = { }
 	OpenPanel(StartPanel)
 end

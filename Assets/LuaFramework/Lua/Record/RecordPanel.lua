@@ -53,7 +53,7 @@ function RecordPanel.RecordResponse(buffer)
 	local message = buffer:ReadString()
 	local data = json.decode(message)
 	if next(data) then
-		GamePanel.CleanList(recordList)
+		CleanList(recordList)
 		recordList = { }
 		RecordPage:SetActive(true)
 		DetailPage:SetActive(false)
@@ -73,7 +73,7 @@ function RecordPanel.DetailResponse(buffer)
 	local message = buffer:ReadString()
 	local data = json.decode(message)
 	if next(data) then
-		GamePanel.CleanList(detailList)
+		CleanList(detailList)
 		detailList = { }
 		RecordPage:SetActive(false)
 		DetailPage:SetActive(true)
@@ -131,18 +131,18 @@ function RecordPanel.CloseClick()
 	end
 end
 
-function RecordPanel.OnOpen()
+function RecordPanel:OnOpen()
 	recordItem = UIManager.RecordItem
 	detailItem = UIManager.DetailItem
 	this.GetRecord()
 end
 
-function RecordPanel.AddListener()
+function RecordPanel:AddListener()
 	Event.AddListener(tostring(APIS.ZHANJI_REPORTER_REPONSE), this.RecordResponse)
 	Event.AddListener(tostring(APIS.ZHANJI_DETAIL_REPORTER_REPONSE), this.DetailResponse)
 end
 
-function RecordPanel.RemoveListener()
+function RecordPanel:RemoveListener()
 	Event.RemoveListener(tostring(APIS.ZHANJI_REPORTER_REPONSE), this.RecordResponse)
 	Event.RemoveListener(tostring(APIS.ZHANJI_DETAIL_REPORTER_REPONSE), this.DetailResponse)
 end

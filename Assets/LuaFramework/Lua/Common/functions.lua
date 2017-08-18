@@ -99,3 +99,21 @@ function string.bytes2string(bytes)
 	end
 	return str
 end
+--[Comment]
+-- 摧毁list中的gameobject
+function CleanList(list)
+	for k, v in pairs(list) do
+		if type(v) == "table" then
+			CleanList(v)
+		elseif type(v) == "userdata" then
+			if not IsNil(v) and not IsNil(v.gameObject) then
+				destroy(v.gameObject)
+			end
+		end
+	end
+end
+
+function Invoke(f, time)
+	coroutine.wait(time)
+	f()
+end

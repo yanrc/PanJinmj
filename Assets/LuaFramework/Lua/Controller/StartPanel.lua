@@ -58,7 +58,7 @@ function StartPanel.RoomBackResponse(buffer)
 		end
 	end
 	ClosePanel(this)
-	OpenPanel(GamePanel)
+	OpenPanel(StartPanel.GetGame(RoomData.roomType))
 end
 
 function StartPanel.ConnectTime(time)
@@ -123,10 +123,23 @@ function StartPanel.CloseXieyiPanel()
 		xieyiPanel:SetActive(false);
 	end
 end
-
+function StartPanel.GetGame(roomType)
+	local switch = {
+		[1] = ZhuanzhuanGame,
+		[2] = PanjinGame,
+		[3] = ChangshaGame,
+		[4] = GuangdongGame,
+		[5] = PanjinGame,
+		[6] = WuxiGame,
+		[7] = ShuangliaoGame,
+		[8] = JiujiangGame,
+		[9] = TuidaohuGame,
+	}
+	return switch[roomType] or GamePanel
+end
 
 -------------------模板-------------------------
-function StartPanel.OnOpen()
+function StartPanel:OnOpen()
 	soundMgr:playBGM(1);
 	versionText.text = "版本号：" .. Application.version;
 	OpenPanel(WaitingPanel, "正在连接服务器")
@@ -134,7 +147,7 @@ function StartPanel.OnOpen()
 	coroutine.start(this.ConnectTime, 1);
 end
 -- 移除事件--
-function StartPanel.RemoveListener()
+function StartPanel:RemoveListener()
 	-- UpdateBeat:Remove(this.Update);
 	Event.RemoveListener(Protocal.Connect, this.OnConnect);
 	Event.RemoveListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)
@@ -142,7 +155,7 @@ function StartPanel.RemoveListener()
 end
 
 -- 增加事件--
-function StartPanel.AddListener()
+function StartPanel:AddListener()
 	-- UpdateBeat:Add(this.Update);
 	Event.AddListener(Protocal.Connect, this.OnConnect);
 	Event.AddListener(tostring(APIS.LOGIN_RESPONSE), this.LoginCallBack)

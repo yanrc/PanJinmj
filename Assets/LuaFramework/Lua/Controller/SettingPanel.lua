@@ -45,7 +45,7 @@ function SettingPanel.toJieSan()
 	OpenPanel(ExitPanel, "申请解散房间", "你确定要申请解散房间？",
 	function()
 		soundMgr:playSoundByActionButton(1);
-		GamePanel.DoDissoliveRoomRequest(0)
+		VotePanel.DoDissoliveRoomRequest(0)
 		ClosePanel(ExitPanel)
 	end );
 	ClosePanel(this)
@@ -107,7 +107,7 @@ end
 function SettingPanel.CloseClick()
 	ClosePanel(this)
 end
-function SettingPanel.OnOpen(_type)
+function SettingPanel:OnOpen(_type)
 	sliderYinYue.value = soundMgr.MusicVolume
 	sliderYinXiao.value = soundMgr.EffectVolume
 	this.lua:ResetClick(jiesanBtn)
@@ -126,13 +126,13 @@ function SettingPanel.OnOpen(_type)
 	end
 end
 -- 移除事件--
-function SettingPanel.RemoveListener()
+function SettingPanel:RemoveListener()
 
 end
 
 
 -- 增加事件--
-function SettingPanel.AddListener()
+function SettingPanel:AddListener()
 
 end
 

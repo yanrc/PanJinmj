@@ -31,6 +31,6 @@ end
 function SharePanel.CloseClick()
 	ClosePanel(this)
 end
-function SharePanel.OnOpen()
+function SharePanel:OnOpen()
 
 end

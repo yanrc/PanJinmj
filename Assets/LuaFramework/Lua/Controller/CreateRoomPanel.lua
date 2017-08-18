@@ -303,7 +303,7 @@ function CreateRoomPanel.OnCreateRoomCallback(buffer)
 		LoginData.scores = 0;
 		ClosePanel(this)
 		ClosePanel(HomePanel)
-		OpenPanel(GamePanel)
+		OpenPanel(StartPanel.GetGame(RoomData.roomType))
 	else
 		TipsManager.SetTips(message);
 	end
@@ -312,15 +312,15 @@ end
 function CreateRoomPanel.CloseClick()
 	ClosePanel(this)
 end
-function CreateRoomPanel.OnOpen()
+function CreateRoomPanel:OnOpen()
 
 end
 -- 移除事件--
-function CreateRoomPanel.RemoveListener()
+function CreateRoomPanel:RemoveListener()
 	Event.RemoveListener(tostring(APIS.CREATEROOM_RESPONSE), this.OnCreateRoomCallback)
 end
 
 -- 增加事件--
-function CreateRoomPanel.AddListener()
+function CreateRoomPanel:AddListener()
 	Event.AddListener(tostring(APIS.CREATEROOM_RESPONSE), this.OnCreateRoomCallback)
 end

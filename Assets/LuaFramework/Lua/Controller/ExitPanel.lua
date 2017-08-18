@@ -40,18 +40,18 @@ function ExitPanel.CloseClick()
 
 end
 
-function ExitPanel.OnOpen(titleStr, des, f)
+function ExitPanel:OnOpen(titleStr, des, f)
 	this.lua:ResetClick(btnExit)
 	this.lua:AddClick(btnExit, f or this.Exit)
 	title.text = titleStr or "提示"
 	content.text = des or "亲，确定要退出游戏吗?"
 end
 -- 移除事件--
-function ExitPanel.RemoveListener()
+function ExitPanel:RemoveListener()
 
 end
 
 -- 增加事件--
-function ExitPanel.AddListener()
+function ExitPanel:AddListener()
 
 end

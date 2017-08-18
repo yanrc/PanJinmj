@@ -9,7 +9,7 @@ end
 function Test.Update()
 	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
 	if (Input.GetKeyDown(KeyCode.T)) then
-		local tables = GamePanel.Test()
+		local tables = GamePanel:Test()
 		for k, v in pairs(tables) do
 			log(this.DumpTab(v))
 		end

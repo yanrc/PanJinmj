@@ -242,19 +242,19 @@ end
 -- end
 -- end
 -------------------模板-------------------------
-function HomePanel.OnOpen()
+function HomePanel:OnOpen()
 	this.InitUI();
 	soundMgr:playBGM(1);
 	-- this.CheckEnterInRoom();
 end
 -- 移除事件--
-function HomePanel.RemoveListener()
+function HomePanel:RemoveListener()
 	Event.RemoveListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
 	Event.RemoveListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
 end
 
 -- 增加事件--
-function HomePanel.AddListener()
+function HomePanel:AddListener()
 	Event.AddListener(tostring(APIS.CARD_CHANGE), this.CardChangeNotice)
 	Event.AddListener(tostring(APIS.CONTACT_INFO_RESPONSE), this.ContactInfoResponse)
 end
