@@ -26,5 +26,6 @@ function UserInfoPanel.OnOpen(userInfo)
 	IP.text = "IP:" .. userInfo.IP;
 	ID.text = "ID:" .. tostring(userInfo.account.uuid)
 	nameText.text = "昵称:" .. userInfo.account.nickname;
+	headIcon.sprite=UIManager.DefaultIcon
 	CoMgr.LoadImg(headIcon, headIconPath);
 end

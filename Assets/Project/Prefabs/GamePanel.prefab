@@ -8398,7 +8398,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 70, y: -132.75}
-  m_SizeDelta: {x: 677, y: 144.5}
+  m_SizeDelta: {x: 800, y: 144.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22409702
 RectTransform:
@@ -11310,6 +11310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224747876039162934}
   - component: {fileID: 222387404997610366}
+  - component: {fileID: 114466008139994226}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -13881,7 +13882,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114486779337224016}
   toggleTransition: 1
   graphic: {fileID: 114254129338139752}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114466008139994226}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -14733,6 +14734,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114466008139994226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063466037054546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1184210157, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 1
 --- !u!114 &114469543522707314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15555,7 +15568,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114499621068235684}
   toggleTransition: 1
   graphic: {fileID: 114125467426652264}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 114466008139994226}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -58,9 +58,9 @@ function SignalOverItem:SetUI(itemData, Banker)
 	self.totalScroe.text = tostring(itemData.totalScore);
 	self.gangScore.text = tostring(itemData.gangScore);
 	self.fanCount.text = tostring(itemData.totalScore - itemData.gangScore)
-	self.huFlagImg.enabled =(itemData.uuid == RoundOverData.winnerId);
+	self.huFlagImg.enabled =(itemData.cardPoint>-1);
 	self.Banker.enabled =(itemData.uuid == Banker);
-	self.JiaGang.enabled=(itemData.jiaGang)
+	self.JiaGang.enabled =(itemData.jiaGang)
 	self.GenzhuangFlag.enabled =(itemData.totalInfo.genzhuang == "1" and itemData.uuid == Banker)
 	self:AnalysisPaiInfo(itemData);
 end
@@ -80,7 +80,7 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 			temp.cardPoint = tonumber(items[2])
 			temp.type = items[3]
 			-- 增加判断是否为自己的杠牌的操作
-			paiArray[temp.cardPoint+1] = paiArray[temp.cardPoint+1] -4;
+			paiArray[temp.cardPoint + 1] = paiArray[temp.cardPoint + 1] -4;
 			table.insert(self.gangPaiList, temp)
 			if (temp.type == "an") then
 				mdesCribe = mdesCribe .. "暗杠  ";
@@ -95,10 +95,10 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 		local pengs = string.split(pengpaiStr, ',')
 		for i = 1, #pengs do
 			local cardPoint = tonumber(pengs[i])
-			--此处服务器有坑，补杠后碰没去掉
-			if paiArray[cardPoint+1]>2 then
-			paiArray[cardPoint+1] = paiArray[cardPoint+1] -3;
-			table.insert(self.pengPaiList, cardPoint)
+			-- 此处服务器有坑，补杠后碰没去掉
+			if paiArray[cardPoint + 1] > 2 then
+				paiArray[cardPoint + 1] = paiArray[cardPoint + 1] -3;
+				table.insert(self.pengPaiList, cardPoint)
 			end
 		end
 	end
@@ -111,16 +111,18 @@ function SignalOverItem:AnalysisPaiInfo(itemData)
 			local cardPoint1 = tonumber(items[1])
 			local cardPoint2 = tonumber(items[2])
 			local cardPoint3 = tonumber(items[3])
-			paiArray[cardPoint1+1] = paiArray[cardPoint1+1] -1;
-			paiArray[cardPoint2+1] = paiArray[cardPoint2+1] -1;
-			paiArray[cardPoint3+1] = paiArray[cardPoint3+1] -1;
+			paiArray[cardPoint1 + 1] = paiArray[cardPoint1 + 1] -1;
+			paiArray[cardPoint2 + 1] = paiArray[cardPoint2 + 1] -1;
+			paiArray[cardPoint3 + 1] = paiArray[cardPoint3 + 1] -1;
 			local temp = { }
 			temp.cardPoints = { cardPoint1, cardPoint2, cardPoint3 };
 			table.insert(self.chiPaiList, temp)
 		end
 	end
-	if (itemData.uuid == RoundOverData.winnerId) then
-		paiArray[itemData.cardPoint+1] = paiArray[itemData.cardPoint+1] -1;
+	if (itemData.cardPoint>-1) then
+		if (paiArray[itemData.cardPoint + 1]) then
+			paiArray[itemData.cardPoint + 1] = paiArray[itemData.cardPoint + 1] -1;
+		end
 	end
 	if (itemData.huType ~= nil) then
 		mdesCribe = mdesCribe .. itemData.huType
@@ -134,7 +136,7 @@ end
 function SignalOverItem:ArrangePai(itemData)
 	local startPosition = 30
 	-- 显示杠牌
-	if (#self.gangPaiList>0) then
+	if (#self.gangPaiList > 0) then
 		for i = 1, #self.gangPaiList do
 			local cardPoint = self.gangPaiList[i].cardPoint;
 			for j = 1, 4 do
@@ -149,7 +151,7 @@ function SignalOverItem:ArrangePai(itemData)
 		end
 		startPosition = startPosition + 8
 	end
-	if (#self.pengPaiList >0) then
+	if (#self.pengPaiList > 0) then
 		for i = 1, #self.pengPaiList do
 			local cardPoint = self.pengPaiList[i];
 			for j = 1, 3 do
@@ -165,7 +167,7 @@ function SignalOverItem:ArrangePai(itemData)
 		end
 		startPosition = startPosition + 8
 	end
-	if (#self.chiPaiList >0) then
+	if (#self.chiPaiList > 0) then
 		for i = 1, #self.chiPaiList do
 			for j = 1, 3 do
 				local cardPoint = self.chiPaiList[i].cardPoints[j];
@@ -197,7 +199,7 @@ function SignalOverItem:ArrangePai(itemData)
 		end
 	end
 	startPosition = startPosition + 8
-	if (itemData.cardPoint > -1 and itemData.uuid == RoundOverData.winnerId) then
+	if (itemData.cardPoint > -1) then
 		local cardPoint = itemData.cardPoint
 		local obj = newObject(UIManager.TopAndBottomCard)
 		obj.transform:SetParent(self.paiArrayPanel)

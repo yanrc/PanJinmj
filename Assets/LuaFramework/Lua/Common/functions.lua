@@ -3,6 +3,7 @@
 function log(str)
 	Util.Log(tostring(str));
 	--print(debug.traceback(tostring(str)))
+	--print(tostring(str));
 end
 
 -- 错误日志--

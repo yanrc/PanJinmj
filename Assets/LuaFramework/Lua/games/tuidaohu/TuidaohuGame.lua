@@ -54,9 +54,9 @@ function TuidaohuGame.HupaiCallBack(buffer)
 		this.PengGangHuEffectCtrl("hu");
 		for i = 1, #RoundOverData.avatarList do
 			local LocalIndex = this.GetLocalIndex(i - 1);
-			if (RoundOverData.avatarList[i].uuid == RoundOverData.winnerId) then
+			if (RoundOverData.avatarList[i].cardPoint>-1) then
 				RoundOverData.winnerIndex = LocalIndex
-				if (RoundOverData.winnerId ~= RoundOverData.dianPaoId) then
+				if (RoundOverData.avatarList[i].uuid ~= RoundOverData.avatarList[i].dianPaoId) then
 					soundMgr:playSoundByAction("hu", this.avatarList[i].account.sex);
 				else
 					soundMgr:playSoundByAction("zimo", this.avatarList[i].account.sex);

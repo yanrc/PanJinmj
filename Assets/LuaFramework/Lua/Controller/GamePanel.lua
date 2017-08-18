@@ -86,6 +86,7 @@ local LastAvarIndex = 1
 this.putOutCardPoint = -1
 -- 保存服务器杠按钮通知的牌值
 this.gangPaiList = { }
+this.kaigangPaiList = { };
 -- 保存吃按钮通知的牌值
 this.chiPaiPointList = { }
 this.passStr = ""-- “过”操作字符串
@@ -323,36 +324,40 @@ function GamePanel.CreateMoPaiGameObject(LocalIndex)
 	obj.transform.localScale = Vector3.one;
 	return obj
 end
--- 自己起牌
+-- 摸牌
 function GamePanel.PickCard(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local cardvo = json.decode(message);
 	local cardPoint = cardvo.cardPoint;
-	local LocalIndex = 1
+	local LocalIndex = this.GetLocalIndex(cardvo.avatarIndex)
 	this.SetDirGameObjectAction(LocalIndex);
 	this.CardsNumChange();
 	local go = this.CreateMoPaiGameObject(LocalIndex)
 	go.name = cardPoint;
-	go.transform.localScale = Vector3.New(1.1, 1.1, 1);
-	local objCtrl = BottomScript.New(go)
-	objCtrl.OnSendMessage = this.CardChange;
-	objCtrl.ReSetPoisiton = this.CardSelect;
-	objCtrl:Init(cardPoint);
-	table.insert(this.handerCardList[1], objCtrl)
+	if (LocalIndex == 1) then
+		go.transform.localScale = Vector3.New(1.1, 1.1, 1);
+		local objCtrl = BottomScript.New(go)
+		objCtrl.OnSendMessage = this.CardChange;
+		objCtrl.ReSetPoisiton = this.CardSelect;
+		objCtrl:Init(cardPoint);
+		table.insert(this.handerCardList[1], objCtrl)
+	else
+		table.insert(this.handerCardList[LocalIndex], go)
+	end
 end
 -- 别人摸牌通知
 function GamePanel.OtherPickCard(buffer)
-	local status = buffer:ReadInt()
-	local message = buffer:ReadString()
-	local json = json.decode(message);
-	local avatarIndex = json["avatarIndex"];
-	local LocalIndex = this.GetLocalIndex(avatarIndex)
-	this.SetDirGameObjectAction(LocalIndex);
-	this.CardsNumChange();
-	-- 创建其他玩家的摸牌对象
-	local go = this.CreateMoPaiGameObject(LocalIndex)
-	table.insert(this.handerCardList[LocalIndex], go)
+--	local status = buffer:ReadInt()
+--	local message = buffer:ReadString()
+--	local json = json.decode(message);
+--	local avatarIndex = json["avatarIndex"];
+--	local LocalIndex = this.GetLocalIndex(avatarIndex)
+--	this.SetDirGameObjectAction(LocalIndex);
+--	this.CardsNumChange();
+--	-- 创建其他玩家的摸牌对象
+--	local go = this.CreateMoPaiGameObject(LocalIndex)
+--	table.insert(this.handerCardList[LocalIndex], go)
 end
 -- 胡，杠，碰，吃，pass按钮显示.
 function GamePanel.ActionBtnShow(buffer)
@@ -533,6 +538,7 @@ function GamePanel.CardChange(objCtrl)
 		networkMgr:SendMessage(ClientRequest.New(APIS.CHUPAI_REQUEST, json.encode(cardvo)));
 		LastAvarIndex = 1;
 		CurLocalIndex = 2
+		this.CleanBtnShow();
 		return true
 	end
 	return false
@@ -1243,7 +1249,7 @@ function GamePanel.CleanList(list)
 		elseif type(v) == "userdata" then
 			if not IsNil(v.gameObject) then
 				destroy(v.gameObject)
-				-- 			list[k]=nil
+				list[k] = nil
 			end
 		end
 	end
@@ -1360,7 +1366,7 @@ function GamePanel.OtherUserJointRoom(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local avatar = json.decode(message);
-	avatar=AvatarVO.New(avatar)
+	avatar = AvatarVO.New(avatar)
 	this.AddAvatarVOToList(avatar);
 end
 
@@ -1376,8 +1382,8 @@ function GamePanel.HupaiCallBack(buffer)
 		this.PengGangHuEffectCtrl("hu");
 		for i = 1, #RoundOverData.avatarList do
 			local LocalIndex = this.GetLocalIndex(i - 1);
-			if (RoundOverData.avatarList[i].uuid == RoundOverData.winnerId) then
-				if (RoundOverData.winnerId ~= RoundOverData.dianPaoId) then
+			if (RoundOverData.avatarList[i].cardPoint > -1) then
+				if (RoundOverData.avatarList[i].uuid ~= RoundOverData.avatarList[i].dianPaoId) then
 					soundMgr:playSoundByAction("hu", this.avatarList[i].account.sex);
 				else
 					soundMgr:playSoundByAction("zimo", this.avatarList[i].account.sex);
@@ -1586,9 +1592,9 @@ function GamePanel.ReEnterRoom()
 		local selfPaiArray = this.avatarList[selfIndex].paiArray;
 		if (selfPaiArray == nil or #selfPaiArray == 0) then
 			-- 游戏还没有开始
-			if (not this.avatarList[selfIndex].isReady) then
-				this.ReadyGame();
-			end
+			-- 		if (not this.avatarList[selfIndex].isReady and RoomDataRoomData.currentRound==0) then
+			-- 			this.ReadyGame();
+			-- 		end
 			-- 牌局已开始
 		else
 			this.CleanGameplayUI();
@@ -1952,6 +1958,7 @@ end
 
 -- 发准备消息
 function GamePanel.ReadyGame()
+	-- print(debug.traceback("ReadyGame"))
 	networkMgr:SendMessage(ClientRequest.New(APIS.PrepareGame_MSG_REQUEST, json.encode(readyvo)));
 end
 
@@ -1969,6 +1976,7 @@ end
 function GamePanel.CompleteBtnAction()
 	this.putOutCardPoint = -1
 	this.gangPaiList = { }
+	this.kaigangPaiList = { };
 	this.chiPaiPointList = { }
 	this.passStr = ""
 end

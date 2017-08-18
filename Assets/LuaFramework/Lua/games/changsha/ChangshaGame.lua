@@ -4,6 +4,8 @@ local mt = { }-- 元表（基类）
 mt.__index = GamePanel-- index方法
 setmetatable(this, mt)
 
+--开始出牌
+this.startPutOffCard=false;
 function ChangshaGame.InitLeftCard()
 	this.LeavedCardsNum = 108
 	this.LeavedCardsNum = this.LeavedCardsNum - 53;
@@ -11,11 +13,19 @@ function ChangshaGame.InitLeftCard()
 end
 
 function ChangshaGame.Start()
+this.startPutOffCard=false;
 	this.AddListener()
 end
 function ChangshaGame.End()
 	this.RemoveListener()
 end
+
+function ChangshaGame.StartPutOffCard(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
+this.startPutOffCard=true;
+end
+
 -- 胡，杠，碰，吃，pass按钮显示.
 function ChangshaGame.ActionBtnShow(buffer)
 	local status = buffer:ReadInt()
@@ -40,10 +50,15 @@ function ChangshaGame.ActionBtnShow(buffer)
 			GamePanel.passStr = GamePanel.passStr .. "peng_"
 		end
 		if string.match(strs[i], "gang") then
-			this.ShowBtn(2, true);
 			this.ShowBtn(6, true);
 			GamePanel.gangPaiList = string.split(strs[i], ':');
 			table.remove(this.gangPaiList, 1)
+			GamePanel.passStr = GamePanel.passStr .. "gang_"
+		end
+		if string.match(strs[i], "kaigang") then
+			this.ShowBtn(2, true);
+			GamePanel.kaigangPaiList = string.split(strs[i], ':');
+			table.remove(this.kaigangPaiList, 1)
 			GamePanel.passStr = GamePanel.passStr .. "gang_"
 		end
 		if string.match(strs[i], "chi") then
@@ -72,7 +87,7 @@ function ChangshaGame.ActionBtnShow(buffer)
 end
 function ChangshaGame.GangBtnClick()
 	local GangRequestVO = { }
-	GangRequestVO.cardPoint = tonumber(this.gangPaiList[1])
+	GangRequestVO.cardPoint = tonumber(this.kaigangPaiList[1])
 	GangRequestVO.gangType = 0;
 	GangRequestVO.kaigang = true;
 	networkMgr:SendMessage(ClientRequest.New(APIS.GANGPAI_REQUEST, json.encode(GangRequestVO)))
@@ -110,6 +125,46 @@ function ChangshaGame.StartGame(buffer)
 	end
 end
 
+-- 0.明杠，1.暗杠，2.补杠
+function GamePanel.GangCard(buffer)
+	local status = buffer:ReadInt()
+	local message = buffer:ReadString()
+	local cardVo = json.decode(message);
+	local gangType = cardVo.type;
+	local cardPoint = cardVo.cardPoint
+	local kaigang = cardVo.kaigang
+	if(kaigang) then
+	this.PengGangHuEffectCtrl("gang");
+	else
+	this.PengGangHuEffectCtrl("bu");
+	end
+	soundMgr:playSoundByAction("gang", this.avatarList[cardVo.avatarId + 1].account.sex)
+	local LocalIndex = this.GetLocalIndex(cardVo.avatarId);
+	this.SetDirGameObjectAction(LocalIndex);
+	-- 明杠
+	if gangType == 0 then
+		-- 销毁桌上被碰的牌
+		this.RemoveLastCardOnTable()
+		-- 去掉三张手牌
+		this.RemoveHandCard(LocalIndex, cardPoint, 3)
+		this.AddCPGToTable(LocalIndex, cardPoint, 4, 0)
+		-- 暗杠
+	elseif (gangType == 1) then
+		-- 去掉四张手牌
+		this.RemoveHandCard(LocalIndex, cardPoint, 4)
+		this.AddCPGToTable(LocalIndex, cardPoint, 1, 3)
+		-- 补杠
+	elseif gangType == 2 then
+		this.RemoveHandCard(LocalIndex, cardPoint, 1)
+		this.AddCPGToTable(LocalIndex, cardPoint)
+	end
+	if kaigang then
+		this.avatarList[cardVo.avatarId + 1].tingPai = true
+		this.LockHandCard(LocalIndex)
+	end
+	this.SetPosition(LocalIndex);
+end
+
 function ChangshaGame.HupaiCallBack(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
@@ -120,9 +175,9 @@ function ChangshaGame.HupaiCallBack(buffer)
 		this.PengGangHuEffectCtrl("hu");
 		for i = 1, #RoundOverData.avatarList do
 			local LocalIndex = this.GetLocalIndex(i - 1);
-			if (RoundOverData.avatarList[i].uuid == RoundOverData.winnerId) then
+			if (RoundOverData.avatarList[i].cardPoint>-1) then
 				RoundOverData.winnerIndex = LocalIndex
-				if (RoundOverData.winnerId ~= RoundOverData.dianPaoId) then
+				if (RoundOverData.avatarList[i].uuid ~= RoundOverData.avatarList[i].dianPaoId) then
 					soundMgr:playSoundByAction("hu", this.avatarList[i].account.sex);
 				else
 					soundMgr:playSoundByAction("zimo", this.avatarList[i].account.sex);

@@ -3,7 +3,6 @@ local this = PanjinGame
 local mt = { }-- 元表（基类）
 mt.__index = GamePanel-- index方法
 setmetatable(this, mt)
-
 -- 创建房间
 function PanjinGame.CreateRoomAddAvatarVO(avatar)
 	GamePanel.avatarList = { }
@@ -61,7 +60,7 @@ function PanjinGame.ReEnterRoom()
 					this.btnReadyGame:SetActive(true);
 					this.ReadySelect[1].interactable = this.avatarList[this.GetMyIndexFromList()].main;
 				else
-					this.ReadyGame();
+					-- this.ReadyGame();
 				end
 			end
 			-- 牌局已开始
@@ -142,9 +141,9 @@ function PanjinGame.HupaiCallBack(buffer)
 		local huPaiPoint = 0;
 		for i = 1, #RoundOverData.avatarList do
 			local LocalIndex = this.GetLocalIndex(i - 1);
-			if (RoundOverData.avatarList[i].uuid == RoundOverData.winnerId) then
+			if (RoundOverData.avatarList[i].cardPoint > -1) then
 				huPaiPoint = RoundOverData.avatarList[i].cardPoint;
-				if (RoundOverData.winnerId ~= RoundOverData.dianPaoId) then
+				if (RoundOverData.avatarList[i].uuid ~= RoundOverData.avatarList[i].dianPaoId) then
 					soundMgr:playSoundByAction("hu", this.avatarList[i].account.sex);
 				else
 					soundMgr:playSoundByAction("zimo", this.avatarList[i].account.sex);
@@ -157,7 +156,7 @@ function PanjinGame.HupaiCallBack(buffer)
 		local allMas = RoundOverData.allMas;
 		-- 盘锦麻将绝
 		if (RoomData.jue) then
-			OpenPanel(ZhuaMaPanel,huPaiPoint)
+			OpenPanel(ZhuaMaPanel, huPaiPoint)
 			coroutine.start(this.Invoke, this.OpenGameOverPanelSignal, 7, allMas)
 		else
 			coroutine.start(this.Invoke, this.OpenGameOverPanelSignal, 3, allMas)
@@ -172,16 +171,22 @@ function PanjinGame.HupaiCallBack(buffer)
 end
 
 function PanjinGame.Start()
+	this.temp={}
+	this.temp.togglegroup=this.ReadySelect[1].group;
 	this.AddListener()
 	this.SetUI()
 end
 function PanjinGame.End()
 	this.RemoveListener()
+	this.ReadySelect[1].group = this.temp.togglegroup
+	this.ReadySelect[2].group = this.temp.togglegroup
 end
 
 function PanjinGame.SetUI()
 	this.lbReadySelect[1].text = "买断门"
 	this.lbReadySelect[2].text = "加钢"
+	this.ReadySelect[1].group = nil
+	this.ReadySelect[2].group = nil
 end
 
 -- 增加事件--

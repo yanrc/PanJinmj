@@ -119,11 +119,11 @@ function _M:new(name)
 end
 _M.CreateEvent = _M.new
 
-function _M:Connect(handler)
+function _M:Connect(handler,table)
 	assert(self ~= nil and type(self) == "table", "Invalid Event (make sure you're using ':' not '.')")
 	assert(type(handler) == "function", "Invalid handler. Expected function got " .. type(handler))
 	assert(self.handlers, "Invalid Event")
-	table.insert(self.handlers, handler)
+	table.insert(self.handlers, {handler=handler,table=table})
 	local t = { }
 	t.Disconnect = function()
 		return self:Disconnect(handler)
@@ -140,7 +140,7 @@ function _M:Disconnect(handler)
 		self.handlers = { }
 	else
 		for k, v in pairs(self.handlers) do
-			if v == handler then
+			if v.handler == handler then
 				self.handlers[k] = nil
 				return k
 			end
@@ -172,7 +172,7 @@ function _M:Fire(...)
 		i = i + 1
 		spawn( function()
 			xpcall( function()
-				v(unpack(self.args))
+				v.handler(v.table,unpack(self.args))
 			end , logError
 			)
 			i = i - 1
