@@ -101,6 +101,7 @@ namespace LuaFramework {
                 loader.AddBundle("lua/lua_games_changsha.unity3d");
                 loader.AddBundle("lua/lua_games_fushun.unity3d");
                 loader.AddBundle("lua/lua_games_jiujiang.unity3d");
+                loader.AddBundle("lua/lua_games_panjin.unity3d");
                 loader.AddBundle("lua/lua_games_shuangliao.unity3d");
                 loader.AddBundle("lua/lua_games_tuidaohu.unity3d");
                 loader.AddBundle("lua/lua_games_wuxi.unity3d");

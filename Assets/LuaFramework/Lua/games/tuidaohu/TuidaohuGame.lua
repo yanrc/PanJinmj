@@ -4,7 +4,7 @@ mt.__index = GamePanel-- index方法
 setmetatable(TuidaohuGame, mt)
 
 function TuidaohuGame:InitLeftCard()
-	self.LeavedCardsNum = 112
+	self.LeavedCardsNum = 108
 	self.LeavedCardsNum = self.LeavedCardsNum - 53;
 	self.LeavedCastNumText.text = tostring(self.LeavedCardsNum);
 end

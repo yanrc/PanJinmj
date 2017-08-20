@@ -1,20 +1,98 @@
 ManifestFileVersion: 0
-CRC: 1739755312
+CRC: 2754530966
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
+      Name: lua/lua_cjson.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: lua/lua_common.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: lua/lua_controller.unity3d
+      Dependencies: {}
+    Info_3:
+      Name: lua/lua_data.unity3d
+      Dependencies: {}
+    Info_4:
+      Name: lua/lua_logic.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: lua/lua_lpeg.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: lua/lua_micphone.unity3d
+      Dependencies: {}
+    Info_7:
+      Name: lua/lua_misc.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: lua/lua_newmodule.unity3d
+      Dependencies: {}
+    Info_9:
+      Name: lua/lua_protobuf.unity3d
+      Dependencies: {}
+    Info_10:
+      Name: lua/lua_record.unity3d
+      Dependencies: {}
+    Info_11:
+      Name: lua/lua_socket.unity3d
+      Dependencies: {}
+    Info_12:
+      Name: lua/lua_system.unity3d
+      Dependencies: {}
+    Info_13:
+      Name: lua/lua_unityengine.unity3d
+      Dependencies: {}
+    Info_14:
+      Name: lua/lua_vos.unity3d
+      Dependencies: {}
+    Info_15:
+      Name: lua/lua_3rd_cjson.unity3d
+      Dependencies: {}
+    Info_16:
+      Name: lua/lua_3rd_luabitop.unity3d
+      Dependencies: {}
+    Info_17:
+      Name: lua/lua_3rd_pbc.unity3d
+      Dependencies: {}
+    Info_18:
+      Name: lua/lua_3rd_pblua.unity3d
+      Dependencies: {}
+    Info_19:
+      Name: lua/lua_3rd_sproto.unity3d
+      Dependencies: {}
+    Info_20:
+      Name: lua/lua_games_changsha.unity3d
+      Dependencies: {}
+    Info_21:
+      Name: lua/lua_games_jiujiang.unity3d
+      Dependencies: {}
+    Info_22:
+      Name: lua/lua_games_panjin.unity3d
+      Dependencies: {}
+    Info_23:
+      Name: lua/lua_games_tuidaohu.unity3d
+      Dependencies: {}
+    Info_24:
+      Name: lua/lua_system_reflection.unity3d
+      Dependencies: {}
+    Info_25:
+      Name: lua/lua.unity3d
+      Dependencies: {}
+    Info_26:
       Name: animations.unity3d
       Dependencies:
         Dependency_0: texturespng.unity3d
-    Info_1:
+    Info_27:
       Name: dynaimages.unity3d
       Dependencies: {}
-    Info_2:
+    Info_28:
       Name: materials.unity3d
       Dependencies:
         Dependency_0: shaders.unity3d
         Dependency_1: texturespng.unity3d
-    Info_3:
+    Info_29:
       Name: prefabs.unity3d
       Dependencies:
         Dependency_0: animations.unity3d
@@ -22,21 +100,21 @@ AssetBundleManifest:
         Dependency_2: materials.unity3d
         Dependency_3: texturespng.unity3d
         Dependency_4: texturesjpg.unity3d
-    Info_4:
+    Info_30:
       Name: shaders.unity3d
       Dependencies: {}
-    Info_5:
+    Info_31:
       Name: xmls.unity3d
       Dependencies: {}
-    Info_6:
+    Info_32:
       Name: texturespng.unity3d
       Dependencies: {}
-    Info_7:
+    Info_33:
       Name: texturesjpg.unity3d
       Dependencies: {}
-    Info_8:
+    Info_34:
       Name: soundsmp3.unity3d
       Dependencies: {}
-    Info_9:
+    Info_35:
       Name: soundswav.unity3d
       Dependencies: {}

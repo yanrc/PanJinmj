@@ -43,7 +43,7 @@ APIS =
 	GANGPAI_RESPONSE = 0x100008;-- 杠牌返回
 	OTHER_GANGPAI_NOICE = 0x10a008;-- 杠牌通知
 	HUPAI_REQUEST = 0x100009;-- 胡牌请求
-	HUPAI_RESPONSE = 0x100010;--胡牌返回
+	HUPAI_RESPONSE = 0x100010;-- 胡牌返回
 
 	CHIPAI_REQUEST = 0x100011;-- 吃牌请求
 	CHIPAI_RESPONSE = 0x100012;-- 吃牌通知
@@ -123,8 +123,10 @@ function APIS.GameSetting()
 	end
 	if GameSetting.Jiujiang then
 		table.insert(this.Rules, JiujiangRule)
-		AppConst.SocketAddress = "127.0.0.1";
-		AppConst.ChatSocketAddress = "127.0.0.1";
+		-- 	AppConst.SocketAddress = "127.0.0.1";
+		-- 	AppConst.ChatSocketAddress = "127.0.0.1";
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
@@ -136,8 +138,10 @@ function APIS.GameSetting()
 	end
 	if GameSetting.Changsha then
 		table.insert(this.Rules, ChangshaRule)
-		AppConst.SocketAddress = "127.0.0.1";
-		AppConst.ChatSocketAddress = "127.0.0.1";
+		-- 	AppConst.SocketAddress = "127.0.0.1";
+		-- 	AppConst.ChatSocketAddress = "127.0.0.1";
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
@@ -147,10 +151,12 @@ function APIS.GameSetting()
 		end
 		shareImageUrl = "http://101.200.197.7:8090/panjin/share/logo.png";
 	end
-if GameSetting.Tuidaohu then
+	if GameSetting.Tuidaohu then
 		table.insert(this.Rules, TuidaohuRule)
-		AppConst.SocketAddress = "127.0.0.1";
-		AppConst.ChatSocketAddress = "127.0.0.1";
+		-- 	AppConst.SocketAddress = "127.0.0.1";
+		-- 	AppConst.ChatSocketAddress = "127.0.0.1";
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
 		AppConst.SocketPort = 10233;
 		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
