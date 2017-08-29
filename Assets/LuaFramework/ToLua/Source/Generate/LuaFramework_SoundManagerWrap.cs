@@ -31,13 +31,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			UnityEngine.AudioClip o = obj.LoadAudioClip(arg0);
-			ToLua.Push(L, o);
+			ToLua.PushSealed(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -49,12 +49,12 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			bool o = obj.CanPlayBackSound();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -66,13 +66,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 			obj.PlayBacksound(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -84,12 +84,12 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			bool o = obj.CanPlaySoundEffect();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -101,13 +101,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
-			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.AudioClip));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
+			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioClip));
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			obj.Play(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -119,13 +119,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.playSound(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -137,13 +137,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.playMessageBoxSound(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -155,12 +155,12 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.playBGM(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -172,13 +172,13 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.playSoundByAction(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -190,12 +190,12 @@ public class LuaFramework_SoundManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
+			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.playSoundByActionButton(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -206,18 +206,37 @@ public class LuaFramework_SoundManagerWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 7);
-			LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.SoundManager));
-			string arg0 = ToLua.CheckString(L, 2);
-			string arg1 = ToLua.CheckString(L, 3);
-			UnityEngine.AudioSource arg2 = (UnityEngine.AudioSource)ToLua.CheckUnityObject(L, 4, typeof(UnityEngine.AudioSource));
-			bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
-			float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
-			LuaFunction arg5 = ToLua.CheckLuaFunction(L, 7);
-			obj.GetAudioClip(arg0, arg1, arg2, arg3, arg4, arg5);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 6)
+			{
+				LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				string arg1 = ToLua.CheckString(L, 3);
+				UnityEngine.AudioSource arg2 = (UnityEngine.AudioSource)ToLua.CheckObject(L, 4, typeof(UnityEngine.AudioSource));
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
+				obj.GetAudioClip(arg0, arg1, arg2, arg3, arg4);
+				return 0;
+			}
+			else if (count == 7)
+			{
+				LuaFramework.SoundManager obj = (LuaFramework.SoundManager)ToLua.CheckObject<LuaFramework.SoundManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				string arg1 = ToLua.CheckString(L, 3);
+				UnityEngine.AudioSource arg2 = (UnityEngine.AudioSource)ToLua.CheckObject(L, 4, typeof(UnityEngine.AudioSource));
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
+				LuaFunction arg5 = ToLua.CheckLuaFunction(L, 7);
+				obj.GetAudioClip(arg0, arg1, arg2, arg3, arg4, arg5);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.SoundManager.GetAudioClip");
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -235,7 +254,7 @@ public class LuaFramework_SoundManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -256,7 +275,7 @@ public class LuaFramework_SoundManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index MusicVolume on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index MusicVolume on a nil value");
 		}
 	}
 
@@ -275,7 +294,7 @@ public class LuaFramework_SoundManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index EffectVolume on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index EffectVolume on a nil value");
 		}
 	}
 
@@ -294,7 +313,7 @@ public class LuaFramework_SoundManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index MusicVolume on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index MusicVolume on a nil value");
 		}
 	}
 
@@ -313,7 +332,7 @@ public class LuaFramework_SoundManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index EffectVolume on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index EffectVolume on a nil value");
 		}
 	}
 }

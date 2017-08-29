@@ -19,25 +19,13 @@ public class LuaFramework_ThreadManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.ThreadManager obj = (LuaFramework.ThreadManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ThreadManager));
-			ThreadEvent arg0 = (ThreadEvent)ToLua.CheckObject(L, 2, typeof(ThreadEvent));
-			System.Action<NotiData> arg1 = null;
-			LuaTypes funcType3 = LuaDLL.lua_type(L, 3);
-
-			if (funcType3 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg1 = (System.Action<NotiData>)ToLua.CheckObject(L, 3, typeof(System.Action<NotiData>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 3);
-				arg1 = DelegateFactory.CreateDelegate(typeof(System.Action<NotiData>), func) as System.Action<NotiData>;
-			}
-
+			LuaFramework.ThreadManager obj = (LuaFramework.ThreadManager)ToLua.CheckObject<LuaFramework.ThreadManager>(L, 1);
+			ThreadEvent arg0 = (ThreadEvent)ToLua.CheckObject<ThreadEvent>(L, 2);
+			System.Action<NotiData> arg1 = (System.Action<NotiData>)ToLua.CheckDelegate<System.Action<NotiData>>(L, 3);
 			obj.AddEvent(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -55,7 +43,7 @@ public class LuaFramework_ThreadManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

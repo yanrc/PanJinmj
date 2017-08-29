@@ -39,12 +39,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.CanvasUpdate arg0 = (UnityEngine.UI.CanvasUpdate)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.CanvasUpdate));
 			obj.Rebuild(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -56,11 +56,11 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			obj.LayoutComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -72,11 +72,11 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			obj.GraphicUpdateComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -88,12 +88,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerDown(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -105,12 +105,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -122,12 +122,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
-			UnityEngine.EventSystems.AxisEventData arg0 = (UnityEngine.EventSystems.AxisEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.AxisEventData));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
+			UnityEngine.EventSystems.AxisEventData arg0 = (UnityEngine.EventSystems.AxisEventData)ToLua.CheckObject<UnityEngine.EventSystems.AxisEventData>(L, 2);
 			obj.OnMove(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -139,12 +139,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnLeft();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -156,12 +156,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnRight();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -173,12 +173,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnUp();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -190,12 +190,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnDown();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -207,12 +207,12 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnInitializePotentialDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -224,13 +224,13 @@ public class UnityEngine_UI_SliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 1);
 			UnityEngine.UI.Slider.Direction arg0 = (UnityEngine.UI.Slider.Direction)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Slider.Direction));
 			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 			obj.SetDirection(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -248,7 +248,7 @@ public class UnityEngine_UI_SliderWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -264,12 +264,12 @@ public class UnityEngine_UI_SliderWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)o;
 			UnityEngine.RectTransform ret = obj.fillRect;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillRect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillRect on a nil value");
 		}
 	}
 
@@ -283,12 +283,12 @@ public class UnityEngine_UI_SliderWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)o;
 			UnityEngine.RectTransform ret = obj.handleRect;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index handleRect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index handleRect on a nil value");
 		}
 	}
 
@@ -307,7 +307,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index direction on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index direction on a nil value");
 		}
 	}
 
@@ -326,7 +326,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minValue on a nil value");
 		}
 	}
 
@@ -345,7 +345,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index maxValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index maxValue on a nil value");
 		}
 	}
 
@@ -364,7 +364,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index wholeNumbers on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index wholeNumbers on a nil value");
 		}
 	}
 
@@ -383,7 +383,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index value on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index value on a nil value");
 		}
 	}
 
@@ -402,7 +402,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index normalizedValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index normalizedValue on a nil value");
 		}
 	}
 
@@ -421,7 +421,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -434,13 +434,13 @@ public class UnityEngine_UI_SliderWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)o;
-			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.RectTransform));
+			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckObject(L, 2, typeof(UnityEngine.RectTransform));
 			obj.fillRect = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillRect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillRect on a nil value");
 		}
 	}
 
@@ -453,13 +453,13 @@ public class UnityEngine_UI_SliderWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)o;
-			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.RectTransform));
+			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckObject(L, 2, typeof(UnityEngine.RectTransform));
 			obj.handleRect = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index handleRect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index handleRect on a nil value");
 		}
 	}
 
@@ -478,7 +478,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index direction on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index direction on a nil value");
 		}
 	}
 
@@ -497,7 +497,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minValue on a nil value");
 		}
 	}
 
@@ -516,7 +516,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index maxValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index maxValue on a nil value");
 		}
 	}
 
@@ -535,7 +535,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index wholeNumbers on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index wholeNumbers on a nil value");
 		}
 	}
 
@@ -554,7 +554,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index value on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index value on a nil value");
 		}
 	}
 
@@ -573,7 +573,7 @@ public class UnityEngine_UI_SliderWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index normalizedValue on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index normalizedValue on a nil value");
 		}
 	}
 
@@ -586,13 +586,13 @@ public class UnityEngine_UI_SliderWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Slider obj = (UnityEngine.UI.Slider)o;
-			UnityEngine.UI.Slider.SliderEvent arg0 = (UnityEngine.UI.Slider.SliderEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Slider.SliderEvent));
+			UnityEngine.UI.Slider.SliderEvent arg0 = (UnityEngine.UI.Slider.SliderEvent)ToLua.CheckObject<UnityEngine.UI.Slider.SliderEvent>(L, 2);
 			obj.onValueChanged = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 }

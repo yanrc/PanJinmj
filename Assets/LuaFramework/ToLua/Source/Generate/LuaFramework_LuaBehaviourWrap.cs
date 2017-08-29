@@ -23,19 +23,19 @@ public class LuaFramework_LuaBehaviourWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.LuaBehaviour), typeof(UnityEngine.GameObject), typeof(LuaInterface.LuaFunction)))
+			if (count == 3)
 			{
-				LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.ToObject(L, 1);
-				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.ToObject(L, 2);
-				LuaFunction arg1 = ToLua.ToLuaFunction(L, 3);
+				LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject<LuaFramework.LuaBehaviour>(L, 1);
+				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
+				LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
 				obj.AddClick(arg0, arg1);
 				return 0;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.LuaBehaviour), typeof(UnityEngine.GameObject), typeof(LuaInterface.LuaFunction), typeof(object)))
+			else if (count == 4)
 			{
-				LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.ToObject(L, 1);
-				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.ToObject(L, 2);
-				LuaFunction arg1 = ToLua.ToLuaFunction(L, 3);
+				LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject<LuaFramework.LuaBehaviour>(L, 1);
+				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
+				LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
 				object arg2 = ToLua.ToVarObject(L, 4);
 				obj.AddClick(arg0, arg1, arg2);
 				return 0;
@@ -45,7 +45,7 @@ public class LuaFramework_LuaBehaviourWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.LuaBehaviour.AddClick");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -57,12 +57,12 @@ public class LuaFramework_LuaBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject(L, 1, typeof(LuaFramework.LuaBehaviour));
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject<LuaFramework.LuaBehaviour>(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.RemoveClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -74,12 +74,12 @@ public class LuaFramework_LuaBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject(L, 1, typeof(LuaFramework.LuaBehaviour));
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject<LuaFramework.LuaBehaviour>(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.ResetClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -91,11 +91,11 @@ public class LuaFramework_LuaBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject(L, 1, typeof(LuaFramework.LuaBehaviour));
+			LuaFramework.LuaBehaviour obj = (LuaFramework.LuaBehaviour)ToLua.CheckObject<LuaFramework.LuaBehaviour>(L, 1);
 			obj.ClearClick();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -113,7 +113,7 @@ public class LuaFramework_LuaBehaviourWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

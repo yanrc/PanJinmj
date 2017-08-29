@@ -29,7 +29,7 @@ public class MicroPhoneInputWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -41,11 +41,11 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			obj.StartRecord();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -57,12 +57,12 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			byte[] o = obj.GetClipData();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -74,12 +74,12 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			byte[] arg0 = ToLua.CheckByteBuffer(L, 2);
 			obj.PlayClipData(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -91,11 +91,11 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			obj.PlayClipDataBy();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -107,11 +107,11 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			obj.OnPointerDown();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -123,11 +123,11 @@ public class MicroPhoneInputWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject(L, 1, typeof(MicroPhoneInput));
+			MicroPhoneInput obj = (MicroPhoneInput)ToLua.CheckObject<MicroPhoneInput>(L, 1);
 			obj.OnPointerUp();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -145,7 +145,7 @@ public class MicroPhoneInputWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

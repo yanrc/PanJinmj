@@ -14,7 +14,7 @@ public class LuaFramework_AppConstWrap
 		L.RegConstant("ExampleMode", 0);
 		L.RegConstant("UpdateMode", 0);
 		L.RegConstant("LuaByteMode", 1);
-		L.RegConstant("LuaBundleMode", 0);
+		L.RegConstant("LuaBundleMode", 1);
 		L.RegConstant("TimerInterval", 1);
 		L.RegConstant("GameFrameRate", 30);
 		L.RegVar("AppName", get_AppName, null);
@@ -53,7 +53,7 @@ public class LuaFramework_AppConstWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: LuaFramework.AppConst.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -69,7 +69,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -83,7 +83,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.AppName);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -97,7 +97,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.LuaTempDir);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -111,7 +111,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.AppPrefix);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -125,7 +125,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.ExtName);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -139,7 +139,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.AssetDir);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -153,7 +153,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.UserId);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -167,7 +167,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushinteger(L, LuaFramework.AppConst.SocketPort);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -181,7 +181,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.SocketAddress);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -195,7 +195,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushinteger(L, LuaFramework.AppConst.ChatSocketPort);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -209,7 +209,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.ChatSocketAddress);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -223,7 +223,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_ANDROID);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -237,7 +237,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_IPHONE);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -251,7 +251,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_STANDALONE_WIN);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -265,7 +265,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.UNITY_EDITOR);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -279,7 +279,7 @@ public class LuaFramework_AppConstWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.FrameworkRoot);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -294,7 +294,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.UserId = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -309,7 +309,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.SocketPort = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -324,7 +324,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.SocketAddress = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -339,7 +339,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.ChatSocketPort = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -354,7 +354,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.ChatSocketAddress = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -369,7 +369,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.UNITY_ANDROID = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -384,7 +384,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.UNITY_IPHONE = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -399,7 +399,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.UNITY_STANDALONE_WIN = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -414,7 +414,7 @@ public class LuaFramework_AppConstWrap
 			LuaFramework.AppConst.UNITY_EDITOR = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

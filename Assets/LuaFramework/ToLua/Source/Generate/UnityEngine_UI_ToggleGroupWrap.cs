@@ -25,12 +25,12 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
-			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
+			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 2);
 			obj.NotifyToggleOn(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -42,12 +42,12 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
-			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
+			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 2);
 			obj.UnregisterToggle(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -59,12 +59,12 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
-			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
+			UnityEngine.UI.Toggle arg0 = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 2);
 			obj.RegisterToggle(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -76,12 +76,12 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
 			bool o = obj.AnyTogglesOn();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -93,12 +93,12 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
 			System.Collections.Generic.IEnumerable<UnityEngine.UI.Toggle> o = obj.ActiveToggles();
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -110,11 +110,11 @@ public class UnityEngine_UI_ToggleGroupWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.ToggleGroup));
+			UnityEngine.UI.ToggleGroup obj = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 1);
 			obj.SetAllTogglesOff();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -132,7 +132,7 @@ public class UnityEngine_UI_ToggleGroupWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -153,7 +153,7 @@ public class UnityEngine_UI_ToggleGroupWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index allowSwitchOff on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index allowSwitchOff on a nil value");
 		}
 	}
 
@@ -172,7 +172,7 @@ public class UnityEngine_UI_ToggleGroupWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index allowSwitchOff on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index allowSwitchOff on a nil value");
 		}
 	}
 }

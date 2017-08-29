@@ -20,11 +20,11 @@ public class LuaFramework_GameManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.GameManager obj = (LuaFramework.GameManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.GameManager));
+			LuaFramework.GameManager obj = (LuaFramework.GameManager)ToLua.CheckObject<LuaFramework.GameManager>(L, 1);
 			obj.CheckExtractResource();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -36,11 +36,11 @@ public class LuaFramework_GameManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.GameManager obj = (LuaFramework.GameManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.GameManager));
+			LuaFramework.GameManager obj = (LuaFramework.GameManager)ToLua.CheckObject<LuaFramework.GameManager>(L, 1);
 			obj.OnResourceInited();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -58,7 +58,7 @@ public class LuaFramework_GameManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

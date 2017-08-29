@@ -28,7 +28,7 @@ public class UnityEngine_MicrophoneWrap
 			if (count == 0)
 			{
 				UnityEngine.Microphone obj = new UnityEngine.Microphone();
-				ToLua.PushObject(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -36,7 +36,7 @@ public class UnityEngine_MicrophoneWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.Microphone.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -53,10 +53,10 @@ public class UnityEngine_MicrophoneWrap
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
 			int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
 			UnityEngine.AudioClip o = UnityEngine.Microphone.Start(arg0, arg1, arg2, arg3);
-			ToLua.Push(L, o);
+			ToLua.PushSealed(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -72,7 +72,7 @@ public class UnityEngine_MicrophoneWrap
 			UnityEngine.Microphone.End(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -89,7 +89,7 @@ public class UnityEngine_MicrophoneWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -106,7 +106,7 @@ public class UnityEngine_MicrophoneWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -126,7 +126,7 @@ public class UnityEngine_MicrophoneWrap
 			LuaDLL.lua_pushinteger(L, arg2);
 			return 2;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -140,7 +140,7 @@ public class UnityEngine_MicrophoneWrap
 			ToLua.Push(L, UnityEngine.Microphone.devices);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

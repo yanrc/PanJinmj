@@ -25,12 +25,12 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.StartTimer(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -42,11 +42,11 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
 			obj.StopTimer();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -58,12 +58,12 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
-			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject(L, 2, typeof(LuaFramework.TimerInfo));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
+			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject<LuaFramework.TimerInfo>(L, 2);
 			obj.AddTimerEvent(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -75,12 +75,12 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
-			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject(L, 2, typeof(LuaFramework.TimerInfo));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
+			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject<LuaFramework.TimerInfo>(L, 2);
 			obj.RemoveTimerEvent(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -92,12 +92,12 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
-			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject(L, 2, typeof(LuaFramework.TimerInfo));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
+			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject<LuaFramework.TimerInfo>(L, 2);
 			obj.StopTimerEvent(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -109,12 +109,12 @@ public class LuaFramework_TimerManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.TimerManager));
-			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject(L, 2, typeof(LuaFramework.TimerInfo));
+			LuaFramework.TimerManager obj = (LuaFramework.TimerManager)ToLua.CheckObject<LuaFramework.TimerManager>(L, 1);
+			LuaFramework.TimerInfo arg0 = (LuaFramework.TimerInfo)ToLua.CheckObject<LuaFramework.TimerInfo>(L, 2);
 			obj.ResumeTimerEvent(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -132,7 +132,7 @@ public class LuaFramework_TimerManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -153,7 +153,7 @@ public class LuaFramework_TimerManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Interval on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Interval on a nil value");
 		}
 	}
 
@@ -172,7 +172,7 @@ public class LuaFramework_TimerManagerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Interval on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Interval on a nil value");
 		}
 	}
 }

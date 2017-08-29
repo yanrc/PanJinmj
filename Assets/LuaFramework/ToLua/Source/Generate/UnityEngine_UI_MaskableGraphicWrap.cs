@@ -25,13 +25,13 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.MaskableGraphic));
-			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Material));
+			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic>(L, 1);
+			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckObject<UnityEngine.Material>(L, 2);
 			UnityEngine.Material o = obj.GetModifiedMaterial(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -43,13 +43,13 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.MaskableGraphic));
-			UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rect));
+			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic>(L, 1);
+			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 			obj.Cull(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,13 +61,13 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.MaskableGraphic));
-			UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rect));
+			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic>(L, 1);
+			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 			obj.SetClipRect(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -79,11 +79,11 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.MaskableGraphic));
+			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic>(L, 1);
 			obj.RecalculateClipping();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -95,11 +95,11 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.MaskableGraphic));
+			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic>(L, 1);
 			obj.RecalculateMasking();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -117,7 +117,7 @@ public class UnityEngine_UI_MaskableGraphicWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -138,7 +138,7 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onCullStateChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onCullStateChanged on a nil value");
 		}
 	}
 
@@ -157,7 +157,7 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index maskable on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index maskable on a nil value");
 		}
 	}
 
@@ -170,13 +170,13 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.MaskableGraphic obj = (UnityEngine.UI.MaskableGraphic)o;
-			UnityEngine.UI.MaskableGraphic.CullStateChangedEvent arg0 = (UnityEngine.UI.MaskableGraphic.CullStateChangedEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.MaskableGraphic.CullStateChangedEvent));
+			UnityEngine.UI.MaskableGraphic.CullStateChangedEvent arg0 = (UnityEngine.UI.MaskableGraphic.CullStateChangedEvent)ToLua.CheckObject<UnityEngine.UI.MaskableGraphic.CullStateChangedEvent>(L, 2);
 			obj.onCullStateChanged = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onCullStateChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onCullStateChanged on a nil value");
 		}
 	}
 
@@ -195,7 +195,7 @@ public class UnityEngine_UI_MaskableGraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index maskable on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index maskable on a nil value");
 		}
 	}
 }

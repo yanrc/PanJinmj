@@ -45,12 +45,12 @@ public class UnityEngine_RectWrap
 
 			if (count == 1)
 			{
-				UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+				UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 1);
 				UnityEngine.Rect obj = new UnityEngine.Rect(arg0);
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector2)))
+			else if (count == 2)
 			{
 				UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 1);
 				UnityEngine.Vector2 arg1 = ToLua.ToVector2(L, 2);
@@ -58,7 +58,7 @@ public class UnityEngine_RectWrap
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(float), typeof(float), typeof(float), typeof(float)))
+			else if (count == 4)
 			{
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
@@ -79,7 +79,7 @@ public class UnityEngine_RectWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.Rect.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -99,7 +99,7 @@ public class UnityEngine_RectWrap
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -120,7 +120,7 @@ public class UnityEngine_RectWrap
 			ToLua.SetBack(L, 1, obj);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -133,29 +133,29 @@ public class UnityEngine_RectWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(UnityEngine.Vector3)))
+			if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Vector3>(L, 2))
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				bool o = obj.Contains(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2)))
+			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Vector2>(L, 2))
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
 				UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 2);
 				bool o = obj.Contains(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(UnityEngine.Vector3), typeof(bool)))
+			else if (count == 3)
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				bool arg1 = LuaDLL.lua_toboolean(L, 3);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 				bool o = obj.Contains(arg0, arg1);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
@@ -166,7 +166,7 @@ public class UnityEngine_RectWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Rect.Contains");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -179,20 +179,20 @@ public class UnityEngine_RectWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(UnityEngine.Rect)))
+			if (count == 2)
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+				UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				bool o = obj.Overlaps(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(UnityEngine.Rect), typeof(bool)))
+			else if (count == 3)
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
-				bool arg1 = LuaDLL.lua_toboolean(L, 3);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+				UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
 				bool o = obj.Overlaps(arg0, arg1);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
@@ -203,7 +203,7 @@ public class UnityEngine_RectWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Rect.Overlaps");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -215,13 +215,13 @@ public class UnityEngine_RectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 1);
 			UnityEngine.Vector2 arg1 = ToLua.ToVector2(L, 2);
 			UnityEngine.Vector2 o = UnityEngine.Rect.NormalizedToPoint(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -233,13 +233,13 @@ public class UnityEngine_RectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 1);
 			UnityEngine.Vector2 arg1 = ToLua.ToVector2(L, 2);
 			UnityEngine.Vector2 o = UnityEngine.Rect.PointToNormalized(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -251,13 +251,13 @@ public class UnityEngine_RectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Rect arg0 = (UnityEngine.Rect)ToLua.ToObject(L, 1);
-			UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.To(L, 1);
+			UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.To(L, 2);
 			bool o = arg0 == arg1;
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -275,7 +275,7 @@ public class UnityEngine_RectWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -287,14 +287,14 @@ public class UnityEngine_RectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
+			UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
 			object arg0 = ToLua.ToVarObject(L, 2);
 			bool o = obj.Equals(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -307,17 +307,17 @@ public class UnityEngine_RectWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect)))
+			if (count == 1)
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
 				string o = obj.ToString();
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Rect), typeof(string)))
+			else if (count == 2)
 			{
-				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
+				UnityEngine.Rect obj = (UnityEngine.Rect)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rect));
+				string arg0 = ToLua.CheckString(L, 2);
 				string o = obj.ToString(arg0);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
@@ -327,7 +327,7 @@ public class UnityEngine_RectWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Rect.ToString");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -341,7 +341,7 @@ public class UnityEngine_RectWrap
 			ToLua.PushValue(L, UnityEngine.Rect.zero);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -362,7 +362,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index x on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index x on a nil value");
 		}
 	}
 
@@ -381,7 +381,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index y on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index y on a nil value");
 		}
 	}
 
@@ -400,7 +400,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index position on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index position on a nil value");
 		}
 	}
 
@@ -419,7 +419,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index center on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index center on a nil value");
 		}
 	}
 
@@ -438,7 +438,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index min on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index min on a nil value");
 		}
 	}
 
@@ -457,7 +457,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index max on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index max on a nil value");
 		}
 	}
 
@@ -476,7 +476,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index width on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index width on a nil value");
 		}
 	}
 
@@ -495,7 +495,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index height on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index height on a nil value");
 		}
 	}
 
@@ -514,7 +514,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index size on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index size on a nil value");
 		}
 	}
 
@@ -533,7 +533,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index xMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index xMin on a nil value");
 		}
 	}
 
@@ -552,7 +552,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index yMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index yMin on a nil value");
 		}
 	}
 
@@ -571,7 +571,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index xMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index xMax on a nil value");
 		}
 	}
 
@@ -590,7 +590,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index yMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index yMax on a nil value");
 		}
 	}
 
@@ -610,7 +610,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index x on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index x on a nil value");
 		}
 	}
 
@@ -630,7 +630,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index y on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index y on a nil value");
 		}
 	}
 
@@ -650,7 +650,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index position on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index position on a nil value");
 		}
 	}
 
@@ -670,7 +670,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index center on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index center on a nil value");
 		}
 	}
 
@@ -690,7 +690,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index min on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index min on a nil value");
 		}
 	}
 
@@ -710,7 +710,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index max on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index max on a nil value");
 		}
 	}
 
@@ -730,7 +730,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index width on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index width on a nil value");
 		}
 	}
 
@@ -750,7 +750,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index height on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index height on a nil value");
 		}
 	}
 
@@ -770,7 +770,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index size on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index size on a nil value");
 		}
 	}
 
@@ -790,7 +790,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index xMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index xMin on a nil value");
 		}
 	}
 
@@ -810,7 +810,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index yMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index yMin on a nil value");
 		}
 	}
 
@@ -830,7 +830,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index xMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index xMax on a nil value");
 		}
 	}
 
@@ -850,7 +850,7 @@ public class UnityEngine_RectWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index yMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index yMax on a nil value");
 		}
 	}
 }

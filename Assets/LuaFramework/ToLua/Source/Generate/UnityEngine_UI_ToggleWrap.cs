@@ -28,12 +28,12 @@ public class UnityEngine_UI_ToggleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 1);
 			UnityEngine.UI.CanvasUpdate arg0 = (UnityEngine.UI.CanvasUpdate)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.CanvasUpdate));
 			obj.Rebuild(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -45,11 +45,11 @@ public class UnityEngine_UI_ToggleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 1);
 			obj.LayoutComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,11 +61,11 @@ public class UnityEngine_UI_ToggleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Toggle));
+			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 1);
 			obj.GraphicUpdateComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -77,12 +77,12 @@ public class UnityEngine_UI_ToggleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Toggle));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -94,12 +94,12 @@ public class UnityEngine_UI_ToggleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Toggle));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)ToLua.CheckObject<UnityEngine.UI.Toggle>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSubmit(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -117,7 +117,7 @@ public class UnityEngine_UI_ToggleWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -138,7 +138,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index toggleTransition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index toggleTransition on a nil value");
 		}
 	}
 
@@ -157,7 +157,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index graphic on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index graphic on a nil value");
 		}
 	}
 
@@ -176,7 +176,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -195,7 +195,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index group on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index group on a nil value");
 		}
 	}
 
@@ -214,7 +214,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index isOn on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isOn on a nil value");
 		}
 	}
 
@@ -233,7 +233,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index toggleTransition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index toggleTransition on a nil value");
 		}
 	}
 
@@ -246,13 +246,13 @@ public class UnityEngine_UI_ToggleWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)o;
-			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 2);
 			obj.graphic = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index graphic on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index graphic on a nil value");
 		}
 	}
 
@@ -265,13 +265,13 @@ public class UnityEngine_UI_ToggleWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)o;
-			UnityEngine.UI.Toggle.ToggleEvent arg0 = (UnityEngine.UI.Toggle.ToggleEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Toggle.ToggleEvent));
+			UnityEngine.UI.Toggle.ToggleEvent arg0 = (UnityEngine.UI.Toggle.ToggleEvent)ToLua.CheckObject<UnityEngine.UI.Toggle.ToggleEvent>(L, 2);
 			obj.onValueChanged = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -284,13 +284,13 @@ public class UnityEngine_UI_ToggleWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Toggle obj = (UnityEngine.UI.Toggle)o;
-			UnityEngine.UI.ToggleGroup arg0 = (UnityEngine.UI.ToggleGroup)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.ToggleGroup));
+			UnityEngine.UI.ToggleGroup arg0 = (UnityEngine.UI.ToggleGroup)ToLua.CheckObject<UnityEngine.UI.ToggleGroup>(L, 2);
 			obj.group = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index group on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index group on a nil value");
 		}
 	}
 
@@ -309,7 +309,7 @@ public class UnityEngine_UI_ToggleWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index isOn on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isOn on a nil value");
 		}
 	}
 }

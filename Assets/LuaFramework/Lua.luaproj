@@ -34,18 +34,18 @@
     <Folder Include="Lua\Common\" />
     <Folder Include="Lua\Controller\" />
     <Folder Include="Lua\Data\" />
+    <Folder Include="Lua\games\" />
     <Folder Include="Lua\games\changsha\" />
+    <Folder Include="Lua\games\fushun\" />
+    <Folder Include="Lua\games\jiujiang\" />
     <Folder Include="Lua\games\panjin\" />
+    <Folder Include="Lua\games\shuangliao\" />
     <Folder Include="Lua\games\tuidaohu\" />
+    <Folder Include="Lua\games\wuxi\" />
     <Folder Include="Lua\Logic\" />
     <Folder Include="Lua\MicPhone\" />
-    <Folder Include="Lua\games\jiujiang\" />
-    <Folder Include="Lua\games\fushun\" />
-    <Folder Include="Lua\games\" />
-    <Folder Include="Lua\games\wuxi\" />
-    <Folder Include="Lua\games\shuangliao\" />
-    <Folder Include="Lua\Record\" />
     <Folder Include="Lua\NewModule\" />
+    <Folder Include="Lua\Record\" />
     <Folder Include="Lua\Rules\" />
     <Folder Include="Lua\Vos\" />
   </ItemGroup>
@@ -118,6 +118,7 @@
     <Compile Include="Lua\Controller\SharePanel.lua" />
     <Compile Include="Lua\Controller\ShopPanel.lua" />
     <Compile Include="Lua\Controller\StartPanel.lua" />
+    <Compile Include="Lua\Controller\UserInfoPanel.lua" />
     <Compile Include="Lua\Controller\VotePanel.lua" />
     <Compile Include="Lua\Controller\WaitingPanel.lua" />
     <Compile Include="Lua\Controller\ZhuaMaPanel.lua" />
@@ -137,6 +138,9 @@
     <Compile Include="Lua\games\jiujiang\JiujiangGame.lua" />
     <Compile Include="Lua\games\jiujiang\JiujiangRule.lua" />
     <Compile Include="Lua\games\panjin\PanjinGame.lua" />
+    <Compile Include="Lua\games\panjin\PanjinRule.lua" />
+    <Compile Include="Lua\games\shuangliao\ShuangLiaoGame.lua" />
+    <Compile Include="Lua\games\shuangliao\ShuangLiaoRule.lua" />
     <Compile Include="Lua\games\tuidaohu\TuidaohuGame.lua" />
     <Compile Include="Lua\games\tuidaohu\TuidaohuRule.lua" />
     <Compile Include="Lua\Logic\BottomScript.lua" />
@@ -146,7 +150,6 @@
     <Compile Include="Lua\Logic\LoginManager.lua" />
     <Compile Include="Lua\Logic\LuaClass.lua" />
     <Compile Include="Lua\Logic\Network.lua" />
-    <Compile Include="Lua\Controller\UserInfoPanel.lua" />
     <Compile Include="Lua\Logic\Test.lua" />
     <Compile Include="Lua\Logic\TipsManager.lua" />
     <Compile Include="Lua\Logic\TopAndBottomCardScript.lua" />
@@ -161,7 +164,6 @@
     <Compile Include="Lua\Record\RecordItem.lua" />
     <Compile Include="Lua\Record\RecordPanel.lua" />
     <Compile Include="Lua\Record\RecordPlayerItem.lua" />
-    <Compile Include="Lua\games\panjin\PanjinRule.lua" />
     <Compile Include="Lua\Vos\Account.lua" />
     <Compile Include="Lua\Vos\APIS.lua" />
     <Compile Include="Lua\Vos\AvatarVO.lua" />

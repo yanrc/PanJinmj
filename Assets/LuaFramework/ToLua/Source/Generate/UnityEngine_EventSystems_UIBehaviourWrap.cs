@@ -20,12 +20,12 @@ public class UnityEngine_EventSystems_UIBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.UIBehaviour obj = (UnityEngine.EventSystems.UIBehaviour)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.UIBehaviour));
+			UnityEngine.EventSystems.UIBehaviour obj = (UnityEngine.EventSystems.UIBehaviour)ToLua.CheckObject<UnityEngine.EventSystems.UIBehaviour>(L, 1);
 			bool o = obj.IsActive();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -37,12 +37,12 @@ public class UnityEngine_EventSystems_UIBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.UIBehaviour obj = (UnityEngine.EventSystems.UIBehaviour)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.UIBehaviour));
+			UnityEngine.EventSystems.UIBehaviour obj = (UnityEngine.EventSystems.UIBehaviour)ToLua.CheckObject<UnityEngine.EventSystems.UIBehaviour>(L, 1);
 			bool o = obj.IsDestroyed();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -60,7 +60,7 @@ public class UnityEngine_EventSystems_UIBehaviourWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

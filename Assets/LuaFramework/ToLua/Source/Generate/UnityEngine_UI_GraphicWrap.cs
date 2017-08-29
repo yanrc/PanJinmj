@@ -48,11 +48,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.SetAllDirty();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -64,11 +64,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.SetLayoutDirty();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -80,11 +80,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.SetVerticesDirty();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -96,11 +96,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.SetMaterialDirty();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -112,12 +112,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			UnityEngine.UI.CanvasUpdate arg0 = (UnityEngine.UI.CanvasUpdate)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.CanvasUpdate));
 			obj.Rebuild(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -129,11 +129,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.LayoutComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -145,11 +145,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.GraphicUpdateComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -161,11 +161,11 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			obj.SetNativeSize();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -177,14 +177,14 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 2);
-			UnityEngine.Camera arg1 = (UnityEngine.Camera)ToLua.CheckUnityObject(L, 3, typeof(UnityEngine.Camera));
+			UnityEngine.Camera arg1 = (UnityEngine.Camera)ToLua.CheckObject(L, 3, typeof(UnityEngine.Camera));
 			bool o = obj.Raycast(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -196,13 +196,13 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 2);
 			UnityEngine.Vector2 o = obj.PixelAdjustPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -214,12 +214,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			UnityEngine.Rect o = obj.GetPixelAdjustedRect();
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -232,24 +232,24 @@ public class UnityEngine_UI_GraphicWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.UI.Graphic), typeof(UnityEngine.Color), typeof(float), typeof(bool), typeof(bool)))
+			if (count == 5)
 			{
-				UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.ToObject(L, 1);
+				UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 				UnityEngine.Color arg0 = ToLua.ToColor(L, 2);
-				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-				bool arg2 = LuaDLL.lua_toboolean(L, 4);
-				bool arg3 = LuaDLL.lua_toboolean(L, 5);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
 				obj.CrossFadeColor(arg0, arg1, arg2, arg3);
 				return 0;
 			}
-			else if (count == 6 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.UI.Graphic), typeof(UnityEngine.Color), typeof(float), typeof(bool), typeof(bool), typeof(bool)))
+			else if (count == 6)
 			{
-				UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.ToObject(L, 1);
+				UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 				UnityEngine.Color arg0 = ToLua.ToColor(L, 2);
-				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-				bool arg2 = LuaDLL.lua_toboolean(L, 4);
-				bool arg3 = LuaDLL.lua_toboolean(L, 5);
-				bool arg4 = LuaDLL.lua_toboolean(L, 6);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				bool arg4 = LuaDLL.luaL_checkboolean(L, 6);
 				obj.CrossFadeColor(arg0, arg1, arg2, arg3, arg4);
 				return 0;
 			}
@@ -258,7 +258,7 @@ public class UnityEngine_UI_GraphicWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.UI.Graphic.CrossFadeColor");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -270,14 +270,14 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
 			obj.CrossFadeAlpha(arg0, arg1, arg2);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -289,24 +289,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.RegisterDirtyLayoutCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -318,24 +306,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.UnregisterDirtyLayoutCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -347,24 +323,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.RegisterDirtyVerticesCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -376,24 +340,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.UnregisterDirtyVerticesCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -405,24 +357,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.RegisterDirtyMaterialCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -434,24 +374,12 @@ public class UnityEngine_UI_GraphicWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Graphic));
-			UnityEngine.Events.UnityAction arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction), func) as UnityEngine.Events.UnityAction;
-			}
-
+			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 1);
+			UnityEngine.Events.UnityAction arg0 = (UnityEngine.Events.UnityAction)ToLua.CheckDelegate<UnityEngine.Events.UnityAction>(L, 2);
 			obj.UnregisterDirtyMaterialCallback(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -469,7 +397,7 @@ public class UnityEngine_UI_GraphicWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -483,7 +411,7 @@ public class UnityEngine_UI_GraphicWrap
 			ToLua.Push(L, UnityEngine.UI.Graphic.defaultGraphicMaterial);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -504,7 +432,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index color on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index color on a nil value");
 		}
 	}
 
@@ -523,7 +451,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index raycastTarget on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index raycastTarget on a nil value");
 		}
 	}
 
@@ -542,7 +470,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index depth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index depth on a nil value");
 		}
 	}
 
@@ -556,12 +484,12 @@ public class UnityEngine_UI_GraphicWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)o;
 			UnityEngine.RectTransform ret = obj.rectTransform;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index rectTransform on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index rectTransform on a nil value");
 		}
 	}
 
@@ -575,12 +503,12 @@ public class UnityEngine_UI_GraphicWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)o;
 			UnityEngine.Canvas ret = obj.canvas;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index canvas on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index canvas on a nil value");
 		}
 	}
 
@@ -594,12 +522,12 @@ public class UnityEngine_UI_GraphicWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)o;
 			UnityEngine.CanvasRenderer ret = obj.canvasRenderer;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index canvasRenderer on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index canvasRenderer on a nil value");
 		}
 	}
 
@@ -618,7 +546,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index defaultMaterial on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index defaultMaterial on a nil value");
 		}
 	}
 
@@ -637,7 +565,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index material on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index material on a nil value");
 		}
 	}
 
@@ -656,7 +584,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index materialForRendering on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index materialForRendering on a nil value");
 		}
 	}
 
@@ -675,7 +603,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index mainTexture on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index mainTexture on a nil value");
 		}
 	}
 
@@ -694,7 +622,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index color on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index color on a nil value");
 		}
 	}
 
@@ -713,7 +641,7 @@ public class UnityEngine_UI_GraphicWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index raycastTarget on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index raycastTarget on a nil value");
 		}
 	}
 
@@ -726,13 +654,13 @@ public class UnityEngine_UI_GraphicWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Graphic obj = (UnityEngine.UI.Graphic)o;
-			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Material));
+			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckObject<UnityEngine.Material>(L, 2);
 			obj.material = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index material on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index material on a nil value");
 		}
 	}
 }

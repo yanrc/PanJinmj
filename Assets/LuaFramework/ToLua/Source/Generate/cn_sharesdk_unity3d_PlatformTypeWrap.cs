@@ -57,6 +57,18 @@ public class cn_sharesdk_unity3d_PlatformTypeWrap
 		L.RegVar("YixinPlatform", get_YixinPlatform, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<cn.sharesdk.unity3d.PlatformType>.Check = CheckType;
+		StackTraits<cn.sharesdk.unity3d.PlatformType>.Push = Push;
+	}
+
+	static void Push(IntPtr L, cn.sharesdk.unity3d.PlatformType arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(cn.sharesdk.unity3d.PlatformType), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

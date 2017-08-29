@@ -38,7 +38,7 @@ public class UnityEngine_RectTransformWrap
 			if (count == 0)
 			{
 				UnityEngine.RectTransform obj = new UnityEngine.RectTransform();
-				ToLua.Push(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -46,7 +46,7 @@ public class UnityEngine_RectTransformWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.RectTransform.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -57,13 +57,29 @@ public class UnityEngine_RectTransformWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
-			UnityEngine.Vector3[] arg0 = ToLua.CheckObjectArray<UnityEngine.Vector3>(L, 2);
-			obj.GetLocalCorners(arg0);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+            if (count == 1)
+            {
+                UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
+                UnityEngine.Vector3[] arg0 = new UnityEngine.Vector3[4];
+                obj.GetLocalCorners(arg0);
+                ToLua.Push(L, arg0);
+                return 1;
+            }
+			else if (count == 2)
+			{
+				UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
+				UnityEngine.Vector3[] arg0 = ToLua.CheckStructArray<UnityEngine.Vector3>(L, 2);
+				obj.GetLocalCorners(arg0);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.RectTransform.GetLocalCorners");
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -74,13 +90,29 @@ public class UnityEngine_RectTransformWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
-			UnityEngine.Vector3[] arg0 = ToLua.CheckObjectArray<UnityEngine.Vector3>(L, 2);
-			obj.GetWorldCorners(arg0);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+            if (count == 1)
+            {
+                UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
+                UnityEngine.Vector3[] arg0 = new UnityEngine.Vector3[4];
+                obj.GetWorldCorners(arg0);
+                ToLua.Push(L, arg0);
+                return 1;
+            }
+			else if (count == 2)
+			{
+				UnityEngine.RectTransform obj = (UnityEngine.RectTransform)ToLua.CheckObject(L, 1, typeof(UnityEngine.RectTransform));
+				UnityEngine.Vector3[] arg0 = ToLua.CheckStructArray<UnityEngine.Vector3>(L, 2);
+				obj.GetWorldCorners(arg0);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.RectTransform.GetWorldCorners");
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -99,7 +131,7 @@ public class UnityEngine_RectTransformWrap
 			obj.SetInsetAndSizeFromParentEdge(arg0, arg1, arg2);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -117,7 +149,7 @@ public class UnityEngine_RectTransformWrap
 			obj.SetSizeWithCurrentAnchors(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -135,7 +167,7 @@ public class UnityEngine_RectTransformWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -156,7 +188,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index rect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index rect on a nil value");
 		}
 	}
 
@@ -175,7 +207,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchorMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchorMin on a nil value");
 		}
 	}
 
@@ -194,7 +226,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchorMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchorMax on a nil value");
 		}
 	}
 
@@ -213,7 +245,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchoredPosition3D on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchoredPosition3D on a nil value");
 		}
 	}
 
@@ -232,7 +264,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchoredPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchoredPosition on a nil value");
 		}
 	}
 
@@ -251,7 +283,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index sizeDelta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index sizeDelta on a nil value");
 		}
 	}
 
@@ -270,7 +302,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pivot on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pivot on a nil value");
 		}
 	}
 
@@ -289,7 +321,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index offsetMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index offsetMin on a nil value");
 		}
 	}
 
@@ -308,14 +340,14 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index offsetMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index offsetMax on a nil value");
 		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_reapplyDrivenProperties(IntPtr L)
 	{
-		ToLua.Push(L, new EventObject("UnityEngine.RectTransform.reapplyDrivenProperties"));
+		ToLua.Push(L, new EventObject(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties)));
 		return 1;
 	}
 
@@ -334,7 +366,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchorMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchorMin on a nil value");
 		}
 	}
 
@@ -353,7 +385,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchorMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchorMax on a nil value");
 		}
 	}
 
@@ -372,7 +404,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchoredPosition3D on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchoredPosition3D on a nil value");
 		}
 	}
 
@@ -391,7 +423,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index anchoredPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index anchoredPosition on a nil value");
 		}
 	}
 
@@ -410,7 +442,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index sizeDelta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index sizeDelta on a nil value");
 		}
 	}
 
@@ -429,7 +461,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pivot on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pivot on a nil value");
 		}
 	}
 
@@ -448,7 +480,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index offsetMin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index offsetMin on a nil value");
 		}
 	}
 
@@ -467,7 +499,7 @@ public class UnityEngine_RectTransformWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index offsetMax on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index offsetMax on a nil value");
 		}
 	}
 
@@ -489,34 +521,18 @@ public class UnityEngine_RectTransformWrap
 
 			if (arg0.op == EventOp.Add)
 			{
-				UnityEngine.RectTransform.ReapplyDrivenProperties ev = (UnityEngine.RectTransform.ReapplyDrivenProperties)DelegateFactory.CreateDelegate(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), arg0.func);
+				UnityEngine.RectTransform.ReapplyDrivenProperties ev = (UnityEngine.RectTransform.ReapplyDrivenProperties)arg0.func;
 				UnityEngine.RectTransform.reapplyDrivenProperties += ev;
 			}
 			else if (arg0.op == EventOp.Sub)
 			{
-				UnityEngine.RectTransform.ReapplyDrivenProperties ev = (UnityEngine.RectTransform.ReapplyDrivenProperties)LuaMisc.GetEventHandler(null, typeof(UnityEngine.RectTransform), "reapplyDrivenProperties");
-				Delegate[] ds = ev.GetInvocationList();
-				LuaState state = LuaState.Get(L);
-
-				for (int i = 0; i < ds.Length; i++)
-				{
-					ev = (UnityEngine.RectTransform.ReapplyDrivenProperties)ds[i];
-					LuaDelegate ld = ev.Target as LuaDelegate;
-
-					if (ld != null && ld.func == arg0.func)
-					{
-						UnityEngine.RectTransform.reapplyDrivenProperties -= ev;
-						state.DelayDispose(ld.func);
-						break;
-					}
-				}
-
-				arg0.func.Dispose();
+				UnityEngine.RectTransform.ReapplyDrivenProperties ev = (UnityEngine.RectTransform.ReapplyDrivenProperties)arg0.func;
+				UnityEngine.RectTransform.reapplyDrivenProperties -= ev;
 			}
 
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -532,13 +548,13 @@ public class UnityEngine_RectTransformWrap
 
 			if (count == 1)
 			{
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), func);
+				Delegate arg1 = DelegateTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Create(func);
 				ToLua.Push(L, arg1);
 			}
 			else
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), func, self);
+				Delegate arg1 = DelegateTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

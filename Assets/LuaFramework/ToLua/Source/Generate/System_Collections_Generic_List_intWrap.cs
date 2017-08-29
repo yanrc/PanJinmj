@@ -58,21 +58,21 @@ public class System_Collections_Generic_List_intWrap
 			if (count == 0)
 			{
 				System.Collections.Generic.List<int> obj = new System.Collections.Generic.List<int>();
-				ToLua.PushObject(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(int)))
+			else if (count == 1 && TypeChecker.CheckTypes<int>(L, 1))
 			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
 				System.Collections.Generic.List<int> obj = new System.Collections.Generic.List<int>(arg0);
-				ToLua.PushObject(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.IEnumerable<int>)))
+			else if (count == 1 && TypeChecker.CheckTypes<System.Collections.Generic.IEnumerable<int>>(L, 1))
 			{
-				System.Collections.Generic.IEnumerable<int> arg0 = (System.Collections.Generic.IEnumerable<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.IEnumerable<int>));
+				System.Collections.Generic.IEnumerable<int> arg0 = (System.Collections.Generic.IEnumerable<int>)ToLua.ToObject(L, 1);
 				System.Collections.Generic.List<int> obj = new System.Collections.Generic.List<int>(arg0);
-				ToLua.PushObject(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -80,7 +80,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: System.Collections.Generic.List<int>.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -99,7 +99,7 @@ public class System_Collections_Generic_List_intWrap
 			return 1;
 
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -118,7 +118,7 @@ public class System_Collections_Generic_List_intWrap
 			return 0;
 
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -133,7 +133,7 @@ public class System_Collections_Generic_List_intWrap
 			LuaDLL.tolua_bindthis(L, _get_this, _set_this);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -150,7 +150,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.Add(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -163,11 +163,11 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Collections.Generic.IEnumerable<int> arg0 = (System.Collections.Generic.IEnumerable<int>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.IEnumerable<int>));
+			System.Collections.Generic.IEnumerable<int> arg0 = (System.Collections.Generic.IEnumerable<int>)ToLua.CheckObject<System.Collections.Generic.IEnumerable<int>>(L, 2);
 			obj.AddRange(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -184,7 +184,7 @@ public class System_Collections_Generic_List_intWrap
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -197,30 +197,30 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int)))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int o = obj.BinarySearch(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(System.Collections.Generic.IComparer<int>)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				System.Collections.Generic.IComparer<int> arg1 = (System.Collections.Generic.IComparer<int>)ToLua.ToObject(L, 3);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Collections.Generic.IComparer<int> arg1 = (System.Collections.Generic.IComparer<int>)ToLua.CheckObject<System.Collections.Generic.IComparer<int>>(L, 3);
 				int o = obj.BinarySearch(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(int), typeof(System.Collections.Generic.IComparer<int>)))
+			else if (count == 5)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-				System.Collections.Generic.IComparer<int> arg3 = (System.Collections.Generic.IComparer<int>)ToLua.ToObject(L, 5);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				System.Collections.Generic.IComparer<int> arg3 = (System.Collections.Generic.IComparer<int>)ToLua.CheckObject<System.Collections.Generic.IComparer<int>>(L, 5);
 				int o = obj.BinarySearch(arg0, arg1, arg2, arg3);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -230,7 +230,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.BinarySearch");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -246,7 +246,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.Clear();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -264,7 +264,7 @@ public class System_Collections_Generic_List_intWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -277,28 +277,28 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int[])))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 				int[] arg0 = ToLua.CheckNumberArray<int>(L, 2);
 				obj.CopyTo(arg0);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int[]), typeof(int)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 				int[] arg0 = ToLua.CheckNumberArray<int>(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 				obj.CopyTo(arg0, arg1);
 				return 0;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int[]), typeof(int), typeof(int)))
+			else if (count == 5)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int[] arg1 = ToLua.CheckNumberArray<int>(L, 3);
-				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-				int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
 				obj.CopyTo(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -307,7 +307,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.CopyTo");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -320,24 +320,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			bool o = obj.Exists(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -350,24 +338,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			int o = obj.Find(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -380,24 +356,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			System.Collections.Generic.List<int> o = obj.FindAll(arg0);
-			ToLua.PushObject(L, o);
+			ToLua.PushSealed(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -410,65 +374,29 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(System.Predicate<int>)))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				System.Predicate<int> arg0 = null;
-				LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-				if (funcType2 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg0 = (System.Predicate<int>)ToLua.ToObject(L, 2);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 2);
-					arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 				int o = obj.FindIndex(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(System.Predicate<int>)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				System.Predicate<int> arg1 = null;
-				LuaTypes funcType3 = LuaDLL.lua_type(L, 3);
-
-				if (funcType3 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg1 = (System.Predicate<int>)ToLua.ToObject(L, 3);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 3);
-					arg1 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Predicate<int> arg1 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 3);
 				int o = obj.FindIndex(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(System.Predicate<int>)))
+			else if (count == 4)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				System.Predicate<int> arg2 = null;
-				LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
-
-				if (funcType4 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg2 = (System.Predicate<int>)ToLua.ToObject(L, 4);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 4);
-					arg2 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				System.Predicate<int> arg2 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 4);
 				int o = obj.FindIndex(arg0, arg1, arg2);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -478,7 +406,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.FindIndex");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -491,24 +419,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			int o = obj.FindLast(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -521,65 +437,29 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(System.Predicate<int>)))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				System.Predicate<int> arg0 = null;
-				LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-				if (funcType2 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg0 = (System.Predicate<int>)ToLua.ToObject(L, 2);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 2);
-					arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 				int o = obj.FindLastIndex(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(System.Predicate<int>)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				System.Predicate<int> arg1 = null;
-				LuaTypes funcType3 = LuaDLL.lua_type(L, 3);
-
-				if (funcType3 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg1 = (System.Predicate<int>)ToLua.ToObject(L, 3);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 3);
-					arg1 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Predicate<int> arg1 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 3);
 				int o = obj.FindLastIndex(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(System.Predicate<int>)))
+			else if (count == 4)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				System.Predicate<int> arg2 = null;
-				LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
-
-				if (funcType4 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg2 = (System.Predicate<int>)ToLua.ToObject(L, 4);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 4);
-					arg2 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				System.Predicate<int> arg2 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 4);
 				int o = obj.FindLastIndex(arg0, arg1, arg2);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -589,7 +469,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.FindLastIndex");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -602,23 +482,11 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Action<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Action<int>)ToLua.CheckObject(L, 2, typeof(System.Action<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Action<int>), func) as System.Action<int>;
-			}
-
+			System.Action<int> arg0 = (System.Action<int>)ToLua.CheckDelegate<System.Action<int>>(L, 2);
 			obj.ForEach(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -631,11 +499,11 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Collections.Generic.List<int>.Enumerator o = obj.GetEnumerator();
+			System.Collections.IEnumerator o = obj.GetEnumerator();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -651,10 +519,10 @@ public class System_Collections_Generic_List_intWrap
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			System.Collections.Generic.List<int> o = obj.GetRange(arg0, arg1);
-			ToLua.PushObject(L, o);
+			ToLua.PushSealed(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -667,29 +535,29 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int)))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int o = obj.IndexOf(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 				int o = obj.IndexOf(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(int)))
+			else if (count == 4)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
 				int o = obj.IndexOf(arg0, arg1, arg2);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -699,7 +567,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.IndexOf");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -717,7 +585,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.Insert(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -731,11 +599,11 @@ public class System_Collections_Generic_List_intWrap
 			ToLua.CheckArgsCount(L, 3);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			System.Collections.Generic.IEnumerable<int> arg1 = (System.Collections.Generic.IEnumerable<int>)ToLua.CheckObject(L, 3, typeof(System.Collections.Generic.IEnumerable<int>));
+			System.Collections.Generic.IEnumerable<int> arg1 = (System.Collections.Generic.IEnumerable<int>)ToLua.CheckObject<System.Collections.Generic.IEnumerable<int>>(L, 3);
 			obj.InsertRange(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -748,29 +616,29 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int)))
+			if (count == 2)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int o = obj.LastIndexOf(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 				int o = obj.LastIndexOf(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(int)))
+			else if (count == 4)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
 				int o = obj.LastIndexOf(arg0, arg1, arg2);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -780,7 +648,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.LastIndexOf");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -798,7 +666,7 @@ public class System_Collections_Generic_List_intWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -811,24 +679,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			int o = obj.RemoveAll(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -845,7 +701,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.RemoveAt(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -863,7 +719,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.RemoveRange(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -876,17 +732,17 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>)))
+			if (count == 1)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 				obj.Reverse();
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int)))
+			else if (count == 3)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 				obj.Reverse(arg0, arg1);
 				return 0;
 			}
@@ -895,7 +751,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.Reverse");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -908,44 +764,32 @@ public class System_Collections_Generic_List_intWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>)))
+			if (count == 1)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 				obj.Sort();
 				return 0;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(System.Comparison<int>)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Comparison<int>>(L, 2))
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				System.Comparison<int> arg0 = null;
-				LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-				if (funcType2 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg0 = (System.Comparison<int>)ToLua.ToObject(L, 2);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 2);
-					arg0 = DelegateFactory.CreateDelegate(typeof(System.Comparison<int>), func) as System.Comparison<int>;
-				}
-
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				System.Comparison<int> arg0 = (System.Comparison<int>)ToLua.ToObject(L, 2);
 				obj.Sort(arg0);
 				return 0;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(System.Collections.Generic.IComparer<int>)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.Generic.IComparer<int>>(L, 2))
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
 				System.Collections.Generic.IComparer<int> arg0 = (System.Collections.Generic.IComparer<int>)ToLua.ToObject(L, 2);
 				obj.Sort(arg0);
 				return 0;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.Generic.List<int>), typeof(int), typeof(int), typeof(System.Collections.Generic.IComparer<int>)))
+			else if (count == 4)
 			{
-				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.ToObject(L, 1);
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-				System.Collections.Generic.IComparer<int> arg2 = (System.Collections.Generic.IComparer<int>)ToLua.ToObject(L, 4);
+				System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				System.Collections.Generic.IComparer<int> arg2 = (System.Collections.Generic.IComparer<int>)ToLua.CheckObject<System.Collections.Generic.IComparer<int>>(L, 4);
 				obj.Sort(arg0, arg1, arg2);
 				return 0;
 			}
@@ -954,7 +798,7 @@ public class System_Collections_Generic_List_intWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.Collections.Generic.List<int>.Sort");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -971,7 +815,7 @@ public class System_Collections_Generic_List_intWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -987,7 +831,7 @@ public class System_Collections_Generic_List_intWrap
 			obj.TrimExcess();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1000,24 +844,12 @@ public class System_Collections_Generic_List_intWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.Collections.Generic.List<int> obj = (System.Collections.Generic.List<int>)ToLua.CheckObject(L, 1, typeof(System.Collections.Generic.List<int>));
-			System.Predicate<int> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (System.Predicate<int>)ToLua.CheckObject(L, 2, typeof(System.Predicate<int>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(System.Predicate<int>), func) as System.Predicate<int>;
-			}
-
+			System.Predicate<int> arg0 = (System.Predicate<int>)ToLua.CheckDelegate<System.Predicate<int>>(L, 2);
 			bool o = obj.TrueForAll(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1035,7 +867,7 @@ public class System_Collections_Generic_List_intWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1053,7 +885,7 @@ public class System_Collections_Generic_List_intWrap
 			obj[arg0] = arg1;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1074,7 +906,7 @@ public class System_Collections_Generic_List_intWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Capacity on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Capacity on a nil value");
 		}
 	}
 
@@ -1093,7 +925,7 @@ public class System_Collections_Generic_List_intWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Count on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Count on a nil value");
 		}
 	}
 
@@ -1112,7 +944,7 @@ public class System_Collections_Generic_List_intWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Capacity on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Capacity on a nil value");
 		}
 	}
 }

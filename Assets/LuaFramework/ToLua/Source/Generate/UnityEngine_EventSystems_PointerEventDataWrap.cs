@@ -45,7 +45,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 
 			if (count == 1)
 			{
-				UnityEngine.EventSystems.EventSystem arg0 = (UnityEngine.EventSystems.EventSystem)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.EventSystems.EventSystem));
+				UnityEngine.EventSystems.EventSystem arg0 = (UnityEngine.EventSystems.EventSystem)ToLua.CheckObject<UnityEngine.EventSystems.EventSystem>(L, 1);
 				UnityEngine.EventSystems.PointerEventData obj = new UnityEngine.EventSystems.PointerEventData(arg0);
 				ToLua.PushObject(L, obj);
 				return 1;
@@ -55,7 +55,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.EventSystems.PointerEventData.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -67,12 +67,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 1);
 			bool o = obj.IsPointerMoving();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -84,12 +84,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 1);
 			bool o = obj.IsScrolling();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -101,12 +101,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 1);
 			string o = obj.ToString();
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -122,12 +122,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			System.Collections.Generic.List<UnityEngine.GameObject> ret = obj.hovered;
-			ToLua.PushObject(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index hovered on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index hovered on a nil value");
 		}
 	}
 
@@ -141,12 +141,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.GameObject ret = obj.pointerEnter;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerEnter on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerEnter on a nil value");
 		}
 	}
 
@@ -160,12 +160,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.GameObject ret = obj.lastPress;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index lastPress on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lastPress on a nil value");
 		}
 	}
 
@@ -179,12 +179,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.GameObject ret = obj.rawPointerPress;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index rawPointerPress on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index rawPointerPress on a nil value");
 		}
 	}
 
@@ -198,12 +198,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.GameObject ret = obj.pointerDrag;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerDrag on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerDrag on a nil value");
 		}
 	}
 
@@ -222,7 +222,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerCurrentRaycast on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerCurrentRaycast on a nil value");
 		}
 	}
 
@@ -241,7 +241,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerPressRaycast on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerPressRaycast on a nil value");
 		}
 	}
 
@@ -260,7 +260,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index eligibleForClick on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index eligibleForClick on a nil value");
 		}
 	}
 
@@ -279,7 +279,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerId on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerId on a nil value");
 		}
 	}
 
@@ -298,7 +298,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index position on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index position on a nil value");
 		}
 	}
 
@@ -317,7 +317,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index delta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index delta on a nil value");
 		}
 	}
 
@@ -336,7 +336,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pressPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pressPosition on a nil value");
 		}
 	}
 
@@ -355,7 +355,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index clickTime on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index clickTime on a nil value");
 		}
 	}
 
@@ -374,7 +374,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index clickCount on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index clickCount on a nil value");
 		}
 	}
 
@@ -393,7 +393,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index scrollDelta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index scrollDelta on a nil value");
 		}
 	}
 
@@ -412,7 +412,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index useDragThreshold on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index useDragThreshold on a nil value");
 		}
 	}
 
@@ -431,7 +431,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index dragging on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index dragging on a nil value");
 		}
 	}
 
@@ -450,7 +450,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index button on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index button on a nil value");
 		}
 	}
 
@@ -464,12 +464,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.Camera ret = obj.enterEventCamera;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index enterEventCamera on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index enterEventCamera on a nil value");
 		}
 	}
 
@@ -483,12 +483,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.Camera ret = obj.pressEventCamera;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pressEventCamera on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pressEventCamera on a nil value");
 		}
 	}
 
@@ -502,12 +502,12 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
 			UnityEngine.GameObject ret = obj.pointerPress;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerPress on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerPress on a nil value");
 		}
 	}
 
@@ -526,7 +526,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index hovered on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index hovered on a nil value");
 		}
 	}
 
@@ -539,13 +539,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.pointerEnter = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerEnter on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerEnter on a nil value");
 		}
 	}
 
@@ -558,13 +558,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.rawPointerPress = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index rawPointerPress on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index rawPointerPress on a nil value");
 		}
 	}
 
@@ -577,13 +577,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.pointerDrag = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerDrag on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerDrag on a nil value");
 		}
 	}
 
@@ -596,13 +596,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.EventSystems.RaycastResult arg0 = (UnityEngine.EventSystems.RaycastResult)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.RaycastResult));
+			UnityEngine.EventSystems.RaycastResult arg0 = StackTraits<UnityEngine.EventSystems.RaycastResult>.Check(L, 2);
 			obj.pointerCurrentRaycast = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerCurrentRaycast on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerCurrentRaycast on a nil value");
 		}
 	}
 
@@ -615,13 +615,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.EventSystems.RaycastResult arg0 = (UnityEngine.EventSystems.RaycastResult)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.RaycastResult));
+			UnityEngine.EventSystems.RaycastResult arg0 = StackTraits<UnityEngine.EventSystems.RaycastResult>.Check(L, 2);
 			obj.pointerPressRaycast = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerPressRaycast on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerPressRaycast on a nil value");
 		}
 	}
 
@@ -640,7 +640,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index eligibleForClick on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index eligibleForClick on a nil value");
 		}
 	}
 
@@ -659,7 +659,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerId on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerId on a nil value");
 		}
 	}
 
@@ -678,7 +678,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index position on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index position on a nil value");
 		}
 	}
 
@@ -697,7 +697,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index delta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index delta on a nil value");
 		}
 	}
 
@@ -716,7 +716,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pressPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pressPosition on a nil value");
 		}
 	}
 
@@ -735,7 +735,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index clickTime on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index clickTime on a nil value");
 		}
 	}
 
@@ -754,7 +754,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index clickCount on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index clickCount on a nil value");
 		}
 	}
 
@@ -773,7 +773,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index scrollDelta on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index scrollDelta on a nil value");
 		}
 	}
 
@@ -792,7 +792,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index useDragThreshold on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index useDragThreshold on a nil value");
 		}
 	}
 
@@ -811,7 +811,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index dragging on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index dragging on a nil value");
 		}
 	}
 
@@ -830,7 +830,7 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index button on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index button on a nil value");
 		}
 	}
 
@@ -843,13 +843,13 @@ public class UnityEngine_EventSystems_PointerEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.PointerEventData obj = (UnityEngine.EventSystems.PointerEventData)o;
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.pointerPress = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pointerPress on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pointerPress on a nil value");
 		}
 	}
 }

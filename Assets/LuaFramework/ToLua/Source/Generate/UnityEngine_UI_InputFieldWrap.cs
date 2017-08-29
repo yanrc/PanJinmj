@@ -72,12 +72,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.MoveTextEnd(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -89,12 +89,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.MoveTextStart(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -106,12 +106,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnBeginDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -123,12 +123,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -140,12 +140,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnEndDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -157,12 +157,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerDown(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -174,12 +174,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			UnityEngine.Event arg0 = (UnityEngine.Event)ToLua.CheckObject(L, 2, typeof(UnityEngine.Event));
 			obj.ProcessEvent(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -191,12 +191,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnUpdateSelected(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -208,11 +208,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.ForceLabelUpdate();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -224,12 +224,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			UnityEngine.UI.CanvasUpdate arg0 = (UnityEngine.UI.CanvasUpdate)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.CanvasUpdate));
 			obj.Rebuild(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -241,11 +241,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.LayoutComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -257,11 +257,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.GraphicUpdateComplete();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -273,11 +273,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.ActivateInputField();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -289,12 +289,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSelect(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -306,12 +306,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -323,11 +323,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.DeactivateInputField();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -339,12 +339,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnDeselect(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -356,12 +356,12 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSubmit(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -373,11 +373,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.CalculateLayoutInputHorizontal();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -389,11 +389,11 @@ public class UnityEngine_UI_InputFieldWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.InputField));
+			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)ToLua.CheckObject<UnityEngine.UI.InputField>(L, 1);
 			obj.CalculateLayoutInputVertical();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -411,7 +411,7 @@ public class UnityEngine_UI_InputFieldWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -432,7 +432,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shouldHideMobileInput on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shouldHideMobileInput on a nil value");
 		}
 	}
 
@@ -451,7 +451,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index text on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index text on a nil value");
 		}
 	}
 
@@ -470,7 +470,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index isFocused on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isFocused on a nil value");
 		}
 	}
 
@@ -489,7 +489,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretBlinkRate on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretBlinkRate on a nil value");
 		}
 	}
 
@@ -508,7 +508,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretWidth on a nil value");
 		}
 	}
 
@@ -527,7 +527,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textComponent on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textComponent on a nil value");
 		}
 	}
 
@@ -546,7 +546,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index placeholder on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index placeholder on a nil value");
 		}
 	}
 
@@ -565,7 +565,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretColor on a nil value");
 		}
 	}
 
@@ -584,7 +584,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index customCaretColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index customCaretColor on a nil value");
 		}
 	}
 
@@ -603,7 +603,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionColor on a nil value");
 		}
 	}
 
@@ -622,7 +622,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onEndEdit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onEndEdit on a nil value");
 		}
 	}
 
@@ -641,7 +641,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -660,7 +660,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValidateInput on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValidateInput on a nil value");
 		}
 	}
 
@@ -679,7 +679,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index characterLimit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index characterLimit on a nil value");
 		}
 	}
 
@@ -698,7 +698,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index contentType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index contentType on a nil value");
 		}
 	}
 
@@ -717,7 +717,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index lineType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lineType on a nil value");
 		}
 	}
 
@@ -736,7 +736,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index inputType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index inputType on a nil value");
 		}
 	}
 
@@ -755,7 +755,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index keyboardType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index keyboardType on a nil value");
 		}
 	}
 
@@ -774,7 +774,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index characterValidation on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index characterValidation on a nil value");
 		}
 	}
 
@@ -793,7 +793,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index readOnly on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index readOnly on a nil value");
 		}
 	}
 
@@ -812,7 +812,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index multiLine on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index multiLine on a nil value");
 		}
 	}
 
@@ -831,7 +831,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index asteriskChar on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index asteriskChar on a nil value");
 		}
 	}
 
@@ -850,7 +850,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index wasCanceled on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index wasCanceled on a nil value");
 		}
 	}
 
@@ -869,7 +869,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretPosition on a nil value");
 		}
 	}
 
@@ -888,7 +888,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionAnchorPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionAnchorPosition on a nil value");
 		}
 	}
 
@@ -907,7 +907,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionFocusPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionFocusPosition on a nil value");
 		}
 	}
 
@@ -926,7 +926,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minWidth on a nil value");
 		}
 	}
 
@@ -945,7 +945,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredWidth on a nil value");
 		}
 	}
 
@@ -964,7 +964,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleWidth on a nil value");
 		}
 	}
 
@@ -983,7 +983,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minHeight on a nil value");
 		}
 	}
 
@@ -1002,7 +1002,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredHeight on a nil value");
 		}
 	}
 
@@ -1021,7 +1021,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleHeight on a nil value");
 		}
 	}
 
@@ -1040,7 +1040,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index layoutPriority on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index layoutPriority on a nil value");
 		}
 	}
 
@@ -1059,7 +1059,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shouldHideMobileInput on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shouldHideMobileInput on a nil value");
 		}
 	}
 
@@ -1078,7 +1078,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index text on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index text on a nil value");
 		}
 	}
 
@@ -1097,7 +1097,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretBlinkRate on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretBlinkRate on a nil value");
 		}
 	}
 
@@ -1116,7 +1116,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretWidth on a nil value");
 		}
 	}
 
@@ -1129,13 +1129,13 @@ public class UnityEngine_UI_InputFieldWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.textComponent = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textComponent on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textComponent on a nil value");
 		}
 	}
 
@@ -1148,13 +1148,13 @@ public class UnityEngine_UI_InputFieldWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)o;
-			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 2);
 			obj.placeholder = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index placeholder on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index placeholder on a nil value");
 		}
 	}
 
@@ -1173,7 +1173,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretColor on a nil value");
 		}
 	}
 
@@ -1192,7 +1192,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index customCaretColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index customCaretColor on a nil value");
 		}
 	}
 
@@ -1211,7 +1211,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionColor on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionColor on a nil value");
 		}
 	}
 
@@ -1224,13 +1224,13 @@ public class UnityEngine_UI_InputFieldWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)o;
-			UnityEngine.UI.InputField.SubmitEvent arg0 = (UnityEngine.UI.InputField.SubmitEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.InputField.SubmitEvent));
+			UnityEngine.UI.InputField.SubmitEvent arg0 = (UnityEngine.UI.InputField.SubmitEvent)ToLua.CheckObject<UnityEngine.UI.InputField.SubmitEvent>(L, 2);
 			obj.onEndEdit = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onEndEdit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onEndEdit on a nil value");
 		}
 	}
 
@@ -1243,13 +1243,13 @@ public class UnityEngine_UI_InputFieldWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)o;
-			UnityEngine.UI.InputField.OnChangeEvent arg0 = (UnityEngine.UI.InputField.OnChangeEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.InputField.OnChangeEvent));
+			UnityEngine.UI.InputField.OnChangeEvent arg0 = (UnityEngine.UI.InputField.OnChangeEvent)ToLua.CheckObject<UnityEngine.UI.InputField.OnChangeEvent>(L, 2);
 			obj.onValueChanged = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -1262,25 +1262,13 @@ public class UnityEngine_UI_InputFieldWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.InputField obj = (UnityEngine.UI.InputField)o;
-			UnityEngine.UI.InputField.OnValidateInput arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.UI.InputField.OnValidateInput)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.InputField.OnValidateInput));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.UI.InputField.OnValidateInput), func) as UnityEngine.UI.InputField.OnValidateInput;
-			}
-
+			UnityEngine.UI.InputField.OnValidateInput arg0 = (UnityEngine.UI.InputField.OnValidateInput)ToLua.CheckDelegate<UnityEngine.UI.InputField.OnValidateInput>(L, 2);
 			obj.onValidateInput = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValidateInput on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValidateInput on a nil value");
 		}
 	}
 
@@ -1299,7 +1287,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index characterLimit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index characterLimit on a nil value");
 		}
 	}
 
@@ -1318,7 +1306,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index contentType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index contentType on a nil value");
 		}
 	}
 
@@ -1337,7 +1325,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index lineType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lineType on a nil value");
 		}
 	}
 
@@ -1356,7 +1344,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index inputType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index inputType on a nil value");
 		}
 	}
 
@@ -1375,7 +1363,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index keyboardType on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index keyboardType on a nil value");
 		}
 	}
 
@@ -1394,7 +1382,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index characterValidation on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index characterValidation on a nil value");
 		}
 	}
 
@@ -1413,7 +1401,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index readOnly on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index readOnly on a nil value");
 		}
 	}
 
@@ -1432,7 +1420,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index asteriskChar on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index asteriskChar on a nil value");
 		}
 	}
 
@@ -1451,7 +1439,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index caretPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index caretPosition on a nil value");
 		}
 	}
 
@@ -1470,7 +1458,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionAnchorPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionAnchorPosition on a nil value");
 		}
 	}
 
@@ -1489,7 +1477,7 @@ public class UnityEngine_UI_InputFieldWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectionFocusPosition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectionFocusPosition on a nil value");
 		}
 	}
 
@@ -1503,13 +1491,13 @@ public class UnityEngine_UI_InputFieldWrap
 
 			if (count == 1)
 			{
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(UnityEngine.UI.InputField.OnValidateInput), func);
+				Delegate arg1 = DelegateTraits<UnityEngine.UI.InputField.OnValidateInput>.Create(func);
 				ToLua.Push(L, arg1);
 			}
 			else
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(UnityEngine.UI.InputField.OnValidateInput), func, self);
+				Delegate arg1 = DelegateTraits<UnityEngine.UI.InputField.OnValidateInput>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

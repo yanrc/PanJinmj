@@ -22,25 +22,13 @@ public class LuaFramework_ResourceManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
-			System.Action arg1 = null;
-			LuaTypes funcType3 = LuaDLL.lua_type(L, 3);
-
-			if (funcType3 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg1 = (System.Action)ToLua.CheckObject(L, 3, typeof(System.Action));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 3);
-				arg1 = DelegateFactory.CreateDelegate(typeof(System.Action), func) as System.Action;
-			}
-
+			System.Action arg1 = (System.Action)ToLua.CheckDelegate<System.Action>(L, 3);
 			obj.Initialize(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -53,54 +41,30 @@ public class LuaFramework_ResourceManagerWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.ResourceManager), typeof(string), typeof(string[]), typeof(LuaInterface.LuaFunction)))
+			if (count == 4 && TypeChecker.CheckTypes<string[], LuaInterface.LuaFunction>(L, 3))
 			{
-				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				string[] arg1 = ToLua.CheckStringArray(L, 3);
+				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				string[] arg1 = ToLua.ToStringArray(L, 3);
 				LuaFunction arg2 = ToLua.ToLuaFunction(L, 4);
 				obj.LoadPrefab(arg0, arg1, arg2);
 				return 0;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.ResourceManager), typeof(string), typeof(string[]), typeof(System.Action<UnityEngine.Object[]>)))
+			else if (count == 4 && TypeChecker.CheckTypes<string[], System.Action<UnityEngine.Object[]>>(L, 3))
 			{
-				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				string[] arg1 = ToLua.CheckStringArray(L, 3);
-				System.Action<UnityEngine.Object[]> arg2 = null;
-				LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
-
-				if (funcType4 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg2 = (System.Action<UnityEngine.Object[]>)ToLua.ToObject(L, 4);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 4);
-					arg2 = DelegateFactory.CreateDelegate(typeof(System.Action<UnityEngine.Object[]>), func) as System.Action<UnityEngine.Object[]>;
-				}
-
+				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				string[] arg1 = ToLua.ToStringArray(L, 3);
+				System.Action<UnityEngine.Object[]> arg2 = (System.Action<UnityEngine.Object[]>)ToLua.ToObject(L, 4);
 				obj.LoadPrefab(arg0, arg1, arg2);
 				return 0;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(LuaFramework.ResourceManager), typeof(string), typeof(string), typeof(System.Action<UnityEngine.Object[]>)))
+			else if (count == 4 && TypeChecker.CheckTypes<string, System.Action<UnityEngine.Object[]>>(L, 3))
 			{
-				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
+				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
 				string arg1 = ToLua.ToString(L, 3);
-				System.Action<UnityEngine.Object[]> arg2 = null;
-				LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
-
-				if (funcType4 != LuaTypes.LUA_TFUNCTION)
-				{
-					 arg2 = (System.Action<UnityEngine.Object[]>)ToLua.ToObject(L, 4);
-				}
-				else
-				{
-					LuaFunction func = ToLua.ToLuaFunction(L, 4);
-					arg2 = DelegateFactory.CreateDelegate(typeof(System.Action<UnityEngine.Object[]>), func) as System.Action<UnityEngine.Object[]>;
-				}
-
+				System.Action<UnityEngine.Object[]> arg2 = (System.Action<UnityEngine.Object[]>)ToLua.ToObject(L, 4);
 				obj.LoadPrefab(arg0, arg1, arg2);
 				return 0;
 			}
@@ -109,7 +73,7 @@ public class LuaFramework_ResourceManagerWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.ResourceManager.LoadPrefab");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -121,14 +85,14 @@ public class LuaFramework_ResourceManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
+			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			string[] arg1 = ToLua.CheckStringArray(L, 3);
 			LuaFunction arg2 = ToLua.CheckLuaFunction(L, 4);
 			obj.LoadSprite(arg0, arg1, arg2);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -139,14 +103,29 @@ public class LuaFramework_ResourceManagerWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.ResourceManager));
-			string arg0 = ToLua.CheckString(L, 2);
-			bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
-			obj.UnloadAssetBundle(arg0, arg1);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2)
+			{
+				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				obj.UnloadAssetBundle(arg0);
+				return 0;
+			}
+			else if (count == 3)
+			{
+				LuaFramework.ResourceManager obj = (LuaFramework.ResourceManager)ToLua.CheckObject<LuaFramework.ResourceManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				obj.UnloadAssetBundle(arg0, arg1);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.ResourceManager.UnloadAssetBundle");
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -164,7 +143,7 @@ public class LuaFramework_ResourceManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

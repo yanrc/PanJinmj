@@ -20,11 +20,11 @@ public class UnityEngine_EventSystems_AbstractEventDataWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.AbstractEventData obj = (UnityEngine.EventSystems.AbstractEventData)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.AbstractEventData));
+			UnityEngine.EventSystems.AbstractEventData obj = (UnityEngine.EventSystems.AbstractEventData)ToLua.CheckObject<UnityEngine.EventSystems.AbstractEventData>(L, 1);
 			obj.Reset();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -36,11 +36,11 @@ public class UnityEngine_EventSystems_AbstractEventDataWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.EventSystems.AbstractEventData obj = (UnityEngine.EventSystems.AbstractEventData)ToLua.CheckObject(L, 1, typeof(UnityEngine.EventSystems.AbstractEventData));
+			UnityEngine.EventSystems.AbstractEventData obj = (UnityEngine.EventSystems.AbstractEventData)ToLua.CheckObject<UnityEngine.EventSystems.AbstractEventData>(L, 1);
 			obj.Use();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,7 +61,7 @@ public class UnityEngine_EventSystems_AbstractEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index used on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index used on a nil value");
 		}
 	}
 }

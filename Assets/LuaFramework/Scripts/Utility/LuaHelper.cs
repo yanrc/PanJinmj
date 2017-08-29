@@ -6,6 +6,7 @@ using System;
 
 namespace LuaFramework {
     public static class LuaHelper {
+
         /// <summary>
         /// getType
         /// </summary>

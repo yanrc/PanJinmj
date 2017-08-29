@@ -13,6 +13,18 @@ public class DG_Tweening_RotateModeWrap
 		L.RegVar("LocalAxisAdd", get_LocalAxisAdd, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<DG.Tweening.RotateMode>.Check = CheckType;
+		StackTraits<DG.Tweening.RotateMode>.Push = Push;
+	}
+
+	static void Push(IntPtr L, DG.Tweening.RotateMode arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(DG.Tweening.RotateMode), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

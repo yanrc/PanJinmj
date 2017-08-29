@@ -106,84 +106,89 @@ function GamePanel.OnCreate(go)
 	gameObject = go;
 	transform = go.transform
 	this:Init(go)
+	this.BottomPrefabs = { UIManager.Bottom_B, UIManager.Bottom_R, UIManager.Bottom_T, UIManager.Bottom_L }
+	this.ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
+	this.CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
+	this.BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
+	this.Pointer = UIManager.Pointer
+	this.versionText = transform:Find('Text_version'):GetComponent('Text');
+	this.LeavedRoundNumText = transform:Find('Leaved1/Text'):GetComponent('Text');
+	this.ruleText = transform:Find('Rule'):GetComponent('Text');
+	this.btnInviteFriend = transform:Find('UIroot/Button_invite_friend').gameObject;
+	this.btnJieSan = transform:Find('UIroot/Button_jiesan').gameObject;
+	this.lbRoomNum = transform:Find('UIroot/lbRoomNum'):GetComponent('Text');
+	this.ExitRoomButton = transform:Find('Button_other'):GetComponent('Button');
+	this.live1 = transform:Find('Leaved'):GetComponent('Image');
+	this.liveJu = transform:Find('Leaved1/imgJu'):GetComponent('Image');
+	this.liveQuan = transform:Find('Leaved1/imgQuan'):GetComponent('Image');
+	this.centerImage = transform:Find('table'):GetComponent('Image');
 
-	this.versionText = transform:FindChild('Text_version'):GetComponent('Text');
-	this.LeavedRoundNumText = transform:FindChild('Leaved1/Text'):GetComponent('Text');
-	this.ruleText = transform:FindChild('Rule'):GetComponent('Text');
-	this.btnInviteFriend = transform:FindChild('UIroot/Button_invite_friend').gameObject;
-	this.btnJieSan = transform:FindChild('UIroot/Button_jiesan').gameObject;
-	this.lbRoomNum = transform:FindChild('UIroot/lbRoomNum'):GetComponent('Text');
-	this.ExitRoomButton = transform:FindChild('Button_other'):GetComponent('Button');
-	this.live1 = transform:FindChild('Leaved'):GetComponent('Image');
-	this.live2 = transform:FindChild('Leaved1'):GetComponent('Image');
-	this.centerImage = transform:FindChild('table'):GetComponent('Image');
+	this.chiEffectGame = transform:Find('ChiEffect_B').gameObject
+	this.pengEffectGame = transform:Find('PengEffect_B').gameObject
+	this.gangEffectGame = transform:Find('GangEffect_B').gameObject
+	this.huEffectGame = transform:Find('HuEffect_B').gameObject
+	this.liujuEffectGame = transform:Find('Liuju_B').gameObject
+	this.effBu = transform:Find('effBu').gameObject
+	this.LeavedCastNumText = transform:Find('Leaved/Text'):GetComponent('Text');
+	this.guiObj = transform:Find('gui').gameObject
+	this.roomRemark = transform:Find('Text'):GetComponent('Text')
+	local players = transform:Find('playList')
+	this.dirGameList[1] = transform:Find('table/Down/Red1').gameObject
+	this.dirGameList[2] = transform:Find('table/Right/Red2').gameObject
+	this.dirGameList[3] = transform:Find('table/Up/Red3').gameObject
+	this.dirGameList[4] = transform:Find('table/Left/Red4').gameObject
+	this.playerItems[1] = PlayerItem.New(players:Find('Player_B').gameObject)
+	this.playerItems[2] = PlayerItem.New(players:Find('Player_R').gameObject)
+	this.playerItems[3] = PlayerItem.New(players:Find('Player_T').gameObject)
+	this.playerItems[4] = PlayerItem.New(players:Find('Player_L').gameObject)
 
-	this.chiEffectGame = transform:FindChild('ChiEffect_B').gameObject
-	this.pengEffectGame = transform:FindChild('PengEffect_B').gameObject
-	this.gangEffectGame = transform:FindChild('GangEffect_B').gameObject
-	this.huEffectGame = transform:FindChild('HuEffect_B').gameObject
-	this.liujuEffectGame = transform:FindChild('Liuju_B').gameObject
-	this.effBu = transform:FindChild('effBu').gameObject
-	this.LeavedCastNumText = transform:FindChild('Leaved/Text'):GetComponent('Text');
-	this.guiObj = transform:FindChild('gui').gameObject
-	this.roomRemark = transform:FindChild('Text'):GetComponent('Text')
-	local players = transform:FindChild('playList')
-	this.dirGameList[1] = transform:FindChild('table/Down/Red1').gameObject
-	this.dirGameList[2] = transform:FindChild('table/Right/Red2').gameObject
-	this.dirGameList[3] = transform:FindChild('table/Up/Red3').gameObject
-	this.dirGameList[4] = transform:FindChild('table/Left/Red4').gameObject
-	this.playerItems[1] = PlayerItem.New(players:FindChild('Player_B').gameObject)
-	this.playerItems[2] = PlayerItem.New(players:FindChild('Player_R').gameObject)
-	this.playerItems[3] = PlayerItem.New(players:FindChild('Player_T').gameObject)
-	this.playerItems[4] = PlayerItem.New(players:FindChild('Player_L').gameObject)
+	this.ReadySelect[1] = transform:Find('Panel/DuanMen'):GetComponent('Toggle')
+	this.ReadySelect[2] = transform:Find('Panel/Gang'):GetComponent('Toggle')
+	this.ReadySelectGroup=transform:Find('Panel'):GetComponent('ToggleGroup')
+	this.lbReadySelect[1] = transform:Find('Panel/DuanMen/Label'):GetComponent('Text')
+	this.lbReadySelect[2] = transform:Find('Panel/Gang/Label'):GetComponent('Text')
+	this.parentList[1] = transform:Find('handparent/Bottom')
+	this.parentList[2] = transform:Find('handparent/Right')
+	this.parentList[3] = transform:Find('handparent/Top')
+	this.parentList[4] = transform:Find('handparent/Left')
+	this.cpgParent[1] = transform:Find('cpgParent/PengGangListB')
+	this.cpgParent[2] = transform:Find('cpgParent/PengGangListR')
+	this.cpgParent[3] = transform:Find('cpgParent/PengGangListT')
+	this.cpgParent[4] = transform:Find('cpgParent/PengGangListL')
+	this.outparentList[1] = transform:Find('ThrowCardsParent/ThrowCardsListBottom')
+	this.outparentList[2] = transform:Find('ThrowCardsParent/ThrowCardsListRight')
+	this.outparentList[3] = transform:Find('ThrowCardsParent/ThrowCardsListTop')
+	this.outparentList[4] = transform:Find('ThrowCardsParent/ThrowCardsListLeft')
+	this.btnReadyGame = transform:Find('Panel/Button').gameObject
+	this.Number = transform:Find('table/Number'):GetComponent('Text')
+	this.noticeGameObject = transform:Find("Image_Notice_BG").gameObject
+	this.noticeText = transform:Find("Image_Notice_BG/textbg/Text"):GetComponent('Text')
+	this.btnSetting = transform:Find('soundClose').gameObject
 
-	this.ReadySelect[1] = transform:FindChild('Panel/DuanMen'):GetComponent('Toggle')
-	this.ReadySelect[2] = transform:FindChild('Panel/Gang'):GetComponent('Toggle')
-	this.ReadySelectGroup=transform:FindChild('Panel'):GetComponent('ToggleGroup')
-	this.lbReadySelect[1] = transform:FindChild('Panel/DuanMen/Label'):GetComponent('Text')
-	this.lbReadySelect[2] = transform:FindChild('Panel/Gang/Label'):GetComponent('Text')
-	this.parentList[1] = transform:FindChild('handparent/Bottom')
-	this.parentList[2] = transform:FindChild('handparent/Right')
-	this.parentList[3] = transform:FindChild('handparent/Top')
-	this.parentList[4] = transform:FindChild('handparent/Left')
-	this.cpgParent[1] = transform:FindChild('cpgParent/PengGangListB')
-	this.cpgParent[2] = transform:FindChild('cpgParent/PengGangListR')
-	this.cpgParent[3] = transform:FindChild('cpgParent/PengGangListT')
-	this.cpgParent[4] = transform:FindChild('cpgParent/PengGangListL')
-	this.outparentList[1] = transform:FindChild('ThrowCardsParent/ThrowCardsListBottom')
-	this.outparentList[2] = transform:FindChild('ThrowCardsParent/ThrowCardsListRight')
-	this.outparentList[3] = transform:FindChild('ThrowCardsParent/ThrowCardsListTop')
-	this.outparentList[4] = transform:FindChild('ThrowCardsParent/ThrowCardsListLeft')
-	this.btnReadyGame = transform:FindChild('Panel/Button').gameObject
-	this.Number = transform:FindChild('table/Number'):GetComponent('Text')
-	this.noticeGameObject = transform:FindChild("Image_Notice_BG").gameObject
-	this.noticeText = transform:FindChild("Image_Notice_BG/textbg/Text"):GetComponent('Text')
-	this.btnSetting = transform:FindChild('soundClose').gameObject
-
-	this.touziObj = transform:FindChild('Panel_touzi').gameObject
-	this.canChiList[1] = transform:FindChild('ChiList/list_1').gameObject
-	this.canChiList[2] = transform:FindChild('ChiList/list_2').gameObject
-	this.canChiList[3] = transform:FindChild('ChiList/list_3').gameObject
-	this.chiList_1[1] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_1').gameObject)
-	this.chiList_1[2] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_2').gameObject)
-	this.chiList_1[3] = BottomScript.New(transform:FindChild('ChiList/list_1/Bottom_3').gameObject)
-	this.chiList_2[1] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_1').gameObject)
-	this.chiList_2[2] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_2').gameObject)
-	this.chiList_2[3] = BottomScript.New(transform:FindChild('ChiList/list_2/Bottom_3').gameObject)
-	this.chiList_3[1] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_1').gameObject)
-	this.chiList_3[2] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_2').gameObject)
-	this.chiList_3[3] = BottomScript.New(transform:FindChild('ChiList/list_3/Bottom_3').gameObject)
-	this.huBtn = transform:FindChild("btnList/huBtn").gameObject
-	this.gangBtn = transform:FindChild("btnList/GangButton").gameObject
-	this.pengBtn = transform:FindChild("btnList/PengButton").gameObject
-	this.chiBtn = transform:FindChild("btnList/ChiButton").gameObject
-	this.passBtn = transform:FindChild("btnList/PassButton").gameObject
-	this.btnBu = transform:FindChild("btnList/btnBu").gameObject
-	this.ChiSelect1 = transform:FindChild("ChiList/list_1/Button").gameObject
-	this.ChiSelect2 = transform:FindChild("ChiList/list_2/Button").gameObject
-	this.ChiSelect3 = transform:FindChild("ChiList/list_3/Button").gameObject
-	this.btnMessageBox = transform:FindChild('btnMessageBox').gameObject
-	this.imgDuanMen = transform:FindChild('imgDuanMen'):GetComponent('Image');
+	this.touziObj = transform:Find('Panel_touzi').gameObject
+	this.canChiList[1] = transform:Find('ChiList/list_1').gameObject
+	this.canChiList[2] = transform:Find('ChiList/list_2').gameObject
+	this.canChiList[3] = transform:Find('ChiList/list_3').gameObject
+	this.chiList_1[1] = BottomScript.New(transform:Find('ChiList/list_1/Bottom_1').gameObject)
+	this.chiList_1[2] = BottomScript.New(transform:Find('ChiList/list_1/Bottom_2').gameObject)
+	this.chiList_1[3] = BottomScript.New(transform:Find('ChiList/list_1/Bottom_3').gameObject)
+	this.chiList_2[1] = BottomScript.New(transform:Find('ChiList/list_2/Bottom_1').gameObject)
+	this.chiList_2[2] = BottomScript.New(transform:Find('ChiList/list_2/Bottom_2').gameObject)
+	this.chiList_2[3] = BottomScript.New(transform:Find('ChiList/list_2/Bottom_3').gameObject)
+	this.chiList_3[1] = BottomScript.New(transform:Find('ChiList/list_3/Bottom_1').gameObject)
+	this.chiList_3[2] = BottomScript.New(transform:Find('ChiList/list_3/Bottom_2').gameObject)
+	this.chiList_3[3] = BottomScript.New(transform:Find('ChiList/list_3/Bottom_3').gameObject)
+	this.huBtn = transform:Find("btnList/huBtn").gameObject
+	this.gangBtn = transform:Find("btnList/GangButton").gameObject
+	this.pengBtn = transform:Find("btnList/PengButton").gameObject
+	this.chiBtn = transform:Find("btnList/ChiButton").gameObject
+	this.passBtn = transform:Find("btnList/PassButton").gameObject
+	this.btnBu = transform:Find("btnList/btnBu").gameObject
+	this.ChiSelect1 = transform:Find("ChiList/list_1/Button").gameObject
+	this.ChiSelect2 = transform:Find("ChiList/list_2/Button").gameObject
+	this.ChiSelect3 = transform:Find("ChiList/list_3/Button").gameObject
+	this.btnMessageBox = transform:Find('btnMessageBox').gameObject
+	this.imgDuanMen = transform:Find('imgDuanMen'):GetComponent('Image');
 	MicPhone.OnCreate(go)
 	MessageBox.OnCreate(transform, this.lua)
 	this.lua:AddClick(this.btnMessageBox, MessageBox.MoveIn)
@@ -239,7 +244,7 @@ function GamePanel:StartGame(buffer)
 	self:DisplayTouzi(sgvo.touzi, sgvo.gui);
 	self:InitMyCard(sgvo.paiArray);
 	for i = 2, 4 do
-		if i == LocalIndex then
+		if LocalIndex==i then
 			self:InitOtherCardList(i, 14);
 		else
 			self:InitOtherCardList(i, 13);
@@ -283,8 +288,8 @@ function GamePanel:CleanGameplayUI()
 	self.btnInviteFriend:SetActive(false);
 	self.btnJieSan:SetActive(false);
 	self.ExitRoomButton.transform.gameObject:SetActive(false);
-	self.live1.transform.gameObject:SetActive(true);
-	self.live2.transform.gameObject:SetActive(true);
+	self.live1.gameObject:SetActive(true);
+	self.liveJu.gameObject:SetActive(true);
 	-- tab.transform.gameObject:SetActive(true);
 	self.centerImage.transform.gameObject:SetActive(true);
 	self.liujuEffectGame:SetActive(false);
@@ -372,7 +377,7 @@ function GamePanel:ActionBtnShow(buffer)
 			self:ShowBtn(1, true);
 			self.passStr = self.passStr .. "hu_"
 		end
-		if string.match(strs[i], "qianghu") then
+		if string.match(strs[i], "dianpao") then
 			self.putOutCardPoint = string.split(strs[i], ':')[2]
 			self:ShowBtn(1, true);
 			self.passStr = self.passStr .. "qianghu_"
@@ -422,8 +427,6 @@ function GamePanel:SortMyCardList()
 	end
 	table.sort(self.handerCardList[1],
 	function(a, b)
-		-- print("a=" .. Test.DumpTab(a))
-		-- print("b=" .. Test.DumpTab(b))
 		-- b是鬼牌
 		if b.cardPoint == RoomData.guiPai then
 			return false
@@ -1062,6 +1065,9 @@ function GamePanel:Update()
 			self:PlayNoticeAction();
 		end
 	end
+	if (Input.GetKeyDown(KeyCode.T)) then
+		self:Test();
+	end
 end
 
 function GamePanel:PlayNoticeAction()
@@ -1097,7 +1103,7 @@ function GamePanel:HubtnClick()
 	local cardPoint
 	local requestVo = { };
 	if (self.putOutCardPoint ~= -1) then
-		requestVo.type = "qianghu";
+		requestVo.type = "dianpao";
 		cardPoint = self.putOutCardPoint;
 	else
 		cardPoint = self.handerCardList[1][#self.handerCardList[1]].cardPoint
@@ -1219,7 +1225,7 @@ end
 function GamePanel:SetRoomRemark()
 	local roomvo = RoomData;
 	local str = "房间号：\n" .. roomvo.roomId .. "\n"
-	.. "圈数:" .. roomvo.roundNumber .. "\n\n"
+	.. "局数:" .. roomvo.roundNumber .. "\n\n"
 	self.roomRemark.text = str;
 end
 
@@ -2024,21 +2030,14 @@ end
 
 -- 测试方法，用来打印table
 function GamePanel:Test()
-	return {
-		self.avatarList,
-		self.handerCardList,
-		self.PengGangList,
-		self.tableCardList,
-	}
+	local Test=require("Logic.Test")
+	print(Test:DumpTab(self.avatarList))
+	print(Test:DumpTab(self.handerCardList))
+	print(Test:DumpTab(self.PengGangList))
+	print(Test:DumpTab(self.tableCardList))
 end
 ------------------------------------------------------------
 function GamePanel:OnOpen()
-	log(Test.DumpTab(RoomData))
-	self.BottomPrefabs = { UIManager.Bottom_B, UIManager.Bottom_R, UIManager.Bottom_T, UIManager.Bottom_L }
-	self.ThrowPrefabs = { UIManager.TopAndBottomCard, UIManager.ThrowCard_R, UIManager.TopAndBottomCard, UIManager.ThrowCard_L }
-	self.CPGPrefabs = { UIManager.PengGangCard_B, UIManager.PengGangCard_R, UIManager.PengGangCard_T, UIManager.PengGangCard_L }
-	self.BackPrefabs = { UIManager.GangBack, UIManager.GangBack_LR, UIManager.GangBack_T, UIManager.GangBack_LR }
-	self.Pointer = UIManager.Pointer
 	self:InitArrayList()
 	self:RandShowTime();
 	self.imgDuanMen.enabled = false
@@ -2076,6 +2075,9 @@ function GamePanel:OnClose()
 		self.ReadySelect[i].interactable = true
 	end
 	self.btnReadyGame:SetActive(false);
+	self.live1.gameObject:SetActive(false);
+	self.liveJu.gameObject:SetActive(false);
+	self.liveQuan.gameObject:SetActive(false);
 	self:Clean();
 	self:Recovery()
 end

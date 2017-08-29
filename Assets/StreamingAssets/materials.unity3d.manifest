@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3460029175
+CRC: 1230944278
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3b310ea3ab81b918b854112f8dd4262a
+    Hash: f90e12ab54867f606dc11674dc3df3b3
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0b04a37228feb7b9c312fb0cfbaa19c4
+    Hash: 8d068741ae817c9b5c92580f37de87e3
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -19,5 +19,5 @@ Assets:
 - Assets/Project/Materials/laizi.mat
 - Assets/Project/Materials/GreyMaterial.mat
 Dependencies:
-- F:/WorkSpace/panjinmj/panjinTolua/Assets/StreamingAssets/shaders.unity3d
-- F:/WorkSpace/panjinmj/panjinTolua/Assets/StreamingAssets/texturespng.unity3d
+- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/shaders.unity3d
+- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/texturespng.unity3d

@@ -7,7 +7,6 @@ public class AssemblyCSharp_GameToolScriptWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(AssemblyCSharp.GameToolScript), typeof(System.Object));
-		L.RegFunction("Instantiate", Instantiate);
 		L.RegFunction("AndroidJavaObjectGetStatic", AndroidJavaObjectGetStatic);
 		L.RegFunction("AndroidJavaObjectCallStatic", AndroidJavaObjectCallStatic);
 		L.RegFunction("AndroidJavaObjectCallBool", AndroidJavaObjectCallBool);
@@ -37,29 +36,12 @@ public class AssemblyCSharp_GameToolScriptWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: AssemblyCSharp.GameToolScript.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
 	}
 
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Instantiate(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.GameObject));
-			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Transform));
-			UnityEngine.GameObject o = AssemblyCSharp.GameToolScript.Instantiate(arg0, arg1);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int AndroidJavaObjectGetStatic(IntPtr L)
@@ -67,13 +49,13 @@ public class AssemblyCSharp_GameToolScriptWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg1 = ToLua.CheckString(L, 2);
 			UnityEngine.AndroidJavaObject o = AssemblyCSharp.GameToolScript.AndroidJavaObjectGetStatic(arg0, arg1);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -85,14 +67,14 @@ public class AssemblyCSharp_GameToolScriptWrap
 		try
 		{
 			int count = LuaDLL.lua_gettop(L);
-			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg1 = ToLua.CheckString(L, 2);
 			object[] arg2 = ToLua.ToParamsObject(L, 3, count - 2);
 			UnityEngine.AndroidJavaObject o = AssemblyCSharp.GameToolScript.AndroidJavaObjectCallStatic(arg0, arg1, arg2);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -104,14 +86,14 @@ public class AssemblyCSharp_GameToolScriptWrap
 		try
 		{
 			int count = LuaDLL.lua_gettop(L);
-			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg1 = ToLua.CheckString(L, 2);
 			object[] arg2 = ToLua.ToParamsObject(L, 3, count - 2);
 			bool o = AssemblyCSharp.GameToolScript.AndroidJavaObjectCallBool(arg0, arg1, arg2);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -128,7 +110,7 @@ public class AssemblyCSharp_GameToolScriptWrap
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -140,13 +122,13 @@ public class AssemblyCSharp_GameToolScriptWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject arg0 = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg1 = ToLua.CheckString(L, 2);
 			string arg2 = ToLua.CheckString(L, 3);
 			AssemblyCSharp.GameToolScript.SetAndroidString(arg0, arg1, arg2);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -163,7 +145,7 @@ public class AssemblyCSharp_GameToolScriptWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

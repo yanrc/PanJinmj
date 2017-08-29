@@ -32,7 +32,7 @@ public class UnityEngine_PlayerPrefsWrap
 			if (count == 0)
 			{
 				UnityEngine.PlayerPrefs obj = new UnityEngine.PlayerPrefs();
-				ToLua.PushObject(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -40,7 +40,7 @@ public class UnityEngine_PlayerPrefsWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.PlayerPrefs.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -57,7 +57,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.SetInt(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -70,17 +70,17 @@ public class UnityEngine_PlayerPrefsWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(string)))
+			if (count == 1)
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				int o = UnityEngine.PlayerPrefs.GetInt(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(int)))
+			else if (count == 2)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int o = UnityEngine.PlayerPrefs.GetInt(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -90,7 +90,7 @@ public class UnityEngine_PlayerPrefsWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.PlayerPrefs.GetInt");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -107,7 +107,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.SetFloat(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -120,17 +120,17 @@ public class UnityEngine_PlayerPrefsWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(string)))
+			if (count == 1)
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				float o = UnityEngine.PlayerPrefs.GetFloat(arg0);
 				LuaDLL.lua_pushnumber(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(float)))
+			else if (count == 2)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float o = UnityEngine.PlayerPrefs.GetFloat(arg0, arg1);
 				LuaDLL.lua_pushnumber(L, o);
 				return 1;
@@ -140,7 +140,7 @@ public class UnityEngine_PlayerPrefsWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.PlayerPrefs.GetFloat");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -157,7 +157,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.SetString(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -170,17 +170,17 @@ public class UnityEngine_PlayerPrefsWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(string)))
+			if (count == 1)
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				string o = UnityEngine.PlayerPrefs.GetString(arg0);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string)))
+			else if (count == 2)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				string arg1 = ToLua.ToString(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				string arg1 = ToLua.CheckString(L, 2);
 				string o = UnityEngine.PlayerPrefs.GetString(arg0, arg1);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
@@ -190,7 +190,7 @@ public class UnityEngine_PlayerPrefsWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.PlayerPrefs.GetString");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -207,7 +207,7 @@ public class UnityEngine_PlayerPrefsWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -223,7 +223,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.DeleteKey(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -238,7 +238,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.DeleteAll();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -253,7 +253,7 @@ public class UnityEngine_PlayerPrefsWrap
 			UnityEngine.PlayerPrefs.Save();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

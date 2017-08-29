@@ -96,7 +96,7 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: cn.sharesdk.unity3d.ShareContent.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -108,12 +108,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetTitle(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -125,12 +125,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetText(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -142,12 +142,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -159,12 +159,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetImagePath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -176,12 +176,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetImageUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -193,12 +193,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetShareType(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -210,12 +210,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetTitleUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -227,12 +227,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetComment(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -244,12 +244,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetSite(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -261,12 +261,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetSiteUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -278,12 +278,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAddress(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -295,12 +295,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetFilePath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -312,12 +312,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetMusicUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -329,12 +329,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetLatitude(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -346,12 +346,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetLongitude(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -363,12 +363,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetSource(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -380,12 +380,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAuthor(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -397,12 +397,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetSafetyLevel(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -414,12 +414,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetContentType(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -431,12 +431,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetHidden(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -448,12 +448,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetIsPublic(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -465,12 +465,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetIsFriend(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -482,12 +482,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetIsFamily(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -499,12 +499,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetFriendsOnly(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -516,12 +516,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetGroupID(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -533,12 +533,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAudioPath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -550,12 +550,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetVideoPath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -567,12 +567,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetNotebook(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -584,12 +584,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetTags(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -601,12 +601,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetObjectID(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -618,12 +618,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAlbumID(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -635,12 +635,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetEmotionPath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -652,12 +652,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetExtInfoPath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -669,12 +669,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetSourceFileExtension(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -686,12 +686,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetSourceFilePath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -703,12 +703,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetThumbImageUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -720,12 +720,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetUrlDescription(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -737,12 +737,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetBoard(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -754,12 +754,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetMenuX(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -771,12 +771,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetMenuY(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -788,12 +788,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetVisibility(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -805,12 +805,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetBlogName(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -822,12 +822,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetRecipients(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -839,12 +839,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetCCRecipients(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -856,12 +856,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetBCCRecipients(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -873,12 +873,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAttachmentPath(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -890,12 +890,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetDesc(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -907,12 +907,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetIsPrivateFromSource(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -924,12 +924,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetResolveFinalUrl(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -941,12 +941,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetFolderId(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -958,12 +958,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetTweetID(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -975,12 +975,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetToUserID(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -992,12 +992,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetPermission(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1009,12 +1009,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.SetEnableShare(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1026,12 +1026,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetImageWidth(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1043,12 +1043,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetImageHeight(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1060,12 +1060,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAppButtonTitle(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1077,12 +1077,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
-			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject(L, 2, typeof(System.Collections.Hashtable));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
+			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 2);
 			obj.SetAndroidExecParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1094,12 +1094,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetAndroidMarkParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1111,12 +1111,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
-			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject(L, 2, typeof(System.Collections.Hashtable));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
+			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 2);
 			obj.SetIphoneExecParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1128,12 +1128,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetIphoneMarkParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1145,12 +1145,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
-			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject(L, 2, typeof(System.Collections.Hashtable));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
+			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 2);
 			obj.SetIpadExecParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1162,12 +1162,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetIpadMarkParam(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1179,13 +1179,13 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
-			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 3);
 			obj.SetShareContentCustomize(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1197,12 +1197,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			string o = obj.GetShareParamsStr();
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1214,12 +1214,12 @@ public class cn_sharesdk_unity3d_ShareContentWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent obj = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 1);
 			System.Collections.Hashtable o = obj.GetShareParams();
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

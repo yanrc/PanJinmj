@@ -21,6 +21,7 @@ public class UnityEngine_CharacterControllerWrap
 		L.RegVar("slopeLimit", get_slopeLimit, set_slopeLimit);
 		L.RegVar("stepOffset", get_stepOffset, set_stepOffset);
 		L.RegVar("skinWidth", get_skinWidth, set_skinWidth);
+		L.RegVar("minMoveDistance", get_minMoveDistance, set_minMoveDistance);
 		L.RegVar("detectCollisions", get_detectCollisions, set_detectCollisions);
 		L.RegVar("enableOverlapRecovery", get_enableOverlapRecovery, set_enableOverlapRecovery);
 		L.EndClass();
@@ -36,7 +37,7 @@ public class UnityEngine_CharacterControllerWrap
 			if (count == 0)
 			{
 				UnityEngine.CharacterController obj = new UnityEngine.CharacterController();
-				ToLua.Push(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -44,7 +45,7 @@ public class UnityEngine_CharacterControllerWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.CharacterController.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -62,7 +63,7 @@ public class UnityEngine_CharacterControllerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -80,7 +81,7 @@ public class UnityEngine_CharacterControllerWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -98,7 +99,7 @@ public class UnityEngine_CharacterControllerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -119,7 +120,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index isGrounded on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isGrounded on a nil value");
 		}
 	}
 
@@ -138,7 +139,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index velocity on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index velocity on a nil value");
 		}
 	}
 
@@ -157,7 +158,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index collisionFlags on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index collisionFlags on a nil value");
 		}
 	}
 
@@ -176,7 +177,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index radius on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index radius on a nil value");
 		}
 	}
 
@@ -195,7 +196,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index height on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index height on a nil value");
 		}
 	}
 
@@ -214,7 +215,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index center on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index center on a nil value");
 		}
 	}
 
@@ -233,7 +234,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index slopeLimit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index slopeLimit on a nil value");
 		}
 	}
 
@@ -252,7 +253,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index stepOffset on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index stepOffset on a nil value");
 		}
 	}
 
@@ -271,7 +272,26 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index skinWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index skinWidth on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_minMoveDistance(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)o;
+			float ret = obj.minMoveDistance;
+			LuaDLL.lua_pushnumber(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minMoveDistance on a nil value");
 		}
 	}
 
@@ -290,7 +310,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index detectCollisions on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index detectCollisions on a nil value");
 		}
 	}
 
@@ -309,7 +329,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index enableOverlapRecovery on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index enableOverlapRecovery on a nil value");
 		}
 	}
 
@@ -328,7 +348,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index radius on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index radius on a nil value");
 		}
 	}
 
@@ -347,7 +367,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index height on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index height on a nil value");
 		}
 	}
 
@@ -366,7 +386,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index center on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index center on a nil value");
 		}
 	}
 
@@ -385,7 +405,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index slopeLimit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index slopeLimit on a nil value");
 		}
 	}
 
@@ -404,7 +424,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index stepOffset on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index stepOffset on a nil value");
 		}
 	}
 
@@ -423,7 +443,26 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index skinWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index skinWidth on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_minMoveDistance(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)o;
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			obj.minMoveDistance = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minMoveDistance on a nil value");
 		}
 	}
 
@@ -442,7 +481,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index detectCollisions on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index detectCollisions on a nil value");
 		}
 	}
 
@@ -461,7 +500,7 @@ public class UnityEngine_CharacterControllerWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index enableOverlapRecovery on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index enableOverlapRecovery on a nil value");
 		}
 	}
 }

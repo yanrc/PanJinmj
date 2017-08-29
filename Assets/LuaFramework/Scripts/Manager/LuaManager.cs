@@ -16,6 +16,7 @@ namespace LuaFramework {
             lua.LuaSetTop(0);
 
             LuaBinder.Bind(lua);
+            DelegateFactory.Init();
             LuaCoroutine.Register(lua, this);
         }
 
@@ -118,15 +119,16 @@ namespace LuaFramework {
             }
         }
 
-        public object[] DoFile(string filename) {
-            return lua.DoFile(filename);
+        public void DoFile(string filename)
+        {
+            lua.DoFile(filename);
         }
 
         // Update is called once per frame
         public object[] CallFunction(string funcName, params object[] args) {
             LuaFunction func = lua.GetFunction(funcName);
             if (func != null) {
-                return func.Call(args);
+                return func.LazyCall(args);
             }
             return null;
         }

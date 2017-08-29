@@ -19,12 +19,12 @@ public class ViewWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			View obj = (View)ToLua.CheckObject(L, 1, typeof(View));
-			IMessage arg0 = (IMessage)ToLua.CheckObject(L, 2, typeof(IMessage));
+			View obj = (View)ToLua.CheckObject<View>(L, 1);
+			IMessage arg0 = (IMessage)ToLua.CheckObject<IMessage>(L, 2);
 			obj.OnMessage(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -42,7 +42,7 @@ public class ViewWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

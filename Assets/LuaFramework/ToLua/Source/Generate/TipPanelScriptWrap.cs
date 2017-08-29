@@ -22,12 +22,12 @@ public class TipPanelScriptWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject(L, 1, typeof(TipPanelScript));
+			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject<TipPanelScript>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.setText(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -39,12 +39,12 @@ public class TipPanelScriptWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject(L, 1, typeof(TipPanelScript));
+			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject<TipPanelScript>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.startAction(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -56,11 +56,11 @@ public class TipPanelScriptWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject(L, 1, typeof(TipPanelScript));
+			TipPanelScript obj = (TipPanelScript)ToLua.CheckObject<TipPanelScript>(L, 1);
 			obj.TipsMoveCompleted();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -78,7 +78,7 @@ public class TipPanelScriptWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -99,7 +99,7 @@ public class TipPanelScriptWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index label on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index label on a nil value");
 		}
 	}
 
@@ -112,13 +112,13 @@ public class TipPanelScriptWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			TipPanelScript obj = (TipPanelScript)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.label = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index label on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index label on a nil value");
 		}
 	}
 }

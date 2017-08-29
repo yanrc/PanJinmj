@@ -40,7 +40,7 @@ public class UnityEngine_SpriteWrap
 			if (count == 0)
 			{
 				UnityEngine.Sprite obj = new UnityEngine.Sprite();
-				ToLua.Push(L, obj);
+				ToLua.PushSealed(L, obj);
 				return 1;
 			}
 			else
@@ -48,7 +48,7 @@ public class UnityEngine_SpriteWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.Sprite.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,59 +61,59 @@ public class UnityEngine_SpriteWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Texture2D), typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2)))
+			if (count == 3)
 			{
-				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				UnityEngine.Vector2 arg2 = ToLua.ToVector2(L, 3);
 				UnityEngine.Sprite o = UnityEngine.Sprite.Create(arg0, arg1, arg2);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Texture2D), typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2), typeof(float)))
+			else if (count == 4)
 			{
-				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				UnityEngine.Vector2 arg2 = ToLua.ToVector2(L, 3);
-				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.Sprite o = UnityEngine.Sprite.Create(arg0, arg1, arg2, arg3);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Texture2D), typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2), typeof(float), typeof(uint)))
+			else if (count == 5)
 			{
-				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				UnityEngine.Vector2 arg2 = ToLua.ToVector2(L, 3);
-				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
-				uint arg4 = (uint)LuaDLL.lua_tonumber(L, 5);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
+				uint arg4 = (uint)LuaDLL.luaL_checknumber(L, 5);
 				UnityEngine.Sprite o = UnityEngine.Sprite.Create(arg0, arg1, arg2, arg3, arg4);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 6 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Texture2D), typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2), typeof(float), typeof(uint), typeof(UnityEngine.SpriteMeshType)))
+			else if (count == 6)
 			{
-				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				UnityEngine.Vector2 arg2 = ToLua.ToVector2(L, 3);
-				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
-				uint arg4 = (uint)LuaDLL.lua_tonumber(L, 5);
-				UnityEngine.SpriteMeshType arg5 = (UnityEngine.SpriteMeshType)ToLua.ToObject(L, 6);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
+				uint arg4 = (uint)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.SpriteMeshType arg5 = (UnityEngine.SpriteMeshType)ToLua.CheckObject(L, 6, typeof(UnityEngine.SpriteMeshType));
 				UnityEngine.Sprite o = UnityEngine.Sprite.Create(arg0, arg1, arg2, arg3, arg4, arg5);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 7 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Texture2D), typeof(UnityEngine.Rect), typeof(UnityEngine.Vector2), typeof(float), typeof(uint), typeof(UnityEngine.SpriteMeshType), typeof(UnityEngine.Vector4)))
+			else if (count == 7)
 			{
-				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-				UnityEngine.Rect arg1 = (UnityEngine.Rect)ToLua.ToObject(L, 2);
+				UnityEngine.Texture2D arg0 = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg1 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 				UnityEngine.Vector2 arg2 = ToLua.ToVector2(L, 3);
-				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
-				uint arg4 = (uint)LuaDLL.lua_tonumber(L, 5);
-				UnityEngine.SpriteMeshType arg5 = (UnityEngine.SpriteMeshType)ToLua.ToObject(L, 6);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
+				uint arg4 = (uint)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.SpriteMeshType arg5 = (UnityEngine.SpriteMeshType)ToLua.CheckObject(L, 6, typeof(UnityEngine.SpriteMeshType));
 				UnityEngine.Vector4 arg6 = ToLua.ToVector4(L, 7);
 				UnityEngine.Sprite o = UnityEngine.Sprite.Create(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
 			else
@@ -121,7 +121,7 @@ public class UnityEngine_SpriteWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Sprite.Create");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -134,12 +134,12 @@ public class UnityEngine_SpriteWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Sprite obj = (UnityEngine.Sprite)ToLua.CheckObject(L, 1, typeof(UnityEngine.Sprite));
-			UnityEngine.Vector2[] arg0 = ToLua.CheckObjectArray<UnityEngine.Vector2>(L, 2);
+			UnityEngine.Vector2[] arg0 = ToLua.CheckStructArray<UnityEngine.Vector2>(L, 2);
 			ushort[] arg1 = ToLua.CheckNumberArray<ushort>(L, 3);
 			obj.OverrideGeometry(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -157,7 +157,7 @@ public class UnityEngine_SpriteWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -178,7 +178,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index bounds on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index bounds on a nil value");
 		}
 	}
 
@@ -197,7 +197,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index rect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index rect on a nil value");
 		}
 	}
 
@@ -216,7 +216,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pixelsPerUnit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pixelsPerUnit on a nil value");
 		}
 	}
 
@@ -230,12 +230,12 @@ public class UnityEngine_SpriteWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Sprite obj = (UnityEngine.Sprite)o;
 			UnityEngine.Texture2D ret = obj.texture;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index texture on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index texture on a nil value");
 		}
 	}
 
@@ -249,12 +249,12 @@ public class UnityEngine_SpriteWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Sprite obj = (UnityEngine.Sprite)o;
 			UnityEngine.Texture2D ret = obj.associatedAlphaSplitTexture;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index associatedAlphaSplitTexture on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index associatedAlphaSplitTexture on a nil value");
 		}
 	}
 
@@ -273,7 +273,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textureRect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textureRect on a nil value");
 		}
 	}
 
@@ -292,7 +292,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textureRectOffset on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textureRectOffset on a nil value");
 		}
 	}
 
@@ -311,7 +311,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index packed on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index packed on a nil value");
 		}
 	}
 
@@ -330,7 +330,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index packingMode on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index packingMode on a nil value");
 		}
 	}
 
@@ -349,7 +349,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index packingRotation on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index packingRotation on a nil value");
 		}
 	}
 
@@ -368,7 +368,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pivot on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pivot on a nil value");
 		}
 	}
 
@@ -387,7 +387,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index border on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index border on a nil value");
 		}
 	}
 
@@ -406,7 +406,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index vertices on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index vertices on a nil value");
 		}
 	}
 
@@ -425,7 +425,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index triangles on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index triangles on a nil value");
 		}
 	}
 
@@ -444,7 +444,7 @@ public class UnityEngine_SpriteWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index uv on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index uv on a nil value");
 		}
 	}
 }

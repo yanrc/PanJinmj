@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4122489446
+CRC: 1178256976
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 298f6c0cb917b5af8126d12315739607
+    Hash: fa77a61f86b2ca02c3d5c3cb48aff0de
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4d24bf54f46935ed9e6cf78ac481bb9d
+    Hash: 21f0dc8ebad690f009368069428e0a1a
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -75,7 +75,6 @@ Assets:
 - Assets/Project/Textures/Unused/frame_06.png
 - Assets/Project/Textures/Unused/shanchu_.png
 - "Assets/Project/Textures/prize/tab/\u5E78\u8FD0\u8F6C\u76D82.png"
-- Assets/Project/Textures/Icon/Icon-180.png
 - Assets/Project/Textures/JionGame/8.png
 - Assets/Project/Textures/Unused/chakanzhanji2_03.png
 - Assets/Project/Textures/Buttons/share.png
@@ -147,6 +146,7 @@ Assets:
 - Assets/Project/Textures/Unused/majiang2.png
 - Assets/Project/Textures/Setting/setting_sound_effect.png
 - Assets/Project/Textures/Other/fangzhu.png
+- Assets/Project/Textures/Icon/panjin.png
 - Assets/Project/Textures/Unused/putOutCard_TB_bg.png
 - Assets/Project/Textures/New_cardsBg/dipai_11.png
 - Assets/Project/Textures/Unused/ui_game5.png
@@ -176,6 +176,7 @@ Assets:
 - Assets/Project/Textures/Unused/ui_game3.png
 - Assets/Project/Textures/Other/Lottery (1).png
 - Assets/Project/Textures/Unused/sex1.png
+- Assets/Project/Textures/Other/leavedQuan.png
 - Assets/Project/Textures/wechatShare/03.png
 - Assets/Project/Textures/Unused/yinliang_04.png
 - Assets/Project/Textures/Unused/userbg.png
@@ -204,11 +205,11 @@ Assets:
 - Assets/Project/Textures/Unused/mahjong_face.png
 - Assets/Project/Textures/Frame/icon_frame.png
 - Assets/Project/Textures/binding/17.png
-- Assets/Project/Textures/Icon/Icon.png
 - Assets/Project/Textures/Unused/game_over_bg.png
 - Assets/Project/Textures/Effect/game_op_hu1.png
 - Assets/Project/Textures/Other/paoshou.png
 - Assets/Project/Textures/Unused/jiaru.png
+- Assets/Project/Textures/Other/leavedJu.png
 - Assets/Project/Textures/Unused/zhuanzhuan_03.png
 - Assets/Project/Textures/Other/zhongma_03.png
 - Assets/Project/Textures/Buttons/huodong.png
@@ -278,10 +279,8 @@ Assets:
 - Assets/Project/Textures/Effect/hu_e.png
 - Assets/Project/Textures/Other/gui.png
 - Assets/Project/Textures/prize/rule/tabbg.png
-- Assets/Project/Textures/Icon/Icon-108.png
 - Assets/Project/Textures/Other/xiayu_03.png
 - Assets/Project/Textures/Effect/game_op_peng1.png
-- Assets/Project/Textures/Other/leaved1.png
 - Assets/Project/Textures/Other/wanfa.png
 - Assets/Project/Textures/Buttons/invite_friend.png
 - Assets/Project/Textures/prize/Lottery/light.png
@@ -289,6 +288,7 @@ Assets:
 - Assets/Project/Textures/Buttons/fanhui.png
 - Assets/Project/Textures/Effect/genzhuang_34.png
 - Assets/Project/Textures/Unused/paodekuai_title.png
+- Assets/Project/Textures/Icon/wuxi.png
 - Assets/Project/Textures/Other/rank_first.png
 - Assets/Project/Textures/Unused/pengcardBk.png
 - Assets/Project/Textures/prize/rule/inactivetab2.png
@@ -303,6 +303,7 @@ Assets:
 - Assets/Project/Textures/prize/flower.png
 - Assets/Project/Textures/Bg/rank_dialog_bg.png
 - Assets/Project/Textures/Unused/home_bg.png
+- Assets/Project/Textures/Icon/shuangliao.png
 - Assets/Project/Textures/Other/shengqing_03.png
 - Assets/Project/Textures/JionGame/shanchu.png
 - Assets/Project/Textures/Bg/bgframe.png
@@ -313,7 +314,6 @@ Assets:
 - Assets/Project/Textures/Unused/zhuanzhuanmajiang_03.png
 - Assets/Project/Textures/Other/fankui.png
 - Assets/Project/Textures/Other/fengexian_03.png
-- Assets/Project/Textures/Icon/Icon-144.png
 - Assets/Project/Textures/Buttons/btn2.png
 - Assets/Project/Textures/Unused/rule_content_bg.png
 - Assets/Project/Textures/Unused/sure_button.png
@@ -329,6 +329,7 @@ Assets:
 - Assets/Project/Textures/prize/rule/activetab3.png
 - Assets/Project/Textures/Unused/share_current.png
 - Assets/Project/Textures/Unused/rank_third.png
+- Assets/Project/Textures/Icon/fushun.png
 - Assets/Project/Textures/Buttons/down.png
 - Assets/Project/Textures/Unused/border.png
 - Assets/Project/Textures/Buttons/dayingjia.png
@@ -354,6 +355,7 @@ Assets:
 - Assets/Project/Textures/Unused/Icon-120.png
 - Assets/Project/Textures/wechatShare/05.png
 - Assets/Project/Textures/Unused/frame_02.png
+- Assets/Project/Textures/Icon/honghong.png
 - Assets/Project/Textures/JionGame/fangjianhao.png
 - Assets/Project/Textures/Other/notice_bg.png
 - Assets/Project/Textures/Buttons/guanbi.png
@@ -370,7 +372,6 @@ Assets:
 - "Assets/Project/Textures/prize/tab/\u63A8\u5E7F\u5458\u62DB\u52DF.png"
 - Assets/Project/Textures/Buttons/bofang_36.png
 - Assets/Project/Textures/Effect/chi_e.png
-- Assets/Project/Textures/Icon/Icon-72.png
 - Assets/Project/Textures/Other/rank_week_title.png
 - Assets/Project/Textures/Unused/dipai_17.png
 - Assets/Project/Textures/prize/rule/bg.png

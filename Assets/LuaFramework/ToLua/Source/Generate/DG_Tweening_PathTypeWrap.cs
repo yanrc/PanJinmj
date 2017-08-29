@@ -11,6 +11,18 @@ public class DG_Tweening_PathTypeWrap
 		L.RegVar("CatmullRom", get_CatmullRom, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<DG.Tweening.PathType>.Check = CheckType;
+		StackTraits<DG.Tweening.PathType>.Push = Push;
+	}
+
+	static void Push(IntPtr L, DG.Tweening.PathType arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(DG.Tweening.PathType), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

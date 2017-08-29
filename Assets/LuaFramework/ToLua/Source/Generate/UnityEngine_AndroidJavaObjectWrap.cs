@@ -24,9 +24,9 @@ public class UnityEngine_AndroidJavaObjectWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (TypeChecker.CheckTypes(L, 1, typeof(string)) && TypeChecker.CheckParamsType(L, typeof(object), 2, count - 1))
+			if (TypeChecker.CheckTypes<string>(L, 1) && TypeChecker.CheckParamsType<object>(L, 2, count - 1))
 			{
-				string arg0 = ToLua.CheckString(L, 1);
+				string arg0 = ToLua.ToString(L, 1);
 				object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
 				UnityEngine.AndroidJavaObject obj = new UnityEngine.AndroidJavaObject(arg0, arg1);
 				ToLua.PushObject(L, obj);
@@ -37,7 +37,7 @@ public class UnityEngine_AndroidJavaObjectWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.AndroidJavaObject.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -49,11 +49,11 @@ public class UnityEngine_AndroidJavaObjectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			obj.Dispose();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -65,13 +65,13 @@ public class UnityEngine_AndroidJavaObjectWrap
 		try
 		{
 			int count = LuaDLL.lua_gettop(L);
-			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			object[] arg1 = ToLua.ToParamsObject(L, 3, count - 2);
 			obj.Call(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -83,13 +83,13 @@ public class UnityEngine_AndroidJavaObjectWrap
 		try
 		{
 			int count = LuaDLL.lua_gettop(L);
-			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			object[] arg1 = ToLua.ToParamsObject(L, 3, count - 2);
 			obj.CallStatic(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -101,12 +101,12 @@ public class UnityEngine_AndroidJavaObjectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			System.IntPtr o = obj.GetRawObject();
 			LuaDLL.lua_pushlightuserdata(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -118,12 +118,12 @@ public class UnityEngine_AndroidJavaObjectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.AndroidJavaObject));
+			UnityEngine.AndroidJavaObject obj = (UnityEngine.AndroidJavaObject)ToLua.CheckObject<UnityEngine.AndroidJavaObject>(L, 1);
 			System.IntPtr o = obj.GetRawClass();
 			LuaDLL.lua_pushlightuserdata(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

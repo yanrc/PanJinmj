@@ -28,7 +28,7 @@ public class LuaFramework_LuaHelperWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -44,7 +44,7 @@ public class LuaFramework_LuaHelperWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -60,7 +60,7 @@ public class LuaFramework_LuaHelperWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -76,7 +76,7 @@ public class LuaFramework_LuaHelperWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -92,7 +92,7 @@ public class LuaFramework_LuaHelperWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -109,7 +109,7 @@ public class LuaFramework_LuaHelperWrap
 			LuaFramework.LuaHelper.OnCallLuaFunc(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -126,7 +126,7 @@ public class LuaFramework_LuaHelperWrap
 			LuaFramework.LuaHelper.OnJsonCallFunc(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

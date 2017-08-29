@@ -20,24 +20,12 @@ public class UnityEngine_Events_UnityEvent_floatWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<float>));
-			UnityEngine.Events.UnityAction<float> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction<float>)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction<float>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction<float>), func) as UnityEngine.Events.UnityAction<float>;
-			}
-
+			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<float>>(L, 1);
+			UnityEngine.Events.UnityAction<float> arg0 = (UnityEngine.Events.UnityAction<float>)ToLua.CheckDelegate<UnityEngine.Events.UnityAction<float>>(L, 2);
 			obj.AddListener(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -49,24 +37,12 @@ public class UnityEngine_Events_UnityEvent_floatWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<float>));
-			UnityEngine.Events.UnityAction<float> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction<float>)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction<float>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction<float>), func) as UnityEngine.Events.UnityAction<float>;
-			}
-
+			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<float>>(L, 1);
+			UnityEngine.Events.UnityAction<float> arg0 = (UnityEngine.Events.UnityAction<float>)ToLua.CheckDelegate<UnityEngine.Events.UnityAction<float>>(L, 2);
 			obj.RemoveListener(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -78,12 +54,12 @@ public class UnityEngine_Events_UnityEvent_floatWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<float>));
+			UnityEngine.Events.UnityEvent<float> obj = (UnityEngine.Events.UnityEvent<float>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<float>>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.Invoke(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

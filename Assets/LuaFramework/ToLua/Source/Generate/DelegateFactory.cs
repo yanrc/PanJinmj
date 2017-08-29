@@ -3,74 +3,228 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 
-public static class DelegateFactory
+public class DelegateFactory
 {
-	public delegate Delegate DelegateValue(LuaFunction func, LuaTable self, bool flag);
-	public static Dictionary<Type, DelegateValue> dict = new Dictionary<Type, DelegateValue>();
+	public delegate Delegate DelegateCreate(LuaFunction func, LuaTable self, bool flag);
+	public static Dictionary<Type, DelegateCreate> dict = new Dictionary<Type, DelegateCreate>();
+	static DelegateFactory factory = new DelegateFactory();
 
-	static DelegateFactory()
+	public static void Init()
 	{
 		Register();
 	}
 
-	[NoToLuaAttribute]
 	public static void Register()
 	{
 		dict.Clear();
-		dict.Add(typeof(System.Action), System_Action);
-		dict.Add(typeof(UnityEngine.Events.UnityAction), UnityEngine_Events_UnityAction);
-		dict.Add(typeof(System.Predicate<int>), System_Predicate_int);
-		dict.Add(typeof(System.Action<int>), System_Action_int);
-		dict.Add(typeof(System.Comparison<int>), System_Comparison_int);
-		dict.Add(typeof(DG.Tweening.TweenCallback), DG_Tweening_TweenCallback);
-		dict.Add(typeof(UnityEngine.Events.UnityAction<int>), UnityEngine_Events_UnityAction_int);
-		dict.Add(typeof(UnityEngine.Events.UnityAction<float>), UnityEngine_Events_UnityAction_float);
-		dict.Add(typeof(UnityEngine.Events.UnityAction<string>), UnityEngine_Events_UnityAction_string);
-		dict.Add(typeof(UnityEngine.Events.UnityAction<bool>), UnityEngine_Events_UnityAction_bool);
-		dict.Add(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), cn_sharesdk_unity3d_ShareSDK_EventHandler);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<float>), DG_Tweening_Core_DOGetter_float);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<float>), DG_Tweening_Core_DOSetter_float);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<double>), DG_Tweening_Core_DOGetter_double);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<double>), DG_Tweening_Core_DOSetter_double);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<int>), DG_Tweening_Core_DOGetter_int);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<int>), DG_Tweening_Core_DOSetter_int);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<uint>), DG_Tweening_Core_DOGetter_uint);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<uint>), DG_Tweening_Core_DOSetter_uint);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<long>), DG_Tweening_Core_DOGetter_long);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<long>), DG_Tweening_Core_DOSetter_long);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<ulong>), DG_Tweening_Core_DOGetter_ulong);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<ulong>), DG_Tweening_Core_DOSetter_ulong);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<string>), DG_Tweening_Core_DOGetter_string);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<string>), DG_Tweening_Core_DOSetter_string);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector2>), DG_Tweening_Core_DOGetter_UnityEngine_Vector2);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector2>), DG_Tweening_Core_DOSetter_UnityEngine_Vector2);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector3>), DG_Tweening_Core_DOGetter_UnityEngine_Vector3);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector3>), DG_Tweening_Core_DOSetter_UnityEngine_Vector3);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector4>), DG_Tweening_Core_DOGetter_UnityEngine_Vector4);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector4>), DG_Tweening_Core_DOSetter_UnityEngine_Vector4);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>), DG_Tweening_Core_DOGetter_UnityEngine_Quaternion);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>), DG_Tweening_Core_DOSetter_UnityEngine_Quaternion);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Color>), DG_Tweening_Core_DOGetter_UnityEngine_Color);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Color>), DG_Tweening_Core_DOSetter_UnityEngine_Color);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Rect>), DG_Tweening_Core_DOGetter_UnityEngine_Rect);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Rect>), DG_Tweening_Core_DOSetter_UnityEngine_Rect);
-		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>), DG_Tweening_Core_DOGetter_UnityEngine_RectOffset);
-		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>), DG_Tweening_Core_DOSetter_UnityEngine_RectOffset);
-		dict.Add(typeof(UnityEngine.Camera.CameraCallback), UnityEngine_Camera_CameraCallback);
-		dict.Add(typeof(UnityEngine.Application.AdvertisingIdentifierCallback), UnityEngine_Application_AdvertisingIdentifierCallback);
-		dict.Add(typeof(UnityEngine.Application.LogCallback), UnityEngine_Application_LogCallback);
-		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), UnityEngine_AudioClip_PCMReaderCallback);
-		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), UnityEngine_AudioClip_PCMSetPositionCallback);
-		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), UnityEngine_RectTransform_ReapplyDrivenProperties);
-		dict.Add(typeof(System.Action<NotiData>), System_Action_NotiData);
-		dict.Add(typeof(System.Action<UnityEngine.Object[]>), System_Action_UnityEngine_Objects);
-		dict.Add(typeof(UnityEngine.UI.InputField.OnValidateInput), UnityEngine_UI_InputField_OnValidateInput);
-	}
+		dict.Add(typeof(System.Action), factory.System_Action);
+		dict.Add(typeof(UnityEngine.Events.UnityAction), factory.UnityEngine_Events_UnityAction);
+		dict.Add(typeof(System.Predicate<int>), factory.System_Predicate_int);
+		dict.Add(typeof(System.Action<int>), factory.System_Action_int);
+		dict.Add(typeof(System.Comparison<int>), factory.System_Comparison_int);
+		dict.Add(typeof(System.Func<int,int>), factory.System_Func_int_int);
+		dict.Add(typeof(DG.Tweening.TweenCallback), factory.DG_Tweening_TweenCallback);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<int>), factory.UnityEngine_Events_UnityAction_int);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<float>), factory.UnityEngine_Events_UnityAction_float);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<string>), factory.UnityEngine_Events_UnityAction_string);
+		dict.Add(typeof(UnityEngine.Events.UnityAction<bool>), factory.UnityEngine_Events_UnityAction_bool);
+		dict.Add(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), factory.cn_sharesdk_unity3d_ShareSDK_EventHandler);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<float>), factory.DG_Tweening_Core_DOGetter_float);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<float>), factory.DG_Tweening_Core_DOSetter_float);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<double>), factory.DG_Tweening_Core_DOGetter_double);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<double>), factory.DG_Tweening_Core_DOSetter_double);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<int>), factory.DG_Tweening_Core_DOGetter_int);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<int>), factory.DG_Tweening_Core_DOSetter_int);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<uint>), factory.DG_Tweening_Core_DOGetter_uint);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<uint>), factory.DG_Tweening_Core_DOSetter_uint);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<long>), factory.DG_Tweening_Core_DOGetter_long);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<long>), factory.DG_Tweening_Core_DOSetter_long);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<ulong>), factory.DG_Tweening_Core_DOGetter_ulong);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<ulong>), factory.DG_Tweening_Core_DOSetter_ulong);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<string>), factory.DG_Tweening_Core_DOGetter_string);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<string>), factory.DG_Tweening_Core_DOSetter_string);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector2>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector2);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector2>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector2);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector3>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector3);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector3>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector3);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector4>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector4);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector4>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector4);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Quaternion);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Quaternion);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Color>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Color);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Color>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Color);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Rect>), factory.DG_Tweening_Core_DOGetter_UnityEngine_Rect);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Rect>), factory.DG_Tweening_Core_DOSetter_UnityEngine_Rect);
+		dict.Add(typeof(DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>), factory.DG_Tweening_Core_DOGetter_UnityEngine_RectOffset);
+		dict.Add(typeof(DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>), factory.DG_Tweening_Core_DOSetter_UnityEngine_RectOffset);
+		dict.Add(typeof(UnityEngine.Camera.CameraCallback), factory.UnityEngine_Camera_CameraCallback);
+		dict.Add(typeof(UnityEngine.Application.LowMemoryCallback), factory.UnityEngine_Application_LowMemoryCallback);
+		dict.Add(typeof(UnityEngine.Application.AdvertisingIdentifierCallback), factory.UnityEngine_Application_AdvertisingIdentifierCallback);
+		dict.Add(typeof(UnityEngine.Application.LogCallback), factory.UnityEngine_Application_LogCallback);
+		dict.Add(typeof(UnityEngine.AudioClip.PCMReaderCallback), factory.UnityEngine_AudioClip_PCMReaderCallback);
+		dict.Add(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), factory.UnityEngine_AudioClip_PCMSetPositionCallback);
+		dict.Add(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
+		dict.Add(typeof(System.Action<NotiData>), factory.System_Action_NotiData);
+		dict.Add(typeof(System.Action<UnityEngine.Object[]>), factory.System_Action_UnityEngine_Objects);
+		dict.Add(typeof(UnityEngine.UI.InputField.OnValidateInput), factory.UnityEngine_UI_InputField_OnValidateInput);
 
-    [NoToLuaAttribute]
+		DelegateTraits<System.Action>.Init(factory.System_Action);
+		DelegateTraits<UnityEngine.Events.UnityAction>.Init(factory.UnityEngine_Events_UnityAction);
+		DelegateTraits<System.Predicate<int>>.Init(factory.System_Predicate_int);
+		DelegateTraits<System.Action<int>>.Init(factory.System_Action_int);
+		DelegateTraits<System.Comparison<int>>.Init(factory.System_Comparison_int);
+		DelegateTraits<System.Func<int,int>>.Init(factory.System_Func_int_int);
+		DelegateTraits<DG.Tweening.TweenCallback>.Init(factory.DG_Tweening_TweenCallback);
+		DelegateTraits<UnityEngine.Events.UnityAction<int>>.Init(factory.UnityEngine_Events_UnityAction_int);
+		DelegateTraits<UnityEngine.Events.UnityAction<float>>.Init(factory.UnityEngine_Events_UnityAction_float);
+		DelegateTraits<UnityEngine.Events.UnityAction<string>>.Init(factory.UnityEngine_Events_UnityAction_string);
+		DelegateTraits<UnityEngine.Events.UnityAction<bool>>.Init(factory.UnityEngine_Events_UnityAction_bool);
+		DelegateTraits<cn.sharesdk.unity3d.ShareSDK.EventHandler>.Init(factory.cn_sharesdk_unity3d_ShareSDK_EventHandler);
+		DelegateTraits<DG.Tweening.Core.DOGetter<float>>.Init(factory.DG_Tweening_Core_DOGetter_float);
+		DelegateTraits<DG.Tweening.Core.DOSetter<float>>.Init(factory.DG_Tweening_Core_DOSetter_float);
+		DelegateTraits<DG.Tweening.Core.DOGetter<double>>.Init(factory.DG_Tweening_Core_DOGetter_double);
+		DelegateTraits<DG.Tweening.Core.DOSetter<double>>.Init(factory.DG_Tweening_Core_DOSetter_double);
+		DelegateTraits<DG.Tweening.Core.DOGetter<int>>.Init(factory.DG_Tweening_Core_DOGetter_int);
+		DelegateTraits<DG.Tweening.Core.DOSetter<int>>.Init(factory.DG_Tweening_Core_DOSetter_int);
+		DelegateTraits<DG.Tweening.Core.DOGetter<uint>>.Init(factory.DG_Tweening_Core_DOGetter_uint);
+		DelegateTraits<DG.Tweening.Core.DOSetter<uint>>.Init(factory.DG_Tweening_Core_DOSetter_uint);
+		DelegateTraits<DG.Tweening.Core.DOGetter<long>>.Init(factory.DG_Tweening_Core_DOGetter_long);
+		DelegateTraits<DG.Tweening.Core.DOSetter<long>>.Init(factory.DG_Tweening_Core_DOSetter_long);
+		DelegateTraits<DG.Tweening.Core.DOGetter<ulong>>.Init(factory.DG_Tweening_Core_DOGetter_ulong);
+		DelegateTraits<DG.Tweening.Core.DOSetter<ulong>>.Init(factory.DG_Tweening_Core_DOSetter_ulong);
+		DelegateTraits<DG.Tweening.Core.DOGetter<string>>.Init(factory.DG_Tweening_Core_DOGetter_string);
+		DelegateTraits<DG.Tweening.Core.DOSetter<string>>.Init(factory.DG_Tweening_Core_DOSetter_string);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector2>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector2);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector2>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector2);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector3>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector3);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector3>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector3);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector4>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Vector4);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector4>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Vector4);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Quaternion);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Quaternion);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Color>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Color);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Color>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Color);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.Rect>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_Rect);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.Rect>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_Rect);
+		DelegateTraits<DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>>.Init(factory.DG_Tweening_Core_DOGetter_UnityEngine_RectOffset);
+		DelegateTraits<DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>>.Init(factory.DG_Tweening_Core_DOSetter_UnityEngine_RectOffset);
+		DelegateTraits<UnityEngine.Camera.CameraCallback>.Init(factory.UnityEngine_Camera_CameraCallback);
+		DelegateTraits<UnityEngine.Application.LowMemoryCallback>.Init(factory.UnityEngine_Application_LowMemoryCallback);
+		DelegateTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Init(factory.UnityEngine_Application_AdvertisingIdentifierCallback);
+		DelegateTraits<UnityEngine.Application.LogCallback>.Init(factory.UnityEngine_Application_LogCallback);
+		DelegateTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.UnityEngine_AudioClip_PCMReaderCallback);
+		DelegateTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.UnityEngine_AudioClip_PCMSetPositionCallback);
+		DelegateTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.UnityEngine_RectTransform_ReapplyDrivenProperties);
+		DelegateTraits<System.Action<NotiData>>.Init(factory.System_Action_NotiData);
+		DelegateTraits<System.Action<UnityEngine.Object[]>>.Init(factory.System_Action_UnityEngine_Objects);
+		DelegateTraits<UnityEngine.UI.InputField.OnValidateInput>.Init(factory.UnityEngine_UI_InputField_OnValidateInput);
+
+		TypeTraits<System.Action>.Init(factory.Check_System_Action);
+		TypeTraits<UnityEngine.Events.UnityAction>.Init(factory.Check_UnityEngine_Events_UnityAction);
+		TypeTraits<System.Predicate<int>>.Init(factory.Check_System_Predicate_int);
+		TypeTraits<System.Action<int>>.Init(factory.Check_System_Action_int);
+		TypeTraits<System.Comparison<int>>.Init(factory.Check_System_Comparison_int);
+		TypeTraits<System.Func<int,int>>.Init(factory.Check_System_Func_int_int);
+		TypeTraits<DG.Tweening.TweenCallback>.Init(factory.Check_DG_Tweening_TweenCallback);
+		TypeTraits<UnityEngine.Events.UnityAction<int>>.Init(factory.Check_UnityEngine_Events_UnityAction_int);
+		TypeTraits<UnityEngine.Events.UnityAction<float>>.Init(factory.Check_UnityEngine_Events_UnityAction_float);
+		TypeTraits<UnityEngine.Events.UnityAction<string>>.Init(factory.Check_UnityEngine_Events_UnityAction_string);
+		TypeTraits<UnityEngine.Events.UnityAction<bool>>.Init(factory.Check_UnityEngine_Events_UnityAction_bool);
+		TypeTraits<cn.sharesdk.unity3d.ShareSDK.EventHandler>.Init(factory.Check_cn_sharesdk_unity3d_ShareSDK_EventHandler);
+		TypeTraits<DG.Tweening.Core.DOGetter<float>>.Init(factory.Check_DG_Tweening_Core_DOGetter_float);
+		TypeTraits<DG.Tweening.Core.DOSetter<float>>.Init(factory.Check_DG_Tweening_Core_DOSetter_float);
+		TypeTraits<DG.Tweening.Core.DOGetter<double>>.Init(factory.Check_DG_Tweening_Core_DOGetter_double);
+		TypeTraits<DG.Tweening.Core.DOSetter<double>>.Init(factory.Check_DG_Tweening_Core_DOSetter_double);
+		TypeTraits<DG.Tweening.Core.DOGetter<int>>.Init(factory.Check_DG_Tweening_Core_DOGetter_int);
+		TypeTraits<DG.Tweening.Core.DOSetter<int>>.Init(factory.Check_DG_Tweening_Core_DOSetter_int);
+		TypeTraits<DG.Tweening.Core.DOGetter<uint>>.Init(factory.Check_DG_Tweening_Core_DOGetter_uint);
+		TypeTraits<DG.Tweening.Core.DOSetter<uint>>.Init(factory.Check_DG_Tweening_Core_DOSetter_uint);
+		TypeTraits<DG.Tweening.Core.DOGetter<long>>.Init(factory.Check_DG_Tweening_Core_DOGetter_long);
+		TypeTraits<DG.Tweening.Core.DOSetter<long>>.Init(factory.Check_DG_Tweening_Core_DOSetter_long);
+		TypeTraits<DG.Tweening.Core.DOGetter<ulong>>.Init(factory.Check_DG_Tweening_Core_DOGetter_ulong);
+		TypeTraits<DG.Tweening.Core.DOSetter<ulong>>.Init(factory.Check_DG_Tweening_Core_DOSetter_ulong);
+		TypeTraits<DG.Tweening.Core.DOGetter<string>>.Init(factory.Check_DG_Tweening_Core_DOGetter_string);
+		TypeTraits<DG.Tweening.Core.DOSetter<string>>.Init(factory.Check_DG_Tweening_Core_DOSetter_string);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector2>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector2);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector2>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector2);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector3>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector3);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector3>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector3);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector4>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector4);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector4>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector4);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Quaternion);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Quaternion);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Color>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Color);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Color>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Color);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.Rect>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_Rect);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.Rect>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_Rect);
+		TypeTraits<DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>>.Init(factory.Check_DG_Tweening_Core_DOGetter_UnityEngine_RectOffset);
+		TypeTraits<DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>>.Init(factory.Check_DG_Tweening_Core_DOSetter_UnityEngine_RectOffset);
+		TypeTraits<UnityEngine.Camera.CameraCallback>.Init(factory.Check_UnityEngine_Camera_CameraCallback);
+		TypeTraits<UnityEngine.Application.LowMemoryCallback>.Init(factory.Check_UnityEngine_Application_LowMemoryCallback);
+		TypeTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Init(factory.Check_UnityEngine_Application_AdvertisingIdentifierCallback);
+		TypeTraits<UnityEngine.Application.LogCallback>.Init(factory.Check_UnityEngine_Application_LogCallback);
+		TypeTraits<UnityEngine.AudioClip.PCMReaderCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMReaderCallback);
+		TypeTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Init(factory.Check_UnityEngine_AudioClip_PCMSetPositionCallback);
+		TypeTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Init(factory.Check_UnityEngine_RectTransform_ReapplyDrivenProperties);
+		TypeTraits<System.Action<NotiData>>.Init(factory.Check_System_Action_NotiData);
+		TypeTraits<System.Action<UnityEngine.Object[]>>.Init(factory.Check_System_Action_UnityEngine_Objects);
+		TypeTraits<UnityEngine.UI.InputField.OnValidateInput>.Init(factory.Check_UnityEngine_UI_InputField_OnValidateInput);
+
+		StackTraits<System.Action>.Push = factory.Push_System_Action;
+		StackTraits<UnityEngine.Events.UnityAction>.Push = factory.Push_UnityEngine_Events_UnityAction;
+		StackTraits<System.Predicate<int>>.Push = factory.Push_System_Predicate_int;
+		StackTraits<System.Action<int>>.Push = factory.Push_System_Action_int;
+		StackTraits<System.Comparison<int>>.Push = factory.Push_System_Comparison_int;
+		StackTraits<System.Func<int,int>>.Push = factory.Push_System_Func_int_int;
+		StackTraits<DG.Tweening.TweenCallback>.Push = factory.Push_DG_Tweening_TweenCallback;
+		StackTraits<UnityEngine.Events.UnityAction<int>>.Push = factory.Push_UnityEngine_Events_UnityAction_int;
+		StackTraits<UnityEngine.Events.UnityAction<float>>.Push = factory.Push_UnityEngine_Events_UnityAction_float;
+		StackTraits<UnityEngine.Events.UnityAction<string>>.Push = factory.Push_UnityEngine_Events_UnityAction_string;
+		StackTraits<UnityEngine.Events.UnityAction<bool>>.Push = factory.Push_UnityEngine_Events_UnityAction_bool;
+		StackTraits<cn.sharesdk.unity3d.ShareSDK.EventHandler>.Push = factory.Push_cn_sharesdk_unity3d_ShareSDK_EventHandler;
+		StackTraits<DG.Tweening.Core.DOGetter<float>>.Push = factory.Push_DG_Tweening_Core_DOGetter_float;
+		StackTraits<DG.Tweening.Core.DOSetter<float>>.Push = factory.Push_DG_Tweening_Core_DOSetter_float;
+		StackTraits<DG.Tweening.Core.DOGetter<double>>.Push = factory.Push_DG_Tweening_Core_DOGetter_double;
+		StackTraits<DG.Tweening.Core.DOSetter<double>>.Push = factory.Push_DG_Tweening_Core_DOSetter_double;
+		StackTraits<DG.Tweening.Core.DOGetter<int>>.Push = factory.Push_DG_Tweening_Core_DOGetter_int;
+		StackTraits<DG.Tweening.Core.DOSetter<int>>.Push = factory.Push_DG_Tweening_Core_DOSetter_int;
+		StackTraits<DG.Tweening.Core.DOGetter<uint>>.Push = factory.Push_DG_Tweening_Core_DOGetter_uint;
+		StackTraits<DG.Tweening.Core.DOSetter<uint>>.Push = factory.Push_DG_Tweening_Core_DOSetter_uint;
+		StackTraits<DG.Tweening.Core.DOGetter<long>>.Push = factory.Push_DG_Tweening_Core_DOGetter_long;
+		StackTraits<DG.Tweening.Core.DOSetter<long>>.Push = factory.Push_DG_Tweening_Core_DOSetter_long;
+		StackTraits<DG.Tweening.Core.DOGetter<ulong>>.Push = factory.Push_DG_Tweening_Core_DOGetter_ulong;
+		StackTraits<DG.Tweening.Core.DOSetter<ulong>>.Push = factory.Push_DG_Tweening_Core_DOSetter_ulong;
+		StackTraits<DG.Tweening.Core.DOGetter<string>>.Push = factory.Push_DG_Tweening_Core_DOGetter_string;
+		StackTraits<DG.Tweening.Core.DOSetter<string>>.Push = factory.Push_DG_Tweening_Core_DOSetter_string;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector2>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector2;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector2>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector2;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector3>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector3;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector3>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector3;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Vector4>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector4;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Vector4>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector4;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Quaternion;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Quaternion;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Color>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Color;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Color>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Color;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.Rect>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_Rect;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.Rect>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_Rect;
+		StackTraits<DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>>.Push = factory.Push_DG_Tweening_Core_DOGetter_UnityEngine_RectOffset;
+		StackTraits<DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>>.Push = factory.Push_DG_Tweening_Core_DOSetter_UnityEngine_RectOffset;
+		StackTraits<UnityEngine.Camera.CameraCallback>.Push = factory.Push_UnityEngine_Camera_CameraCallback;
+		StackTraits<UnityEngine.Application.LowMemoryCallback>.Push = factory.Push_UnityEngine_Application_LowMemoryCallback;
+		StackTraits<UnityEngine.Application.AdvertisingIdentifierCallback>.Push = factory.Push_UnityEngine_Application_AdvertisingIdentifierCallback;
+		StackTraits<UnityEngine.Application.LogCallback>.Push = factory.Push_UnityEngine_Application_LogCallback;
+		StackTraits<UnityEngine.AudioClip.PCMReaderCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMReaderCallback;
+		StackTraits<UnityEngine.AudioClip.PCMSetPositionCallback>.Push = factory.Push_UnityEngine_AudioClip_PCMSetPositionCallback;
+		StackTraits<UnityEngine.RectTransform.ReapplyDrivenProperties>.Push = factory.Push_UnityEngine_RectTransform_ReapplyDrivenProperties;
+		StackTraits<System.Action<NotiData>>.Push = factory.Push_System_Action_NotiData;
+		StackTraits<System.Action<UnityEngine.Object[]>>.Push = factory.Push_System_Action_UnityEngine_Objects;
+		StackTraits<UnityEngine.UI.InputField.OnValidateInput>.Push = factory.Push_UnityEngine_UI_InputField_OnValidateInput;
+	}
+    
     public static Delegate CreateDelegate(Type t, LuaFunction func = null)
     {
-        DelegateValue Create = null;
+        DelegateCreate Create = null;
 
         if (!dict.TryGetValue(t, out Create))
         {
@@ -95,13 +249,12 @@ public static class DelegateFactory
             }       
         }
 
-        return Create(func, null, false);        
+        return Create(null, null, false);        
     }
-
-    [NoToLuaAttribute]
+    
     public static Delegate CreateDelegate(Type t, LuaFunction func, LuaTable self)
     {
-        DelegateValue Create = null;
+        DelegateCreate Create = null;
 
         if (!dict.TryGetValue(t, out Create))
         {
@@ -126,10 +279,9 @@ public static class DelegateFactory
             }
         }
 
-        return Create(func, self, true);
+        return Create(null, null, true);
     }
-
-    [NoToLuaAttribute]
+    
     public static Delegate RemoveDelegate(Delegate obj, LuaFunction func)
     {
         LuaState state = func.GetLuaState();
@@ -149,8 +301,7 @@ public static class DelegateFactory
 
         return obj;
     }
-
-    [NoToLuaAttribute]
+    
     public static Delegate RemoveDelegate(Delegate obj, Delegate dg)
     {
         LuaDelegate remove = dg.Target as LuaDelegate;
@@ -199,7 +350,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Action(LuaFunction func, LuaTable self, bool flag)
+	public System.Action System_Action(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -223,6 +374,16 @@ public static class DelegateFactory
 		}
 	}
 
+	bool Check_System_Action(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action), L, pos);
+	}
+
+	void Push_System_Action(IntPtr L, System.Action o)
+	{
+		ToLua.Push(L, o);
+	}
+
 	class UnityEngine_Events_UnityAction_Event : LuaDelegate
 	{
 		public UnityEngine_Events_UnityAction_Event(LuaFunction func) : base(func) { }
@@ -242,7 +403,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Events_UnityAction(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Events.UnityAction UnityEngine_Events_UnityAction(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -264,6 +425,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction(IntPtr L, UnityEngine.Events.UnityAction o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class System_Predicate_int_Event : LuaDelegate
@@ -293,7 +464,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Predicate_int(LuaFunction func, LuaTable self, bool flag)
+	public System.Predicate<int> System_Predicate_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -315,6 +486,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_System_Predicate_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Predicate<int>), L, pos);
+	}
+
+	void Push_System_Predicate_int(IntPtr L, System.Predicate<int> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class System_Action_int_Event : LuaDelegate
@@ -340,7 +521,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Action_int(LuaFunction func, LuaTable self, bool flag)
+	public System.Action<int> System_Action_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -362,6 +543,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_System_Action_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<int>), L, pos);
+	}
+
+	void Push_System_Action_int(IntPtr L, System.Action<int> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class System_Comparison_int_Event : LuaDelegate
@@ -393,7 +584,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Comparison_int(LuaFunction func, LuaTable self, bool flag)
+	public System.Comparison<int> System_Comparison_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -417,6 +608,77 @@ public static class DelegateFactory
 		}
 	}
 
+	bool Check_System_Comparison_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Comparison<int>), L, pos);
+	}
+
+	void Push_System_Comparison_int(IntPtr L, System.Comparison<int> o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class System_Func_int_int_Event : LuaDelegate
+	{
+		public System_Func_int_int_Event(LuaFunction func) : base(func) { }
+		public System_Func_int_int_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public int Call(int param0)
+		{
+			func.BeginPCall();
+			func.Push(param0);
+			func.PCall();
+			int ret = (int)func.CheckNumber();
+			func.EndPCall();
+			return ret;
+		}
+
+		public int CallWithSelf(int param0)
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.Push(param0);
+			func.PCall();
+			int ret = (int)func.CheckNumber();
+			func.EndPCall();
+			return ret;
+		}
+	}
+
+	public System.Func<int,int> System_Func_int_int(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			System.Func<int,int> fn = delegate(int param0) { return 0; };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			System_Func_int_int_Event target = new System_Func_int_int_Event(func);
+			System.Func<int,int> d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			System_Func_int_int_Event target = new System_Func_int_int_Event(func, self);
+			System.Func<int,int> d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_System_Func_int_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Func<int,int>), L, pos);
+	}
+
+	void Push_System_Func_int_int(IntPtr L, System.Func<int,int> o)
+	{
+		ToLua.Push(L, o);
+	}
+
 	class DG_Tweening_TweenCallback_Event : LuaDelegate
 	{
 		public DG_Tweening_TweenCallback_Event(LuaFunction func) : base(func) { }
@@ -436,7 +698,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_TweenCallback(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.TweenCallback DG_Tweening_TweenCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -458,6 +720,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_TweenCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.TweenCallback), L, pos);
+	}
+
+	void Push_DG_Tweening_TweenCallback(IntPtr L, DG.Tweening.TweenCallback o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Events_UnityAction_int_Event : LuaDelegate
@@ -483,7 +755,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Events_UnityAction_int(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Events.UnityAction<int> UnityEngine_Events_UnityAction_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -505,6 +777,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction<int>), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction_int(IntPtr L, UnityEngine.Events.UnityAction<int> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Events_UnityAction_float_Event : LuaDelegate
@@ -530,7 +812,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Events_UnityAction_float(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Events.UnityAction<float> UnityEngine_Events_UnityAction_float(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -552,6 +834,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction_float(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction<float>), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction_float(IntPtr L, UnityEngine.Events.UnityAction<float> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Events_UnityAction_string_Event : LuaDelegate
@@ -577,7 +869,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Events_UnityAction_string(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Events.UnityAction<string> UnityEngine_Events_UnityAction_string(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -599,6 +891,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction_string(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction<string>), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction_string(IntPtr L, UnityEngine.Events.UnityAction<string> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Events_UnityAction_bool_Event : LuaDelegate
@@ -624,7 +926,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Events_UnityAction_bool(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Events.UnityAction<bool> UnityEngine_Events_UnityAction_bool(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -646,6 +948,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Events_UnityAction_bool(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Events.UnityAction<bool>), L, pos);
+	}
+
+	void Push_UnityEngine_Events_UnityAction_bool(IntPtr L, UnityEngine.Events.UnityAction<bool> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class cn_sharesdk_unity3d_ShareSDK_EventHandler_Event : LuaDelegate
@@ -677,7 +989,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate cn_sharesdk_unity3d_ShareSDK_EventHandler(LuaFunction func, LuaTable self, bool flag)
+	public cn.sharesdk.unity3d.ShareSDK.EventHandler cn_sharesdk_unity3d_ShareSDK_EventHandler(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -699,6 +1011,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_cn_sharesdk_unity3d_ShareSDK_EventHandler(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), L, pos);
+	}
+
+	void Push_cn_sharesdk_unity3d_ShareSDK_EventHandler(IntPtr L, cn.sharesdk.unity3d.ShareSDK.EventHandler o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_float_Event : LuaDelegate
@@ -726,7 +1048,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_float(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<float> DG_Tweening_Core_DOGetter_float(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -748,6 +1070,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_float(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<float>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_float(IntPtr L, DG.Tweening.Core.DOGetter<float> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_float_Event : LuaDelegate
@@ -773,7 +1105,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_float(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<float> DG_Tweening_Core_DOSetter_float(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -795,6 +1127,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_float(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<float>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_float(IntPtr L, DG.Tweening.Core.DOSetter<float> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_double_Event : LuaDelegate
@@ -822,7 +1164,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_double(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<double> DG_Tweening_Core_DOGetter_double(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -844,6 +1186,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_double(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<double>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_double(IntPtr L, DG.Tweening.Core.DOGetter<double> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_double_Event : LuaDelegate
@@ -869,7 +1221,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_double(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<double> DG_Tweening_Core_DOSetter_double(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -891,6 +1243,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_double(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<double>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_double(IntPtr L, DG.Tweening.Core.DOSetter<double> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_int_Event : LuaDelegate
@@ -918,7 +1280,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_int(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<int> DG_Tweening_Core_DOGetter_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -940,6 +1302,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<int>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_int(IntPtr L, DG.Tweening.Core.DOGetter<int> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_int_Event : LuaDelegate
@@ -965,7 +1337,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_int(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<int> DG_Tweening_Core_DOSetter_int(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -987,6 +1359,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_int(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<int>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_int(IntPtr L, DG.Tweening.Core.DOSetter<int> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_uint_Event : LuaDelegate
@@ -1014,7 +1396,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_uint(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<uint> DG_Tweening_Core_DOGetter_uint(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1036,6 +1418,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_uint(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<uint>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_uint(IntPtr L, DG.Tweening.Core.DOGetter<uint> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_uint_Event : LuaDelegate
@@ -1061,7 +1453,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_uint(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<uint> DG_Tweening_Core_DOSetter_uint(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1083,6 +1475,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_uint(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<uint>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_uint(IntPtr L, DG.Tweening.Core.DOSetter<uint> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_long_Event : LuaDelegate
@@ -1110,7 +1512,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_long(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<long> DG_Tweening_Core_DOGetter_long(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1132,6 +1534,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_long(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<long>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_long(IntPtr L, DG.Tweening.Core.DOGetter<long> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_long_Event : LuaDelegate
@@ -1157,7 +1569,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_long(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<long> DG_Tweening_Core_DOSetter_long(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1179,6 +1591,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_long(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<long>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_long(IntPtr L, DG.Tweening.Core.DOSetter<long> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_ulong_Event : LuaDelegate
@@ -1206,7 +1628,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_ulong(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<ulong> DG_Tweening_Core_DOGetter_ulong(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1228,6 +1650,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_ulong(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<ulong>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_ulong(IntPtr L, DG.Tweening.Core.DOGetter<ulong> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_ulong_Event : LuaDelegate
@@ -1253,7 +1685,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_ulong(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<ulong> DG_Tweening_Core_DOSetter_ulong(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1275,6 +1707,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_ulong(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<ulong>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_ulong(IntPtr L, DG.Tweening.Core.DOSetter<ulong> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_string_Event : LuaDelegate
@@ -1302,7 +1744,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_string(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<string> DG_Tweening_Core_DOGetter_string(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1324,6 +1766,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_string(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<string>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_string(IntPtr L, DG.Tweening.Core.DOGetter<string> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_string_Event : LuaDelegate
@@ -1349,7 +1801,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_string(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<string> DG_Tweening_Core_DOSetter_string(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1371,6 +1823,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_string(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<string>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_string(IntPtr L, DG.Tweening.Core.DOSetter<string> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Vector2_Event : LuaDelegate
@@ -1398,7 +1860,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Vector2(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Vector2> DG_Tweening_Core_DOGetter_UnityEngine_Vector2(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1420,6 +1882,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector2(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector2>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector2(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Vector2> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Vector2_Event : LuaDelegate
@@ -1445,7 +1917,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Vector2(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Vector2> DG_Tweening_Core_DOSetter_UnityEngine_Vector2(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1467,6 +1939,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector2(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector2>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector2(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Vector2> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Vector3_Event : LuaDelegate
@@ -1494,7 +1976,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Vector3(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Vector3> DG_Tweening_Core_DOGetter_UnityEngine_Vector3(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1516,6 +1998,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector3(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector3>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector3(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Vector3> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Vector3_Event : LuaDelegate
@@ -1541,7 +2033,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Vector3(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Vector3> DG_Tweening_Core_DOSetter_UnityEngine_Vector3(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1563,6 +2055,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector3(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector3>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector3(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Vector3> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Vector4_Event : LuaDelegate
@@ -1590,7 +2092,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Vector4(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Vector4> DG_Tweening_Core_DOGetter_UnityEngine_Vector4(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1612,6 +2114,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Vector4(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Vector4>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Vector4(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Vector4> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Vector4_Event : LuaDelegate
@@ -1637,7 +2149,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Vector4(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Vector4> DG_Tweening_Core_DOSetter_UnityEngine_Vector4(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1659,6 +2171,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Vector4(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Vector4>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Vector4(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Vector4> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Quaternion_Event : LuaDelegate
@@ -1686,7 +2208,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Quaternion(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Quaternion> DG_Tweening_Core_DOGetter_UnityEngine_Quaternion(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1708,6 +2230,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Quaternion(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Quaternion>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Quaternion(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Quaternion> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Quaternion_Event : LuaDelegate
@@ -1733,7 +2265,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Quaternion(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Quaternion> DG_Tweening_Core_DOSetter_UnityEngine_Quaternion(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1755,6 +2287,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Quaternion(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Quaternion>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Quaternion(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Quaternion> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Color_Event : LuaDelegate
@@ -1782,7 +2324,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Color(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Color> DG_Tweening_Core_DOGetter_UnityEngine_Color(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1804,6 +2346,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Color(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Color>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Color(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Color> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Color_Event : LuaDelegate
@@ -1829,7 +2381,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Color(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Color> DG_Tweening_Core_DOSetter_UnityEngine_Color(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1851,6 +2403,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Color(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Color>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Color(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Color> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_Rect_Event : LuaDelegate
@@ -1878,7 +2440,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_Rect(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.Rect> DG_Tweening_Core_DOGetter_UnityEngine_Rect(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1900,6 +2462,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_Rect(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.Rect>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_Rect(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.Rect> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOSetter_UnityEngine_Rect_Event : LuaDelegate
@@ -1925,7 +2497,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_Rect(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.Rect> DG_Tweening_Core_DOSetter_UnityEngine_Rect(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1947,6 +2519,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_Rect(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.Rect>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_Rect(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.Rect> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class DG_Tweening_Core_DOGetter_UnityEngine_RectOffset_Event : LuaDelegate
@@ -1974,7 +2556,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOGetter_UnityEngine_RectOffset(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOGetter<UnityEngine.RectOffset> DG_Tweening_Core_DOGetter_UnityEngine_RectOffset(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -1998,6 +2580,16 @@ public static class DelegateFactory
 		}
 	}
 
+	bool Check_DG_Tweening_Core_DOGetter_UnityEngine_RectOffset(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOGetter<UnityEngine.RectOffset>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOGetter_UnityEngine_RectOffset(IntPtr L, DG.Tweening.Core.DOGetter<UnityEngine.RectOffset> o)
+	{
+		ToLua.Push(L, o);
+	}
+
 	class DG_Tweening_Core_DOSetter_UnityEngine_RectOffset_Event : LuaDelegate
 	{
 		public DG_Tweening_Core_DOSetter_UnityEngine_RectOffset_Event(LuaFunction func) : base(func) { }
@@ -2006,7 +2598,7 @@ public static class DelegateFactory
 		public void Call(UnityEngine.RectOffset param0)
 		{
 			func.BeginPCall();
-			func.PushObject(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
@@ -2015,13 +2607,13 @@ public static class DelegateFactory
 		{
 			func.BeginPCall();
 			func.Push(self);
-			func.PushObject(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
 	}
 
-	public static Delegate DG_Tweening_Core_DOSetter_UnityEngine_RectOffset(LuaFunction func, LuaTable self, bool flag)
+	public DG.Tweening.Core.DOSetter<UnityEngine.RectOffset> DG_Tweening_Core_DOSetter_UnityEngine_RectOffset(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2045,6 +2637,16 @@ public static class DelegateFactory
 		}
 	}
 
+	bool Check_DG_Tweening_Core_DOSetter_UnityEngine_RectOffset(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(DG.Tweening.Core.DOSetter<UnityEngine.RectOffset>), L, pos);
+	}
+
+	void Push_DG_Tweening_Core_DOSetter_UnityEngine_RectOffset(IntPtr L, DG.Tweening.Core.DOSetter<UnityEngine.RectOffset> o)
+	{
+		ToLua.Push(L, o);
+	}
+
 	class UnityEngine_Camera_CameraCallback_Event : LuaDelegate
 	{
 		public UnityEngine_Camera_CameraCallback_Event(LuaFunction func) : base(func) { }
@@ -2053,7 +2655,7 @@ public static class DelegateFactory
 		public void Call(UnityEngine.Camera param0)
 		{
 			func.BeginPCall();
-			func.Push(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
@@ -2062,13 +2664,13 @@ public static class DelegateFactory
 		{
 			func.BeginPCall();
 			func.Push(self);
-			func.Push(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
 	}
 
-	public static Delegate UnityEngine_Camera_CameraCallback(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Camera.CameraCallback UnityEngine_Camera_CameraCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2090,6 +2692,69 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Camera_CameraCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Camera.CameraCallback), L, pos);
+	}
+
+	void Push_UnityEngine_Camera_CameraCallback(IntPtr L, UnityEngine.Camera.CameraCallback o)
+	{
+		ToLua.Push(L, o);
+	}
+
+	class UnityEngine_Application_LowMemoryCallback_Event : LuaDelegate
+	{
+		public UnityEngine_Application_LowMemoryCallback_Event(LuaFunction func) : base(func) { }
+		public UnityEngine_Application_LowMemoryCallback_Event(LuaFunction func, LuaTable self) : base(func, self) { }
+
+		public void Call()
+		{
+			func.Call();
+		}
+
+		public void CallWithSelf()
+		{
+			func.BeginPCall();
+			func.Push(self);
+			func.PCall();
+			func.EndPCall();
+		}
+	}
+
+	public UnityEngine.Application.LowMemoryCallback UnityEngine_Application_LowMemoryCallback(LuaFunction func, LuaTable self, bool flag)
+	{
+		if (func == null)
+		{
+			UnityEngine.Application.LowMemoryCallback fn = delegate() { };
+			return fn;
+		}
+
+		if(!flag)
+		{
+			UnityEngine_Application_LowMemoryCallback_Event target = new UnityEngine_Application_LowMemoryCallback_Event(func);
+			UnityEngine.Application.LowMemoryCallback d = target.Call;
+			target.method = d.Method;
+			return d;
+		}
+		else
+		{
+			UnityEngine_Application_LowMemoryCallback_Event target = new UnityEngine_Application_LowMemoryCallback_Event(func, self);
+			UnityEngine.Application.LowMemoryCallback d = target.CallWithSelf;
+			target.method = d.Method;
+			return d;
+		}
+	}
+
+	bool Check_UnityEngine_Application_LowMemoryCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Application.LowMemoryCallback), L, pos);
+	}
+
+	void Push_UnityEngine_Application_LowMemoryCallback(IntPtr L, UnityEngine.Application.LowMemoryCallback o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Application_AdvertisingIdentifierCallback_Event : LuaDelegate
@@ -2119,7 +2784,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Application_AdvertisingIdentifierCallback(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Application.AdvertisingIdentifierCallback UnityEngine_Application_AdvertisingIdentifierCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2141,6 +2806,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Application_AdvertisingIdentifierCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Application.AdvertisingIdentifierCallback), L, pos);
+	}
+
+	void Push_UnityEngine_Application_AdvertisingIdentifierCallback(IntPtr L, UnityEngine.Application.AdvertisingIdentifierCallback o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_Application_LogCallback_Event : LuaDelegate
@@ -2170,7 +2845,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_Application_LogCallback(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.Application.LogCallback UnityEngine_Application_LogCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2192,6 +2867,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_Application_LogCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.Application.LogCallback), L, pos);
+	}
+
+	void Push_UnityEngine_Application_LogCallback(IntPtr L, UnityEngine.Application.LogCallback o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_AudioClip_PCMReaderCallback_Event : LuaDelegate
@@ -2217,7 +2902,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_AudioClip_PCMReaderCallback(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.AudioClip.PCMReaderCallback UnityEngine_AudioClip_PCMReaderCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2239,6 +2924,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_AudioClip_PCMReaderCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.AudioClip.PCMReaderCallback), L, pos);
+	}
+
+	void Push_UnityEngine_AudioClip_PCMReaderCallback(IntPtr L, UnityEngine.AudioClip.PCMReaderCallback o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_AudioClip_PCMSetPositionCallback_Event : LuaDelegate
@@ -2264,7 +2959,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_AudioClip_PCMSetPositionCallback(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.AudioClip.PCMSetPositionCallback UnityEngine_AudioClip_PCMSetPositionCallback(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2288,6 +2983,16 @@ public static class DelegateFactory
 		}
 	}
 
+	bool Check_UnityEngine_AudioClip_PCMSetPositionCallback(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.AudioClip.PCMSetPositionCallback), L, pos);
+	}
+
+	void Push_UnityEngine_AudioClip_PCMSetPositionCallback(IntPtr L, UnityEngine.AudioClip.PCMSetPositionCallback o)
+	{
+		ToLua.Push(L, o);
+	}
+
 	class UnityEngine_RectTransform_ReapplyDrivenProperties_Event : LuaDelegate
 	{
 		public UnityEngine_RectTransform_ReapplyDrivenProperties_Event(LuaFunction func) : base(func) { }
@@ -2296,7 +3001,7 @@ public static class DelegateFactory
 		public void Call(UnityEngine.RectTransform param0)
 		{
 			func.BeginPCall();
-			func.Push(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
@@ -2305,13 +3010,13 @@ public static class DelegateFactory
 		{
 			func.BeginPCall();
 			func.Push(self);
-			func.Push(param0);
+			func.PushSealed(param0);
 			func.PCall();
 			func.EndPCall();
 		}
 	}
 
-	public static Delegate UnityEngine_RectTransform_ReapplyDrivenProperties(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.RectTransform.ReapplyDrivenProperties UnityEngine_RectTransform_ReapplyDrivenProperties(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2333,6 +3038,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_RectTransform_ReapplyDrivenProperties(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.RectTransform.ReapplyDrivenProperties), L, pos);
+	}
+
+	void Push_UnityEngine_RectTransform_ReapplyDrivenProperties(IntPtr L, UnityEngine.RectTransform.ReapplyDrivenProperties o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class System_Action_NotiData_Event : LuaDelegate
@@ -2358,7 +3073,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Action_NotiData(LuaFunction func, LuaTable self, bool flag)
+	public System.Action<NotiData> System_Action_NotiData(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2380,6 +3095,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_System_Action_NotiData(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<NotiData>), L, pos);
+	}
+
+	void Push_System_Action_NotiData(IntPtr L, System.Action<NotiData> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class System_Action_UnityEngine_Objects_Event : LuaDelegate
@@ -2405,7 +3130,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate System_Action_UnityEngine_Objects(LuaFunction func, LuaTable self, bool flag)
+	public System.Action<UnityEngine.Object[]> System_Action_UnityEngine_Objects(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2427,6 +3152,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_System_Action_UnityEngine_Objects(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(System.Action<UnityEngine.Object[]>), L, pos);
+	}
+
+	void Push_System_Action_UnityEngine_Objects(IntPtr L, System.Action<UnityEngine.Object[]> o)
+	{
+		ToLua.Push(L, o);
 	}
 
 	class UnityEngine_UI_InputField_OnValidateInput_Event : LuaDelegate
@@ -2460,7 +3195,7 @@ public static class DelegateFactory
 		}
 	}
 
-	public static Delegate UnityEngine_UI_InputField_OnValidateInput(LuaFunction func, LuaTable self, bool flag)
+	public UnityEngine.UI.InputField.OnValidateInput UnityEngine_UI_InputField_OnValidateInput(LuaFunction func, LuaTable self, bool flag)
 	{
 		if (func == null)
 		{
@@ -2482,6 +3217,16 @@ public static class DelegateFactory
 			target.method = d.Method;
 			return d;
 		}
+	}
+
+	bool Check_UnityEngine_UI_InputField_OnValidateInput(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckDelegateType(typeof(UnityEngine.UI.InputField.OnValidateInput), L, pos);
+	}
+
+	void Push_UnityEngine_UI_InputField_OnValidateInput(IntPtr L, UnityEngine.UI.InputField.OnValidateInput o)
+	{
+		ToLua.Push(L, o);
 	}
 
 }

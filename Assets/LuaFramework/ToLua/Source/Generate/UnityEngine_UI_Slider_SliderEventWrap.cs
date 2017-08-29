@@ -30,7 +30,7 @@ public class UnityEngine_UI_Slider_SliderEventWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.UI.Slider.SliderEvent.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

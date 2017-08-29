@@ -47,11 +47,11 @@ public class UnityEngine_UI_TextWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 1);
 			obj.FontTextureChanged();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -63,13 +63,13 @@ public class UnityEngine_UI_TextWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 1);
 			UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 2);
 			UnityEngine.TextGenerationSettings o = obj.GetGenerationSettings(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -86,7 +86,7 @@ public class UnityEngine_UI_TextWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -98,11 +98,11 @@ public class UnityEngine_UI_TextWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 1);
 			obj.CalculateLayoutInputHorizontal();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -114,11 +114,11 @@ public class UnityEngine_UI_TextWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 1);
 			obj.CalculateLayoutInputVertical();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -136,7 +136,7 @@ public class UnityEngine_UI_TextWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -152,12 +152,12 @@ public class UnityEngine_UI_TextWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)o;
 			UnityEngine.TextGenerator ret = obj.cachedTextGenerator;
-			ToLua.PushObject(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index cachedTextGenerator on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index cachedTextGenerator on a nil value");
 		}
 	}
 
@@ -171,12 +171,12 @@ public class UnityEngine_UI_TextWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)o;
 			UnityEngine.TextGenerator ret = obj.cachedTextGeneratorForLayout;
-			ToLua.PushObject(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index cachedTextGeneratorForLayout on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index cachedTextGeneratorForLayout on a nil value");
 		}
 	}
 
@@ -195,7 +195,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index mainTexture on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index mainTexture on a nil value");
 		}
 	}
 
@@ -209,12 +209,12 @@ public class UnityEngine_UI_TextWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)o;
 			UnityEngine.Font ret = obj.font;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index font on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index font on a nil value");
 		}
 	}
 
@@ -233,7 +233,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index text on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index text on a nil value");
 		}
 	}
 
@@ -252,7 +252,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index supportRichText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index supportRichText on a nil value");
 		}
 	}
 
@@ -271,7 +271,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextForBestFit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextForBestFit on a nil value");
 		}
 	}
 
@@ -290,7 +290,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextMinSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextMinSize on a nil value");
 		}
 	}
 
@@ -309,7 +309,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextMaxSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextMaxSize on a nil value");
 		}
 	}
 
@@ -328,7 +328,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alignment on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alignment on a nil value");
 		}
 	}
 
@@ -347,7 +347,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alignByGeometry on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alignByGeometry on a nil value");
 		}
 	}
 
@@ -366,7 +366,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fontSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fontSize on a nil value");
 		}
 	}
 
@@ -385,7 +385,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index horizontalOverflow on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index horizontalOverflow on a nil value");
 		}
 	}
 
@@ -404,7 +404,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index verticalOverflow on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index verticalOverflow on a nil value");
 		}
 	}
 
@@ -423,7 +423,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index lineSpacing on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lineSpacing on a nil value");
 		}
 	}
 
@@ -442,7 +442,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fontStyle on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fontStyle on a nil value");
 		}
 	}
 
@@ -461,7 +461,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pixelsPerUnit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pixelsPerUnit on a nil value");
 		}
 	}
 
@@ -480,7 +480,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minWidth on a nil value");
 		}
 	}
 
@@ -499,7 +499,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredWidth on a nil value");
 		}
 	}
 
@@ -518,7 +518,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleWidth on a nil value");
 		}
 	}
 
@@ -537,7 +537,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minHeight on a nil value");
 		}
 	}
 
@@ -556,7 +556,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredHeight on a nil value");
 		}
 	}
 
@@ -575,7 +575,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleHeight on a nil value");
 		}
 	}
 
@@ -594,7 +594,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index layoutPriority on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index layoutPriority on a nil value");
 		}
 	}
 
@@ -607,13 +607,13 @@ public class UnityEngine_UI_TextWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Text obj = (UnityEngine.UI.Text)o;
-			UnityEngine.Font arg0 = (UnityEngine.Font)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Font));
+			UnityEngine.Font arg0 = (UnityEngine.Font)ToLua.CheckObject(L, 2, typeof(UnityEngine.Font));
 			obj.font = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index font on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index font on a nil value");
 		}
 	}
 
@@ -632,7 +632,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index text on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index text on a nil value");
 		}
 	}
 
@@ -651,7 +651,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index supportRichText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index supportRichText on a nil value");
 		}
 	}
 
@@ -670,7 +670,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextForBestFit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextForBestFit on a nil value");
 		}
 	}
 
@@ -689,7 +689,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextMinSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextMinSize on a nil value");
 		}
 	}
 
@@ -708,7 +708,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index resizeTextMaxSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index resizeTextMaxSize on a nil value");
 		}
 	}
 
@@ -727,7 +727,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alignment on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alignment on a nil value");
 		}
 	}
 
@@ -746,7 +746,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alignByGeometry on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alignByGeometry on a nil value");
 		}
 	}
 
@@ -765,7 +765,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fontSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fontSize on a nil value");
 		}
 	}
 
@@ -784,7 +784,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index horizontalOverflow on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index horizontalOverflow on a nil value");
 		}
 	}
 
@@ -803,7 +803,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index verticalOverflow on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index verticalOverflow on a nil value");
 		}
 	}
 
@@ -822,7 +822,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index lineSpacing on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lineSpacing on a nil value");
 		}
 	}
 
@@ -841,7 +841,7 @@ public class UnityEngine_UI_TextWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fontStyle on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fontStyle on a nil value");
 		}
 	}
 }

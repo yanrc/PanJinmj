@@ -30,7 +30,7 @@ public class UnityEngine_UI_InputField_OnChangeEventWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.UI.InputField.OnChangeEvent.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

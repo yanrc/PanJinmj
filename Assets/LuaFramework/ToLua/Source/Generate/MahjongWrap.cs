@@ -22,12 +22,12 @@ public class MahjongWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			Mahjong obj = (Mahjong)ToLua.CheckObject(L, 1, typeof(Mahjong));
+			Mahjong obj = (Mahjong)ToLua.CheckObject<Mahjong>(L, 1);
 			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
 			obj.Init(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -39,12 +39,12 @@ public class MahjongWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			Mahjong obj = (Mahjong)ToLua.CheckObject(L, 1, typeof(Mahjong));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			Mahjong obj = (Mahjong)ToLua.CheckObject<Mahjong>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnDrag(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -56,12 +56,12 @@ public class MahjongWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			Mahjong obj = (Mahjong)ToLua.CheckObject(L, 1, typeof(Mahjong));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			Mahjong obj = (Mahjong)ToLua.CheckObject<Mahjong>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerDown(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -73,12 +73,12 @@ public class MahjongWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			Mahjong obj = (Mahjong)ToLua.CheckObject(L, 1, typeof(Mahjong));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			Mahjong obj = (Mahjong)ToLua.CheckObject<Mahjong>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerUp(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -96,7 +96,7 @@ public class MahjongWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

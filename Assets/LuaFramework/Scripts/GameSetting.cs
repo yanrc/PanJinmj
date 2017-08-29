@@ -17,7 +17,7 @@ public class GameSetting : MonoBehaviour {
         gamelist.Clear();
         gamelist.Add("Panjin", Panjin);
         gamelist.Add("Wuxi", Wuxi);
-        gamelist.Add("ShuangLiao", Shuangliao);
+        gamelist.Add("Shuangliao", Shuangliao);
         gamelist.Add("Jiujiang", Jiujiang);
         gamelist.Add("Changsha", Changsha);
         gamelist.Add("TuiDaoHu", Tuidaohu);
@@ -27,7 +27,7 @@ public class GameSetting : MonoBehaviour {
     [ExecuteInEditMode]
     public void OnValidate()
     {
-       FindObjectOfType<LoadingProgress>().transform.FindChild("logo").GetComponent<Image>().sprite = LOGO;
+       FindObjectOfType<LoadingProgress>().transform.Find("logo").GetComponent<Image>().sprite = LOGO;
     }
 }
 

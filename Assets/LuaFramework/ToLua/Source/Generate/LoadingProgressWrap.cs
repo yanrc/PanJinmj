@@ -26,12 +26,12 @@ public class LoadingProgressWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LoadingProgress obj = (LoadingProgress)ToLua.CheckObject(L, 1, typeof(LoadingProgress));
-			IMessage arg0 = (IMessage)ToLua.CheckObject(L, 2, typeof(IMessage));
+			LoadingProgress obj = (LoadingProgress)ToLua.CheckObject<LoadingProgress>(L, 1);
+			IMessage arg0 = (IMessage)ToLua.CheckObject<IMessage>(L, 2);
 			obj.Execute(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -46,7 +46,7 @@ public class LoadingProgressWrap
 			LoadingProgress.ClearProgressBar();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -64,7 +64,7 @@ public class LoadingProgressWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -85,7 +85,7 @@ public class LoadingProgressWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index s on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index s on a nil value");
 		}
 	}
 
@@ -104,7 +104,7 @@ public class LoadingProgressWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textInfo on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textInfo on a nil value");
 		}
 	}
 
@@ -123,7 +123,7 @@ public class LoadingProgressWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textTitle on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textTitle on a nil value");
 		}
 	}
 
@@ -135,7 +135,7 @@ public class LoadingProgressWrap
 			LuaDLL.lua_pushnumber(L, LoadingProgress.current);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -149,7 +149,7 @@ public class LoadingProgressWrap
 			LuaDLL.lua_pushnumber(L, LoadingProgress.all);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -163,7 +163,7 @@ public class LoadingProgressWrap
 			ToLua.Push(L, LoadingProgress.Instance);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -178,13 +178,13 @@ public class LoadingProgressWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			LoadingProgress obj = (LoadingProgress)o;
-			UnityEngine.UI.Slider arg0 = (UnityEngine.UI.Slider)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Slider));
+			UnityEngine.UI.Slider arg0 = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 2);
 			obj.s = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index s on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index s on a nil value");
 		}
 	}
 
@@ -197,13 +197,13 @@ public class LoadingProgressWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			LoadingProgress obj = (LoadingProgress)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.textInfo = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textInfo on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textInfo on a nil value");
 		}
 	}
 
@@ -216,13 +216,13 @@ public class LoadingProgressWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			LoadingProgress obj = (LoadingProgress)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.textTitle = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index textTitle on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index textTitle on a nil value");
 		}
 	}
 
@@ -235,7 +235,7 @@ public class LoadingProgressWrap
 			LoadingProgress.current = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -250,7 +250,7 @@ public class LoadingProgressWrap
 			LoadingProgress.all = arg0;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

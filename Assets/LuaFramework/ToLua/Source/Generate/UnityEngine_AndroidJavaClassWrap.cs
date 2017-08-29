@@ -31,7 +31,7 @@ public class UnityEngine_AndroidJavaClassWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.AndroidJavaClass.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

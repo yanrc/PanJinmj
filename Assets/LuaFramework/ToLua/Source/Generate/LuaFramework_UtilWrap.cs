@@ -54,7 +54,7 @@ public class LuaFramework_UtilWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: LuaFramework.Util.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -71,7 +71,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -88,7 +88,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -105,7 +105,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.tolua_pushint64(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -116,30 +116,14 @@ public class LuaFramework_UtilWrap
 	{
 		try
 		{
-			int count = LuaDLL.lua_gettop(L);
-
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(float), typeof(float)))
-			{
-				float arg0 = (float)LuaDLL.lua_tonumber(L, 1);
-				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
-				float o = LuaFramework.Util.Random(arg0, arg1);
-				LuaDLL.lua_pushnumber(L, o);
-				return 1;
-			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int)))
-			{
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-				int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-				int o = LuaFramework.Util.Random(arg0, arg1);
-				LuaDLL.lua_pushinteger(L, o);
-				return 1;
-			}
-			else
-			{
-				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.Util.Random");
-			}
+			ToLua.CheckArgsCount(L, 2);
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
+			float o = LuaFramework.Util.Random(arg0, arg1);
+			LuaDLL.lua_pushnumber(L, o);
+			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -156,7 +140,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -172,7 +156,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.tolua_pushint64(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -185,20 +169,20 @@ public class LuaFramework_UtilWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Transform), typeof(string)))
+			if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Transform, string>(L, 1))
 			{
 				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				UnityEngine.GameObject o = LuaFramework.Util.Child(arg0, arg1);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.GameObject), typeof(string)))
+			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.GameObject, string>(L, 1))
 			{
 				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.ToObject(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				UnityEngine.GameObject o = LuaFramework.Util.Child(arg0, arg1);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
 			else
@@ -206,7 +190,7 @@ public class LuaFramework_UtilWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.Util.Child");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -219,20 +203,20 @@ public class LuaFramework_UtilWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.Transform), typeof(string)))
+			if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Transform, string>(L, 1))
 			{
 				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				UnityEngine.GameObject o = LuaFramework.Util.Peer(arg0, arg1);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.GameObject), typeof(string)))
+			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.GameObject, string>(L, 1))
 			{
 				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.ToObject(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				UnityEngine.GameObject o = LuaFramework.Util.Peer(arg0, arg1);
-				ToLua.Push(L, o);
+				ToLua.PushSealed(L, o);
 				return 1;
 			}
 			else
@@ -240,7 +224,7 @@ public class LuaFramework_UtilWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.Util.Peer");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -257,7 +241,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -274,7 +258,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -286,11 +270,11 @@ public class LuaFramework_UtilWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.Transform));
+			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			LuaFramework.Util.ClearChild(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -305,7 +289,7 @@ public class LuaFramework_UtilWrap
 			LuaFramework.Util.ClearMemory();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -321,7 +305,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -338,7 +322,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -354,7 +338,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -370,7 +354,7 @@ public class LuaFramework_UtilWrap
 			LuaFramework.Util.Log(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -386,7 +370,7 @@ public class LuaFramework_UtilWrap
 			LuaFramework.Util.LogWarning(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -402,7 +386,7 @@ public class LuaFramework_UtilWrap
 			LuaFramework.Util.LogError(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -418,7 +402,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -437,7 +421,7 @@ public class LuaFramework_UtilWrap
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -453,7 +437,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -467,7 +451,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushstring(L, LuaFramework.Util.DataPath);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -481,7 +465,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.Util.NetAvailable);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -495,7 +479,7 @@ public class LuaFramework_UtilWrap
 			LuaDLL.lua_pushboolean(L, LuaFramework.Util.IsWifi);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

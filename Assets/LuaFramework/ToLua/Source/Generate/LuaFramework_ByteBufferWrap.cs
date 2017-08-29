@@ -48,7 +48,7 @@ public class LuaFramework_ByteBufferWrap
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(byte[])))
+			else if (count == 1)
 			{
 				byte[] arg0 = ToLua.CheckByteBuffer(L, 1);
 				LuaFramework.ByteBuffer obj = new LuaFramework.ByteBuffer(arg0);
@@ -60,7 +60,7 @@ public class LuaFramework_ByteBufferWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: LuaFramework.ByteBuffer.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -72,11 +72,11 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			obj.Close();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -88,12 +88,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			byte arg0 = (byte)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteByte(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -105,12 +105,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteInt(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -122,12 +122,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			short arg0 = (short)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteShort(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -139,12 +139,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			ushort arg0 = (ushort)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteUshort(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -156,12 +156,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			long arg0 = LuaDLL.tolua_checkint64(L, 2);
 			obj.WriteLong(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -173,12 +173,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteFloat(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -190,12 +190,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			double arg0 = (double)LuaDLL.luaL_checknumber(L, 2);
 			obj.WriteDouble(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -207,12 +207,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.WriteString(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -224,12 +224,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			byte[] arg0 = ToLua.CheckByteBuffer(L, 2);
 			obj.WriteBytes(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -241,12 +241,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			LuaByteBuffer arg0 = new LuaByteBuffer(ToLua.CheckByteBuffer(L, 2));
 			obj.WriteBuffer(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -258,12 +258,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			byte o = obj.ReadByte();
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -275,12 +275,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			int o = obj.ReadInt();
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -292,12 +292,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			short o = obj.ReadShort();
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -309,12 +309,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			ushort o = obj.ReadUshort();
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -326,12 +326,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			long o = obj.ReadLong();
 			LuaDLL.tolua_pushint64(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -343,12 +343,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			float o = obj.ReadFloat();
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -360,12 +360,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			double o = obj.ReadDouble();
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -377,12 +377,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			string o = obj.ReadString();
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -394,12 +394,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			byte[] o = obj.ReadBytes();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -411,12 +411,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			LuaInterface.LuaByteBuffer o = obj.ReadBuffer();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -428,12 +428,12 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			byte[] o = obj.ToBytes();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -445,11 +445,11 @@ public class LuaFramework_ByteBufferWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject(L, 1, typeof(LuaFramework.ByteBuffer));
+			LuaFramework.ByteBuffer obj = (LuaFramework.ByteBuffer)ToLua.CheckObject<LuaFramework.ByteBuffer>(L, 1);
 			obj.Flush();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

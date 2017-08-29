@@ -24,12 +24,12 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			int o = obj.GetPersistentEventCount();
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -41,13 +41,13 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Object o = obj.GetPersistentTarget(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -59,13 +59,13 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			string o = obj.GetPersistentMethodName(arg0);
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -77,13 +77,13 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Events.UnityEventCallState arg1 = (UnityEngine.Events.UnityEventCallState)ToLua.CheckObject(L, 3, typeof(UnityEngine.Events.UnityEventCallState));
 			obj.SetPersistentListenerState(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -95,11 +95,11 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			obj.RemoveAllListeners();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -111,12 +111,12 @@ public class UnityEngine_Events_UnityEventBaseWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEventBase));
+			UnityEngine.Events.UnityEventBase obj = (UnityEngine.Events.UnityEventBase)ToLua.CheckObject<UnityEngine.Events.UnityEventBase>(L, 1);
 			string o = obj.ToString();
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -135,7 +135,7 @@ public class UnityEngine_Events_UnityEventBaseWrap
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

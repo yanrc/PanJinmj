@@ -34,11 +34,11 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 			obj.RefreshShownValue();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -51,23 +51,23 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.UI.Dropdown), typeof(System.Collections.Generic.List<UnityEngine.Sprite>)))
+			if (count == 2 && TypeChecker.CheckTypes<System.Collections.Generic.List<UnityEngine.Sprite>>(L, 2))
 			{
-				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.ToObject(L, 1);
+				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 				System.Collections.Generic.List<UnityEngine.Sprite> arg0 = (System.Collections.Generic.List<UnityEngine.Sprite>)ToLua.ToObject(L, 2);
 				obj.AddOptions(arg0);
 				return 0;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.UI.Dropdown), typeof(System.Collections.Generic.List<string>)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.Generic.List<string>>(L, 2))
 			{
-				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.ToObject(L, 1);
+				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 				System.Collections.Generic.List<string> arg0 = (System.Collections.Generic.List<string>)ToLua.ToObject(L, 2);
 				obj.AddOptions(arg0);
 				return 0;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(UnityEngine.UI.Dropdown), typeof(System.Collections.Generic.List<UnityEngine.UI.Dropdown.OptionData>)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.Generic.List<UnityEngine.UI.Dropdown.OptionData>>(L, 2))
 			{
-				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.ToObject(L, 1);
+				UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 				System.Collections.Generic.List<UnityEngine.UI.Dropdown.OptionData> arg0 = (System.Collections.Generic.List<UnityEngine.UI.Dropdown.OptionData>)ToLua.ToObject(L, 2);
 				obj.AddOptions(arg0);
 				return 0;
@@ -77,7 +77,7 @@ public class UnityEngine_UI_DropdownWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.UI.Dropdown.AddOptions");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -89,11 +89,11 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 			obj.ClearOptions();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -105,12 +105,12 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -122,12 +122,12 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSubmit(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -139,12 +139,12 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnCancel(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -156,11 +156,11 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 			obj.Show();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -172,11 +172,11 @@ public class UnityEngine_UI_DropdownWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Dropdown));
+			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)ToLua.CheckObject<UnityEngine.UI.Dropdown>(L, 1);
 			obj.Hide();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -194,7 +194,7 @@ public class UnityEngine_UI_DropdownWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -210,12 +210,12 @@ public class UnityEngine_UI_DropdownWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
 			UnityEngine.RectTransform ret = obj.template;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index template on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index template on a nil value");
 		}
 	}
 
@@ -234,7 +234,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index captionText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index captionText on a nil value");
 		}
 	}
 
@@ -253,7 +253,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index captionImage on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index captionImage on a nil value");
 		}
 	}
 
@@ -272,7 +272,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index itemText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index itemText on a nil value");
 		}
 	}
 
@@ -291,7 +291,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index itemImage on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index itemImage on a nil value");
 		}
 	}
 
@@ -305,12 +305,12 @@ public class UnityEngine_UI_DropdownWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
 			System.Collections.Generic.List<UnityEngine.UI.Dropdown.OptionData> ret = obj.options;
-			ToLua.PushObject(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index options on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index options on a nil value");
 		}
 	}
 
@@ -329,7 +329,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -348,7 +348,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index value on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index value on a nil value");
 		}
 	}
 
@@ -361,13 +361,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.RectTransform));
+			UnityEngine.RectTransform arg0 = (UnityEngine.RectTransform)ToLua.CheckObject(L, 2, typeof(UnityEngine.RectTransform));
 			obj.template = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index template on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index template on a nil value");
 		}
 	}
 
@@ -380,13 +380,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.captionText = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index captionText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index captionText on a nil value");
 		}
 	}
 
@@ -399,13 +399,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 2);
 			obj.captionImage = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index captionImage on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index captionImage on a nil value");
 		}
 	}
 
@@ -418,13 +418,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Text));
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
 			obj.itemText = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index itemText on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index itemText on a nil value");
 		}
 	}
 
@@ -437,13 +437,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 2);
 			obj.itemImage = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index itemImage on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index itemImage on a nil value");
 		}
 	}
 
@@ -462,7 +462,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index options on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index options on a nil value");
 		}
 	}
 
@@ -475,13 +475,13 @@ public class UnityEngine_UI_DropdownWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Dropdown obj = (UnityEngine.UI.Dropdown)o;
-			UnityEngine.UI.Dropdown.DropdownEvent arg0 = (UnityEngine.UI.Dropdown.DropdownEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Dropdown.DropdownEvent));
+			UnityEngine.UI.Dropdown.DropdownEvent arg0 = (UnityEngine.UI.Dropdown.DropdownEvent)ToLua.CheckObject<UnityEngine.UI.Dropdown.DropdownEvent>(L, 2);
 			obj.onValueChanged = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onValueChanged on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onValueChanged on a nil value");
 		}
 	}
 
@@ -500,7 +500,7 @@ public class UnityEngine_UI_DropdownWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index value on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index value on a nil value");
 		}
 	}
 }

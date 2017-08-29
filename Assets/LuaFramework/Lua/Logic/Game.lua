@@ -35,10 +35,9 @@ function Game.OnInitOK()
 	WechatOperate.AddListener()
 	APIS.GameSetting()
 	-- 加载面板
-	UIManager.InitPanels();
+	UIManager.InitPrefabs();
 	CtrlManager.Init();
 	BroadcastScript.Awake()
-	Test.Awake()
 	logWarn('LuaFramework InitOK--->>>');
 end
 

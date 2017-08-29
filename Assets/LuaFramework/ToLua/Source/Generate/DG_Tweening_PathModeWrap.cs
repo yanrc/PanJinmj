@@ -13,6 +13,18 @@ public class DG_Tweening_PathModeWrap
 		L.RegVar("Sidescroller2D", get_Sidescroller2D, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<DG.Tweening.PathMode>.Check = CheckType;
+		StackTraits<DG.Tweening.PathMode>.Push = Push;
+	}
+
+	static void Push(IntPtr L, DG.Tweening.PathMode arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(DG.Tweening.PathMode), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

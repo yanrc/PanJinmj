@@ -47,6 +47,18 @@ public class DG_Tweening_EaseWrap
 		L.RegVar("INTERNAL_Custom", get_INTERNAL_Custom, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<DG.Tweening.Ease>.Check = CheckType;
+		StackTraits<DG.Tweening.Ease>.Push = Push;
+	}
+
+	static void Push(IntPtr L, DG.Tweening.Ease arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(DG.Tweening.Ease), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

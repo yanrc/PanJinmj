@@ -20,24 +20,12 @@ public class UnityEngine_Events_UnityEvent_boolWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<bool>));
-			UnityEngine.Events.UnityAction<bool> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction<bool>)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction<bool>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction<bool>), func) as UnityEngine.Events.UnityAction<bool>;
-			}
-
+			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<bool>>(L, 1);
+			UnityEngine.Events.UnityAction<bool> arg0 = (UnityEngine.Events.UnityAction<bool>)ToLua.CheckDelegate<UnityEngine.Events.UnityAction<bool>>(L, 2);
 			obj.AddListener(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -49,24 +37,12 @@ public class UnityEngine_Events_UnityEvent_boolWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<bool>));
-			UnityEngine.Events.UnityAction<bool> arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (UnityEngine.Events.UnityAction<bool>)ToLua.CheckObject(L, 2, typeof(UnityEngine.Events.UnityAction<bool>));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(UnityEngine.Events.UnityAction<bool>), func) as UnityEngine.Events.UnityAction<bool>;
-			}
-
+			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<bool>>(L, 1);
+			UnityEngine.Events.UnityAction<bool> arg0 = (UnityEngine.Events.UnityAction<bool>)ToLua.CheckDelegate<UnityEngine.Events.UnityAction<bool>>(L, 2);
 			obj.RemoveListener(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -78,12 +54,12 @@ public class UnityEngine_Events_UnityEvent_boolWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject(L, 1, typeof(UnityEngine.Events.UnityEvent<bool>));
+			UnityEngine.Events.UnityEvent<bool> obj = (UnityEngine.Events.UnityEvent<bool>)ToLua.CheckObject<UnityEngine.Events.UnityEvent<bool>>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.Invoke(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

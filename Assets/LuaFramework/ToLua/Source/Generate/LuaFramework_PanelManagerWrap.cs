@@ -19,14 +19,29 @@ public class LuaFramework_PanelManagerWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 3);
-			LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.PanelManager));
-			string arg0 = ToLua.CheckString(L, 2);
-			LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
-			obj.CreatePanel(arg0, arg1);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2)
+			{
+				LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject<LuaFramework.PanelManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				obj.CreatePanel(arg0);
+				return 0;
+			}
+			else if (count == 3)
+			{
+				LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject<LuaFramework.PanelManager>(L, 1);
+				string arg0 = ToLua.CheckString(L, 2);
+				LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
+				obj.CreatePanel(arg0, arg1);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaFramework.PanelManager.CreatePanel");
+			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -38,12 +53,12 @@ public class LuaFramework_PanelManagerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.PanelManager));
+			LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject<LuaFramework.PanelManager>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.ClosePanel(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,7 +76,7 @@ public class LuaFramework_PanelManagerWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}

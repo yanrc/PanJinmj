@@ -28,8 +28,21 @@ public class UnityEngine_RuntimePlatformWrap
 		L.RegVar("SamsungTVPlayer", get_SamsungTVPlayer, null);
 		L.RegVar("WiiU", get_WiiU, null);
 		L.RegVar("tvOS", get_tvOS, null);
+		L.RegVar("Switch", get_Switch, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<UnityEngine.RuntimePlatform>.Check = CheckType;
+		StackTraits<UnityEngine.RuntimePlatform>.Push = Push;
+	}
+
+	static void Push(IntPtr L, UnityEngine.RuntimePlatform arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(UnityEngine.RuntimePlatform), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -176,6 +189,13 @@ public class UnityEngine_RuntimePlatformWrap
 	static int get_tvOS(IntPtr L)
 	{
 		ToLua.Push(L, UnityEngine.RuntimePlatform.tvOS);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_Switch(IntPtr L)
+	{
+		ToLua.Push(L, UnityEngine.RuntimePlatform.Switch);
 		return 1;
 	}
 

@@ -86,7 +86,7 @@ public class System_DateTimeWrap
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(long), typeof(System.DateTimeKind)))
+			else if (count == 2)
 			{
 				long arg0 = LuaDLL.tolua_checkint64(L, 1);
 				System.DateTimeKind arg1 = (System.DateTimeKind)ToLua.CheckObject(L, 2, typeof(System.DateTimeKind));
@@ -94,7 +94,7 @@ public class System_DateTimeWrap
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int)))
+			else if (count == 3)
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -103,17 +103,17 @@ public class System_DateTimeWrap
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(System.Globalization.Calendar)))
+			else if (count == 4)
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				System.Globalization.Calendar arg3 = (System.Globalization.Calendar)ToLua.CheckObject(L, 4, typeof(System.Globalization.Calendar));
+				System.Globalization.Calendar arg3 = (System.Globalization.Calendar)ToLua.CheckObject<System.Globalization.Calendar>(L, 4);
 				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3);
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 6 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int)))
+			else if (count == 6)
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -125,7 +125,7 @@ public class System_DateTimeWrap
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 7 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(System.DateTimeKind)))
+			else if (count == 7 && TypeChecker.CheckTypes<System.DateTimeKind>(L, 7))
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -133,12 +133,38 @@ public class System_DateTimeWrap
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				System.DateTimeKind arg6 = (System.DateTimeKind)ToLua.CheckObject(L, 7, typeof(System.DateTimeKind));
+				System.DateTimeKind arg6 = (System.DateTimeKind)ToLua.ToObject(L, 7);
 				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 7 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int)))
+			else if (count == 7 && TypeChecker.CheckTypes<int>(L, 7))
+			{
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
+				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
+				int arg6 = (int)LuaDLL.lua_tonumber(L, 7);
+				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+				ToLua.PushValue(L, obj);
+				return 1;
+			}
+			else if (count == 7 && TypeChecker.CheckTypes<System.Globalization.Calendar>(L, 7))
+			{
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
+				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
+				System.Globalization.Calendar arg6 = (System.Globalization.Calendar)ToLua.ToObject(L, 7);
+				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+				ToLua.PushValue(L, obj);
+				return 1;
+			}
+			else if (count == 8 && TypeChecker.CheckTypes<System.DateTimeKind>(L, 8))
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -147,38 +173,12 @@ public class System_DateTimeWrap
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
-				ToLua.PushValue(L, obj);
-				return 1;
-			}
-			else if (count == 7 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(System.Globalization.Calendar)))
-			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				System.Globalization.Calendar arg6 = (System.Globalization.Calendar)ToLua.CheckObject(L, 7, typeof(System.Globalization.Calendar));
-				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
-				ToLua.PushValue(L, obj);
-				return 1;
-			}
-			else if (count == 8 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(System.DateTimeKind)))
-			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				System.DateTimeKind arg7 = (System.DateTimeKind)ToLua.CheckObject(L, 8, typeof(System.DateTimeKind));
+				System.DateTimeKind arg7 = (System.DateTimeKind)ToLua.ToObject(L, 8);
 				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 8 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(System.Globalization.Calendar)))
+			else if (count == 8 && TypeChecker.CheckTypes<System.Globalization.Calendar>(L, 8))
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -187,12 +187,12 @@ public class System_DateTimeWrap
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				System.Globalization.Calendar arg7 = (System.Globalization.Calendar)ToLua.CheckObject(L, 8, typeof(System.Globalization.Calendar));
+				System.Globalization.Calendar arg7 = (System.Globalization.Calendar)ToLua.ToObject(L, 8);
 				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 				ToLua.PushValue(L, obj);
 				return 1;
 			}
-			else if (count == 9 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(System.Globalization.Calendar), typeof(System.DateTimeKind)))
+			else if (count == 9)
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
@@ -201,7 +201,7 @@ public class System_DateTimeWrap
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				System.Globalization.Calendar arg7 = (System.Globalization.Calendar)ToLua.CheckObject(L, 8, typeof(System.Globalization.Calendar));
+				System.Globalization.Calendar arg7 = (System.Globalization.Calendar)ToLua.CheckObject<System.Globalization.Calendar>(L, 8);
 				System.DateTimeKind arg8 = (System.DateTimeKind)ToLua.CheckObject(L, 9, typeof(System.DateTimeKind));
 				System.DateTime obj = new System.DateTime(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 				ToLua.PushValue(L, obj);
@@ -218,7 +218,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: System.DateTime.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -231,13 +231,13 @@ public class System_DateTimeWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
-			System.TimeSpan arg0 = (System.TimeSpan)ToLua.CheckObject(L, 2, typeof(System.TimeSpan));
+			System.TimeSpan arg0 = StackTraits<System.TimeSpan>.Check(L, 2);
 			System.DateTime o = obj.Add(arg0);
 			ToLua.PushValue(L, o);
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -256,7 +256,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -275,7 +275,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -294,7 +294,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -313,7 +313,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -332,7 +332,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -351,7 +351,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -370,7 +370,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -389,7 +389,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -401,13 +401,13 @@ public class System_DateTimeWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.DateTime arg0 = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
-			System.DateTime arg1 = (System.DateTime)ToLua.CheckObject(L, 2, typeof(System.DateTime));
+			System.DateTime arg0 = StackTraits<System.DateTime>.Check(L, 1);
+			System.DateTime arg1 = StackTraits<System.DateTime>.Check(L, 2);
 			int o = System.DateTime.Compare(arg0, arg1);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -420,18 +420,18 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.DateTime)))
+			if (count == 2 && TypeChecker.CheckTypes<System.DateTime>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 2);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				System.DateTime arg0 = StackTraits<System.DateTime>.To(L, 2);
 				int o = obj.CompareTo(arg0);
 				LuaDLL.lua_pushinteger(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(object)))
+			else if (count == 2 && TypeChecker.CheckTypes<object>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				object arg0 = ToLua.ToVarObject(L, 2);
 				int o = obj.CompareTo(arg0);
 				LuaDLL.lua_pushinteger(L, o);
@@ -443,7 +443,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.CompareTo");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -461,7 +461,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -474,18 +474,18 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.DateTime)))
+			if (count == 2 && TypeChecker.CheckTypes<System.DateTime>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 2);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				System.DateTime arg0 = StackTraits<System.DateTime>.To(L, 2);
 				bool o = obj.Equals(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(object)))
+			else if (count == 2 && TypeChecker.CheckTypes<object>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				object arg0 = ToLua.ToVarObject(L, 2);
 				bool o = obj.Equals(arg0);
 				LuaDLL.lua_pushboolean(L, o);
@@ -497,7 +497,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.Equals");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -515,7 +515,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -532,7 +532,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -544,13 +544,13 @@ public class System_DateTimeWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.DateTime arg0 = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+			System.DateTime arg0 = StackTraits<System.DateTime>.Check(L, 1);
 			System.DateTimeKind arg1 = (System.DateTimeKind)ToLua.CheckObject(L, 2, typeof(System.DateTimeKind));
 			System.DateTime o = System.DateTime.SpecifyKind(arg0, arg1);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -568,7 +568,7 @@ public class System_DateTimeWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -585,7 +585,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -602,7 +602,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -619,7 +619,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -632,37 +632,37 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime)))
+			if (count == 1)
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				string[] o = obj.GetDateTimeFormats();
 				ToLua.Push(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.IFormatProvider)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.IFormatProvider>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				System.IFormatProvider arg0 = (System.IFormatProvider)ToLua.ToObject(L, 2);
 				string[] o = obj.GetDateTimeFormats(arg0);
 				ToLua.Push(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(char)))
+			else if (count == 2 && TypeChecker.CheckTypes<char>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				char arg0 = (char)LuaDLL.lua_tonumber(L, 2);
 				string[] o = obj.GetDateTimeFormats(arg0);
 				ToLua.Push(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(char), typeof(System.IFormatProvider)))
+			else if (count == 3)
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				char arg0 = (char)LuaDLL.lua_tonumber(L, 2);
-				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.ToObject(L, 3);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				char arg0 = (char)LuaDLL.luaL_checknumber(L, 2);
+				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 3);
 				string[] o = obj.GetDateTimeFormats(arg0, arg1);
 				ToLua.Push(L, o);
 				ToLua.SetBack(L, 1, obj);
@@ -673,7 +673,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.GetDateTimeFormats");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -691,7 +691,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -709,7 +709,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -726,7 +726,7 @@ public class System_DateTimeWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -739,26 +739,26 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(string)))
+			if (count == 1)
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				System.DateTime o = System.DateTime.Parse(arg0);
 				ToLua.PushValue(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(System.IFormatProvider)))
+			else if (count == 2)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.ToObject(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 2);
 				System.DateTime o = System.DateTime.Parse(arg0, arg1);
 				ToLua.PushValue(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles)))
+			else if (count == 3)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.ToObject(L, 2);
-				System.Globalization.DateTimeStyles arg2 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 3);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 2);
+				System.Globalization.DateTimeStyles arg2 = (System.Globalization.DateTimeStyles)ToLua.CheckObject(L, 3, typeof(System.Globalization.DateTimeStyles));
 				System.DateTime o = System.DateTime.Parse(arg0, arg1, arg2);
 				ToLua.PushValue(L, o);
 				return 1;
@@ -768,7 +768,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.Parse");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -781,28 +781,28 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string), typeof(System.IFormatProvider)))
+			if (count == 3)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				string arg1 = ToLua.ToString(L, 2);
-				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.ToObject(L, 3);
+				string arg0 = ToLua.CheckString(L, 1);
+				string arg1 = ToLua.CheckString(L, 2);
+				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 3);
 				System.DateTime o = System.DateTime.ParseExact(arg0, arg1, arg2);
 				ToLua.PushValue(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string[]), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles)))
+			else if (count == 4 && TypeChecker.CheckTypes<string[], System.IFormatProvider, System.Globalization.DateTimeStyles>(L, 2))
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				string[] arg1 = ToLua.CheckStringArray(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				string[] arg1 = ToLua.ToStringArray(L, 2);
 				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.ToObject(L, 3);
 				System.Globalization.DateTimeStyles arg3 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 4);
 				System.DateTime o = System.DateTime.ParseExact(arg0, arg1, arg2, arg3);
 				ToLua.PushValue(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles)))
+			else if (count == 4 && TypeChecker.CheckTypes<string, System.IFormatProvider, System.Globalization.DateTimeStyles>(L, 2))
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.ToObject(L, 3);
 				System.Globalization.DateTimeStyles arg3 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 4);
@@ -815,7 +815,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.ParseExact");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -828,20 +828,20 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(LuaInterface.LuaOut<System.DateTime>)))
+			if (count == 2)
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				System.DateTime arg1;
 				bool o = System.DateTime.TryParse(arg0, out arg1);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.PushValue(L, arg1);
 				return 2;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles), typeof(LuaInterface.LuaOut<System.DateTime>)))
+			else if (count == 4)
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.ToObject(L, 2);
-				System.Globalization.DateTimeStyles arg2 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 3);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 2);
+				System.Globalization.DateTimeStyles arg2 = (System.Globalization.DateTimeStyles)ToLua.CheckObject(L, 3, typeof(System.Globalization.DateTimeStyles));
 				System.DateTime arg3;
 				bool o = System.DateTime.TryParse(arg0, arg1, arg2, out arg3);
 				LuaDLL.lua_pushboolean(L, o);
@@ -853,7 +853,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.TryParse");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -866,10 +866,10 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string[]), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles), typeof(LuaInterface.LuaOut<System.DateTime>)))
+			if (count == 5 && TypeChecker.CheckTypes<string[], System.IFormatProvider, System.Globalization.DateTimeStyles, LuaInterface.LuaOut<System.DateTime>>(L, 2))
 			{
-				string arg0 = ToLua.ToString(L, 1);
-				string[] arg1 = ToLua.CheckStringArray(L, 2);
+				string arg0 = ToLua.CheckString(L, 1);
+				string[] arg1 = ToLua.ToStringArray(L, 2);
 				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.ToObject(L, 3);
 				System.Globalization.DateTimeStyles arg3 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 4);
 				System.DateTime arg4;
@@ -878,9 +878,9 @@ public class System_DateTimeWrap
 				ToLua.PushValue(L, arg4);
 				return 2;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes(L, 1, typeof(string), typeof(string), typeof(System.IFormatProvider), typeof(System.Globalization.DateTimeStyles), typeof(LuaInterface.LuaOut<System.DateTime>)))
+			else if (count == 5 && TypeChecker.CheckTypes<string, System.IFormatProvider, System.Globalization.DateTimeStyles, LuaInterface.LuaOut<System.DateTime>>(L, 2))
 			{
-				string arg0 = ToLua.ToString(L, 1);
+				string arg0 = ToLua.CheckString(L, 1);
 				string arg1 = ToLua.ToString(L, 2);
 				System.IFormatProvider arg2 = (System.IFormatProvider)ToLua.ToObject(L, 3);
 				System.Globalization.DateTimeStyles arg3 = (System.Globalization.DateTimeStyles)ToLua.ToObject(L, 4);
@@ -895,7 +895,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.TryParseExact");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -908,19 +908,19 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.TimeSpan)))
+			if (count == 2 && TypeChecker.CheckTypes<System.TimeSpan>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				System.TimeSpan arg0 = (System.TimeSpan)ToLua.ToObject(L, 2);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				System.TimeSpan arg0 = StackTraits<System.TimeSpan>.To(L, 2);
 				System.DateTime o = obj.Subtract(arg0);
 				ToLua.PushValue(L, o);
 				ToLua.SetBack(L, 1, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.DateTime)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.DateTime>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 2);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				System.DateTime arg0 = StackTraits<System.DateTime>.To(L, 2);
 				System.TimeSpan o = obj.Subtract(arg0);
 				ToLua.PushValue(L, o);
 				ToLua.SetBack(L, 1, obj);
@@ -931,7 +931,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.Subtract");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -949,7 +949,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -967,7 +967,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -985,7 +985,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1003,7 +1003,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1021,7 +1021,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1039,7 +1039,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1057,7 +1057,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1070,34 +1070,34 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime)))
+			if (count == 1)
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				string o = obj.ToString();
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(string)))
+			else if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				string arg0 = ToLua.ToString(L, 2);
 				string o = obj.ToString(arg0);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.IFormatProvider)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.IFormatProvider>(L, 2))
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
 				System.IFormatProvider arg0 = (System.IFormatProvider)ToLua.ToObject(L, 2);
 				string o = obj.ToString(arg0);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(string), typeof(System.IFormatProvider)))
+			else if (count == 3)
 			{
-				System.DateTime obj = (System.DateTime)ToLua.ToObject(L, 1);
-				string arg0 = ToLua.ToString(L, 2);
-				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.ToObject(L, 3);
+				System.DateTime obj = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
+				string arg0 = ToLua.CheckString(L, 2);
+				System.IFormatProvider arg1 = (System.IFormatProvider)ToLua.CheckObject<System.IFormatProvider>(L, 3);
 				string o = obj.ToString(arg0, arg1);
 				LuaDLL.lua_pushstring(L, o);
 				return 1;
@@ -1107,7 +1107,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.ToString");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1125,7 +1125,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1143,7 +1143,7 @@ public class System_DateTimeWrap
 			ToLua.SetBack(L, 1, obj);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1155,13 +1155,13 @@ public class System_DateTimeWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.DateTime arg0 = (System.DateTime)ToLua.CheckObject(L, 1, typeof(System.DateTime));
-			System.TimeSpan arg1 = (System.TimeSpan)ToLua.CheckObject(L, 2, typeof(System.TimeSpan));
+			System.DateTime arg0 = StackTraits<System.DateTime>.Check(L, 1);
+			System.TimeSpan arg1 = StackTraits<System.TimeSpan>.Check(L, 2);
 			System.DateTime o = arg0 + arg1;
 			ToLua.PushValue(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1173,13 +1173,13 @@ public class System_DateTimeWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 1);
-			System.DateTime arg1 = (System.DateTime)ToLua.ToObject(L, 2);
+			System.DateTime arg0 = StackTraits<System.DateTime>.To(L, 1);
+			System.DateTime arg1 = StackTraits<System.DateTime>.To(L, 2);
 			bool o = arg0 == arg1;
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1192,18 +1192,18 @@ public class System_DateTimeWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.TimeSpan)))
+			if (count == 2 && TypeChecker.CheckTypes<System.TimeSpan>(L, 2))
 			{
-				System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 1);
-				System.TimeSpan arg1 = (System.TimeSpan)ToLua.ToObject(L, 2);
+				System.DateTime arg0 = StackTraits<System.DateTime>.Check(L, 1);
+				System.TimeSpan arg1 = StackTraits<System.TimeSpan>.To(L, 2);
 				System.DateTime o = arg0 - arg1;
 				ToLua.PushValue(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.DateTime), typeof(System.DateTime)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.DateTime>(L, 2))
 			{
-				System.DateTime arg0 = (System.DateTime)ToLua.ToObject(L, 1);
-				System.DateTime arg1 = (System.DateTime)ToLua.ToObject(L, 2);
+				System.DateTime arg0 = StackTraits<System.DateTime>.Check(L, 1);
+				System.DateTime arg1 = StackTraits<System.DateTime>.To(L, 2);
 				System.TimeSpan o = arg0 - arg1;
 				ToLua.PushValue(L, o);
 				return 1;
@@ -1213,7 +1213,7 @@ public class System_DateTimeWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: System.DateTime.op_Subtraction");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1227,7 +1227,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, System.DateTime.MaxValue);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1241,7 +1241,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, System.DateTime.MinValue);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1262,7 +1262,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Date on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Date on a nil value");
 		}
 	}
 
@@ -1281,7 +1281,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Month on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Month on a nil value");
 		}
 	}
 
@@ -1300,7 +1300,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Day on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Day on a nil value");
 		}
 	}
 
@@ -1319,7 +1319,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index DayOfWeek on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index DayOfWeek on a nil value");
 		}
 	}
 
@@ -1338,7 +1338,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index DayOfYear on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index DayOfYear on a nil value");
 		}
 	}
 
@@ -1357,7 +1357,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index TimeOfDay on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index TimeOfDay on a nil value");
 		}
 	}
 
@@ -1376,7 +1376,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Hour on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Hour on a nil value");
 		}
 	}
 
@@ -1395,7 +1395,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Minute on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Minute on a nil value");
 		}
 	}
 
@@ -1414,7 +1414,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Second on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Second on a nil value");
 		}
 	}
 
@@ -1433,7 +1433,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Millisecond on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Millisecond on a nil value");
 		}
 	}
 
@@ -1445,7 +1445,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, System.DateTime.Now);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1466,7 +1466,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Ticks on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Ticks on a nil value");
 		}
 	}
 
@@ -1478,7 +1478,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, System.DateTime.Today);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1492,7 +1492,7 @@ public class System_DateTimeWrap
 			ToLua.PushValue(L, System.DateTime.UtcNow);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -1513,7 +1513,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Year on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Year on a nil value");
 		}
 	}
 
@@ -1532,7 +1532,7 @@ public class System_DateTimeWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Kind on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Kind on a nil value");
 		}
 	}
 }

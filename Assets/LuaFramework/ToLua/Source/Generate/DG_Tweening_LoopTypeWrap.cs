@@ -12,6 +12,18 @@ public class DG_Tweening_LoopTypeWrap
 		L.RegVar("Incremental", get_Incremental, null);
 		L.RegFunction("IntToEnum", IntToEnum);
 		L.EndEnum();
+		TypeTraits<DG.Tweening.LoopType>.Check = CheckType;
+		StackTraits<DG.Tweening.LoopType>.Push = Push;
+	}
+
+	static void Push(IntPtr L, DG.Tweening.LoopType arg)
+	{
+		ToLua.Push(L, arg);
+	}
+
+	static bool CheckType(IntPtr L, int pos)
+	{
+		return TypeChecker.CheckEnumType(typeof(DG.Tweening.LoopType), L, pos);
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

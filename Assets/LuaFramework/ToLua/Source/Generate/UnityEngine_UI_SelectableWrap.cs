@@ -42,12 +42,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			bool o = obj.IsInteractable();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -59,13 +59,13 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 			UnityEngine.UI.Selectable o = obj.FindSelectable(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -77,12 +77,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnLeft();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -94,12 +94,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnRight();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -111,12 +111,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnUp();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -128,12 +128,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			UnityEngine.UI.Selectable o = obj.FindSelectableOnDown();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -145,12 +145,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.AxisEventData arg0 = (UnityEngine.EventSystems.AxisEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.AxisEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.AxisEventData arg0 = (UnityEngine.EventSystems.AxisEventData)ToLua.CheckObject<UnityEngine.EventSystems.AxisEventData>(L, 2);
 			obj.OnMove(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -162,12 +162,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerDown(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -179,12 +179,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerUp(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -196,12 +196,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerEnter(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -213,12 +213,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerExit(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -230,12 +230,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSelect(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -247,12 +247,12 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnDeselect(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -264,11 +264,11 @@ public class UnityEngine_UI_SelectableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Selectable));
+			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)ToLua.CheckObject<UnityEngine.UI.Selectable>(L, 1);
 			obj.Select();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -286,7 +286,7 @@ public class UnityEngine_UI_SelectableWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -297,10 +297,10 @@ public class UnityEngine_UI_SelectableWrap
 	{
 		try
 		{
-			ToLua.PushObject(L, UnityEngine.UI.Selectable.allSelectables);
+			ToLua.PushSealed(L, UnityEngine.UI.Selectable.allSelectables);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -321,7 +321,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index navigation on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index navigation on a nil value");
 		}
 	}
 
@@ -340,7 +340,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index transition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index transition on a nil value");
 		}
 	}
 
@@ -359,7 +359,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index colors on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index colors on a nil value");
 		}
 	}
 
@@ -378,7 +378,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index spriteState on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index spriteState on a nil value");
 		}
 	}
 
@@ -397,7 +397,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index animationTriggers on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index animationTriggers on a nil value");
 		}
 	}
 
@@ -416,7 +416,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index targetGraphic on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index targetGraphic on a nil value");
 		}
 	}
 
@@ -435,7 +435,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index interactable on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index interactable on a nil value");
 		}
 	}
 
@@ -454,7 +454,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index image on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index image on a nil value");
 		}
 	}
 
@@ -468,12 +468,12 @@ public class UnityEngine_UI_SelectableWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
 			UnityEngine.Animator ret = obj.animator;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index animator on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index animator on a nil value");
 		}
 	}
 
@@ -486,13 +486,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.Navigation arg0 = (UnityEngine.UI.Navigation)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Navigation));
+			UnityEngine.UI.Navigation arg0 = StackTraits<UnityEngine.UI.Navigation>.Check(L, 2);
 			obj.navigation = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index navigation on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index navigation on a nil value");
 		}
 	}
 
@@ -511,7 +511,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index transition on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index transition on a nil value");
 		}
 	}
 
@@ -524,13 +524,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.ColorBlock arg0 = (UnityEngine.UI.ColorBlock)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.ColorBlock));
+			UnityEngine.UI.ColorBlock arg0 = StackTraits<UnityEngine.UI.ColorBlock>.Check(L, 2);
 			obj.colors = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index colors on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index colors on a nil value");
 		}
 	}
 
@@ -543,13 +543,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.SpriteState arg0 = (UnityEngine.UI.SpriteState)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.SpriteState));
+			UnityEngine.UI.SpriteState arg0 = StackTraits<UnityEngine.UI.SpriteState>.Check(L, 2);
 			obj.spriteState = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index spriteState on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index spriteState on a nil value");
 		}
 	}
 
@@ -562,13 +562,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.AnimationTriggers arg0 = (UnityEngine.UI.AnimationTriggers)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.AnimationTriggers));
+			UnityEngine.UI.AnimationTriggers arg0 = (UnityEngine.UI.AnimationTriggers)ToLua.CheckObject<UnityEngine.UI.AnimationTriggers>(L, 2);
 			obj.animationTriggers = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index animationTriggers on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index animationTriggers on a nil value");
 		}
 	}
 
@@ -581,13 +581,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Graphic));
+			UnityEngine.UI.Graphic arg0 = (UnityEngine.UI.Graphic)ToLua.CheckObject<UnityEngine.UI.Graphic>(L, 2);
 			obj.targetGraphic = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index targetGraphic on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index targetGraphic on a nil value");
 		}
 	}
 
@@ -606,7 +606,7 @@ public class UnityEngine_UI_SelectableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index interactable on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index interactable on a nil value");
 		}
 	}
 
@@ -619,13 +619,13 @@ public class UnityEngine_UI_SelectableWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Selectable obj = (UnityEngine.UI.Selectable)o;
-			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image arg0 = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 2);
 			obj.image = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index image on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index image on a nil value");
 		}
 	}
 }

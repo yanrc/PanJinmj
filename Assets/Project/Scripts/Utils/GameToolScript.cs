@@ -10,11 +10,12 @@ namespace AssemblyCSharp
 {
     public class GameToolScript
     {
-        public static GameObject Instantiate(GameObject obj, Transform parent)
-        {
-            return GameObject.Instantiate(obj, parent);
-        }
-
+        /// <summary>
+        /// 安卓的几个泛型方法
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
         public static AndroidJavaObject AndroidJavaObjectGetStatic(AndroidJavaObject obj,string fieldName)
         {
             return obj.GetStatic<AndroidJavaObject>(fieldName);
@@ -27,10 +28,21 @@ namespace AssemblyCSharp
         {
             return obj.Call<bool>(fieldName, args);
         }
+        /// <summary>
+        /// 这个类lua生成的是带两个参数的构造函数，第二个函数传null会报错
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns></returns>
         public static AndroidJavaObject NewAndroidJavaObject(string className)
         {
             return new AndroidJavaObject(className);
         }
+        /// <summary>
+        /// lua没有生成这个方法
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="val"></param>
         public static void SetAndroidString(AndroidJavaObject obj, string fieldName, string val)
         {
             obj.Set(fieldName, val);

@@ -47,15 +47,15 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			cn.sharesdk.unity3d.PlatformType arg1 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.PlatformType));
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
-			System.Collections.Hashtable arg3 = (System.Collections.Hashtable)ToLua.CheckObject(L, 5, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable arg3 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 5);
 			obj.OnError(arg0, arg1, arg2, arg3);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -67,15 +67,15 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			cn.sharesdk.unity3d.PlatformType arg1 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.PlatformType));
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
-			System.Collections.Hashtable arg3 = (System.Collections.Hashtable)ToLua.CheckObject(L, 5, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable arg3 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 5);
 			obj.OnComplete(arg0, arg1, arg2, arg3);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -87,14 +87,14 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			cn.sharesdk.unity3d.PlatformType arg1 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.PlatformType));
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
 			obj.OnCancel(arg0, arg1, arg2);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -106,12 +106,12 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.InitSDK(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -123,12 +123,12 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
-			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject(L, 2, typeof(System.Collections.Hashtable));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
+			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 2);
 			obj.SetPlatformConfig(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -140,13 +140,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			int o = obj.Authorize(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -158,12 +158,12 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			obj.CancelAuthorize(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -175,13 +175,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			bool o = obj.IsAuthorized(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -193,13 +193,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			bool o = obj.IsClientValid(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -211,13 +211,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			int o = obj.GetUserInfo(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -230,18 +230,18 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK), typeof(cn.sharesdk.unity3d.PlatformType[]), typeof(cn.sharesdk.unity3d.ShareContent)))
+			if (count == 3 && TypeChecker.CheckTypes<cn.sharesdk.unity3d.PlatformType[], cn.sharesdk.unity3d.ShareContent>(L, 2))
 			{
-				cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.ToObject(L, 1);
-				cn.sharesdk.unity3d.PlatformType[] arg0 = ToLua.CheckObjectArray<cn.sharesdk.unity3d.PlatformType>(L, 2);
+				cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
+				cn.sharesdk.unity3d.PlatformType[] arg0 = ToLua.ToStructArray<cn.sharesdk.unity3d.PlatformType>(L, 2);
 				cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.ToObject(L, 3);
 				int o = obj.ShareContent(arg0, arg1);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK), typeof(cn.sharesdk.unity3d.PlatformType), typeof(cn.sharesdk.unity3d.ShareContent)))
+			else if (count == 3 && TypeChecker.CheckTypes<cn.sharesdk.unity3d.PlatformType, cn.sharesdk.unity3d.ShareContent>(L, 2))
 			{
-				cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.ToObject(L, 1);
+				cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 				cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.ToObject(L, 2);
 				cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.ToObject(L, 3);
 				int o = obj.ShareContent(arg0, arg1);
@@ -253,7 +253,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: cn.sharesdk.unity3d.ShareSDK.ShareContent");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -265,16 +265,16 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
-			cn.sharesdk.unity3d.PlatformType[] arg0 = ToLua.CheckObjectArray<cn.sharesdk.unity3d.PlatformType>(L, 2);
-			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
+			cn.sharesdk.unity3d.PlatformType[] arg0 = ToLua.CheckStructArray<cn.sharesdk.unity3d.PlatformType>(L, 2);
+			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 3);
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
 			int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
 			int o = obj.ShowPlatformList(arg0, arg1, arg2, arg3);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -286,14 +286,14 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
-			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject(L, 3, typeof(cn.sharesdk.unity3d.ShareContent));
+			cn.sharesdk.unity3d.ShareContent arg1 = (cn.sharesdk.unity3d.ShareContent)ToLua.CheckObject<cn.sharesdk.unity3d.ShareContent>(L, 3);
 			int o = obj.ShowShareContentEditor(arg0, arg1);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -305,15 +305,15 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			string arg1 = ToLua.CheckString(L, 3);
-			System.Collections.Hashtable arg2 = (System.Collections.Hashtable)ToLua.CheckObject(L, 4, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable arg2 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 4);
 			int o = obj.ShareWithContentName(arg0, arg1, arg2);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -325,17 +325,17 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 6);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
-			System.Collections.Hashtable arg1 = (System.Collections.Hashtable)ToLua.CheckObject(L, 3, typeof(System.Collections.Hashtable));
-			cn.sharesdk.unity3d.PlatformType[] arg2 = ToLua.CheckObjectArray<cn.sharesdk.unity3d.PlatformType>(L, 4);
+			System.Collections.Hashtable arg1 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 3);
+			cn.sharesdk.unity3d.PlatformType[] arg2 = ToLua.CheckStructArray<cn.sharesdk.unity3d.PlatformType>(L, 4);
 			int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
 			int arg4 = (int)LuaDLL.luaL_checknumber(L, 6);
 			int o = obj.ShowPlatformListWithContentName(arg0, arg1, arg2, arg3, arg4);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -347,15 +347,15 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			string arg1 = ToLua.CheckString(L, 3);
-			System.Collections.Hashtable arg2 = (System.Collections.Hashtable)ToLua.CheckObject(L, 4, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable arg2 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 4);
 			int o = obj.ShowShareContentEditorWithContentName(arg0, arg1, arg2);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -367,7 +367,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
@@ -375,7 +375,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -387,14 +387,14 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			string arg1 = ToLua.CheckString(L, 3);
 			int o = obj.AddFriend(arg0, arg1);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -406,13 +406,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			cn.sharesdk.unity3d.PlatformType arg0 = (cn.sharesdk.unity3d.PlatformType)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.PlatformType));
 			System.Collections.Hashtable o = obj.GetAuthInfo(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -424,12 +424,12 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject(L, 1, typeof(cn.sharesdk.unity3d.ShareSDK));
+			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDK>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.DisableSSO(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -447,7 +447,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -468,7 +468,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index appKey on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index appKey on a nil value");
 		}
 	}
 
@@ -487,7 +487,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index devInfo on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index devInfo on a nil value");
 		}
 	}
 
@@ -506,7 +506,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shareSDKUtils on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shareSDKUtils on a nil value");
 		}
 	}
 
@@ -525,7 +525,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index authHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index authHandler on a nil value");
 		}
 	}
 
@@ -544,7 +544,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shareHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shareHandler on a nil value");
 		}
 	}
 
@@ -563,7 +563,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index showUserHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index showUserHandler on a nil value");
 		}
 	}
 
@@ -582,7 +582,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index getFriendsHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index getFriendsHandler on a nil value");
 		}
 	}
 
@@ -601,7 +601,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index followFriendHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index followFriendHandler on a nil value");
 		}
 	}
 
@@ -620,7 +620,7 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index appKey on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index appKey on a nil value");
 		}
 	}
 
@@ -633,13 +633,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.DevInfoSet arg0 = (cn.sharesdk.unity3d.DevInfoSet)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.DevInfoSet));
+			cn.sharesdk.unity3d.DevInfoSet arg0 = (cn.sharesdk.unity3d.DevInfoSet)ToLua.CheckObject<cn.sharesdk.unity3d.DevInfoSet>(L, 2);
 			obj.devInfo = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index devInfo on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index devInfo on a nil value");
 		}
 	}
 
@@ -652,13 +652,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDKImpl arg0 = (cn.sharesdk.unity3d.ShareSDKImpl)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDKImpl));
+			cn.sharesdk.unity3d.ShareSDKImpl arg0 = (cn.sharesdk.unity3d.ShareSDKImpl)ToLua.CheckObject<cn.sharesdk.unity3d.ShareSDKImpl>(L, 2);
 			obj.shareSDKUtils = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shareSDKUtils on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shareSDKUtils on a nil value");
 		}
 	}
 
@@ -671,25 +671,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func) as cn.sharesdk.unity3d.ShareSDK.EventHandler;
-			}
-
+			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckDelegate<cn.sharesdk.unity3d.ShareSDK.EventHandler>(L, 2);
 			obj.authHandler = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index authHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index authHandler on a nil value");
 		}
 	}
 
@@ -702,25 +690,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func) as cn.sharesdk.unity3d.ShareSDK.EventHandler;
-			}
-
+			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckDelegate<cn.sharesdk.unity3d.ShareSDK.EventHandler>(L, 2);
 			obj.shareHandler = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index shareHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shareHandler on a nil value");
 		}
 	}
 
@@ -733,25 +709,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func) as cn.sharesdk.unity3d.ShareSDK.EventHandler;
-			}
-
+			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckDelegate<cn.sharesdk.unity3d.ShareSDK.EventHandler>(L, 2);
 			obj.showUserHandler = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index showUserHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index showUserHandler on a nil value");
 		}
 	}
 
@@ -764,25 +728,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func) as cn.sharesdk.unity3d.ShareSDK.EventHandler;
-			}
-
+			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckDelegate<cn.sharesdk.unity3d.ShareSDK.EventHandler>(L, 2);
 			obj.getFriendsHandler = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index getFriendsHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index getFriendsHandler on a nil value");
 		}
 	}
 
@@ -795,25 +747,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			cn.sharesdk.unity3d.ShareSDK obj = (cn.sharesdk.unity3d.ShareSDK)o;
-			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = null;
-			LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
-
-			if (funcType2 != LuaTypes.LUA_TFUNCTION)
-			{
-				 arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckObject(L, 2, typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler));
-			}
-			else
-			{
-				LuaFunction func = ToLua.ToLuaFunction(L, 2);
-				arg0 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func) as cn.sharesdk.unity3d.ShareSDK.EventHandler;
-			}
-
+			cn.sharesdk.unity3d.ShareSDK.EventHandler arg0 = (cn.sharesdk.unity3d.ShareSDK.EventHandler)ToLua.CheckDelegate<cn.sharesdk.unity3d.ShareSDK.EventHandler>(L, 2);
 			obj.followFriendHandler = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index followFriendHandler on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index followFriendHandler on a nil value");
 		}
 	}
 
@@ -827,13 +767,13 @@ public class cn_sharesdk_unity3d_ShareSDKWrap
 
 			if (count == 1)
 			{
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func);
+				Delegate arg1 = DelegateTraits<cn.sharesdk.unity3d.ShareSDK.EventHandler>.Create(func);
 				ToLua.Push(L, arg1);
 			}
 			else
 			{
 				LuaTable self = ToLua.CheckLuaTable(L, 2);
-				Delegate arg1 = DelegateFactory.CreateDelegate(typeof(cn.sharesdk.unity3d.ShareSDK.EventHandler), func, self);
+				Delegate arg1 = DelegateTraits<cn.sharesdk.unity3d.ShareSDK.EventHandler>.Create(func, self);
 				ToLua.Push(L, arg1);
 			}
 			return 1;

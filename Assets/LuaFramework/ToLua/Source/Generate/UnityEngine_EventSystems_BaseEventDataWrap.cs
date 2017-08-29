@@ -23,7 +23,7 @@ public class UnityEngine_EventSystems_BaseEventDataWrap
 
 			if (count == 1)
 			{
-				UnityEngine.EventSystems.EventSystem arg0 = (UnityEngine.EventSystems.EventSystem)ToLua.CheckUnityObject(L, 1, typeof(UnityEngine.EventSystems.EventSystem));
+				UnityEngine.EventSystems.EventSystem arg0 = (UnityEngine.EventSystems.EventSystem)ToLua.CheckObject<UnityEngine.EventSystems.EventSystem>(L, 1);
 				UnityEngine.EventSystems.BaseEventData obj = new UnityEngine.EventSystems.BaseEventData(arg0);
 				ToLua.PushObject(L, obj);
 				return 1;
@@ -33,7 +33,7 @@ public class UnityEngine_EventSystems_BaseEventDataWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: UnityEngine.EventSystems.BaseEventData.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -54,7 +54,7 @@ public class UnityEngine_EventSystems_BaseEventDataWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index currentInputModule on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index currentInputModule on a nil value");
 		}
 	}
 
@@ -68,12 +68,12 @@ public class UnityEngine_EventSystems_BaseEventDataWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.BaseEventData obj = (UnityEngine.EventSystems.BaseEventData)o;
 			UnityEngine.GameObject ret = obj.selectedObject;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectedObject on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectedObject on a nil value");
 		}
 	}
 
@@ -86,13 +86,13 @@ public class UnityEngine_EventSystems_BaseEventDataWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.EventSystems.BaseEventData obj = (UnityEngine.EventSystems.BaseEventData)o;
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.selectedObject = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index selectedObject on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index selectedObject on a nil value");
 		}
 	}
 }

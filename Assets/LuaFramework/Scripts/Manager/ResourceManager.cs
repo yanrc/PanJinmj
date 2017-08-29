@@ -113,7 +113,35 @@ namespace LuaFramework {
             }
         }
 
+        /// <summary>
+        /// 载入素材
+        /// </summary>
+        void LoadAssetWithType(string abName, string[] assetNames,UObject T, Action<UObject[]> action = null, LuaFunction func = null)
+        {
+            YRC.Debuger.Log("LoadAsset:" + assetNames[0]);
+            abName = GetRealAssetPath(abName);
+
+            LoadAssetRequest request = new LoadAssetRequest();
+            request.assetType =T.GetType();
+            request.assetNames = assetNames;
+            request.luaFunc = func;
+            request.sharpFunc = action;
+
+            List<LoadAssetRequest> requests = null;
+            if (!m_LoadRequests.TryGetValue(abName, out requests))
+            {
+                requests = new List<LoadAssetRequest>();
+                requests.Add(request);
+                m_LoadRequests.Add(abName, requests);
+                StartCoroutine(OnLoadAsset(abName,T));
+            }
+            else
+            {
+                requests.Add(request);
+            }
+        }
         IEnumerator OnLoadAsset<T>(string abName) where T : UObject {
+            YRC.Debuger.Log("OnLoadAsset:" + abName);
             AssetBundleInfo bundleInfo = GetLoadedAssetBundle(abName);
             if (bundleInfo == null) {
                 yield return StartCoroutine(OnLoadAssetBundle(abName, typeof(T)));
@@ -160,23 +188,85 @@ namespace LuaFramework {
             }
             m_LoadRequests.Remove(abName);
         }
+        IEnumerator OnLoadAsset(string abName, UObject T)
+        {
+            YRC.Debuger.Log("OnLoadAsset:" + abName);
+            AssetBundleInfo bundleInfo = GetLoadedAssetBundle(abName);
+            if (bundleInfo == null)
+            {
+                yield return StartCoroutine(OnLoadAssetBundle(abName, T.GetType()));
 
+                bundleInfo = GetLoadedAssetBundle(abName);
+                if (bundleInfo == null)
+                {
+                    m_LoadRequests.Remove(abName);
+                    Debug.LogError("OnLoadAsset--->>>" + abName);
+                    yield break;
+                }
+            }
+            List<LoadAssetRequest> list = null;
+            if (!m_LoadRequests.TryGetValue(abName, out list))
+            {
+                m_LoadRequests.Remove(abName);
+                yield break;
+            }
+            for (int i = 0; i < list.Count; i++)
+            {
+                string[] assetNames = list[i].assetNames;
+                List<UObject> result = new List<UObject>();
+
+                AssetBundle ab = bundleInfo.m_AssetBundle;
+                for (int j = 0; j < assetNames.Length; j++)
+                {
+                    string assetPath = assetNames[j];
+                    AssetBundleRequest request = ab.LoadAssetAsync(assetPath, list[i].assetType);
+                    yield return request;
+                    result.Add(request.asset);
+                    if (!request.asset)
+                    {
+                        Debug.LogError(assetPath + " is not exsist in " + abName);
+                    }
+                    //T assetObj = ab.LoadAsset<T>(assetPath);
+                    //result.Add(assetObj);
+                }
+                if (list[i].sharpFunc != null)
+                {
+                    list[i].sharpFunc(result.ToArray());
+                    list[i].sharpFunc = null;
+                }
+                if (list[i].luaFunc != null)
+                {
+                    list[i].luaFunc.Call((object)result.ToArray());
+                    list[i].luaFunc.Dispose();
+                    list[i].luaFunc = null;
+                }
+                bundleInfo.m_ReferencedCount++;
+            }
+            m_LoadRequests.Remove(abName);
+        }
         IEnumerator OnLoadAssetBundle(string abName, Type type) {
             string url = m_BaseDownloadingURL + abName;
-
+            YRC.Debuger.Log(url);
             WWW download = null;
             if (type == typeof(AssetBundleManifest))
-                download = new WWW(url);
-            else {
+            { download = new WWW(url); YRC.Debuger.Log("download="+download); }
+
+            else
+            {
                 string[] dependencies = m_AssetBundleManifest.GetAllDependencies(abName);
-                if (dependencies.Length > 0) {
+                if (dependencies.Length > 0)
+                {
                     m_Dependencies.Add(abName, dependencies);
-                    for (int i = 0; i < dependencies.Length; i++) {
+                    for (int i = 0; i < dependencies.Length; i++)
+                    {
                         string depName = dependencies[i];
                         AssetBundleInfo bundleInfo = null;
-                        if (m_LoadedAssetBundles.TryGetValue(depName, out bundleInfo)) {
+                        if (m_LoadedAssetBundles.TryGetValue(depName, out bundleInfo))
+                        {
                             bundleInfo.m_ReferencedCount++;
-                        } else if (!m_LoadRequests.ContainsKey(depName)) {
+                        }
+                        else if (!m_LoadRequests.ContainsKey(depName))
+                        {
                             yield return StartCoroutine(OnLoadAssetBundle(depName, type));
                         }
                     }

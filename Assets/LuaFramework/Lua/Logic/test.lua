@@ -1,29 +1,11 @@
 -- 测试类，主要用来打印table
-Test = { }
-local this = Test
+local Test = { }
 
-function Test.Awake()
-	UpdateBeat:Add(this.Update);
-end
--- Update is called once per frame
-function Test.Update()
-	-- Android系统监听返回键，由于只有Android和ios系统所以无需对系统做判断
-	if (Input.GetKeyDown(KeyCode.T)) then
-		local tables = GamePanel:Test()
-		for k, v in pairs(tables) do
-			log(this.DumpTab(v))
-		end
-	end
-end
-
-
-
--- -
 -- @function: 获取table的字符串格式内容，递归
 -- @tab： table
 -- @ind：不用传此参数，递归用（前缀格式（空格））
 -- @return: format string of the table
-function Test.DumpTab(tab, ind)
+function Test:DumpTab(tab, ind)
 	if (tab == nil) then return "nil" end;
 	if (not next(tab)) then return "{}" end;
 	local str = "{";
@@ -48,7 +30,7 @@ function Test.DumpTab(tab, ind)
 		elseif (type(v) == "string") then
 			s = "\"" .. v .. "\"";
 		elseif (type(v) == "table") then
-			s = this.DumpTab(v, ind .. "  ");
+			s = self:DumpTab(v, ind .. "  ");
 			s = string.sub(s, 1, #s - 1);
 		elseif (type(v) == "function") then
 			s = "function : " .. tostring(v);
@@ -71,3 +53,4 @@ function Test.DumpTab(tab, ind)
 	return sss;
 	-- string.sub(str,1,#str-1).."\n"..ind.."}\n";
 end;-- //end function
+return Test;

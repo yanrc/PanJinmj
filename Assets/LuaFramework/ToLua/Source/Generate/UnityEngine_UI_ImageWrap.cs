@@ -46,11 +46,11 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			obj.OnBeforeSerialize();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -62,11 +62,11 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			obj.OnAfterDeserialize();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -78,11 +78,11 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			obj.SetNativeSize();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -94,11 +94,11 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			obj.CalculateLayoutInputHorizontal();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -110,11 +110,11 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			obj.CalculateLayoutInputVertical();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -126,14 +126,14 @@ public class UnityEngine_UI_ImageWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Image));
+			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)ToLua.CheckObject<UnityEngine.UI.Image>(L, 1);
 			UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 2);
-			UnityEngine.Camera arg1 = (UnityEngine.Camera)ToLua.CheckUnityObject(L, 3, typeof(UnityEngine.Camera));
+			UnityEngine.Camera arg1 = (UnityEngine.Camera)ToLua.CheckObject(L, 3, typeof(UnityEngine.Camera));
 			bool o = obj.IsRaycastLocationValid(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -151,7 +151,7 @@ public class UnityEngine_UI_ImageWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -167,12 +167,12 @@ public class UnityEngine_UI_ImageWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
 			UnityEngine.Sprite ret = obj.sprite;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index sprite on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index sprite on a nil value");
 		}
 	}
 
@@ -186,12 +186,12 @@ public class UnityEngine_UI_ImageWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
 			UnityEngine.Sprite ret = obj.overrideSprite;
-			ToLua.Push(L, ret);
+			ToLua.PushSealed(L, ret);
 			return 1;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index overrideSprite on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index overrideSprite on a nil value");
 		}
 	}
 
@@ -210,7 +210,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index type on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index type on a nil value");
 		}
 	}
 
@@ -229,7 +229,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preserveAspect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preserveAspect on a nil value");
 		}
 	}
 
@@ -248,7 +248,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillCenter on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillCenter on a nil value");
 		}
 	}
 
@@ -267,7 +267,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillMethod on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillMethod on a nil value");
 		}
 	}
 
@@ -286,7 +286,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillAmount on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillAmount on a nil value");
 		}
 	}
 
@@ -305,7 +305,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillClockwise on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillClockwise on a nil value");
 		}
 	}
 
@@ -324,7 +324,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillOrigin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillOrigin on a nil value");
 		}
 	}
 
@@ -343,7 +343,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alphaHitTestMinimumThreshold on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alphaHitTestMinimumThreshold on a nil value");
 		}
 	}
 
@@ -355,7 +355,7 @@ public class UnityEngine_UI_ImageWrap
 			ToLua.Push(L, UnityEngine.UI.Image.defaultETC1GraphicMaterial);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -376,7 +376,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index mainTexture on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index mainTexture on a nil value");
 		}
 	}
 
@@ -395,7 +395,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index hasBorder on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index hasBorder on a nil value");
 		}
 	}
 
@@ -414,7 +414,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index pixelsPerUnit on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index pixelsPerUnit on a nil value");
 		}
 	}
 
@@ -433,7 +433,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index material on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index material on a nil value");
 		}
 	}
 
@@ -452,7 +452,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minWidth on a nil value");
 		}
 	}
 
@@ -471,7 +471,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredWidth on a nil value");
 		}
 	}
 
@@ -490,7 +490,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleWidth on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleWidth on a nil value");
 		}
 	}
 
@@ -509,7 +509,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index minHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index minHeight on a nil value");
 		}
 	}
 
@@ -528,7 +528,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preferredHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preferredHeight on a nil value");
 		}
 	}
 
@@ -547,7 +547,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index flexibleHeight on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index flexibleHeight on a nil value");
 		}
 	}
 
@@ -566,7 +566,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index layoutPriority on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index layoutPriority on a nil value");
 		}
 	}
 
@@ -579,13 +579,13 @@ public class UnityEngine_UI_ImageWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
-			UnityEngine.Sprite arg0 = (UnityEngine.Sprite)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Sprite));
+			UnityEngine.Sprite arg0 = (UnityEngine.Sprite)ToLua.CheckObject(L, 2, typeof(UnityEngine.Sprite));
 			obj.sprite = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index sprite on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index sprite on a nil value");
 		}
 	}
 
@@ -598,13 +598,13 @@ public class UnityEngine_UI_ImageWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
-			UnityEngine.Sprite arg0 = (UnityEngine.Sprite)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Sprite));
+			UnityEngine.Sprite arg0 = (UnityEngine.Sprite)ToLua.CheckObject(L, 2, typeof(UnityEngine.Sprite));
 			obj.overrideSprite = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index overrideSprite on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index overrideSprite on a nil value");
 		}
 	}
 
@@ -623,7 +623,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index type on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index type on a nil value");
 		}
 	}
 
@@ -642,7 +642,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index preserveAspect on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index preserveAspect on a nil value");
 		}
 	}
 
@@ -661,7 +661,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillCenter on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillCenter on a nil value");
 		}
 	}
 
@@ -680,7 +680,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillMethod on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillMethod on a nil value");
 		}
 	}
 
@@ -699,7 +699,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillAmount on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillAmount on a nil value");
 		}
 	}
 
@@ -718,7 +718,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillClockwise on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillClockwise on a nil value");
 		}
 	}
 
@@ -737,7 +737,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index fillOrigin on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index fillOrigin on a nil value");
 		}
 	}
 
@@ -756,7 +756,7 @@ public class UnityEngine_UI_ImageWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index alphaHitTestMinimumThreshold on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index alphaHitTestMinimumThreshold on a nil value");
 		}
 	}
 
@@ -769,13 +769,13 @@ public class UnityEngine_UI_ImageWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Image obj = (UnityEngine.UI.Image)o;
-			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.Material));
+			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckObject<UnityEngine.Material>(L, 2);
 			obj.material = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index material on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index material on a nil value");
 		}
 	}
 }

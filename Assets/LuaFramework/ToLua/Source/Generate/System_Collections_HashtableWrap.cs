@@ -46,73 +46,73 @@ public class System_Collections_HashtableWrap
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.IDictionary)))
+			else if (count == 1 && TypeChecker.CheckTypes<System.Collections.IDictionary>(L, 1))
 			{
-				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.CheckObject(L, 1, typeof(System.Collections.IDictionary));
+				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.ToObject(L, 1);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.IEqualityComparer)))
+			else if (count == 1 && TypeChecker.CheckTypes<System.Collections.IEqualityComparer>(L, 1))
 			{
-				System.Collections.IEqualityComparer arg0 = (System.Collections.IEqualityComparer)ToLua.CheckObject(L, 1, typeof(System.Collections.IEqualityComparer));
+				System.Collections.IEqualityComparer arg0 = (System.Collections.IEqualityComparer)ToLua.ToObject(L, 1);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 1 && TypeChecker.CheckTypes(L, 1, typeof(int)))
+			else if (count == 1 && TypeChecker.CheckTypes<int>(L, 1))
 			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(float)))
+			else if (count == 2 && TypeChecker.CheckTypes<int, float>(L, 1))
 			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(System.Collections.IEqualityComparer)))
+			else if (count == 2 && TypeChecker.CheckTypes<int, System.Collections.IEqualityComparer>(L, 1))
 			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-				System.Collections.IEqualityComparer arg1 = (System.Collections.IEqualityComparer)ToLua.CheckObject(L, 2, typeof(System.Collections.IEqualityComparer));
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+				System.Collections.IEqualityComparer arg1 = (System.Collections.IEqualityComparer)ToLua.ToObject(L, 2);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.IDictionary), typeof(float)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.IDictionary, float>(L, 1))
 			{
-				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.CheckObject(L, 1, typeof(System.Collections.IDictionary));
-				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
+				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.ToObject(L, 1);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.IDictionary), typeof(System.Collections.IEqualityComparer)))
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.IDictionary, System.Collections.IEqualityComparer>(L, 1))
 			{
-				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.CheckObject(L, 1, typeof(System.Collections.IDictionary));
-				System.Collections.IEqualityComparer arg1 = (System.Collections.IEqualityComparer)ToLua.CheckObject(L, 2, typeof(System.Collections.IEqualityComparer));
+				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.ToObject(L, 1);
+				System.Collections.IEqualityComparer arg1 = (System.Collections.IEqualityComparer)ToLua.ToObject(L, 2);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(int), typeof(float), typeof(System.Collections.IEqualityComparer)))
+			else if (count == 3 && TypeChecker.CheckTypes<int, float, System.Collections.IEqualityComparer>(L, 1))
 			{
-				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
-				System.Collections.IEqualityComparer arg2 = (System.Collections.IEqualityComparer)ToLua.CheckObject(L, 3, typeof(System.Collections.IEqualityComparer));
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.IEqualityComparer arg2 = (System.Collections.IEqualityComparer)ToLua.ToObject(L, 3);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1, arg2);
 				ToLua.PushObject(L, obj);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes(L, 1, typeof(System.Collections.IDictionary), typeof(float), typeof(System.Collections.IEqualityComparer)))
+			else if (count == 3 && TypeChecker.CheckTypes<System.Collections.IDictionary, float, System.Collections.IEqualityComparer>(L, 1))
 			{
-				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.CheckObject(L, 1, typeof(System.Collections.IDictionary));
-				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
-				System.Collections.IEqualityComparer arg2 = (System.Collections.IEqualityComparer)ToLua.CheckObject(L, 3, typeof(System.Collections.IEqualityComparer));
+				System.Collections.IDictionary arg0 = (System.Collections.IDictionary)ToLua.ToObject(L, 1);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
+				System.Collections.IEqualityComparer arg2 = (System.Collections.IEqualityComparer)ToLua.ToObject(L, 3);
 				System.Collections.Hashtable obj = new System.Collections.Hashtable(arg0, arg1, arg2);
 				ToLua.PushObject(L, obj);
 				return 1;
@@ -122,7 +122,7 @@ public class System_Collections_HashtableWrap
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: System.Collections.Hashtable.New");
 			}
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -134,14 +134,14 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			object o = obj[arg0];
 			ToLua.Push(L, o);
 			return 1;
 
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -153,14 +153,14 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			object arg1 = ToLua.ToVarObject(L, 3);
 			obj[arg0] = arg1;
 			return 0;
 
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -175,7 +175,7 @@ public class System_Collections_HashtableWrap
 			LuaDLL.tolua_bindthis(L, _get_this, _set_this);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -187,13 +187,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			object o = obj[arg0];
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -205,13 +205,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			object arg1 = ToLua.ToVarObject(L, 3);
 			obj[arg0] = arg1;
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -223,13 +223,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
-			System.Array arg0 = (System.Array)ToLua.CheckObject(L, 2, typeof(System.Array));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
+			System.Array arg0 = (System.Array)ToLua.CheckObject<System.Array>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.CopyTo(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -241,13 +241,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			object arg1 = ToLua.ToVarObject(L, 3);
 			obj.Add(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -259,11 +259,11 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			obj.Clear();
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -275,13 +275,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			bool o = obj.Contains(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -293,12 +293,12 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			System.Collections.IDictionaryEnumerator o = obj.GetEnumerator();
-			ToLua.Push(L, o);
+			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -310,12 +310,12 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			obj.Remove(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -327,13 +327,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			bool o = obj.ContainsKey(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -345,13 +345,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
 			bool o = obj.ContainsValue(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -363,12 +363,12 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			object o = obj.Clone();
 			ToLua.Push(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -380,13 +380,13 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable obj = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			System.Runtime.Serialization.SerializationInfo arg0 = (System.Runtime.Serialization.SerializationInfo)ToLua.CheckObject(L, 2, typeof(System.Runtime.Serialization.SerializationInfo));
-			System.Runtime.Serialization.StreamingContext arg1 = (System.Runtime.Serialization.StreamingContext)ToLua.CheckObject(L, 3, typeof(System.Runtime.Serialization.StreamingContext));
+			System.Runtime.Serialization.StreamingContext arg1 = StackTraits<System.Runtime.Serialization.StreamingContext>.Check(L, 3);
 			obj.GetObjectData(arg0, arg1);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -398,12 +398,12 @@ public class System_Collections_HashtableWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject(L, 1, typeof(System.Collections.Hashtable));
+			System.Collections.Hashtable arg0 = (System.Collections.Hashtable)ToLua.CheckObject<System.Collections.Hashtable>(L, 1);
 			System.Collections.Hashtable o = System.Collections.Hashtable.Synchronized(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -424,7 +424,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Count on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Count on a nil value");
 		}
 	}
 
@@ -443,7 +443,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index IsSynchronized on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index IsSynchronized on a nil value");
 		}
 	}
 
@@ -462,7 +462,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index SyncRoot on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index SyncRoot on a nil value");
 		}
 	}
 
@@ -481,7 +481,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index IsFixedSize on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index IsFixedSize on a nil value");
 		}
 	}
 
@@ -500,7 +500,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index IsReadOnly on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index IsReadOnly on a nil value");
 		}
 	}
 
@@ -519,7 +519,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Keys on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Keys on a nil value");
 		}
 	}
 
@@ -538,7 +538,7 @@ public class System_Collections_HashtableWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index Values on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Values on a nil value");
 		}
 	}
 }

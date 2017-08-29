@@ -21,12 +21,12 @@ public class UnityEngine_UI_ButtonWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Button obj = (UnityEngine.UI.Button)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Button));
-			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.PointerEventData));
+			UnityEngine.UI.Button obj = (UnityEngine.UI.Button)ToLua.CheckObject<UnityEngine.UI.Button>(L, 1);
+			UnityEngine.EventSystems.PointerEventData arg0 = (UnityEngine.EventSystems.PointerEventData)ToLua.CheckObject<UnityEngine.EventSystems.PointerEventData>(L, 2);
 			obj.OnPointerClick(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -38,12 +38,12 @@ public class UnityEngine_UI_ButtonWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.UI.Button obj = (UnityEngine.UI.Button)ToLua.CheckObject(L, 1, typeof(UnityEngine.UI.Button));
-			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject(L, 2, typeof(UnityEngine.EventSystems.BaseEventData));
+			UnityEngine.UI.Button obj = (UnityEngine.UI.Button)ToLua.CheckObject<UnityEngine.UI.Button>(L, 1);
+			UnityEngine.EventSystems.BaseEventData arg0 = (UnityEngine.EventSystems.BaseEventData)ToLua.CheckObject<UnityEngine.EventSystems.BaseEventData>(L, 2);
 			obj.OnSubmit(arg0);
 			return 0;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -61,7 +61,7 @@ public class UnityEngine_UI_ButtonWrap
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
 		}
@@ -82,7 +82,7 @@ public class UnityEngine_UI_ButtonWrap
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onClick on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onClick on a nil value");
 		}
 	}
 
@@ -95,13 +95,13 @@ public class UnityEngine_UI_ButtonWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.UI.Button obj = (UnityEngine.UI.Button)o;
-			UnityEngine.UI.Button.ButtonClickedEvent arg0 = (UnityEngine.UI.Button.ButtonClickedEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.UI.Button.ButtonClickedEvent));
+			UnityEngine.UI.Button.ButtonClickedEvent arg0 = (UnityEngine.UI.Button.ButtonClickedEvent)ToLua.CheckObject<UnityEngine.UI.Button.ButtonClickedEvent>(L, 2);
 			obj.onClick = arg0;
 			return 0;
 		}
 		catch(Exception e)
 		{
-			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index onClick on a nil value" : e.Message);
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index onClick on a nil value");
 		}
 	}
 }
