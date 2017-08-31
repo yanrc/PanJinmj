@@ -42,7 +42,6 @@ public class AssemblyCSharp_GameToolScriptWrap
 		}
 	}
 
-
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int AndroidJavaObjectGetStatic(IntPtr L)
 	{

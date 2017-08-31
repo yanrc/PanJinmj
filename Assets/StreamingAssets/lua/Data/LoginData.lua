@@ -1,2 +1,0 @@
-LoginData={}
-local this=LoginData

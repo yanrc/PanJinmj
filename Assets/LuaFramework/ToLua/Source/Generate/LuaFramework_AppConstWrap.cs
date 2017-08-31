@@ -13,8 +13,8 @@ public class LuaFramework_AppConstWrap
 		L.RegConstant("DebugMode", 1);
 		L.RegConstant("ExampleMode", 0);
 		L.RegConstant("UpdateMode", 0);
-		L.RegConstant("LuaByteMode", 1);
-		L.RegConstant("LuaBundleMode", 1);
+		L.RegVar("LuaByteMode", get_LuaByteMode, set_LuaByteMode);
+		L.RegVar("LuaBundleMode", get_LuaBundleMode, set_LuaBundleMode);
 		L.RegConstant("TimerInterval", 1);
 		L.RegConstant("GameFrameRate", 30);
 		L.RegVar("AppName", get_AppName, null);
@@ -67,6 +67,34 @@ public class LuaFramework_AppConstWrap
 			ToLua.CheckArgsCount(L, 0);
 			string o = LuaFramework.AppConst.GetWebUrl();
 			LuaDLL.lua_pushstring(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LuaByteMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.LuaByteMode);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LuaBundleMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, LuaFramework.AppConst.LuaBundleMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -278,6 +306,36 @@ public class LuaFramework_AppConstWrap
 		{
 			LuaDLL.lua_pushstring(L, LuaFramework.AppConst.FrameworkRoot);
 			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LuaByteMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.LuaByteMode = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LuaBundleMode(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			LuaFramework.AppConst.LuaBundleMode = arg0;
+			return 0;
 		}
 		catch (Exception e)
 		{

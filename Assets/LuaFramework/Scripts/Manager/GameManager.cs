@@ -131,6 +131,7 @@ namespace LuaFramework {
 
             WWW www = new WWW(listUrl);
             yield return www;
+            Debug.Log(www.error);
             if (www.error != null&& www.error !="")
             {
                 OnUpdateFailed(string.Empty);
@@ -140,6 +141,7 @@ namespace LuaFramework {
             {
                 Directory.CreateDirectory(dataPath);
             }
+            Debug.Log(dataPath);
             File.WriteAllBytes(dataPath + "files.txt", www.bytes);
             string filesText = www.text;
             string[] files = filesText.Split('\n');

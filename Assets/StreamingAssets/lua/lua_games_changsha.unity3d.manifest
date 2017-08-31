@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 3949787869
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8498b4fd3364c3a956ae803efc412368
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Lua/games/changsha/ChangshaGame.lua.bytes
+- Assets/Lua/games/changsha/ChangshaRule.lua.bytes
+Dependencies: []

@@ -1,2 +1,0 @@
-RoomOverData={}
-local this=RoomOverData

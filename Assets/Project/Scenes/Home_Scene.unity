@@ -401,7 +401,6 @@ GameObject:
   m_Component:
   - component: {fileID: 985392393}
   - component: {fileID: 985392394}
-  - component: {fileID: 985392395}
   - component: {fileID: 985392396}
   m_Layer: 0
   m_Name: GameManager
@@ -434,18 +433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13baae76dc25164fbbeec8317b29af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &985392395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 985392392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 985f24d3887696044ab730697fc675c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 1
 --- !u!114 &985392396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,14 +444,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84544ca89919ff64185071723afaecb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panjin: 0
+  Panjin: 1
   Wuxi: 0
-  Shuangliao: 1
-  Jiujiang: 1
-  Changsha: 1
-  Tuidaohu: 1
+  Shuangliao: 0
+  Jiujiang: 0
+  Changsha: 0
+  Tuidaohu: 0
   Fushun: 0
-  LOGO: {fileID: 21300000, guid: 91f4659d9843cef42bd95162f9773bb2, type: 3}
+  EnableDebug: 0
+  LOGO: {fileID: 21300000, guid: e3c4a6498bacf044c9c164f70d4e154a, type: 3}
 --- !u!1 &1006521394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1140,22 @@ Prefab:
     - target: {fileID: 1610758429533456, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114212842941431938, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72466a64a0221f948bf0b5f0418f4723,
+        type: 3}
+    - target: {fileID: 114333013199147070, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cdb916b0f6d0b741a709a7f01bfac3d,
+        type: 3}
+    - target: {fileID: 1020654905691294, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d, type: 2}
+      propertyPath: m_Name
+      value: logo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a2fbec617e696c4cb4d4ef1a3e4875d, type: 2}

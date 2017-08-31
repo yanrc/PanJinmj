@@ -66,14 +66,14 @@ public class Packager {
         AssetDatabase.Refresh();
 
         maps.Clear();
-        if (AppConst.LuaBundleMode) {
+        //if (AppConst.LuaBundleMode) {
             HandleLuaBundle();
-        } else {
-            HandleLuaFile();
-        }
-        if (AppConst.ExampleMode) {
-            HandleExampleBundle();
-        }
+        //} else {
+        //    HandleLuaFile();
+        //}
+        //if (AppConst.ExampleMode) {
+        //    HandleExampleBundle();
+        //}
         SetABInfo();
         string resPath = "Assets/" + AppConst.AssetDir;
         BuildPipeline.BuildAssetBundles(resPath, maps.ToArray(), BuildAssetBundleOptions.None, target);

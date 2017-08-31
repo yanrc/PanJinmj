@@ -10,8 +10,15 @@ public class GameSetting : MonoBehaviour {
     public  bool Changsha;
     public  bool Tuidaohu;
     public  bool Fushun;
+    public bool EnableDebug;
     public Sprite LOGO;
     public  Dictionary<string, bool> gamelist = new Dictionary<string, bool>();
+    private void Awake()
+    {
+        YRC.Debuger.debugMode = EnableDebug;
+        GameObject go = GameObject.Find("Panel_Default");
+        go.transform.Find("logo").GetComponent<Image>().sprite = LOGO;
+    }
     public Dictionary<string, bool> Init()
     {
         gamelist.Clear();
@@ -23,11 +30,6 @@ public class GameSetting : MonoBehaviour {
         gamelist.Add("TuiDaoHu", Tuidaohu);
         gamelist.Add("Fushun", Fushun);
         return gamelist;
-    }
-    [ExecuteInEditMode]
-    public void OnValidate()
-    {
-       FindObjectOfType<LoadingProgress>().transform.Find("logo").GetComponent<Image>().sprite = LOGO;
     }
 }
 

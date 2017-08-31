@@ -117,7 +117,6 @@ function RuleSelect.GetDefaultSelect(rulestr)
 			end
 		end
 	else
-		print(Test.DumpTab(groupList))
 		for i = 1, #groupList do
 			groupList[i][1].isOn = true;
 		end

@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 436024794
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 871cc6b3fd5ac00d37526f92603a3f90
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Lua/games/jiujiang/JiujiangRule.lua.bytes
+- Assets/Lua/games/jiujiang/JiujiangGame.lua.bytes
+Dependencies: []

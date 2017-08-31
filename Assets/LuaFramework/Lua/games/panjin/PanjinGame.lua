@@ -1,14 +1,14 @@
 PanjinGame = { }
-local mt = { }-- Ôª±í£¨»ùÀà£©
-mt.__index = GamePanel-- index·½·¨
+local mt = { }-- å…ƒè¡¨ï¼ˆåŸºç±»ï¼‰
+mt.__index = GamePanel-- indexæ–¹æ³•
 setmetatable(PanjinGame, mt)
 function PanjinGame:SetRoomRemark()
 	local roomvo = RoomData;
-	local str = "·¿¼äºÅ£º\n" .. roomvo.roomId .. "\n"
-	.. "È¦Êı:" .. roomvo.roundNumber .. "\n\n"
+	local str = "æˆ¿é—´å·ï¼š\n" .. roomvo.roomId .. "\n"
+	.. "åœˆæ•°:" .. roomvo.roundNumber .. "\n\n"
 	self.roomRemark.text = str;
 end
--- ´´½¨·¿¼ä
+-- åˆ›å»ºæˆ¿é—´
 function PanjinGame:CreateRoomAddAvatarVO(avatar)
 	self.avatarList = { }
 	self:AddAvatarVOToList(avatar);
@@ -23,7 +23,7 @@ function PanjinGame:CreateRoomAddAvatarVO(avatar)
 	end
 end
 
--- ¼ÓÈë·¿¼ä
+-- åŠ å…¥æˆ¿é—´
 function PanjinGame:JoinToRoom(avatars)
 	self.avatarList = avatars;
 	for i = 1, #avatars do
@@ -42,12 +42,12 @@ end
 
 function PanjinGame:ReEnterRoom()
 	if (RoomData.enterType == 3) then
-		-- ·şÎñÆ÷µÄ¿Ó
+		-- æœåŠ¡å™¨çš„å‘
 		if (RoomData.gui <= 0) then
 			RoomData.guiPai = -1
 		end
 		self:SetRoomRemark();
-		-- ÉèÖÃ×ùÎ»
+		-- è®¾ç½®åº§ä½
 		self.avatarList = RoomData.playerList
 		for i = 1, #self.avatarList do
 			self:SetSeat(self.avatarList[i]);
@@ -56,7 +56,7 @@ function PanjinGame:ReEnterRoom()
 		LoginData.account.roomcard = self.avatarList[selfIndex].account.roomcard;
 		local selfPaiArray = self.avatarList[selfIndex].paiArray;
 		if (selfPaiArray == nil or #selfPaiArray == 0) then
-			-- ÓÎÏ·»¹Ã»ÓĞ¿ªÊ¼
+			-- æ¸¸æˆè¿˜æ²¡æœ‰å¼€å§‹
 			if (not self.avatarList[selfIndex].isReady) then
 				-- log("bankerIndex=" + bankerIndex + "     self.GetMyIndexFromList()=" +  self.GetMyIndexFromList());
 				if (RoomData.duanMen or RoomData.jiaGang) then
@@ -68,21 +68,21 @@ function PanjinGame:ReEnterRoom()
 					-- self.ReadyGame();
 				end
 			end
-			-- ÅÆ¾ÖÒÑ¿ªÊ¼
+			-- ç‰Œå±€å·²å¼€å§‹
 		else
 			self:SetAllPlayerReadImgVisbleToFalse();
 			self:CleanGameplayUI();
-			-- ÏÔÊ¾´òÅÆÊı¾İ
+			-- æ˜¾ç¤ºæ‰“ç‰Œæ•°æ®
 			self:DisplayTableCards();
-			-- ÏÔÊ¾¹íÅÆ
+			-- æ˜¾ç¤ºé¬¼ç‰Œ
 			self:DisplayGuiPai();
-			-- ÏÔÊ¾ÆäËûÍæ¼ÒµÄÊÖÅÆ
+			-- æ˜¾ç¤ºå…¶ä»–ç©å®¶çš„æ‰‹ç‰Œ
 			self:DisplayOtherHandercard();
-			-- ÏÔÊ¾¸ÜÅÆ
+			-- æ˜¾ç¤ºæ ç‰Œ
 			self:DisplayallGangCard();
-			-- ÏÔÊ¾ÅöÅÆ
+			-- æ˜¾ç¤ºç¢°ç‰Œ
 			self:DisplayPengCard();
-			-- ÏÔÊ¾³ÔÅÆ
+			-- æ˜¾ç¤ºåƒç‰Œ
 			self:DisplayChiCard();
 			self:DispalySelfhanderCard();
 			networkMgr:SendMessage(ClientRequest.New(APIS.REQUEST_CURRENT_DATA, "dd"));
@@ -106,7 +106,7 @@ function PanjinGame:StartGame(buffer)
 	local status = buffer:ReadInt()
 	local message = buffer:ReadString()
 	local sgvo = json.decode(message);
-self.LeavedRoundNumText.text = tostring(sgvo.surplusRounds)
+	self.LeavedRoundNumText.text = tostring(sgvo.surplusRounds)
 	self:CleanGameplayUI();
 	self:UpateTimeReStart();
 	self:InitLeftCard();
@@ -159,19 +159,19 @@ function PanjinGame:HupaiCallBack(buffer)
 			end
 		end
 		local allMas = RoundOverData.allMas;
-		-- ÅÌ½õÂé½«¾ø
+		-- ç›˜é”¦éº»å°†ç»
 		if (RoomData.jue) then
 			OpenPanel(ZhuaMaPanel, huPaiPoint)
-		coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,7)
+			coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,7)
 		else
 			coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 		end
 	elseif (RoundOverData.type == "1") then
 		soundMgr:playSoundByAction("liuju", LoginData.account.sex);
 		self:PengGangHuEffectCtrl("liuju");
-coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
+		coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 	else
-coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
+		coroutine.start(Invoke,function() self:OpenGameOverPanelSignal() end,3)
 	end
 end
 
@@ -198,8 +198,8 @@ function PanjinGame:Recovery()
 end
 
 function PanjinGame:Change()
-	self.lbReadySelect[1].text = "Âò¶ÏÃÅ"
-	self.lbReadySelect[2].text = "¼Ó¸Ö"
+	self.lbReadySelect[1].text = "ä¹°æ–­é—¨"
+	self.lbReadySelect[2].text = "åŠ é’¢"
 	self.ReadySelect[1].group = nil
 	self.ReadySelect[2].group = nil
 end

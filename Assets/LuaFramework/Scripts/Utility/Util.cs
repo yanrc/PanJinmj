@@ -211,7 +211,8 @@ namespace LuaFramework {
             else if (Application.isMobilePlatform || Application.isConsolePlatform)
                 return "file://" + DataPath;
             else // For standalone player.
-                return "file://" + Application.streamingAssetsPath + "/";
+                //return "file://" + Application.streamingAssetsPath + "/";
+                return "file://" +  "c:/" + AppConst.AppName.ToLower() + "/";
         }
 
         /// <summary>

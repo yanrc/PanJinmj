@@ -8,7 +8,6 @@ public class GameSettingWrap
 	{
 		L.BeginClass(typeof(GameSetting), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("Init", Init);
-		L.RegFunction("OnValidate", OnValidate);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Panjin", get_Panjin, set_Panjin);
@@ -18,6 +17,7 @@ public class GameSettingWrap
 		L.RegVar("Changsha", get_Changsha, set_Changsha);
 		L.RegVar("Tuidaohu", get_Tuidaohu, set_Tuidaohu);
 		L.RegVar("Fushun", get_Fushun, set_Fushun);
+		L.RegVar("EnableDebug", get_EnableDebug, set_EnableDebug);
 		L.RegVar("LOGO", get_LOGO, set_LOGO);
 		L.RegVar("gamelist", get_gamelist, set_gamelist);
 		L.EndClass();
@@ -33,22 +33,6 @@ public class GameSettingWrap
 			System.Collections.Generic.Dictionary<string,bool> o = obj.Init();
 			ToLua.PushSealed(L, o);
 			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int OnValidate(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 1);
-			GameSetting obj = (GameSetting)ToLua.CheckObject<GameSetting>(L, 1);
-			obj.OnValidate();
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -204,6 +188,25 @@ public class GameSettingWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Fushun on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_EnableDebug(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			GameSetting obj = (GameSetting)o;
+			bool ret = obj.EnableDebug;
+			LuaDLL.lua_pushboolean(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index EnableDebug on a nil value");
 		}
 	}
 
@@ -375,6 +378,25 @@ public class GameSettingWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Fushun on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_EnableDebug(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			GameSetting obj = (GameSetting)o;
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			obj.EnableDebug = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index EnableDebug on a nil value");
 		}
 	}
 

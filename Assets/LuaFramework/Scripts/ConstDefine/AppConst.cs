@@ -30,9 +30,14 @@ namespace LuaFramework
 #else
          true;
 #endif                       
-        public const bool LuaByteMode = false;                      //Lua字节码模式-默认关闭 
+        public static bool LuaByteMode = false;                     //Lua字节码模式-默认关闭 
 
-        public const bool LuaBundleMode = false;                    //Lua代码AssetBundle模式
+        public static bool LuaBundleMode =                           //Lua代码AssetBundle模式
+#if UNITY_EDITOR
+         false;                                   
+#else
+         true;
+#endif   
 
         public const int TimerInterval = 1;
         public const int GameFrameRate = 30;                        //游戏帧频

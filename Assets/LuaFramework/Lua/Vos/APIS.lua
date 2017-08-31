@@ -110,10 +110,12 @@ function APIS.GameSetting()
 	this.Rules = { }
 	if GameSetting.Panjin then
 		table.insert(this.Rules, PanjinRule)
-		AppConst.SocketAddress = "101.200.197.7";
-		AppConst.ChatSocketAddress = "101.200.197.7";
-		AppConst.SocketPort = 11111;
-		AppConst.ChatSocketPort = 10123;
+		-- 	AppConst.SocketAddress = "127.0.0.1";
+		-- 	AppConst.ChatSocketAddress = "127.0.0.1";
+		AppConst.SocketAddress = "120.77.38.7";
+		AppConst.ChatSocketAddress = "120.77.38.7";
+		AppConst.SocketPort = 10233;
+		AppConst.ChatSocketPort = 10234;
 		if UNITY_ANDROID then
 			APIS.shareUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef967ded3e40f05c&redirect_uri=http://dqc.qrz123.com/MaJiangManage/weixinPage?device=android&response_type=code&scope=snsapi_userinfo&state=%s&connect_redirect=1#wechat_redirect";
 		elseif UNITY_IPHONE then

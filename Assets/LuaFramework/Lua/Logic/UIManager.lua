@@ -3,7 +3,7 @@
 UIManager = { }
 local this = UIManager;
 this.PanelNum = 0
---预制体加载好了再加载panel
+--棰勫埗浣撳姞杞藉ソ浜嗗啀鍔犺浇panel
 function UIManager.InitPanels()
 	log("Lua:UIManager.InitPanels")
 	Event.AddListener(define.PanelsInited, this.OnInited)
@@ -12,16 +12,16 @@ function UIManager.InitPanels()
 		_G[v]:Awake()
 	end
 end
--- 面板都加载好了，再打开StartPanel
+-- 闈㈡澘閮藉姞杞藉ソ浜嗭紝鍐嶆墦寮�StartPanel
 function UIManager.OnInited(panel)
 	this.PanelNum = this.PanelNum - 1
 	if (this.PanelNum == 0) then
-	LoadingProgress.ClearProgressBar();
-	UpdateBeat:Add(this.Update);
-	OpenPanel(StartPanel)	
+		LoadingProgress.ClearProgressBar();
+		UpdateBeat:Add(this.Update);
+		OpenPanel(StartPanel)
 	end
 end
---先加载预制体
+--鍏堝姞杞介鍒朵綋
 function UIManager.InitPrefabs()
 	resMgr:LoadPrefab('prefabs', { "Assets/Project/Prefabs/Pointer.prefab" }, function(prefabs) this.Pointer = newObject(prefabs[0]) end)
 	resMgr:LoadPrefab('prefabs', { 'Assets/Project/Prefabs/card/Bottom_B.prefab' }, function(prefabs) this.Bottom_B = prefabs[0] end)
@@ -64,15 +64,15 @@ function UIManager.InitCards()
 		table.insert(path, "Assets/Project/DynaImages/Cards/Small/s" ..(i - 1) .. ".png")
 	end
 	resMgr:LoadSprite('dynaimages', path, function(prefabs)
-	for i = 1, 34 do
-		table.insert(this.bCards,prefabs[i-1])
-	end
-	for i = 1, 34 do
-		table.insert(this.lrCards,prefabs[i+33])
-	end
-	for i = 1, 34 do
-		table.insert(this.sCards,prefabs[i+67])
-	end
+		for i = 1, 34 do
+			table.insert(this.bCards,prefabs[i-1])
+		end
+		for i = 1, 34 do
+			table.insert(this.lrCards,prefabs[i+33])
+		end
+		for i = 1, 34 do
+			table.insert(this.sCards,prefabs[i+67])
+		end
 	end)
 	this.InitPanels();
 end
@@ -101,7 +101,7 @@ function ClosePanel(panel)
 	)
 end
 
--- 返回登陆界面
+-- 杩斿洖鐧婚檰鐣岄潰
 function UIManager.ReturnStartPanel()
 	log(debug.traceback())
 	for k, v in pairs(define.Panels) do
