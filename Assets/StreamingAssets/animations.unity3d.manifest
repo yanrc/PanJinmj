@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2075316628
+CRC: 2252155099
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c9166c808a1621fdde69010629cb7a56
+    Hash: c6951cdb3082362943ea07411c83511d
   TypeTreeHash:
     serializedVersion: 2
     Hash: ecd48a33f0a5d27752dfbaf86f2e1ab5
@@ -51,4 +51,4 @@ Assets:
 - Assets/Project/Animations/GangEffect.controller
 - Assets/Project/Animations/Bottom.controller
 Dependencies:
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/texturespng.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/texturespng.unity3d

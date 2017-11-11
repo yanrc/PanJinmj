@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2268693864
+CRC: 2901891983
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a186830c62e6228a72190fc08d61ee68
+    Hash: 2cfdcc03ebcb91263f866e696e174898
   TypeTreeHash:
     serializedVersion: 2
     Hash: 22cf40d624864c3046ead6c52433887b
@@ -106,19 +106,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 0f059ba8b785bbd488ac6c03ce0602bf, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
+  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d175d1d4880876c4a9bb45b9bee971f8, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a04f3968206b08544864c55fbe0b36fa, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: b4a458ab4ab57a3438963209610c27f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cd33d078b6790ba41a3d9398021bdf28, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 778d62564298d684b9f583406f83d5b7, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: d68484d805e3fb14bb3da1ceebe689c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bd2ccf831d8813041b3e9fef02bdb11d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 9d3cfa88d946cca4995d9d1428ef3aef, type: 3}
 - Class: 114
@@ -242,8 +242,8 @@ Assets:
 - Assets/Project/Prefabs/GameOverPanel.prefab
 - Assets/Project/Prefabs/PengGangCard/PengGangCard_L.prefab
 Dependencies:
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/animations.unity3d
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/dynaimages.unity3d
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/materials.unity3d
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/texturespng.unity3d
-- F:/WorkSpace/toluaprojs/panjinmj/Assets/StreamingAssets/texturesjpg.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/animations.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/dynaimages.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/materials.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/texturespng.unity3d
+- C:/Users/admin/Desktop/panjinmj/Assets/StreamingAssets/texturesjpg.unity3d

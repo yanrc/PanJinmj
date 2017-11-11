@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "panjinmj", "panjinmj.csproj", "{D95DC43E-1A5A-0288-3E2D-9C87B24FAF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "panjinmj.Plugins", "panjinmj.Plugins.csproj", "{92EA4E83-0A15-C389-941C-E0A3D4B4B3C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "panjinmj.Editor", "panjinmj.Editor.csproj", "{94DACD36-54E4-FBBF-ACFF-67E28744A3CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D95DC43E-1A5A-0288-3E2D-9C87B24FAF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95DC43E-1A5A-0288-3E2D-9C87B24FAF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95DC43E-1A5A-0288-3E2D-9C87B24FAF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95DC43E-1A5A-0288-3E2D-9C87B24FAF69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92EA4E83-0A15-C389-941C-E0A3D4B4B3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92EA4E83-0A15-C389-941C-E0A3D4B4B3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92EA4E83-0A15-C389-941C-E0A3D4B4B3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92EA4E83-0A15-C389-941C-E0A3D4B4B3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94DACD36-54E4-FBBF-ACFF-67E28744A3CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94DACD36-54E4-FBBF-ACFF-67E28744A3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94DACD36-54E4-FBBF-ACFF-67E28744A3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94DACD36-54E4-FBBF-ACFF-67E28744A3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

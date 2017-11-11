@@ -445,14 +445,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panjin: 1
-  Wuxi: 0
-  Shuangliao: 0
-  Jiujiang: 0
-  Changsha: 0
-  Tuidaohu: 0
+  Wuxi: 1
+  Shuangliao: 1
+  Jiujiang: 1
+  Changsha: 1
+  Tuidaohu: 1
   Fushun: 0
   EnableDebug: 0
-  LOGO: {fileID: 21300000, guid: e3c4a6498bacf044c9c164f70d4e154a, type: 3}
+  LOGO: {fileID: 21300000, guid: 91f4659d9843cef42bd95162f9773bb2, type: 3}
 --- !u!1 &1006521394
 GameObject:
   m_ObjectHideFlags: 0

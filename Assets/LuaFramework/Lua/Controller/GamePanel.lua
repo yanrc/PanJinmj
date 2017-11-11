@@ -119,6 +119,7 @@ function GamePanel.OnCreate(go)
 	this.lbRoomNum = transform:Find('UIroot/lbRoomNum'):GetComponent('Text');
 	this.ExitRoomButton = transform:Find('Button_other'):GetComponent('Button');
 	this.live1 = transform:Find('Leaved'):GetComponent('Image');
+	this.live2 = transform:Find('Leaved1')
 	this.liveJu = transform:Find('Leaved1/imgJu'):GetComponent('Image');
 	this.liveQuan = transform:Find('Leaved1/imgQuan'):GetComponent('Image');
 	this.centerImage = transform:Find('table'):GetComponent('Image');
@@ -289,6 +290,7 @@ function GamePanel:CleanGameplayUI()
 	self.btnJieSan:SetActive(false);
 	self.ExitRoomButton.transform.gameObject:SetActive(false);
 	self.live1.gameObject:SetActive(true);
+	self.live2.gameObject:SetActive(true);
 	self.liveJu.gameObject:SetActive(true);
 	-- tab.transform.gameObject:SetActive(true);
 	self.centerImage.transform.gameObject:SetActive(true);
@@ -2076,6 +2078,7 @@ function GamePanel:OnClose()
 	end
 	self.btnReadyGame:SetActive(false);
 	self.live1.gameObject:SetActive(false);
+	self.live2.gameObject:SetActive(false);
 	self.liveJu.gameObject:SetActive(false);
 	self.liveQuan.gameObject:SetActive(false);
 	self:Clean();

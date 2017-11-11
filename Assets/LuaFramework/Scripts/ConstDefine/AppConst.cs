@@ -83,15 +83,16 @@ namespace LuaFramework
         public static string GetWebUrl()
         {
             string WebUrl = "http://101.200.197.7:8090/";
-            Dictionary<string, bool> gamelist = GameObject.FindObjectOfType<GameSetting>().Init();
-            foreach(var item in gamelist)
-            {
-                if(item.Value)
-                {
-                    WebUrl +=item.Key;
-                    break;
-                }
-            }
+            //Dictionary<string, bool> gamelist = GameObject.FindObjectOfType<GameSetting>().Init();
+            //foreach(var item in gamelist)
+            //{
+            //    if(item.Value)
+            //    {
+            //        WebUrl +=item.Key;
+            //        break;
+            //    }
+            //}
+            WebUrl += "Shuangliao";
             if (Application.platform == RuntimePlatform.Android)
             {
                 WebUrl+= "/Android/";
