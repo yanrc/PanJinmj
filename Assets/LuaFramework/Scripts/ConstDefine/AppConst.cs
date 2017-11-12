@@ -49,8 +49,6 @@ namespace LuaFramework
 
 #if UNITY_STANDALONE_WIN
         public const string AssetDirEx = "Windows";
-#elif UNITY_EDITOR
-        public const string AssetDirEx = "Windows";
 #elif UNITY_ANDROID
         public const string AssetDirEx = "Android";
 #elif UNITY_IPHONE
