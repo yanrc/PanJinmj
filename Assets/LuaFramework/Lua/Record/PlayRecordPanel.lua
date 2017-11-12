@@ -1,4 +1,4 @@
-
+local Test=require("Logic.Test")
 PlayRecordPanel = UIBase(define.Panels.PlayRecordPanel, define.PopUI);
 local this = PlayRecordPanel;
 local transform;
@@ -678,7 +678,7 @@ end
 
 function PlayRecordPanel.RemoveHandCard(Index, cardPoint, count)
 	local list = handerCardList[Index]
-	log(Test.DumpTab(list))
+	log(Test:DumpTab(list))
 	local pos = Vector3.zero
 	for i = #list, 1, -1 do
 		local objCtrl = list[i];

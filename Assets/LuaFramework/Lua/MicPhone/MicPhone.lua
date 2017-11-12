@@ -1,6 +1,6 @@
 MicPhone = { }
 local this = MicPhone
-
+local Test=require("Logic.Test")
 -- 录音的图标对象
 local InputObj
 -- 最大录音时间
@@ -20,7 +20,7 @@ end
 function MicPhone.OnPointerDown()
 	soundMgr:playBGM(0);
 	xpcall( function()
-		log(Test.DumpTab(avatarList))
+		log(Test:DumpTab(avatarList))
 		if (avatarList ~= nil and #avatarList > 1) then
 			btnDown = true;
 			InputObj:SetActive(true);
