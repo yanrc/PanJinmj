@@ -127,11 +127,10 @@ namespace LuaFramework {
             string message = string.Empty;
             string random = DateTime.Now.ToString("yyyymmddhhmmss");
             string listUrl = url + "files.txt?v=" + random;
-            Debug.LogWarning("LoadUpdate---->>>" + listUrl);
+            Debug.Log("LoadUpdate---->>>" + listUrl);
 
             WWW www = new WWW(listUrl);
             yield return www;
-            Debug.Log(www.error);
             if (www.error != null&& www.error !="")
             {
                 OnUpdateFailed(string.Empty);
