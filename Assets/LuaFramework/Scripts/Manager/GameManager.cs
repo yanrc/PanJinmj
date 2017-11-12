@@ -238,7 +238,7 @@ namespace LuaFramework {
         public void OnResourceInited() {
             YRC.Debuger.Log("OnResourceInited");
 #if ASYNC_MODE
-            ResManager.Initialize(AppConst.AssetDir, delegate() {
+            ResManager.Initialize(AppConst.AssetDirEx, delegate() {
                 Debug.Log("Initialize OK!!!");
                 this.OnInitialize();
             });

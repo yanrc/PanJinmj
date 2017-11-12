@@ -46,7 +46,17 @@ namespace LuaFramework
         public const string LuaTempDir = "Lua/";                    //临时目录
         public const string AppPrefix = AppName + "_";              //应用程序前缀
         public const string ExtName = ".unity3d";                   //素材扩展名
-        public const string AssetDir = "StreamingAssets";           //素材目录 
+#if UNITY_ANDROID
+        public const string AssetDirEx = "Android";
+#elif UNITY_IPHONE
+        public const string AssetDirEx = "iOS";
+#elif UNITY_STANDALONE_WIN
+        public const string AssetDirEx = "Windows";
+#elif UNITY_EDITOR
+        public const string AssetDirEx = "Windows";
+#endif
+        public const string AssetDir = "StreamingAssets/"+AssetDirEx;           //素材目录 
+
 
         public static string UserId = string.Empty;                 //用户ID
         public static int SocketPort = 0;                           //Socket服务器端口

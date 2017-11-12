@@ -67,7 +67,7 @@ namespace LuaFramework {
             LoadAsset<T>(abName, new string[] { assetName }, func);
         }
         string GetRealAssetPath(string abName) {
-            if (abName.Equals(AppConst.AssetDir)) {
+            if (abName.Equals(AppConst.AssetDirEx)) {
                 return abName;
             }
             abName = abName.ToLower();

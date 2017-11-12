@@ -55,14 +55,15 @@ public class Packager {
     /// 生成绑定素材
     /// </summary>
     public static void BuildAssetResource(BuildTarget target) {
-        if (Directory.Exists(Util.DataPath)) {
+        if (Directory.Exists(Util.DataPath))
+        {
             Directory.Delete(Util.DataPath, true);
         }
-        string streamPath = Application.streamingAssetsPath;
-        if (Directory.Exists(streamPath)) {
-            Directory.Delete(streamPath, true);
-        }
-        Directory.CreateDirectory(streamPath);
+        //string streamPath = Application.streamingAssetsPath;
+        //if (Directory.Exists(streamPath)) {
+        //    Directory.Delete(streamPath, true);
+        //}
+        //Directory.CreateDirectory(streamPath);
         AssetDatabase.Refresh();
 
         maps.Clear();
@@ -137,7 +138,7 @@ public class Packager {
         AddBuildMap("lua/lua" + AppConst.ExtName, "*.bytes", "Assets/" + AppConst.LuaTempDir);
 
         //-------------------------------处理非Lua文件----------------------------------
-        string luaPath = AppDataPath + "/StreamingAssets/lua/";
+        string luaPath = AppDataPath + "/"+ AppConst.AssetDir + "/lua/";
         for (int i = 0; i < srcDirs.Length; i++) {
             paths.Clear(); files.Clear();
             string luaDataPath = srcDirs[i].ToLower();
@@ -211,7 +212,7 @@ public class Packager {
     }
 
     static void BuildFileIndex() {
-        string resPath = AppDataPath + "/StreamingAssets/";
+        string resPath = AppDataPath + "/"+AppConst.AssetDir+"/";
         ///----------------------创建文件列表-----------------------
         string newFilePath = resPath + "/files.txt";
         if (File.Exists(newFilePath)) File.Delete(newFilePath);
@@ -224,7 +225,7 @@ public class Packager {
         for (int i = 0; i < files.Count; i++) {
             string file = files[i];
             string ext = Path.GetExtension(file);
-            if (file.EndsWith(".meta") || file.Contains(".DS_Store")) continue;
+            if (file.EndsWith(".meta") || file.Contains(".DS_Store")|| file.Contains(".idea")) continue;
 
             string md5 = Util.md5file(file);
             string value = file.Replace(resPath, string.Empty);

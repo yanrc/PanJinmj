@@ -247,10 +247,10 @@ namespace LuaFramework {
             string path = string.Empty;
             switch (Application.platform) {
                 case RuntimePlatform.Android:
-                    path = "jar:file://" + Application.dataPath + "!/assets/";
+                    path = "jar:file://" + Application.dataPath + "!/assets/Android/";
                 break;
                 case RuntimePlatform.IPhonePlayer:
-                    path = Application.dataPath + "/Raw/";
+                    path = Application.dataPath + "/Raw/iOS/";
                 break;
                 default:
                     path = Application.dataPath + "/" + AppConst.AssetDir + "/";
@@ -277,7 +277,7 @@ namespace LuaFramework {
         /// <returns></returns>
         public static int CheckRuntimeFile() {
             if (!Application.isEditor) return 0;
-            string streamDir = Application.dataPath + "/StreamingAssets/";
+            string streamDir = Application.dataPath + "/"+AppConst.AssetDir+"/";
             if (!Directory.Exists(streamDir)) {
                 return -1;
             } else {
@@ -313,7 +313,8 @@ namespace LuaFramework {
         public static bool CheckEnvironment() {
 #if UNITY_EDITOR
             int resultId = Util.CheckRuntimeFile();
-            if (resultId == -1) {
+            if (resultId == -1)
+            {
                 Debug.LogError("没有找到框架所需要的资源，单击Game菜单下Build xxx Resource生成！！");
                 EditorApplication.isPlaying = false;
                 return false;
